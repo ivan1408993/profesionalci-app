@@ -1,9 +1,15 @@
-/* Manja dugmad i inputi na mobilnim uređajima */
-@media (max-width: 768px) {
-  .btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
+.custom-btn {
+  font-size: 16px; /* normalna veličina na desktopu */
+  padding: 10px 20px;
+}
+
+@media (max-width: 600px) {
+  .custom-btn {
+    font-size: 12px; /* manja veličina na telefonu */
+    padding: 6px 12px;
   }
+}
+
 
   input[type="text"],
   input[type="password"],
@@ -18,4 +24,3 @@
   th, td {
     white-space: nowrap;
   }
-}
