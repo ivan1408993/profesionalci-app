@@ -2,17 +2,20 @@
 
 {% block content %}
 <div class="container mt-5">
-    <a href="{{ url_for('main.search_driver') }}" class="btn btn-warning mb-3">
+    <a href="{{ url_for('main.search_driver') }}" class="btn btn-warning mb-3 btn-sm mb-4 custom-btn">
         Претрага свих возача
     </a>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Ваши возачи</h2>
+    <h2>Ваши возачи</h2>
+    <div class="d-flex gap-2">
         <a href="{{ url_for('main.all_drivers') }}" class="btn btn-primary btn-sm mb-4 custom-btn">
             <i class="fas fa-users"></i> Сви возачи (укључујући и неактивне)
         </a>
         <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary btn-sm mb-4 custom-btn">➕ Додај возача</a>
     </div>
+</div>
+
 
     <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4">
         <div class="input-group">
