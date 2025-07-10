@@ -883,16 +883,3 @@ def terms_public():
 @main.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy_policy.html')
-
-
-@main.route('/set-admin')
-def set_admin():
-    from app.models import Employer
-    from app import db
-
-    employer = Employer.query.filter_by(email="lazici19@gmail.com").first()
-    if employer:
-        employer.is_superadmin = True
-        db.session.commit()
-        return "✅ Налог постављен као администратор."
-    return "❌ Налог није пронађен."
