@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Пријава{% endblock %}
+
+{% block content %}
+<div class="card-style">
+    <h2 class="text-center mb-4">Пријава</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="error-msg">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('main.login') }}">
+        <div class="mb-3">
+            <input type="email" class="form-control" name="email" placeholder="Емаил" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Лозинка" required>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-custom">Пријави се</button>
+        </div>
+        <p class="mt-3">
+    <a href="{{ url_for('main.reset_password_request') }}" class="text-info">Заборавили сте лозинку?</a>
+</p>
+
+    </form>
+
+    <p class="mt-3 text-center">
+        Немате налог? <a href="{{ url_for('main.register') }}">Региструјте се</a>
+    </p>
+</div>
+{% endblock %}

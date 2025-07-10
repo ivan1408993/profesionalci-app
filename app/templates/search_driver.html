@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}Претрага возача{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Претрага возача по ЈМБГ или броју тахограф картице </h2>
+
+<form method="POST" action="{{ url_for('main.search_driver') }}" class="row g-3 align-items-center my-3">
+  <div class="col-auto flex-grow-1">
+    <label for="search_input" class="form-label">ЈМБГ или број тахограф картице:</label>
+    <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Унесите ЈМБГ или број тахограф картице" required>
+  </div>
+
+    <div class="col-auto align-self-end">
+      <button type="submit" class="btn btn-primary">Претражи</button>
+    </div>
+  </form>
+
+  {% if driver %}
+    <hr>
+    <h3>Резултати:</h3>
+    <ul class="list-group mb-3">
+      <li class="list-group-item"><strong>Име:</strong> {{ driver.full_name }}</li>
+      {% set active_card = driver.cards | selectattr('is_active') | first %}
+    <li class="list-group-item"><strong>Број тахограф картице:</strong> {{ active_card.card_number if active_card else '—' }}</li>
+
+      <li class="list-group-item"><strong>Фирма:</strong> {{ driver.employer.company_name if driver.employer else "Није запослен" }}</li>
+      <li class="list-group-item"><strong>Статус:</strong> 
+        {% if driver.active %}
+          <span class="badge bg-success">Активан</span>
+        {% else %}
+          <span class="badge bg-secondary">Неактиван</span>
+        {% endif %}
+      </li>
+    </ul>
+
+    {% if driver.cards|length > 1 %}
+  <h5 class="mt-4">Историја тахограф картица:</h5>
+  <ul class="list-group">
+    {% for card in driver.cards if not card.is_active %}
+      <li class="list-group-item">
+        {{ card.card_number }} –
+        {% if card.issue_date %} издата: {{ card.issue_date.strftime('%d.%m.%Y') }}, {% endif %}
+        {% if card.expiry_date %} важи до: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
+        <span class="text-muted">(неактивна)</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+    {# 👉 Додај овде дугме ако возач већ ради код неког другог #}
+{% if driver and already_employed_by_other %}
+  <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mb-3">
+    Ажурирај возача
+  </a>
+{% endif %}
+
+    {% if driver and not driver.active %}
+    <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST">
+        <button type="submit" class="btn btn-success mt-3">Преузми возача</button>
+    </form>
+    {% endif %}
+
+    {% if ratings_info %}
+      <h4>Оцене:</h4>
+      <table class="table table-bordered table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>Послодавац</th>
+            <th>Оцена</th>
+            <th>Коментар</th>
+            <th>Датум</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for r in ratings_info %}
+          <tr>
+            <td>{{ r.employer_name }}</td>
+            <td>{{ r.stars }}</td>
+            <td>{{ r.comment }}</td>
+            <td>{{ r.rated_at }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-muted">Нема оцена.</p>
+    {% endif %}
+
+  {% elif request.method == 'POST' %}
+    <div class="alert alert-warning mt-4" role="alert">
+      Возач није пронађен.
+    </div>
+
+    {% if show_additional_fields %}
+    <hr>
+    <h4>Додатна провера</h4>
+    <form method="POST" action="{{ url_for('main.search_driver') }}">
+      <!-- Скривено поље да знамо да је ово додатна провера -->
+      <input type="hidden" name="check_additional" value="1">
+
+      <div class="mb-3">
+        <label for="full_name" class="form-label">Име и презиме</label>
+        <input type="text" id="full_name" name="full_name" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="cpc_card_number" class="form-label">Број CPC картице</label>
+        <input type="text" id="cpc_card_number" name="cpc_card_number" class="form-control" required>
+      </div>
+
+      <button type="submit" class="btn btn-secondary">Провери</button>
+    </form>
+
+    
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

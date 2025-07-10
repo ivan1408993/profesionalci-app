@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Сви возачи који су радили у вашој фирми</h2>
+
+    <form method="get" class="form-inline mb-3">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Претражи по имену или картици" value="{{ search or '' }}">
+        <button type="submit" class="btn btn-primary">Претражи</button>
+    </form>
+
+    {% if drivers %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Име и презиме</th>
+                    <th>Број картице</th>
+                    <th>CPC број</th>
+                    <th>CPC важи до</th>
+                    <th>Статус</th>
+                    <th>Просечна оцена</th>
+                    <th>Акције</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for driver in drivers %}
+                <tr class="{% if not driver.active %}table-secondary{% endif %}">
+                    <td>{{ driver.full_name }}</td>
+                    <td>
+                        {% set active_card = driver.cards | selectattr('is_active') | first %}
+                        {{ active_card.card_number if active_card else '—' }}
+                    </td>
+                    <td>{{ driver.cpc_card_number or '—' }}</td>
+                     <td>
+                        {% if driver.cpc_expiry_date %}
+                            {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %}
+                    —
+                    {% endif %}
+            </td>
+                    <td>
+                        {% if driver.active %}
+                            <span class="text-success">Активан</span>
+                        {% else %}
+                            <span class="text-danger">Неактиван</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if driver_ratings[driver.id] %}
+                            {{ driver_ratings[driver.id] }} ⭐
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-sm btn-info">Детаљи</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">Нема резултата.</div>
+    {% endif %}
+</div>
+{% endblock %}

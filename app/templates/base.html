@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Апликација{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        .terms-text, .privacy-text {
+    max-width: 800px;
+    color: white;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    padding: 2.5rem 2rem;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* полупрозирна црна позадина */
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.terms-text h2, .privacy-text h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.terms-text h5, .privacy-text h5 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+.terms-text ul li, .privacy-text ul li {
+    margin-bottom: 0.6rem;
+    list-style-type: disc;
+    margin-left: 1.5rem;
+}
+
+.terms-text hr, .privacy-text hr {
+    margin: 3rem 0 2rem;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.terms-text .text-center, .privacy-text .text-center {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
+
+        .card-style {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            max-width: auto;
+        }
+
+        .form-control::placeholder {
+            color: #ccc;
+        }
+
+        .btn-custom {
+            background-color: #00bcd4;
+            border: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #0097a7;
+            color: white;
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+       .navbar {
+            background-color: rgba(0, 0, 0, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5);
+        }
+        body {
+            padding-top: 70px;
+        }
+
+
+        .navbar a {
+            color: #00bcd4 !important;
+        }
+
+        .navbar a:hover {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌐 Навигација -->
+    <nav class="navbar navbar-expand-lg navbar-dark px-3">
+        <a class="navbar-brand" href="{{ url_for('main.index') }}">Profesionalci</a>
+        <form method="POST" action="{{ url_for('main.change_language') }}">
+    <select name="language" onchange="this.form.submit()">
+        <option value="sr" {% if current_lang == 'sr' %}selected{% endif %}>Српски</option>
+        <option value="en" {% if current_lang == 'en' %}selected{% endif %}>English</option>
+        <option value="de" {% if current_lang == 'de' %}selected{% endif %}>Deutsch</option>
+    </select>
+</form>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                {% if session.get('user_type') == 'employer' and session.get('user_id') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="employerMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Добродошли, {{ session.get('company_name', 'Послодавац') }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
+                        <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">Почетна</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}">Мој профил</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">Kontrolna tabla</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}">Одјава</a></li>
+                    </ul>
+                </li>
+                {% elif session.get('user_id') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.logout') }}">Одјава</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.login') }}">Пријава</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.register') }}">Регистрација</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+
+    <!-- Flash поруке -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Дугме назад, осим на главној страници -->
+<div class="container mt-3">
+    {% if request.endpoint not in ['main.index', 'main.login'] %}
+<button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Назад</button>
+{% endif %}
+</div>
+
+
+<!-- 📦 Садржај странице -->
+<div class="d-flex align-items-center justify-content-center py-5">
+    {% block content %}{% endblock %}
+</div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block scripts %}{% endblock %}
+
+
+    <footer class="text-center mt-5 py-4" style="color: #ccc;">
+    <small>© 2025 Profesionalci | 
+    <a href="{{ url_for('main.terms') }}" style="color: #00bcd4; text-decoration: none;">Услови коришћења</a> | 
+    <a href="{{ url_for('main.privacy_policy') }}" style="color: #00bcd4; text-decoration: none;">Политика приватности</a>
+    </small>
+    </footer>
+</body>
+</html>

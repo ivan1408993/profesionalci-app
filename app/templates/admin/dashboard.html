@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Админ контролна табла{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 1000px;">
+
+    <h1 class="mb-4 text-center">Админ контролна табла</h1>
+
+    <!-- Форма за претрагу фирми -->
+    <form method="get" action="{{ url_for('main.admin_dashboard') }}" class="row g-3 mb-4">
+        <div class="col-md-5">
+            <input type="text" class="form-control" name="company_query" placeholder="Претрага по називу фирме..." value="{{ company_query }}">
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" name="pib_query" placeholder="Претрага по ПИБ-у..." value="{{ pib_query }}">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-info w-100">Претражи фирме</button>
+        </div>
+    </form>
+
+    <h2 class="mt-4">Регистроване фирме</h2>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-bordered">
+           <thead>
+    <tr>
+        <th>ID</th>
+        <th>Назив фирме</th>
+        <th>ПИБ</th>
+        <th>Email</th>
+        <th>Статус</th>  <!-- нова колона -->
+        <th>Акција</th>  <!-- нова колона за дугме -->
+    </tr>
+</thead>
+<tbody>
+    {% for employer in employers %}
+    <tr>
+        <td>{{ employer.id }}</td>
+        <td>
+            <a href="{{ url_for('main.admin_employer_drivers', employer_id=employer.id) }}" class="text-info text-decoration-none">
+                {{ employer.company_name }}
+            </a>
+        </td>
+        <td>{{ employer.pib }}</td>
+        <td>{{ employer.email }}</td>
+        <td>
+            {% if employer.active %}
+                <span class="badge bg-success">Активна</span>
+            {% else %}
+                <span class="badge bg-secondary">Неактивна</span>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{ url_for('main.toggle_employer_status', employer_id=employer.id) }}" 
+               class="btn btn-sm btn-outline-primary">
+                {% if employer.active %} Деактивирај {% else %} Активирај {% endif %}
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+        </table>
+    </div>
+
+    <!-- Форма за претрагу возача -->
+    <form method="get" action="{{ url_for('main.admin_dashboard') }}" class="row g-3 mt-5 mb-4">
+        <!-- Да би се сачували филтери фирми када претражујеш возаче -->
+        <input type="hidden" name="company_query" value="{{ company_query }}">
+        <input type="hidden" name="pib_query" value="{{ pib_query }}">
+
+        <div class="col-md-8">
+            <input type="text" class="form-control" name="driver_query" placeholder="Претрага возача по имену, тахограф картици или CPC броју..." value="{{ driver_query }}">
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-info w-100">Претражи возаче</button>
+        </div>
+    </form>
+
+    <h2 class="mt-4">Сви возачи у бази</h2>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Име и презиме</th>
+                    <th>Број тахограф картице</th>
+                    <th>CPC број</th>
+                    <th>CPC важи до</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for driver in drivers %}
+                <tr>
+                    <td>{{ driver.id }}</td>
+                    <td>{{ driver.full_name }}</td>
+                    <td>
+                        {% set active_card = driver.cards | selectattr('is_active') | first %}
+                        {{ active_card.card_number if active_card else '—' }}
+                    </td>
+                    <td>{{ driver.cpc_card_number or '-' }}</td>
+                    <td>{{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '-' }}</td>
+                    <td>
+                        {% if driver.active %}
+                            <span class="badge bg-success">Активан</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Неактиван</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

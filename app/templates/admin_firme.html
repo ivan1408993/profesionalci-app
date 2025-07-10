@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Списак свих фирми у систему</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Назив</th>
+        <th>Емаил</th>
+    </tr>
+    {% for firma in firme %}
+    <tr>
+        <td>{{ firma.id }}</td>
+        <td>{{ firma.company_name }}</td>
+        <td>{{ firma.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

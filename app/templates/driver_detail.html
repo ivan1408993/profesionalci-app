@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary mb-3">Назад</a>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-3">Возач: {{ driver.full_name }}</h2>
+
+            <p><strong>Број тахограф картице:</strong>
+                {% set active_card = driver.cards | selectattr('is_active') | first %}
+                {{ active_card.card_number if active_card else '—' }}
+            </p>
+
+            <p><strong>Статус:</strong>
+                {% if driver.active %}
+                    <span class="text-success">Запослен</span>
+                    {% if driver.employer %}
+                        – {{ driver.employer.company_name }}
+                    {% endif %}
+                {% else %}
+                    <span class="text-danger">Незапослен</span>
+                {% endif %}
+            </p>
+
+            {% if not driver.active %}
+                <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST">
+                    <button type="submit" class="btn btn-success mt-3">Преузми возача</button>
+                </form>
+            {% else %}
+                <a href="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" class="btn btn-danger mb-3">Означи као неактивног</a>
+            {% endif %}
+
+            {% if already_employed_by_other %}
+                <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
+                    Ажурирај возача
+                </a>
+            {% endif %}
+
+            <h4 class="mt-4 mb-3">Оцене возача:</h4>
+            {% if ratings %}
+                <ul class="list-group">
+                    {% for r in ratings %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>Оцена:</strong> {{ r.stars }} ⭐
+                                </div>
+                                <small class="text-muted">
+                                    Оценио: {{ r.employer.company_name if r.employer else "Непознато" }} |
+                                    {{ r.created_at.strftime('%d.%m.%Y %H:%M') }}
+                                </small>
+                            </div>
+                            <p class="mb-0"><strong>Коментар:</strong> {{ r.comment or "Нема коментара" }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="alert alert-info mt-3">
+                    Возач још нема ниједну оцену.
+                </div>
+            {% endif %}
+
+            <h4 class="mt-4 mb-3">Историја тахограф картица</h4>
+            {% if driver.cards %}
+                {% set sorted_cards = driver.cards | sort(attribute='issue_date', reverse=True) %}
+                <ul class="list-group">
+                    <p>Укупно картица: {{ driver.cards | length }}</p>
+                    {% for card in sorted_cards %}
+                        <li class="list-group-item {% if card.is_active %}list-group-item-success{% endif %}">
+                            {{ card.card_number }}
+                            {% if card.issue_date %} – издана: {{ card.issue_date.strftime('%d.%m.%Y') }}{% endif %}
+                            {% if card.expiry_date %}, истиче: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
+                            {% if card.is_active %}
+                                <strong> (активна)</strong>
+                            {% else %}
+                                (неактивна)
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">Нема података о картицама.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

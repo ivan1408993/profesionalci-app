@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <a href="{{ url_for('main.search_driver') }}" class="btn btn-warning mb-3">
+        Претрага свих возача
+    </a>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Ваши возачи</h2>
+        <a href="{{ url_for('main.all_drivers') }}" class="btn btn-primary btn-lg mb-4">
+            <i class="fas fa-users"></i> Сви возачи (укључујући и неактивне)
+        </a>
+        <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary">➕ Додај возача</a>
+    </div>
+
+    <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Претрага по имену, CPC или тахограф картици" value="{{ search or '' }}">
+            <button class="btn btn-outline-secondary" type="submit">🔍 Претражи</button>
+        </div>
+    </form>
+
+    {% if drivers %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Име и презиме</th>
+                    <th>Број тахограф картице</th>
+                    <th>CPC број</th>
+                    <th>CPC важи до</th>
+                    <th>Оцена</th>
+                    <th>Оцени</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for driver in drivers %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}">
+                            {{ driver.full_name }}
+                        </a>
+                    </td>
+                    <td>
+                        {% set active_card = driver.cards | selectattr('is_active') | first %}
+                        {{ active_card.card_number if active_card else '—' }}
+                    </td>
+                    <td>{{ driver.cpc_card_number or '—' }}</td>
+                    <td>
+                        {% if driver.cpc_expiry_date %}
+                            {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %}
+                            — 
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if driver_ratings[driver.id] %}
+                            ⭐ {{ "%.1f"|format(driver_ratings[driver.id]) }} / 5
+                        {% else %}
+                            Још није оцењен
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('main.rate_driver', driver_id=driver.id) }}" class="btn btn-outline-success btn-sm">Оцени</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center" role="alert">
+        Тренутно немате ниједног возача у систему.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

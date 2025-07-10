@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Ажурирање возача{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Ажурирај податке о возачу</h2>
+
+    <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}">
+        <div class="mb-3">
+            <label for="full_name" class="form-label">Име и презиме</label>
+            <input type="text" class="form-control" name="full_name" id="full_name" value="{{ driver.full_name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="card_number" class="form-label">Нови број тахограф картице</label>
+            <input type="text" class="form-control" name="card_number" id="card_number">
+            <div class="form-text">Унесите само ако је возач добио нову картицу</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="expiry_date" class="form-label">Датум истека</label>
+            <input type="date" class="form-control" name="expiry_date" id="expiry_date">
+        </div>
+
+        <div class="mb-3">
+            <label for="cpc_card_number" class="form-label">Број CPC картице</label>
+            <input type="text" class="form-control" name="cpc_card_number" id="cpc_card_number" value="{{ driver.cpc_card_number }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="cpc_expiry_date" class="form-label">Истек CPC картице</label>
+            <input type="date" class="form-control" name="cpc_expiry_date" id="cpc_expiry_date" value="{{ driver.cpc_expiry_date }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сачувај промене</button>
+        <a href="{{ url_for('main.search_driver') }}" class="btn btn-secondary ms-2">Назад</a>
+    </form>
+
+    <hr>
+    <h4>Историја тахограф картица</h4>
+    {% if driver.cards %}
+        <ul class="list-group">
+        {% for card in driver.cards %}
+            <li class="list-group-item {% if card.is_active %}list-group-item-success{% endif %}">
+                {{ card.card_number }}
+                {% if card.expiry_date %} — важи до: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
+                {% if card.is_active %}
+                    <strong class="ms-2">(активна)</strong>
+                {% else %}
+                    <span class="text-muted ms-2">(неактивна)</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">Нема података о картицама.</p>
+    {% endif %}
+</div>
+{% endblock %}

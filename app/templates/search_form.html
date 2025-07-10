@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Претрага возача{% endblock %}
+
+{% block content %}
+<h2>Претрага возача по броју тахограф картице</h2>
+
+<form method="POST">
+    {{ csrf_token() }}
+    <div class="form-group">
+        <label>Број тахограф картице:</label>
+        <input type="text" name="card_number" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Претражи</button>
+    <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary">Назад</a>
+</form>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Постојећи возач - {{ driver.full_name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Возач већ постоји у систему</h2>
+
+    <p><strong>Име и презиме:</strong> {{ driver.full_name }}</p>
+    <p><strong>Број тахографске картице:</strong> {{ driver.card_number }}</p>
+
+    <h3>Историја рада код других послодаваца и оцене:</h3>
+    {% if ratings_info %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Послодавац</th>
+                    <th>Оцена</th>
+                    <th>Коментар</th>
+                    <th>Датум</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for r in ratings_info %}
+                <tr>
+                    <td>{{ r.employer_name }}</td>
+                    <td>{{ r.stars }}</td>
+                    <td>{{ r.comment }}</td>
+                    <td>{{ r.rated_at }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Нема података о ранијим послодавцима и оценама.</p>
+    {% endif %}
+
+    {% if not already_employed_by_other %}
+        <form method="POST" action="{{ url_for('main.activate_existing_driver', driver_id=driver.id) }}">
+            <button type="submit" class="btn btn-primary mt-3">
+                Активирај и додај возача у моју фирму
+            </button>
+            <a href="{{ url_for('main.add_driver') }}" class="btn btn-secondary ms-2">
+                Откажи
+            </a>
+        </form>
+        {% if already_employed_by_other %}
+         <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
+             Ажурирај возача
+             </a>
+        {% endif %}
+     {% else %}
+        <a href="{{ url_for('main.add_driver') }}" class="btn btn-secondary mt-3">
+            Назад
+        </a>
+    {% endif %}
+
+{% endif %}
+
+</div>
+{% endblock %}
+
+

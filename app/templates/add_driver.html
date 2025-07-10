@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Додај новог возача</h2>
+
+    <!-- Flash поруке -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('main.add_driver') }}" id="driverForm" novalidate>
+        <div class="mb-3">
+            <label for="full_name" class="form-label">Име и презиме</label>
+            <input type="text" class="form-control" id="full_name" name="full_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="jmbg" class="form-label">ЈМБГ</label>
+            <input type="text" class="form-control" id="jmbg" name="jmbg"
+                   required pattern="^\d{13}$" maxlength="13" minlength="13"
+                   title="Унесите тачно 13 цифара ЈМБГ-а.">
+            <div class="invalid-feedback">ЈМБГ мора садржати тачно 13 цифара.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="card_number" class="form-label">Број тахограф картице</label>
+            <input type="text" class="form-control" id="card_number" name="card_number"
+                   required pattern="^[A-Za-z0-9]{16}$" maxlength="16" minlength="16"
+                   title="Број тахограф картице мора имати тачно 16 карактера.">
+            <div class="invalid-feedback">Број тахограф картице мора имати тачно 16 карактера (слова или цифре).</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="expiry_date" class="form-label">Картица важи до</label>
+            <input type="date" class="form-control" id="expiry_date" name="expiry_date">
+        </div>
+
+        <div class="mb-3">
+            <label for="cpc_card_number" class="form-label">Број CPC картице</label>
+            <input type="text" class="form-control" id="cpc_card_number" name="cpc_card_number">
+        </div>
+
+        <div class="mb-3">
+            <label for="cpc_expiry_date" class="form-label">CPC важи до</label>
+            <input type="date" class="form-control" id="cpc_expiry_date" name="cpc_expiry_date">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сачувај</button>
+        <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary ms-2">Назад</a>
+    </form>
+</div>
+
+<!-- ✅ Bootstrap JS валидација -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("driverForm");
+
+        form.addEventListener("submit", function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add("was-validated");
+        });
+    });
+</script>
+{% endblock %}

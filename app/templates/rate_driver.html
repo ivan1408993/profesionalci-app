@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-light mb-4">Оцени возача {{ driver.full_name }}</h2>
+
+    <form method="POST" action="{{ url_for('main.rate_driver', driver_id=driver.id) }}" class="bg-dark text-light p-4 rounded shadow">
+
+        {% if existing_rating %}
+            <div class="alert alert-warning text-center">
+                Већ сте оценили овог возача – можете ажурирати оцену и коментар.
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label for="comment" class="form-label">Коментар</label>
+            <textarea class="form-control" name="comment" id="comment" rows="4" required>{{ existing_rating.comment if existing_rating else '' }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label d-block">Оцена</label>
+            <div class="star-rating fs-3">
+                <span class="star" onclick="selectStar(1)">&#9733;</span>
+                <span class="star" onclick="selectStar(2)">&#9733;</span>
+                <span class="star" onclick="selectStar(3)">&#9733;</span>
+                <span class="star" onclick="selectStar(4)">&#9733;</span>
+                <span class="star" onclick="selectStar(5)">&#9733;</span>
+            </div>
+            <input type="hidden" id="rating" name="rating" value="{{ existing_rating.stars if existing_rating else 0 }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-warning w-100">
+            {% if existing_rating %}Ажурирај оцену{% else %}Пошаљи оцену{% endif %}
+        </button>
+    </form>
+
+    <div class="text-center mt-3">
+        <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-light">Назад на листу возача</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function selectStar(rating) {
+        document.getElementById('rating').value = rating;
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    }
+
+    // Аутоматски означи звездице ако постоји стара оцена
+    document.addEventListener("DOMContentLoaded", function () {
+        const existingRating = parseInt(document.getElementById('rating').value);
+        if (existingRating > 0) {
+            selectStar(existingRating);
+        }
+    });
+</script>
+
+<style>
+    .star {
+        cursor: pointer;
+        color: grey;
+        transition: color 0.2s;
+    }
+    .star.selected {
+        color: gold;
+    }
+    .star-rating {
+        user-select: none;
+    }
+</style>
+{% endblock %}

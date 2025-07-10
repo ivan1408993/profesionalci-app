@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero d-flex align-items-center justify-content-center text-center text-light">
+    <div>
+        <h1 class="display-4 fw-bold">Добродошли у <span class="text-warning">Професионалци</span></h1>
+        <p class="lead">Платформа за оцењивање и проверу професионалних возача.</p>
+        <div class="mt-4">
+            <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg me-3">Пријави се</a>
+            <a href="{{ url_for('main.register') }}" class="btn btn-warning btn-lg">Региструј се</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.hero {
+    min-height: 90vh;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    padding: 50px 20px;
+}
+</style>
+{% endblock %}

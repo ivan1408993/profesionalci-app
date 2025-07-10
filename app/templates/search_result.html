@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Резултат претраге{% endblock %}
+
+{% block content %}
+<h2>Резултат претраге</h2>
+
+<p><strong>Име и презиме:</strong> {{ driver.full_name }}</p>
+<p><strong>Број тахографске картице:</strong> {{ driver.card_number }}</p>
+<p><strong>Тренутно запослен код:</strong> 
+    {% if driver.active %}
+        {{ driver.employer.company_name }}
+    {% else %}
+        Није тренутно запослен
+    {% endif %}
+</p>
+
+<h3>Оцене:</h3>
+{% if ratings_info %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Послодавац</th>
+            <th>Оцена</th>
+            <th>Коментар</th>
+            <th>Датум</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in ratings_info %}
+        <tr>
+            <td>{{ r.employer_name }}</td>
+            <td>{{ r.stars }}</td>
+            <td>{{ r.comment }}</td>
+            <td>{{ r.rated_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>Нема оцена за овог возача.</p>
+{% endif %}
+
+<a href="{{ url_for('main.search_driver') }}" class="btn btn-secondary">Назад на претрагу</a>
+{% endblock %}
