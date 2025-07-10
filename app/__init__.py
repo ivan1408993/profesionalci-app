@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_babel import Babel
 from .helpers import konvertuj_tekst
+import os
 
 
 db = SQLAlchemy()
@@ -11,7 +12,8 @@ babel = Babel()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:lozinka123@localhost/profesionalci_db'
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'tajna123'
     app.config['JMBG_SALT'] = 'moj_sakriveni_salt_2025'  # ✅ Додато ово
