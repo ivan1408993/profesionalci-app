@@ -3,6 +3,18 @@ from datetime import datetime
 from flask_login import UserMixin
 import hashlib
 
+class Employer(db.Model, UserMixin):
+    __tablename__ = 'employer'  # eksplicitno
+    id = db.Column(db.Integer, primary_key=True)
+    company_name = db.Column(db.String(100), nullable=False)
+    pib = db.Column(db.String(9), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+    is_superadmin = db.Column(db.Boolean, default=False)
+    active = db.Column(db.Boolean, default=True, nullable=False)
+
+    drivers = db.relationship('Driver', back_populates='employer', lazy=True)
+    ratings = db.relationship('Rating', back_populates='employer', lazy=True)
 
 class Driver(db.Model):
     __tablename__ = 'driver'
