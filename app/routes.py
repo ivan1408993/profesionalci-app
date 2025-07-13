@@ -97,13 +97,13 @@ def add_driver_card(driver_id):
 @main.route('/')
 def index():
     if 'user_id' in session:
+        print(dict(session))
         user_type = session.get('user_type')
         if user_type == 'employer':
             return redirect(url_for('main.drivers'))
         elif user_type == 'superadmin':
             return redirect(url_for('main.admin_dashboard'))
     return render_template('index.html', current_lang=session.get('lang', 'sr'))
-print(dict(session))
 
 
 
