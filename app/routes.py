@@ -374,21 +374,26 @@ def register():
         password = request.form['password']
         password_hash = generate_password_hash(password)
 
-        # ✅ Валидација: PIB мора бити тачно 9 цифара
+        # Валидација PIB
         if not pib.isdigit() or len(pib) != 9:
             flash("PIB мора садржати тачно 9 цифара.")
             return redirect(url_for('main.register'))
 
         existing = Employer.query.filter_by(pib=pib).first()
         if existing:
-            flash("Постоји већ налог са тим PIB-ом.")
-            return redirect(url_for('main.register'))
+            if not existing.active:
+                flash("Фирма са овим PIB-ом није активна. Регистрација није могућа.")
+                return redirect(url_for('main.register'))
+            else:
+                flash("Постоји већ налог са тим PIB-ом.")
+                return redirect(url_for('main.register'))
 
         new_employer = Employer(
             company_name=company_name,
             pib=pib,
             email=email,
-            password_hash=password_hash
+            password_hash=password_hash,
+            active=True  # нова фирма је активна по дефаулту
         )
         db.session.add(new_employer)
         db.session.commit()
