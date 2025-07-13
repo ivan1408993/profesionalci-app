@@ -412,19 +412,26 @@ def login():
 
         employer = Employer.query.filter_by(email=email).first()
         if employer and check_password_hash(employer.password_hash, password):
+
+            # ✅ Провера да ли је фирма активна
+            if not employer.active:
+                flash("Ваша фирма није активна. Пријава није могућа.")
+                return redirect(url_for('main.login'))
+
             session['user_id'] = employer.id
             session['user_type'] = 'superadmin' if employer.is_superadmin else 'employer'
             session['company_name'] = employer.company_name
 
             if employer.is_superadmin:
-                return redirect(url_for('main.admin_dashboard'))  # ➕ преусмеравање
+                return redirect(url_for('main.admin_dashboard'))
             else:
-                return redirect(url_for('main.drivers'))  # уобичајени послодавац
+                return redirect(url_for('main.drivers'))
 
         flash("Погрешан емаил или лозинка.")
         return redirect(url_for('main.login'))
 
     return render_template('login.html', current_lang=session.get('lang', 'sr'))
+
 
 
 
