@@ -691,10 +691,14 @@ def reset_password_request():
         if employer:
             token = generate_reset_token(email)
             reset_url = url_for('main.reset_password_token', token=token, _external=True)
-            flash(f'Копирајте и отворите овај линк: {reset_url}', 'info')
-        else:
-            flash('Ако емаил постоји у систему, линк је послат.', 'info')
+            
+            # ✅ Замена flash линка слањем мејла
+            send_reset_email(email, reset_url)
+        
+        # Увек враћамо исту поруку ради безбедности
+        flash("Ако емаил постоји у систему, линк за ресет је послат.", 'info')
         return redirect(url_for('main.login'))
+
     return render_template('reset_password_request.html', current_lang=session.get('lang', 'sr'))
 
 
@@ -707,6 +711,13 @@ def reset_password_token(token):
 
     if request.method == 'POST':
         new_password = request.form['password']
+        confirm_password = request.form.get('confirm_password')
+
+        # Проверa да ли се лозинке поклапају
+        if new_password != confirm_password:
+            flash("Лозинке се не поклапају.", "danger")
+            return redirect(url_for('main.reset_password_token', token=token))
+
         employer = Employer.query.filter_by(email=email).first()
         if employer:
             employer.password_hash = generate_password_hash(new_password)
@@ -715,6 +726,23 @@ def reset_password_token(token):
             return redirect(url_for('main.login'))
 
     return render_template('reset_password_form.html', token=token, current_lang=session.get('lang', 'sr'))
+
+
+
+from flask_mail import Message
+from app import mail  # из твоје апликације
+
+def send_reset_email(to_email, reset_url):
+    msg = Message("Ресетовање лозинке", recipients=[to_email])
+    msg.body = f"""Здраво,
+
+Затражили сте ресетовање лозинке. Кликните или налепите следећи линк у прегледач:
+
+{reset_url}
+
+Ако нисте Ви тражили ресет, слободно игноришите овај мејл.
+"""
+    mail.send(msg)
 
 
 from flask_login import login_required, current_user
