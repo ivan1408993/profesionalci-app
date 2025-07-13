@@ -1,0 +1,16 @@
+# Ignoriši .env fajl sa poverljivim podacima
+.env
+
+# Ignoriši pycache
+__pycache__/
+**/__pycache__/
+
+# Ignoriši migracione cache fajlove
+migrations/__pycache__/
+
+# Ignoriši virtuelno okruženje
+venv/
+
+# Ignoriši editor konfiguracije (po želji)
+.vscode/
+.idea/

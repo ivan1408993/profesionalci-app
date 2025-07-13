@@ -21,7 +21,7 @@ class Driver(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
-    jmbg_hashed = db.Column(db.String(64), unique=True, nullable=False)
+    jmbg_hashed = db.Column(db.String(64), unique=True, index=True, nullable=False)
     salt = db.Column(db.LargeBinary(16), nullable=False)  # Додајемо salt као бинарни низ
 
     cpc_card_number = db.Column(db.String(32), unique=True, nullable=True)
