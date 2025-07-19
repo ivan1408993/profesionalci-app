@@ -5,6 +5,17 @@
 <div class="container mt-5">
     <h2>Ажурирај податке о возачу</h2>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Затвори"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}">
         <div class="mb-3">
             <label for="full_name" class="form-label">Име и презиме</label>
@@ -19,28 +30,31 @@
 
         <div class="mb-3">
             <label for="expiry_date" class="form-label">Датум истека</label>
-            <input type="date" class="form-control" name="expiry_date" id="expiry_date">
+            <input type="date" class="form-control" name="expiry_date" id="expiry_date"
+                   value="{{ driver.cards|selectattr('is_active')|first.expiry_date|default('', true)|strftime('%Y-%m-%d') }}">
         </div>
 
         <div class="mb-3">
             <label for="cpc_card_number" class="form-label">Број CPC картице</label>
-            <input type="text" class="form-control" name="cpc_card_number" id="cpc_card_number" value="{{ driver.cpc_card_number }}">
+            <input type="text" class="form-control" name="cpc_card_number" id="cpc_card_number"
+                   value="{{ driver.cpc_card_number or '' }}">
         </div>
 
         <div class="mb-3">
             <label for="cpc_expiry_date" class="form-label">Истек CPC картице</label>
-            <input type="date" class="form-control" name="cpc_expiry_date" id="cpc_expiry_date" value="{{ driver.cpc_expiry_date }}">
+            <input type="date" class="form-control" name="cpc_expiry_date" id="cpc_expiry_date"
+                   value="{{ driver.cpc_expiry_date|default('', true)|strftime('%Y-%m-%d') if driver.cpc_expiry_date }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Сачувај промене</button>
-        <a href="{{ url_for('main.search_driver') }}" class="btn btn-secondary ms-2">Назад</a>
+        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary ms-2">Назад</a>
     </form>
 
     <hr>
     <h4>Историја тахограф картица</h4>
     {% if driver.cards %}
         <ul class="list-group">
-        {% for card in driver.cards %}
+        {% for card in driver.cards|sort(attribute='issue_date', reverse=True) %}
             <li class="list-group-item {% if card.is_active %}list-group-item-success{% endif %}">
                 {{ card.card_number }}
                 {% if card.expiry_date %} — важи до: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}

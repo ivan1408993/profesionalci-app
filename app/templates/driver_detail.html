@@ -32,11 +32,12 @@
                 <a href="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" class="btn btn-danger mb-3">Означи као неактивног</a>
             {% endif %}
 
-            {% if already_employed_by_other %}
-                <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
-                    Ажурирај возача
-                </a>
-            {% endif %}
+            {# ✅ Дугме се приказује само ако је тренутни послодавац исти као онај код ког је возач запослен #}
+            {% if can_update_driver %}
+    <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
+        Ажурирај возача
+    </a>
+{% endif %}
 
             <h4 class="mt-4 mb-3">Оцене возача:</h4>
             {% if ratings %}

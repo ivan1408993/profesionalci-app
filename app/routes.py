@@ -665,23 +665,22 @@ def driver_detail(driver_id):
         flash("Морате бити пријављени као послодавац.")
         return redirect(url_for('main.login'))
 
-    # Учитај возача са картицама и оценама
     driver = Driver.query.options(
         joinedload(Driver.cards),
         joinedload(Driver.ratings).joinedload(Rating.employer)
     ).get_or_404(driver_id)
 
-    # Да ли је возач тренутно запослен код другог послодавца
-    already_employed_by_other = (
-        driver.active and driver.employer_id != employer_id
+    currently_employed_by_this_employer = (
+        driver.active and driver.employer_id == employer_id
     )
 
     return render_template(
         'driver_detail.html',
         driver=driver,
         ratings=driver.ratings,
-        already_employed_by_other=already_employed_by_other
+        can_update_driver=currently_employed_by_this_employer
     )
+
 
 @main.route('/reset-password', methods=['GET', 'POST'])
 def reset_password_request():
@@ -845,14 +844,19 @@ def toggle_employer_status(employer_id):
     return redirect(url_for('main.admin_dashboard'))
 
 
-@main.route('/drivers/<int:driver_id>/update', methods=['GET', 'POST'])
+@main.route('/drivers/<int:driver_id>/update', methods=['GET', 'POST']) 
 def update_driver(driver_id):
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Морате бити пријављени као послодавац.")
+        flash("Морате бити пријављени као послодавац.", "danger")
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
+
+    # ✅ Провери да ли је возач запослен код тренутног послодавца
+    if not driver.active or driver.employer_id != employer_id:
+        flash("Немате дозволу да ажурирате овог возача.", "danger")
+        return redirect(url_for('main.driver_detail', driver_id=driver_id))
 
     if request.method == 'POST':
         # Прикупљање података из форме
@@ -870,14 +874,14 @@ def update_driver(driver_id):
             try:
                 expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash("Неисправан формат датума истека.")
+                flash("Неисправан формат датума истека.", "warning")
                 return redirect(url_for('main.update_driver', driver_id=driver_id))
 
         if cpc_expiry_date_str:
             try:
                 cpc_expiry_date = datetime.strptime(cpc_expiry_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash("Неисправан формат истека CPC картице.")
+                flash("Неисправан формат истека CPC картице.", "warning")
                 return redirect(url_for('main.update_driver', driver_id=driver_id))
 
         # Ажурирање имена ако је промењено
@@ -889,11 +893,9 @@ def update_driver(driver_id):
 
         # Додај нову картицу ако је број промењен
         if new_card_number and (not current_card or current_card.card_number != new_card_number):
-            # Деактивирај стару
             if current_card:
                 current_card.is_active = False
 
-            # Додај нову
             new_card = DriverCard(
                 card_number=new_card_number,
                 driver_id=driver.id,
@@ -901,19 +903,20 @@ def update_driver(driver_id):
                 expiry_date=expiry_date
             )
             db.session.add(new_card)
-            flash("Додата је нова тахографска картица.")
+            flash("Додата је нова тахографска картица.", "success")
         else:
-            flash("Број тахограф картице није промењен.")
+            flash("Број тахограф картице није промењен.", "info")
 
         # Ажурирај CPC податке
         driver.cpc_card_number = cpc_card_number or None
         driver.cpc_expiry_date = cpc_expiry_date
 
         db.session.commit()
-        flash("Подаци о возачу су успешно ажурирани.")
-        return redirect(url_for('main.drivers'))
+        flash("Подаци о возачу су успешно ажурирани.", "success")
+        return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
     return render_template('update_driver.html', driver=driver)
+
 
 @main.route('/terms')
 def terms():
