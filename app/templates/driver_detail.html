@@ -34,10 +34,10 @@
 
             {# ✅ Дугме се приказује само ако је тренутни послодавац исти као онај код ког је возач запослен #}
             {% if can_update_driver %}
-    <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
-        Ажурирај возача
-    </a>
-{% endif %}
+            <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
+                Ажурирај возача
+            </a>
+            {% endif %}
 
             <h4 class="mt-4 mb-3">Оцене возача:</h4>
             {% if ratings %}
