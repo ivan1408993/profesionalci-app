@@ -22,12 +22,16 @@
             <input type="text" class="form-control" name="full_name" id="full_name"
                    value="{{ driver.full_name }}" required>
         </div>
-
+        
         <div class="mb-3">
-            <label for="card_number" class="form-label">Нови број тахограф картице</label>
-            <input type="text" class="form-control" name="card_number" id="card_number">
+             <label for="card_number" class="form-label">Број тахограф картице</label>
+            <input type="text" class="form-control" id="card_number" name="card_number"
+           pattern="^[A-Za-z0-9]{16}$" maxlength="16" minlength="16"
+           title="Број тахограф картице мора имати тачно 16 карактера.">
             <div class="form-text">Унесите само ако је возач добио нову картицу</div>
+            <div class="invalid-feedback">Број тахограф картице мора имати тачно 16 карактера (слова или цифре).</div>
         </div>
+
 
         <div class="mb-3">
             <label for="expiry_date" class="form-label">Датум истека</label>
