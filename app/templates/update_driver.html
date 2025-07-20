@@ -19,7 +19,8 @@
     <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}">
         <div class="mb-3">
             <label for="full_name" class="form-label">Име и презиме</label>
-            <input type="text" class="form-control" name="full_name" id="full_name" value="{{ driver.full_name }}" required>
+            <input type="text" class="form-control" name="full_name" id="full_name"
+                   value="{{ driver.full_name }}" required>
         </div>
 
         <div class="mb-3">
@@ -31,7 +32,7 @@
         <div class="mb-3">
             <label for="expiry_date" class="form-label">Датум истека</label>
             <input type="date" class="form-control" name="expiry_date" id="expiry_date"
-                   value="{{ driver.cards|selectattr('is_active')|first.expiry_date|default('', true)|strftime('%Y-%m-%d') }}">
+                   value="{{ expiry_date_str }}">
         </div>
 
         <div class="mb-3">
@@ -43,7 +44,7 @@
         <div class="mb-3">
             <label for="cpc_expiry_date" class="form-label">Истек CPC картице</label>
             <input type="date" class="form-control" name="cpc_expiry_date" id="cpc_expiry_date"
-                   value="{{ driver.cpc_expiry_date|default('', true)|strftime('%Y-%m-%d') if driver.cpc_expiry_date }}">
+                   value="{{ cpc_expiry_date_str }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Сачувај промене</button>

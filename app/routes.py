@@ -844,6 +844,8 @@ def toggle_employer_status(employer_id):
     return redirect(url_for('main.admin_dashboard'))
 
 
+from datetime import datetime
+
 @main.route('/drivers/<int:driver_id>/update', methods=['GET', 'POST']) 
 def update_driver(driver_id):
     employer_id = session.get('user_id')
@@ -915,7 +917,17 @@ def update_driver(driver_id):
         flash("Подаци о возачу су успешно ажурирани.", "success")
         return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
-    return render_template('update_driver.html', driver=driver)
+    # ✅ За GET захтев — припреми датуми у облику 'YYYY-MM-DD' за шаблон
+    active_card = next((card for card in driver.cards if card.is_active), None)
+    expiry_date_str = active_card.expiry_date.strftime('%Y-%m-%d') if active_card and active_card.expiry_date else ''
+    cpc_expiry_date_str = driver.cpc_expiry_date.strftime('%Y-%m-%d') if driver.cpc_expiry_date else ''
+
+    return render_template(
+        'update_driver.html',
+        driver=driver,
+        expiry_date_str=expiry_date_str,
+        cpc_expiry_date_str=cpc_expiry_date_str
+    )
 
 
 @main.route('/terms')
