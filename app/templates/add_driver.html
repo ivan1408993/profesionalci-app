@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="mb-4">Додај новог возача</h2>
+    <h2 class="mb-4">Dodaj novog vozača</h2>
 
-    <!-- Flash поруке -->
+    <!-- Flash poruke -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
@@ -18,47 +18,47 @@
 
     <form method="POST" action="{{ url_for('main.add_driver') }}" id="driverForm" novalidate>
         <div class="mb-3">
-            <label for="full_name" class="form-label">Име и презиме</label>
+            <label for="full_name" class="form-label">Ime i prezime</label>
             <input type="text" class="form-control" id="full_name" name="full_name" required>
         </div>
 
         <div class="mb-3">
-            <label for="jmbg" class="form-label">ЈМБГ</label>
+            <label for="jmbg" class="form-label">JMBG</label>
             <input type="text" class="form-control" id="jmbg" name="jmbg"
                    required pattern="^\d{13}$" maxlength="13" minlength="13"
-                   title="Унесите тачно 13 цифара ЈМБГ-а.">
-            <div class="invalid-feedback">ЈМБГ мора садржати тачно 13 цифара.</div>
+                   title="Unesite tačno 13 cifara JMBG-a.">
+            <div class="invalid-feedback">JMBG mora sadržati tačno 13 cifara.</div>
         </div>
 
         <div class="mb-3">
-            <label for="card_number" class="form-label">Број тахограф картице</label>
+            <label for="card_number" class="form-label">Broj tahograf kartice</label>
             <input type="text" class="form-control" id="card_number" name="card_number"
                    required pattern="^[A-Za-z0-9]{16}$" maxlength="16" minlength="16"
-                   title="Број тахограф картице мора имати тачно 16 карактера.">
-            <div class="invalid-feedback">Број тахограф картице мора имати тачно 16 карактера (слова или цифре).</div>
+                   title="Broj tahograf kartice mora imati tačno 16 karaktera.">
+            <div class="invalid-feedback">Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).</div>
         </div>
 
         <div class="mb-3">
-            <label for="expiry_date" class="form-label">Картица важи до</label>
+            <label for="expiry_date" class="form-label">Kartica važi do</label>
             <input type="date" class="form-control" id="expiry_date" name="expiry_date">
         </div>
 
         <div class="mb-3">
-            <label for="cpc_card_number" class="form-label">Број CPC картице</label>
+            <label for="cpc_card_number" class="form-label">Broj CPC kartice</label>
             <input type="text" class="form-control" id="cpc_card_number" name="cpc_card_number">
         </div>
 
         <div class="mb-3">
-            <label for="cpc_expiry_date" class="form-label">CPC важи до</label>
+            <label for="cpc_expiry_date" class="form-label">CPC važi do</label>
             <input type="date" class="form-control" id="cpc_expiry_date" name="cpc_expiry_date">
         </div>
 
-        <button type="submit" class="btn btn-primary">Сачувај</button>
-        <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary ms-2">Назад</a>
+        <button type="submit" class="btn btn-primary">Sačuvaj</button>
+        <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary ms-2">Nazad</a>
     </form>
 </div>
 
-<!-- ✅ Bootstrap JS валидација -->
+<!-- ✅ Bootstrap JS validacija -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("driverForm");
