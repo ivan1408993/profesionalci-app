@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <title>{% block title %}Profesionalci{% endblock %}</title>
     <style>
+        body.light-mode {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+.dark-mode .btn {
+  border-color: #f8f9fa;
+  color: #f8f9fa;
+}
+
+.light-mode .btn {
+  border-color: #212529;
+  color: #212529;
+}
+
   body.light-mode {
     background-color: #ffffff;
     color: #000000;
@@ -50,14 +70,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <style>
-        body {
+        body.light-mode {
+  background: linear-gradient(to right, #e0f7fa, #ffffff, #e0f2f1);
+  color: #212529;
+}
 
-            background: linear-gradient(to right, #e0f7fa, #ffffff, #e0f2f1);
-            color: #333;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            padding-top: 70px;
-        }
+body.dark-mode {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding-top: 70px;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
 
         .card-style {
             background-color: rgba(255, 255, 255, 0.9);
