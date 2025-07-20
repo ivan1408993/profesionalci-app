@@ -5,7 +5,7 @@ app = create_app()
 
 with app.app_context():
     admin = Employer.query.filter_by(email="lazici19@gmail.com").first()
-  # или изабери конкретног по емаилу
+  # ili izaberi konkretnog po emailu
     if admin:
         admin.is_superadmin = True
         db.session.commit()

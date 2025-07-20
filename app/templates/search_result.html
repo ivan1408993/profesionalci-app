@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}Резултат претраге{% endblock %}
+{% block title %}Rezultat pretrage{% endblock %}
 
 {% block content %}
-<h2>Резултат претраге</h2>
+<h2>Rezultat pretrage</h2>
 
-<p><strong>Име и презиме:</strong> {{ driver.full_name }}</p>
-<p><strong>Број тахографске картице:</strong> {{ driver.card_number }}</p>
-<p><strong>Тренутно запослен код:</strong> 
+<p><strong>Ime i prezime:</strong> {{ driver.full_name }}</p>
+<p><strong>Broj tahografske kartice:</strong> {{ driver.card_number }}</p>
+<p><strong>Trenutno zaposlen kod:</strong> 
     {% if driver.active %}
         {{ driver.employer.company_name }}
     {% else %}
-        Није тренутно запослен
+        Nije trenutno zaposlen
     {% endif %}
 </p>
 
-<h3>Оцене:</h3>
+<h3>Ocene:</h3>
 {% if ratings_info %}
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Послодавац</th>
-            <th>Оцена</th>
-            <th>Коментар</th>
-            <th>Датум</th>
+            <th>Poslodavac</th>
+            <th>Ocena</th>
+            <th>Komentar</th>
+            <th>Datum</th>
         </tr>
     </thead>
     <tbody>
@@ -37,8 +37,8 @@
     </tbody>
 </table>
 {% else %}
-    <p>Нема оцена за овог возача.</p>
+    <p>Nema ocena za ovog vozača.</p>
 {% endif %}
 
-<a href="{{ url_for('main.search_driver') }}" class="btn btn-secondary">Назад на претрагу</a>
+<a href="{{ url_for('main.search_driver') }}" class="btn btn-secondary">Nazad na pretragu</a>
 {% endblock %}

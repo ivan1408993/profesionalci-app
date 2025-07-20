@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}Претрага возача{% endblock %}
+{% block title %}Pretraga vozača{% endblock %}
 
 {% block content %}
-<h2>Претрага возача по броју тахограф картице</h2>
+<h2>Pretraga vozača po broju tahograf kartice</h2>
 
 <form method="POST">
     {{ csrf_token() }}
     <div class="form-group">
-        <label>Број тахограф картице:</label>
+        <label>Broj tahograf kartice:</label>
         <input type="text" name="card_number" class="form-control" required>
     </div>
-    <button type="submit" class="btn btn-primary">Претражи</button>
-    <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary">Назад</a>
+    <button type="submit" class="btn btn-primary">Pretraži</button>
+    <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary">Nazad</a>
 </form>
 {% endblock %}

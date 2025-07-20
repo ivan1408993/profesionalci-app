@@ -1,54 +1,54 @@
 {% extends "base.html" %}
 
-{% block title %}Услови коришћења{% endblock %}
+{% block title %}Uslovi korišćenja{% endblock %}
 
 {% block content %}
 <div class="container py-5 terms-text" style="max-width: 800px; color: white;">
 
-    <h2 class="text-center mb-4">Услови коришћења</h2>
+    <h2 class="text-center mb-4">Uslovi korišćenja</h2>
 
     <p class="mb-4 text-white text-center">
-    Страница са условима коришћења доступна је искључиво регистрованим послодавцима који користе апликацију као овлашћени корисници.
+    Stranica sa uslovima korišćenja dostupna je isključivo registrovanim poslodavcima koji koriste aplikaciju kao ovlašćeni korisnici.
     </p>
 
 
-    <h5 class="mt-4">1. Намена апликације</h5>
+    <h5 class="mt-4">1. Namena aplikacije</h5>
     <p>
-        Ова веб апликација намењена је искључиво послодавцима у транспортној индустрији ради евиденције и оцењивања рада возача, укључујући приказ историје ангажмана код различитих послодаваца.
+        Ova veb aplikacija namenjena je isključivo poslodavcima u transportnoj industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz istorije angažmana kod različitih poslodavaca.
     </p>
 
-    <h5 class="mt-4">2. Обрада личних података</h5>
+    <h5 class="mt-4">2. Obrada ličnih podataka</h5>
     <p>
-        Коришћењем апликације сагласни сте да послодавци могу уносити и обрађивати податке о запосленима у складу са законом, и то искључиво у контексту радног односа или процеса запошљавања.
+        Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i obrađivati podatke o zaposlenima u skladu sa zakonom, i to isključivo u kontekstu radnog odnosa ili procesa zapošljavanja.
     </p>
 
-    <h5 class="mt-4">3. Политика обраде ЈМБГ-а</h5>
+    <h5 class="mt-4">3. Politika obrade JMBG-a</h5>
     <ul>
-        <li>ЈМБГ се користи само као механизам за везу података при идентификацији возача, и то једнократно – приликом уноса од стране послодавца;</li>
-        <li>Никада се не приказује у интерфејсу, бази или логовима – нити је доступан било ком кориснику;</li>
-        <li>ЈМБГ се хешује једносмерно (SHA-256) и није могуће вратити га у оригинал;</li>
-        <li>Апликација (власник) нема приступ оригиналним ЈМБГ вредностима и не сматра се руковаоцем података у смислу GDPR;</li>
-        <li>Обрада ЈМБГ-а је правно заснована на уговорном односу између послодавца и возача;</li>
+        <li>JMBG se koristi samo kao mehanizam za vezu podataka pri identifikaciji vozača, i to jednokratno – prilikom unosa od strane poslodavca;</li>
+        <li>Nikada se ne prikazuje u interfejsu, bazi ili logovima – niti je dostupan bilo kom korisniku;</li>
+        <li>JMBG se hešuje jednosmerno (SHA-256) i nije moguće vratiti ga u original;</li>
+        <li>Aplikacija (vlasnik) nema pristup originalnim JMBG vrednostima i ne smatra se rukovaocem podataka u smislu GDPR;</li>
+        <li>Obrada JMBG-a je pravno zasnovana na ugovornom odnosu između poslodavca i vozača;</li>
     </ul>
 
-    <h5 class="mt-4">4. Приступ подацима</h5>
+    <h5 class="mt-4">4. Pristup podacima</h5>
     <p>
-        Само регистровани послодавци могу прегледати податке о возачима путем броја тахограф картице, броја CPC картице и иницијалне идентификације хешованим ЈМБГ-ом.
+        Samo registrovani poslodavci mogu pregledati podatke o vozačima putem broja tahograf kartice, broja CPC kartice i inicijalne identifikacije hešovanim JMBG-om.
     </p>
 
-    <h5 class="mt-4">5. Забрана злоупотребе</h5>
+    <h5 class="mt-4">5. Zabrana zloupotrebe</h5>
     <p>
-        Забрањено је свако неовлашћено коришћење, копирање, пренос или откривање података. Корисници који прекрше правила биће онемогућени у даљем коришћењу апликације и могу сносити правне последице.
+        Zabranjeno je svako neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje podataka. Korisnici koji prekrše pravila biće onemogućeni u daljem korišćenju aplikacije i mogu snositi pravne posledice.
     </p>
 
-    <h5 class="mt-4">6. Техничка подршка</h5>
+    <h5 class="mt-4">6. Tehnička podrška</h5>
     <p>
-        У случају техничких проблема, обратите се администратору апликације путем званичног контакт обрасца.
+        U slučaju tehničkih problema, obratite se administratoru aplikacije putem zvaničnog kontakt obrasca.
     </p>
 
     <hr class="mt-5">
     <p class="text-center mt-4">
-        Коришћењем апликације прихватате све наведене услове.
+        Korišćenjem aplikacije prihvatate sve navedene uslove.
     </p>
 </div>
 {% endblock %}

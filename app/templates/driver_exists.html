@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Постојећи возач - {{ driver.full_name }}{% endblock %}
+{% block title %}Postojeći vozač - {{ driver.full_name }}{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Возач већ постоји у систему</h2>
+    <h2>Vozač već postoji u sistemu</h2>
 
-    <p><strong>Име и презиме:</strong> {{ driver.full_name }}</p>
-    <p><strong>Број тахографске картице:</strong> {{ driver.card_number }}</p>
+    <p><strong>Ime i prezime:</strong> {{ driver.full_name }}</p>
+    <p><strong>Broj tahografske kartice:</strong> {{ driver.card_number }}</p>
 
-    <h3>Историја рада код других послодаваца и оцене:</h3>
+    <h3>Istorija rada kod drugih poslodavaca i ocene:</h3>
     {% if ratings_info %}
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Послодавац</th>
-                    <th>Оцена</th>
-                    <th>Коментар</th>
-                    <th>Датум</th>
+                    <th>Poslodavac</th>
+                    <th>Ocena</th>
+                    <th>Komentar</th>
+                    <th>Datum</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,26 +32,26 @@
             </tbody>
         </table>
     {% else %}
-        <p>Нема података о ранијим послодавцима и оценама.</p>
+        <p>Nema podataka o ranijim poslodavcima i ocenama.</p>
     {% endif %}
 
     {% if not already_employed_by_other %}
         <form method="POST" action="{{ url_for('main.activate_existing_driver', driver_id=driver.id) }}">
             <button type="submit" class="btn btn-primary mt-3">
-                Активирај и додај возача у моју фирму
+                Aktiviraj i dodaj vozača u moju firmu
             </button>
             <a href="{{ url_for('main.add_driver') }}" class="btn btn-secondary ms-2">
-                Откажи
+                Otkaži
             </a>
         </form>
         {% if already_employed_by_other %}
          <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
-             Ажурирај возача
+             Ažuriraj vozača
              </a>
         {% endif %}
      {% else %}
         <a href="{{ url_for('main.add_driver') }}" class="btn btn-secondary mt-3">
-            Назад
+            Nazad
         </a>
     {% endif %}
 
@@ -59,5 +59,3 @@
 
 </div>
 {% endblock %}
-
-

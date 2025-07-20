@@ -12,7 +12,7 @@ if os.path.exists("app.db"):
     os.remove("app.db")
     print("🗑️ Baza obrisana.")
 
-# Поново иницијализуј апликацију (да би направио нову празну базу)
+# Ponovo inicijalizuj aplikaciju (da bi napravio novu praznu bazu)
 app = create_app()
 
 with app.app_context():

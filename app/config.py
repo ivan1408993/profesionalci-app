@@ -5,5 +5,5 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Додатни конфигурациони параметар за хеширање JMBG-а
+    # Dodatni konfiguracioni parametar za heširanje JMBG-a
     JMBG_SALT = os.environ.get('JMBG_SALT') or 'moj_sakriveni_salt_2025'

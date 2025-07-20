@@ -22,7 +22,7 @@ class Driver(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
     jmbg_hashed = db.Column(db.String(64), unique=True, index=True, nullable=False)
-    salt = db.Column(db.LargeBinary(16), nullable=False)  # Додајемо salt као бинарни низ
+    salt = db.Column(db.LargeBinary(16), nullable=False)  # Dodajemo salt kao binarni niz
 
     cpc_card_number = db.Column(db.String(32), unique=True, nullable=True)
     cpc_expiry_date = db.Column(db.Date, nullable=True)
@@ -54,7 +54,7 @@ class DriverCard(db.Model):
 class Rating(db.Model):
     __tablename__ = 'rating'
     id = db.Column(db.Integer, primary_key=True)
-    stars = db.Column(db.Integer, nullable=False)  # Оцена од 1 до 5
+    stars = db.Column(db.Integer, nullable=False)  # Ocena od 1 do 5
     comment = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 

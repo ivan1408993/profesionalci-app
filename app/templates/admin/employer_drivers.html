@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Возачи фирме {{ employer.company_name }}{% endblock %}
+{% block title %}Vozači firme {{ employer.company_name }}{% endblock %}
 
 {% block content %}
 <div class="container mt-4" style="max-width: 900px;">
-    <h2 class="mb-4 text-center">Возачи фирме: <strong>{{ employer.company_name }}</strong></h2>
+    <h2 class="mb-4 text-center">Vozači firme: <strong>{{ employer.company_name }}</strong></h2>
 
     {% if drivers %}
     <div class="table-responsive">
@@ -12,11 +12,11 @@
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Име и презиме</th>
-                    <th>Број тахограф картице</th>
-                    <th>CPC број</th>
-                    <th>CPC важи до</th>
-                    <th>Статус</th>
+                    <th>Ime i prezime</th>
+                    <th>Broj tahograf kartice</th>
+                    <th>CPC broj</th>
+                    <th>CPC važi do</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,9 +29,9 @@
                     <td>{{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '-' }}</td>
                     <td>
                         {% if driver.active %}
-                            <span class="badge bg-success">Активан</span>
+                            <span class="badge bg-success">Aktivan</span>
                         {% else %}
-                            <span class="badge bg-secondary">Неактиван</span>
+                            <span class="badge bg-secondary">Neaktivan</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -40,11 +40,11 @@
         </table>
     </div>
     {% else %}
-    <p class="text-center text-muted">Тренутно нема возача за ову фирму.</p>
+    <p class="text-center text-muted">Trenutno nema vozača za ovu firmu.</p>
     {% endif %}
 
     <div class="text-center mt-4">
-        <a href="{{ url_for('main.admin_dashboard') }}" class="btn btn-outline-light">Назад на контролу таблу</a>
+        <a href="{{ url_for('main.admin_dashboard') }}" class="btn btn-outline-light">Nazad na kontrolu tablu</a>
     </div>
 </div>
 {% endblock %}

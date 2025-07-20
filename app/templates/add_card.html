@@ -1,30 +1,30 @@
 {% extends 'base.html' %}
 
-{% block title %}Додај нову тахограф картицу{% endblock %}
+{% block title %}Dodaj novu tahograf karticu{% endblock %}
 
 {% block content %}
 <div class="card-style">
-    <h3 class="text-center mb-4">Додај нову тахограф картицу</h3>
+    <h3 class="text-center mb-4">Dodaj novu tahograf karticu</h3>
 
     <form method="POST">
         {{ form.hidden_tag() }}
 
         <div class="mb-3">
-            <label for="card_number" class="form-label">Број картице</label>
-            {{ form.card_number(class="form-control", placeholder="Унесите број нове картице") }}
+            <label for="card_number" class="form-label">Broj kartice</label>
+            {{ form.card_number(class="form-control", placeholder="Unesite broj nove kartice") }}
         </div>
 
         <div class="mb-3">
-            <label for="issue_date" class="form-label">Датум издавања</label>
+            <label for="issue_date" class="form-label">Datum izdavanja</label>
             {{ form.issue_date(class="form-control") }}
         </div>
 
         <div class="mb-3">
-            <label for="expiry_date" class="form-label">Датум истека</label>
+            <label for="expiry_date" class="form-label">Datum isteka</label>
             {{ form.expiry_date(class="form-control") }}
         </div>
 
-        <button type="submit" class="btn btn-custom w-100">Додај картицу</button>
+        <button type="submit" class="btn btn-custom w-100">Dodaj karticu</button>
     </form>
 </div>
 {% endblock %}

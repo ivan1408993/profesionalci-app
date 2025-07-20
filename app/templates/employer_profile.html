@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
-{% block title %}Мој профил{% endblock %}
+{% block title %}Moj profil{% endblock %}
 
 {% block content %}
 <div class="card-style">
-    <h3 class="mb-4">Мој профил</h3>
+    <h3 class="mb-4">Moj profil</h3>
     <form method="POST" action="{{ url_for('main.employer_profile') }}">
         <div class="form-group mb-3">
-            <label>Назив фирме</label>
+            <label>Naziv firme</label>
             <input type="text" class="form-control" name="company_name" value="{{ employer.company_name }}" required>
         </div>
         <div class="form-group mb-3">
-            <label>ПИБ (непроменљив)</label>
+            <label>PIB (nepromenljiv)</label>
             <input type="text" class="form-control" value="{{ employer.pib }}" disabled>
         </div>
         <div class="form-group mb-3">
-            <label>Имејл</label>
+            <label>Imejl</label>
             <input type="email" class="form-control" name="email" value="{{ employer.email }}" required>
         </div>
         <div class="form-group mb-3">
-            <label>Нова лозинка (оставите празно ако не мењате)</label>
+            <label>Nova lozinka (ostavite prazno ako ne menjate)</label>
             <input type="password" class="form-control" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Сачувај измене</button>
+        <button type="submit" class="btn btn-primary">Sačuvaj izmene</button>
     </form>
 </div>
 {% endblock %}

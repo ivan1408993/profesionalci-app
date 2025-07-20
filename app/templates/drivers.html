@@ -3,24 +3,24 @@
 {% block content %}
 <div class="container mt-5">
     <a href="{{ url_for('main.search_driver') }}" class="btn btn-warning mb-3 btn-sm mb-4 custom-btn">
-        Претрага свих возача
+        Pretraga svih vozača
     </a>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Ваши возачи</h2>
+    <h2>Vaši vozači</h2>
     <div class="d-flex gap-2">
         <a href="{{ url_for('main.all_drivers') }}" class="btn btn-primary btn-sm mb-4 custom-btn">
-            <i class="fas fa-users"></i> Сви возачи (укључујући и неактивне)
+            <i class="fas fa-users"></i> Svi vozači (uključujući i neaktivne)
         </a>
-        <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary btn-sm mb-4 custom-btn">➕ Додај возача</a>
+        <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary btn-sm mb-4 custom-btn">➕ Dodaj vozača</a>
     </div>
 </div>
 
 
     <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4">
         <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Претрага по имену, CPC или тахограф картици" value="{{ search or '' }}">
-            <button class="btn btn-outline-secondary" type="submit">🔍 Претражи</button>
+            <input type="text" name="search" class="form-control" placeholder="Pretraga po imenu, CPC ili tahograf kartici" value="{{ search or '' }}">
+            <button class="btn btn-outline-secondary" type="submit">🔍 Pretraži</button>
         </div>
     </form>
 
@@ -29,12 +29,12 @@
         <table class="table table-hover align-middle">
             <thead class="table-light">
                 <tr>
-                    <th>Име и презиме</th>
-                    <th>Број тахограф картице</th>
-                    <th>CPC број</th>
-                    <th>CPC важи до</th>
-                    <th>Оцена</th>
-                    <th>Оцени</th>
+                    <th>Ime i prezime</th>
+                    <th>Broj tahograf kartice</th>
+                    <th>CPC broj</th>
+                    <th>CPC važi do</th>
+                    <th>Ocena</th>
+                    <th>Oceni</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,11 +61,11 @@
                         {% if driver_ratings[driver.id] %}
                             ⭐ {{ "%.1f"|format(driver_ratings[driver.id]) }} / 5
                         {% else %}
-                            Још није оцењен
+                            Još nije ocenjen
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ url_for('main.rate_driver', driver_id=driver.id) }}" class="btn btn-outline-success btn-sm">Оцени</a>
+                        <a href="{{ url_for('main.rate_driver', driver_id=driver.id) }}" class="btn btn-outline-success btn-sm">Oceni</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -74,7 +74,7 @@
     </div>
     {% else %}
     <div class="alert alert-info text-center" role="alert">
-        Тренутно немате ниједног возача у систему.
+        Trenutno nemate nijednog vozača u sistemu.
     </div>
     {% endif %}
 </div>

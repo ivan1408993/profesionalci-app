@@ -2,24 +2,24 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Сви возачи који су радили у вашој фирми</h2>
+    <h2>Svi vozači koji su radili u vašoj firmi</h2>
 
     <form method="get" class="form-inline mb-3">
-        <input type="text" name="search" class="form-control mr-2" placeholder="Претражи по имену или картици" value="{{ search or '' }}">
-        <button type="submit" class="btn btn-primary">Претражи</button>
+        <input type="text" name="search" class="form-control mr-2" placeholder="Pretraži po imenu ili kartici" value="{{ search or '' }}">
+        <button type="submit" class="btn btn-primary">Pretraži</button>
     </form>
 
     {% if drivers %}
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Име и презиме</th>
-                    <th>Број картице</th>
-                    <th>CPC број</th>
-                    <th>CPC важи до</th>
-                    <th>Статус</th>
-                    <th>Просечна оцена</th>
-                    <th>Акције</th>
+                    <th>Ime i prezime</th>
+                    <th>Broj kartice</th>
+                    <th>CPC broj</th>
+                    <th>CPC važi do</th>
+                    <th>Status</th>
+                    <th>Prosečna ocena</th>
+                    <th>Akcije</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,9 +40,9 @@
             </td>
                     <td>
                         {% if driver.active %}
-                            <span class="text-success">Активан</span>
+                            <span class="text-success">Aktivan</span>
                         {% else %}
-                            <span class="text-danger">Неактиван</span>
+                            <span class="text-danger">Neaktivan</span>
                         {% endif %}
                     </td>
                     <td>
@@ -53,14 +53,14 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-sm btn-info">Детаљи</a>
+                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-sm btn-info">Detalji</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <div class="alert alert-info">Нема резултата.</div>
+        <div class="alert alert-info">Nema rezultata.</div>
     {% endif %}
 </div>
 {% endblock %}

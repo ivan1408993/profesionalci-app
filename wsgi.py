@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# ➕ Учитавање .env фајла пре креирања апликације
+# ➕ Učitavanje .env fajla pre kreiranja aplikacije
 load_dotenv()
 from app import create_app, db
 

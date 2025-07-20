@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}Ажурирање возача{% endblock %}
+{% block title %}Ažuriranje vozača{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Ажурирај податке о возачу</h2>
+    <h2>Ažuriraj podatke o vozaču</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
           <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
               {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Затвори"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zatvori"></button>
           </div>
         {% endfor %}
       {% endif %}
@@ -18,65 +18,65 @@
 
     <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}" id="driverForm" novalidate>
         <div class="mb-3">
-            <label for="full_name" class="form-label">Име и презиме</label>
+            <label for="full_name" class="form-label">Ime i prezime</label>
             <input type="text" class="form-control" name="full_name" id="full_name"
                    value="{{ driver.full_name }}" required>
         </div>
         
         <div class="mb-3">
-             <label for="card_number" class="form-label">Број тахограф картице</label>
+             <label for="card_number" class="form-label">Broj tahograf kartice</label>
             <input type="text" class="form-control" id="card_number" name="card_number"
            pattern="^[A-Za-z0-9]{16}$" maxlength="16" minlength="16"
-           title="Број тахограф картице мора имати тачно 16 карактера.">
-            <div class="form-text">Унесите само ако је возач добио нову картицу</div>
-            <div class="invalid-feedback">Број тахограф картице мора имати тачно 16 карактера (слова или цифре).</div>
+           title="Broj tahograf kartice mora imati tačno 16 karaktera.">
+            <div class="form-text">Unesite samo ako je vozač dobio novu karticu</div>
+            <div class="invalid-feedback">Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).</div>
         </div>
 
 
         <div class="mb-3">
-            <label for="expiry_date" class="form-label">Датум истека</label>
+            <label for="expiry_date" class="form-label">Datum isteka</label>
             <input type="date" class="form-control" name="expiry_date" id="expiry_date"
                    value="{{ expiry_date_str }}">
         </div>
 
         <div class="mb-3">
-            <label for="cpc_card_number" class="form-label">Број CPC картице</label>
+            <label for="cpc_card_number" class="form-label">Broj CPC kartice</label>
             <input type="text" class="form-control" name="cpc_card_number" id="cpc_card_number"
                    value="{{ driver.cpc_card_number or '' }}">
         </div>
 
         <div class="mb-3">
-            <label for="cpc_expiry_date" class="form-label">Истек CPC картице</label>
+            <label for="cpc_expiry_date" class="form-label">Istek CPC kartice</label>
             <input type="date" class="form-control" name="cpc_expiry_date" id="cpc_expiry_date"
                    value="{{ cpc_expiry_date_str }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Сачувај промене</button>
-        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary ms-2">Назад</a>
+        <button type="submit" class="btn btn-primary">Sačuvaj promene</button>
+        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary ms-2">Nazad</a>
     </form>
 
     <hr>
-    <h4>Историја тахограф картица</h4>
+    <h4>Istorija tahograf kartica</h4>
     {% if driver.cards %}
         <ul class="list-group">
         {% for card in driver.cards|sort(attribute='issue_date', reverse=True) %}
             <li class="list-group-item {% if card.is_active %}list-group-item-success{% endif %}">
                 {{ card.card_number }}
-                {% if card.expiry_date %} — важи до: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
+                {% if card.expiry_date %} — važi do: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
                 {% if card.is_active %}
-                    <strong class="ms-2">(активна)</strong>
+                    <strong class="ms-2">(aktivna)</strong>
                 {% else %}
-                    <span class="text-muted ms-2">(неактивна)</span>
+                    <span class="text-muted ms-2">(neaktivna)</span>
                 {% endif %}
             </li>
         {% endfor %}
         </ul>
     {% else %}
-        <p class="text-muted">Нема података о картицама.</p>
+        <p class="text-muted">Nema podataka o karticama.</p>
     {% endif %}
 </div>
 
-<!-- ✅ Bootstrap JS валидација -->
+<!-- ✅ Bootstrap JS validacija -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("driverForm");
