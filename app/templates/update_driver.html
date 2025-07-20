@@ -16,7 +16,7 @@
       {% endif %}
     {% endwith %}
 
-    <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}">
+    <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}" id="driverForm" novalidate>
         <div class="mb-3">
             <label for="full_name" class="form-label">Име и презиме</label>
             <input type="text" class="form-control" name="full_name" id="full_name"
