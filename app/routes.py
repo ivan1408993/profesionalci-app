@@ -570,7 +570,7 @@ def driver_exists(driver_id):
     return render_template('driver_exists.html', driver=driver, ratings_info=ratings_info, current_lang=session.get('lang', 'sr'))
 
 
-@main.route('/driver/<int:driver_id>/deactivate')
+@main.route('/driver/<int:driver_id>/deactivate', methods=['POST'])
 def deactivate_driver(driver_id):
     employer_id = session.get('user_id')
     if not employer_id or session.get('user_type') != 'employer':
