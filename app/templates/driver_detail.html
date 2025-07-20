@@ -38,8 +38,6 @@
                     <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}">
                         <button type="submit" class="btn btn-danger">Означи као неактивног</button>
                     </form>
-
-                    <a href="{{ url_for('main.add_driver_card', driver_id=driver.id) }}" class="btn btn-primary">Додај нову картицу</a>
                 {% endif %}
             </div>
 
