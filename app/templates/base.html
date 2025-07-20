@@ -13,79 +13,84 @@
 
     <style>
         body {
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            color: white;
+            background: linear-gradient(to right, #e0f7fa, #ffffff, #e0f2f1);
+            color: #333;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             padding-top: 70px;
         }
 
         .card-style {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
             margin: auto;
         }
 
         .form-control {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            color: #333;
         }
 
         .form-control::placeholder {
-            color: #ccc;
+            color: #888;
         }
 
         .btn-custom {
-            background-color: #00bcd4;
+            background-color: #007b8a;
             border: none;
-            color: black;
+            color: white;
             font-weight: bold;
         }
 
         .btn-custom:hover {
-            background-color: #0097a7;
+            background-color: #004d60;
+            color: white;
+        }
+
+        .btn-outline-light {
+            border-color: #007b8a;
+            color: #007b8a;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #007b8a;
             color: white;
         }
 
         .error-msg {
-            color: #ff6b6b;
+            color: #d32f2f;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
 
         .navbar {
-            background-color: rgba(0, 0, 0, 0.3);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5);
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .navbar a {
-            color: #00bcd4 !important;
+            color: #007b8a !important;
         }
 
         .navbar a:hover {
-            color: white !important;
+            color: #004d60 !important;
         }
 
         .terms-text, .privacy-text {
             max-width: 800px;
-            color: white;
+            color: #333;
             font-size: 1.15rem;
             line-height: 1.8;
             padding: 2.5rem 2rem;
             margin: auto;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         .terms-text h2, .privacy-text h2 {
@@ -109,7 +114,7 @@
 
         .terms-text hr, .privacy-text hr {
             margin: 3rem 0 2rem;
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 0, 0, 0.1);
         }
 
         .terms-text .text-center, .privacy-text .text-center {
@@ -121,7 +126,7 @@
 <body>
 
 <!-- 🌐 Navigacija -->
-<nav class="navbar navbar-expand-lg navbar-dark px-3">
+<nav class="navbar navbar-expand-lg navbar-light px-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url_for('main.index') }}">Profesionalci</a>
 
@@ -201,10 +206,10 @@
 {% block scripts %}{% endblock %}
 
 <!-- 🔻 Footer -->
-<footer class="text-center mt-5 py-4" style="color: #ccc;">
+<footer class="text-center mt-5 py-4" style="color: #666;">
     <small>© 2025 Profesionalci |
-        <a href="{{ url_for('main.terms') }}" style="color: #00bcd4; text-decoration: none;">Uslovi korišćenja</a> |
-        <a href="{{ url_for('main.privacy_policy') }}" style="color: #00bcd4; text-decoration: none;">Politika privatnosti</a>
+        <a href="{{ url_for('main.terms') }}" style="color: #007b8a; text-decoration: none;">Uslovi korišćenja</a> |
+        <a href="{{ url_for('main.privacy_policy') }}" style="color: #007b8a; text-decoration: none;">Politika privatnosti</a>
     </small>
 </footer>
 
