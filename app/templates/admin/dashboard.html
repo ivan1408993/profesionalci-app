@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 
-{% block title %}Админ контролна табла{% endblock %}
+{% block title %}Admin - Kontrolna tabla{% endblock %}
 
 {% block content %}
 <div class="container mt-4" style="max-width: 1000px;">
 
-    <h1 class="mb-4 text-center">Админ контролна табла</h1>
+    <h1 class="mb-4 text-center">Admin kontrolna tabla</h1>
 
     <!-- Форма за претрагу фирми -->
     <form method="get" action="{{ url_for('main.admin_dashboard') }}" class="row g-3 mb-4">
         <div class="col-md-5">
-            <input type="text" class="form-control" name="company_query" placeholder="Претрага по називу фирме..." value="{{ company_query }}">
+            <input type="text" class="form-control" name="company_query" placeholder="Pretraga po nazivu firme..." value="{{ company_query }}">
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" name="pib_query" placeholder="Претрага по ПИБ-у..." value="{{ pib_query }}">
+            <input type="text" class="form-control" name="pib_query" placeholder="Pretraga po PIB-u..." value="{{ pib_query }}">
         </div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-info w-100">Претражи фирме</button>
+            <button type="submit" class="btn btn-info w-100">Pretraži firme</button>
         </div>
     </form>
 
-    <h2 class="mt-4">Регистроване фирме</h2>
+    <h2 class="mt-4">Registrovane firme</h2>
     <div class="table-responsive">
         <table class="table table-dark table-striped table-bordered">
            <thead>
     <tr>
         <th>ID</th>
-        <th>Назив фирме</th>
-        <th>ПИБ</th>
+        <th>Naziv firme</th>
+        <th>PIB</th>
         <th>Email</th>
-        <th>Статус</th>  <!-- нова колона -->
-        <th>Акција</th>  <!-- нова колона за дугме -->
+        <th>Status</th>
+        <th>Akcija</th>
     </tr>
 </thead>
 <tbody>
@@ -46,15 +46,15 @@
         <td>{{ employer.email }}</td>
         <td>
             {% if employer.active %}
-                <span class="badge bg-success">Активна</span>
+                <span class="badge bg-success">Aktivna</span>
             {% else %}
-                <span class="badge bg-secondary">Неактивна</span>
+                <span class="badge bg-secondary">Neаktivna</span>
             {% endif %}
         </td>
         <td>
             <a href="{{ url_for('main.toggle_employer_status', employer_id=employer.id) }}" 
                class="btn btn-sm btn-outline-primary">
-                {% if employer.active %} Деактивирај {% else %} Активирај {% endif %}
+                {% if employer.active %} Deaktiviraj {% else %} Aktiviraj {% endif %}
             </a>
         </td>
     </tr>
@@ -64,31 +64,31 @@
         </table>
     </div>
 
-    <!-- Форма за претрагу возача -->
+    <!-- Forma za pretragu vozača -->
     <form method="get" action="{{ url_for('main.admin_dashboard') }}" class="row g-3 mt-5 mb-4">
-        <!-- Да би се сачували филтери фирми када претражујеш возаче -->
+        <!-- Da bi se sačuvali filteri firmi kad pretražuješ vozače -->
         <input type="hidden" name="company_query" value="{{ company_query }}">
         <input type="hidden" name="pib_query" value="{{ pib_query }}">
 
         <div class="col-md-8">
-            <input type="text" class="form-control" name="driver_query" placeholder="Претрага возача по имену, тахограф картици или CPC броју..." value="{{ driver_query }}">
+            <input type="text" class="form-control" name="driver_query" placeholder="Pretraga vozača po imenu, tahografu ili CPC kartici..." value="{{ driver_query }}">
         </div>
         <div class="col-md-4">
-            <button type="submit" class="btn btn-info w-100">Претражи возаче</button>
+            <button type="submit" class="btn btn-info w-100">Pretraži vozače</button>
         </div>
     </form>
 
-    <h2 class="mt-4">Сви возачи у бази</h2>
+    <h2 class="mt-4">Svi vozači u bazi</h2>
     <div class="table-responsive">
         <table class="table table-dark table-striped table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Име и презиме</th>
-                    <th>Број тахограф картице</th>
-                    <th>CPC број</th>
-                    <th>CPC важи до</th>
-                    <th>Статус</th>
+                    <th>Ime i prezime</th>
+                    <th>Broj tahograf kartice</th>
+                    <th>Broj CPC kartice</th>
+                    <th>CPC važi do</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,9 +104,9 @@
                     <td>{{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '-' }}</td>
                     <td>
                         {% if driver.active %}
-                            <span class="badge bg-success">Активан</span>
+                            <span class="badge bg-success">Aktivan</span>
                         {% else %}
-                            <span class="badge bg-secondary">Неактиван</span>
+                            <span class="badge bg-secondary">Neaktivan</span>
                         {% endif %}
                     </td>
                 </tr>
