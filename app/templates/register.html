@@ -2,8 +2,8 @@
 {% block title %}Регистрација{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2>Регистрација послодавца</h2>
+<div class="container mt-5" style="max-width: 450px;">
+    <h2 class="mb-4 text-center">Регистрација послодавца</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -36,8 +36,8 @@
             <div id="password-strength" class="mt-2"></div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Региструј се</button>
-        <a href="{{ url_for('main.login') }}" class="btn btn-secondary ms-2">Повратак на пријаву</a>
+        <button type="submit" class="btn btn-primary w-100">Региструј се</button>
+        <a href="{{ url_for('main.login') }}" class="btn btn-secondary w-100 mt-2">Повратак на пријаву</a>
     </form>
 </div>
 
