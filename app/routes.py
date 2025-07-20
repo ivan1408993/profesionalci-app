@@ -379,15 +379,23 @@ def register():
             flash("PIB мора садржати тачно 9 цифара.")
             return redirect(url_for('main.register'))
 
-        existing = Employer.query.filter_by(pib=pib).first()
-        if existing:
-            if not existing.active:
+        # Провера да ли већ постоји фирма са истим PIB-ом
+        existing_pib = Employer.query.filter_by(pib=pib).first()
+        if existing_pib:
+            if not existing_pib.active:
                 flash("Фирма са овим PIB-ом није активна. Регистрација није могућа.")
                 return redirect(url_for('main.register'))
             else:
                 flash("Постоји већ налог са тим PIB-ом.")
                 return redirect(url_for('main.register'))
 
+        # ПРОВЕРА ДА ЛИ МЕЈЛ ВЕЋ ПОСТОЈИ
+        existing_email = Employer.query.filter_by(email=email).first()
+        if existing_email:
+            flash("Е-маил адреса већ постоји у систему. Изаберите другу.")
+            return redirect(url_for('main.register'))
+
+        # Ако је све у реду, додај новог послодавца
         new_employer = Employer(
             company_name=company_name,
             pib=pib,
@@ -401,6 +409,7 @@ def register():
         return redirect(url_for('main.login'))
 
     return render_template('register.html', current_lang=session.get('lang', 'sr'))
+
 
 
 @main.route('/logout')
