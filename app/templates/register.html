@@ -36,6 +36,15 @@
             <div id="password-strength" class="mt-2"></div>
         </div>
 
+        <!-- Checkbox за услове коришћења -->
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">
+                Слажем се са <a href="{{ url_for('main.terms') }}" target="_blank">условима коришћења</a> и
+                <a href="{{ url_for('main.privacy_policy') }}" target="_blank">политиком приватности</a>
+            </label>
+        </div>
+
         <button type="submit" class="btn btn-primary w-100">Региструј се</button>
         <a href="{{ url_for('main.login') }}" class="btn btn-secondary w-100 mt-2">Повратак на пријаву</a>
     </form>
@@ -84,6 +93,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!checkPasswordStrength(password)) {
             e.preventDefault();
             alert('Лозинка није довољно јака. Молимо исправите пре слања.');
+            return;
+        }
+
+        // Проверa checkbox-a
+        const termsCheck = document.getElementById('termsCheck');
+        if (!termsCheck.checked) {
+            e.preventDefault();
+            alert('Морате се сложити са условима коришћења и политиком приватности.');
         }
     });
 });
