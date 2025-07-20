@@ -1,26 +1,119 @@
-.custom-btn {
-  font-size: 16px; /* normalna veličina na desktopu */
-  padding: 10px 20px;
+/* Osnovne promenljive za svetli režim */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --link-color: #0d6efd;
+  --header-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --border-color: #dee2e6;
+  --btn-primary-bg: #0d6efd;
+  --btn-primary-text: #ffffff;
+  --btn-toggle-bg: #f1f1f1;
+  --btn-toggle-text: #000000;
 }
 
-@media (max-width: 600px) {
-  .custom-btn {
-    font-size: 12px; /* manja veličina na telefonu */
-    padding: 6px 12px;
-  }
+/* Promenljive za tamni režim */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --link-color: #66b2ff;
+  --header-color: #1f1f1f;
+  --card-bg: #1e1e1e;
+  --border-color: #333333;
+  --btn-primary-bg: #0d6efd;
+  --btn-primary-text: #ffffff;
+  --btn-toggle-bg: #2c2c2c;
+  --btn-toggle-text: #e0e0e0;
 }
 
+/* Telo sajta */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  input[type="text"],
-  input[type="password"],
-  input[type="email"] {
-    font-size: 0.9rem;
-  }
+/* Zaglavlje */
+header {
+  background-color: var(--header-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
 
-  .table-responsive {
-    overflow-x: auto;
-  }
+/* Kartice */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-  th, td {
-    white-space: nowrap;
-  }
+/* Dugmad */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-toggle {
+  background-color: var(--btn-toggle-bg);
+  color: var(--btn-toggle-text);
+  border: 1px solid var(--border-color);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-toggle:hover {
+  background-color: var(--border-color);
+}
+
+/* Linkovi */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Formulari */
+input, textarea, select {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--link-color);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Navigacija */
+.navbar {
+  background-color: var(--header-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Footer */
+footer {
+  background-color: var(--header-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
