@@ -3,6 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Profesionalci{% endblock %}</title>
+    <style>
+        body.light-mode {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+.dark-mode .btn {
+  border-color: #f8f9fa;
+  color: #f8f9fa;
+}
+
+.light-mode .btn {
+  border-color: #212529;
+  color: #212529;
+}
+
+  body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  .toggle-switch {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .toggle-switch input {
+    display: none;
+  }
+
+  .toggle-switch label {
+    background-color: #444;
+    border-radius: 20px;
+    padding: 5px 15px;
+    color: #fff;
+    font-weight: bold;
+    user-select: none;
+  }
+
+  .light-mode .toggle-switch label {
+    background-color: #ccc;
+    color: #000;
+  }
+</style>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,7 +69,127 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
+    <style>
+        body.light-mode {
+  background: linear-gradient(to right, #e0f7fa, #ffffff, #e0f2f1);
+  color: #212529;
+}
 
+body.dark-mode {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding-top: 70px;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+
+        .card-style {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .form-control {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            color: #333;
+        }
+
+        .form-control::placeholder {
+            color: #888;
+        }
+
+        .btn-custom {
+            background-color: #007b8a;
+            border: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #004d60;
+            color: white;
+        }
+
+        .btn-outline-light {
+            border-color: #007b8a;
+            color: #007b8a;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #007b8a;
+            color: white;
+        }
+
+        .error-msg {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #007b8a !important;
+        }
+
+        .navbar a:hover {
+            color: #004d60 !important;
+        }
+
+        .terms-text, .privacy-text {
+            max-width: 800px;
+            color: #333;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            padding: 2.5rem 2rem;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .terms-text h2, .privacy-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .terms-text h5, .privacy-text h5 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .terms-text ul li, .privacy-text ul li {
+            margin-bottom: 0.6rem;
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+
+        .terms-text hr, .privacy-text hr {
+            margin: 3rem 0 2rem;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .terms-text .text-center, .privacy-text .text-center {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
 <div class="toggle-switch">
