@@ -285,21 +285,24 @@ body {
     </small>
 </footer>
 <script>
-  const toggle = document.getElementById('modeToggle');
-  const label = document.getElementById('modeLabel');
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById('modeToggle');
+    const label = document.getElementById('modeLabel');
 
-  // Примени претходно изабрани мод
-  const savedMode = localStorage.getItem('mode') || 'light';
-  document.body.classList.add(`${savedMode}-mode`);
-  toggle.checked = savedMode === 'dark';
-  label.textContent = savedMode === 'dark' ? '🌙 Тамни режим' : '🌞 Светли режим';
+    if (toggle && label) {
+      const savedMode = localStorage.getItem('mode') || 'light';
+      document.body.classList.add(`${savedMode}-mode`);
+      toggle.checked = savedMode === 'dark';
+      label.textContent = savedMode === 'dark' ? '🌙 Тамни режим' : '🌞 Светли режим';
 
-  toggle.addEventListener('change', () => {
-    document.body.classList.toggle('dark-mode');
-    document.body.classList.toggle('light-mode');
-    const currentMode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-    localStorage.setItem('mode', currentMode);
-    label.textContent = currentMode === 'dark' ? '🌙 Тамни режим' : '🌞 Светли режим';
+      toggle.addEventListener('change', () => {
+        document.body.classList.toggle('dark-mode');
+        document.body.classList.toggle('light-mode');
+        const currentMode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+        localStorage.setItem('mode', currentMode);
+        label.textContent = currentMode === 'dark' ? '🌙 Тамни режим' : '🌞 Светли режим';
+      });
+    }
   });
 </script>
 
