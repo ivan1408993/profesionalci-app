@@ -54,7 +54,7 @@
                                      Ocenio:
 {% if r.employer %}
   <a href="{{ url_for('main.employer_detail', employer_id=r.employer.id) }}">
-    {{ r.employer.company_name }}
+    {{ r.employer.company_name }} | {{ r.created_at.strftime('%d.%m.%Y') }}
   </a>
 {% else %}
   Nepoznato
