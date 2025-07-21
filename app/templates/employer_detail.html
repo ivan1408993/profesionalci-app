@@ -7,9 +7,16 @@
     <h2>Послодавац: {{ employer.company_name }}</h2>
     <ul class="list-group mt-3">
         <li class="list-group-item"><strong>Назив:</strong> {{ employer.company_name }}</li>
-        <li class="list-group-item"><strong>ПИБ:</strong> {{ employer.pib }}</li>
+        <li class="list-group-item">
+            <strong>ПИБ:</strong> {{ employer.pib }}<br>
+            <a href="https://pretraga2.apr.gov.rs/EnterprisePublicSearch/search?searchType=entity&searchCriteria.identifier={{ employer.pib }}" 
+               target="_blank" rel="noopener noreferrer" class="link-primary">
+               Преглед у APR-у
+            </a>
+        </li>
         {# Касније можеш додати број телефона, адресу и друге податке #}
     </ul>
+    
     <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary mt-3">Назад на контролну таблу</a>
 </div>
 {% endblock %}
