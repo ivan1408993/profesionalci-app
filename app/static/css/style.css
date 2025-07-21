@@ -1,119 +1,112 @@
-/* Osnovne promenljive za svetli režim */
-:root {
-  --bg-color: #ffffff;
-  --text-color: #212529;
-  --link-color: #0d6efd;
-  --header-color: #f8f9fa;
-  --card-bg: #ffffff;
-  --border-color: #dee2e6;
-  --btn-primary-bg: #0d6efd;
-  --btn-primary-text: #ffffff;
-  --btn-toggle-bg: #f1f1f1;
-  --btn-toggle-text: #000000;
+/* 🌞 Светли режим (подразумевани) */
+body.light-mode {
+    background-color: #f8f9fa;
+    color: #212529;
 }
 
-/* Promenljive za tamni režim */
-[data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
-  --link-color: #66b2ff;
-  --header-color: #1f1f1f;
-  --card-bg: #1e1e1e;
-  --border-color: #333333;
-  --btn-primary-bg: #0d6efd;
-  --btn-primary-text: #ffffff;
-  --btn-toggle-bg: #2c2c2c;
-  --btn-toggle-text: #e0e0e0;
+.light-mode .card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    color: #212529;
 }
 
-/* Telo sajta */
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.light-mode .form-control {
+    background-color: #ffffff;
+    color: #212529;
+    border: 1px solid #ced4da;
 }
 
-/* Zaglavlje */
-header {
-  background-color: var(--header-color);
-  border-bottom: 1px solid var(--border-color);
-  padding: 1rem 0;
-  margin-bottom: 2rem;
+.light-mode .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
 }
 
-/* Kartice */
+.light-mode .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.light-mode a {
+    color: #007b8a;
+}
+
+.light-mode a:hover {
+    color: #005f6b;
+    text-decoration: underline;
+}
+
+
+/* 🌙 Тамни режим */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    color: #e0e0e0;
+}
+
+.dark-mode .form-control {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+.dark-mode .form-control::placeholder {
+    color: #999;
+}
+
+.dark-mode .btn-primary {
+    background-color: #00697c;
+    border-color: #00697c;
+    color: #ffffff;
+}
+
+.dark-mode .btn-primary:hover {
+    background-color: #004f5c;
+    border-color: #004f5c;
+}
+
+.dark-mode a {
+    color: #00bcd4;
+}
+
+.dark-mode a:hover {
+    color: #80deea;
+    text-decoration: underline;
+}
+
+
+/* ✅ Општи стилови */
 .card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
 }
 
-/* Dugmad */
-.btn-primary {
-  background-color: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  border: none;
-  transition: background-color 0.3s ease;
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
 }
 
-.btn-primary:hover {
-  background-color: #0b5ed7;
+.form-control {
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 1rem;
 }
 
-.btn-toggle {
-  background-color: var(--btn-toggle-bg);
-  color: var(--btn-toggle-text);
-  border: 1px solid var(--border-color);
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.btn-toggle:hover {
-  background-color: var(--border-color);
-}
-
-/* Linkovi */
-a {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Formulari */
-input, textarea, select {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.375rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--link-color);
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
-/* Navigacija */
-.navbar {
-  background-color: var(--header-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
-/* Footer */
 footer {
-  background-color: var(--header-color);
-  color: var(--text-color);
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-  border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+/* Прелазна анимација приликом промене мода */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card, .form-control, .btn, a {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
