@@ -956,3 +956,8 @@ def terms_public():
 @main.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy_policy.html')
+
+@main.route('/employer/<int:employer_id>')
+def employer_detail(employer_id):
+    employer = Employer.query.get_or_404(employer_id)
+    return render_template('employer_detail.html', employer=employer)

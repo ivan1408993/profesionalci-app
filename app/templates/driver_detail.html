@@ -51,8 +51,15 @@
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div><strong>Ocena:</strong> {{ r.stars }} ⭐</div>
                                 <small class="text-muted">
-                                     Ocenio: {{ r.employer.company_name if r.employer else "Nepoznato" }} |
-                                     {{ r.created_at.strftime('%d.%m.%Y') }}
+                                     Ocenio:
+{% if r.employer %}
+  <a href="{{ url_for('main.employer_detail', employer_id=r.employer.id) }}">
+    {{ r.employer.company_name }}
+  </a>
+{% else %}
+  Nepoznato
+{% endif %}
+
                                 </small>
                             </div>
                             <p class="mb-0"><strong>Komentar:</strong> {{ r.comment or "Nema komentara" }}</p>

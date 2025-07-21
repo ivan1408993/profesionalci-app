@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Послодавац - {{ employer.company_name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Послодавац: {{ employer.company_name }}</h2>
+    <ul class="list-group mt-3">
+        <li class="list-group-item"><strong>Назив:</strong> {{ employer.company_name }}</li>
+        <li class="list-group-item"><strong>ПИБ:</strong> {{ employer.pib }}</li>
+        {# Касније можеш додати број телефона, адресу и друге податке #}
+    </ul>
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary mt-3">Назад на контролну таблу</a>
+</div>
+{% endblock %}
