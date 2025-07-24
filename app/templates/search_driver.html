@@ -3,12 +3,12 @@
 
 {% block content %}
 <div class="container mt-4">
-  <h2>Pretraga vozača po JMBG ili broju tahograf kartice </h2>
+  <h2>Pretraga vozača po JMBG, broju tahograf kartice ili CPC </h2>
 
 <form method="POST" action="{{ url_for('main.search_driver') }}" class="row g-3 align-items-center my-3">
   <div class="col-auto flex-grow-1">
     <label for="search_input" class="form-label">JMBG, broj tahograf kartice ili CPC:</label>
-    <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG ili broj tahograf kartice" required>
+    <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG, broj tahograf kartice ili CPC" required>
   </div>
 
     <div class="col-auto align-self-end">
