@@ -147,19 +147,22 @@
                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
     <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">🏠Početna-Kontrolna tabla</a></li>
     <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}">Moj profil</a></li>
-    <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}">👥Vozači</a></li>
+    <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user"></i> <i class="fas fa-truck"></i>Vozači</a></li>
     <li class="nav-item">
           <a class="nav-link" href="{{ url_for('main.add_driver') }}">➕ Додај возача</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.employer_profile') }}">⚙️ Подешавања</a>
         </li>
     <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}">🔍Pretraga svih vozača</a></li>
     {# <li><a class="dropdown-item" href="{{ url_for('main.reports') }}">Izveštaji</a></li> #}
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}">Odjava</a></li>
+    <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}">🚪Odjava</a></li>
     </ul>
                 </li>
                 {% elif session.get('user_id') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.logout') }}">Odjava</a>
+                    <a class="nav-link" href="{{ url_for('main.logout') }}">🚪Odjava</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
