@@ -235,19 +235,29 @@ def search_driver():
         print(f"🔍 Pretraga za unetim: {search_input}")
 
         if search_input.isdigit() and len(search_input) == 13:
-            from app.utils import hash_jmbg_with_salt  # uvezi funkciju
+            # Pretraga po JMBG
+            from app.utils import hash_jmbg_with_salt
             all_drivers = Driver.query.all()
             for d in all_drivers:
                 hashed = hash_jmbg_with_salt(search_input, d.salt)
                 if hashed == d.jmbg_hashed:
                     driver = d
                     break
-            print(f"🔎 Pronađen vozač: {driver}")
-        else:
+            print(f"🔎 Pronađen vozač po JMBG: {driver}")
+        
+        if not driver:
+            # Pretraga po broju tahograf kartice
             card = DriverCard.query.filter_by(card_number=search_input).first()
-            print(f"🔎 Pronađena kartica: {card}")
+            print(f"🔎 Pronađena tahograf kartica: {card}")
             if card:
                 driver = card.driver
+
+        if not driver:
+            # Pretraga po broju CPC kartice
+            cpc_card = CPCDriverCard.query.filter_by(card_number=search_input).first()
+            print(f"🔎 Pronađena CPC kartica: {cpc_card}")
+            if cpc_card:
+                driver = cpc_card.driver
 
         if not driver:
             flash("Vozač sa unetim podacima nije pronađen.")
@@ -274,6 +284,7 @@ def search_driver():
                            already_employed_by_other=already_employed_by_other,
                            show_additional_fields=show_additional_fields,
                            current_lang=session.get('lang', 'sr'))
+
 
 
 @main.route('/adopt_driver/<int:driver_id>', methods=['POST'])

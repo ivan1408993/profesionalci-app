@@ -7,7 +7,7 @@
 
 <form method="POST" action="{{ url_for('main.search_driver') }}" class="row g-3 align-items-center my-3">
   <div class="col-auto flex-grow-1">
-    <label for="search_input" class="form-label">JMBG ili broj tahograf kartice:</label>
+    <label for="search_input" class="form-label">JMBG, broj tahograf kartice ili CPC:</label>
     <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG ili broj tahograf kartice" required>
   </div>
 
@@ -20,7 +20,7 @@
     <hr>
     <h3>Rezultati:</h3>
     <ul class="list-group mb-3">
-      <li class="list-group-item"><strong>Ime:</strong> {{ driver.full_name }}</li>
+      <li class="list-group-item"><strong>Ime i prezime:</strong> {{ driver.full_name }}</li>
       {% set active_card = driver.cards | selectattr('is_active') | first %}
     <li class="list-group-item"><strong>Broj tahograf kartice:</strong> {{ active_card.card_number if active_card else '—' }}</li>
 
