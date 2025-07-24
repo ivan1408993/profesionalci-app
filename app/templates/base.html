@@ -185,10 +185,11 @@
 
 <!-- Dugme nazad, osim na glavnoj stranici -->
 <div class="container mt-3">
-    {% if request.endpoint not in ['main.index', 'main.login'] %}
-<button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Nazad</button>
-{% endif %}
+    {% if request.endpoint not in ['main.index', 'main.login'] and session.get('user_type') != 'employer' %}
+        <button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Назад</button>
+    {% endif %}
 </div>
+
 
 
 <!-- 📦 Sadržaj stranice -->
