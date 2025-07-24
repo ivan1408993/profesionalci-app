@@ -323,6 +323,13 @@ def employer_profile():
         employer.company_name = request.form['company_name']
         employer.email = request.form['email']
 
+        phone_number = request.form.get('phone_number', '').strip()
+        if phone_number and not phone_number.isdigit():
+            flash("Broj telefona može sadržati samo cifre.")
+            return redirect(url_for('main.employer_profile'))
+
+        employer.phone_number = phone_number
+
         new_password = request.form.get('password')
         if new_password:
             employer.password_hash = generate_password_hash(new_password)
@@ -332,6 +339,7 @@ def employer_profile():
         return redirect(url_for('main.drivers'))
 
     return render_template('employer_profile.html', employer=employer, current_lang=session.get('lang', 'sr'))
+
 
 
 @main.route('/drivers/<int:driver_id>/activate', methods=['POST'])

@@ -6,11 +6,12 @@
 <div class="container mt-5">
     <h2>Послодавац: {{ employer.company_name }}</h2>
     <ul class="list-group mt-3">
-        <li class="list-group-item"><strong>Назив:</strong> {{ employer.company_name }}</li>
-        <li class="list-group-item"><strong>ПИБ:</strong> {{ employer.pib }}</li>
+        <li class="list-group-item"><strong>Naziv firme:</strong> {{ employer.company_name }}</li>
+        <li class="list-group-item"><strong>PIB:</strong> {{ employer.pib }}</li>
+        <li class="list-group-item"><strong>Telefon:</strong> {{ employer.phone_number }}</li>
         {# Касније можеш додати број телефона, адресу и друге податке #}
     </ul>
     
-    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary mt-3">Назад на контролну таблу</a>
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary mt-3">Nazad na kontrolnu tablu</a>
 </div>
 {% endblock %}

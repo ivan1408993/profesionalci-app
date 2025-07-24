@@ -18,6 +18,10 @@
             <input type="email" class="form-control" name="email" value="{{ employer.email }}" required>
         </div>
         <div class="form-group mb-3">
+            <label>Broj telefona</label>
+            <input type="tel" pattern="[0-9]+" class="form-control" name="phone_number" value="{{ employer.phone_number or '' }}" placeholder="Unesite broj telefona (samo cifre)">
+        </div>
+        <div class="form-group mb-3">
             <label>Nova lozinka (ostavite prazno ako ne menjate)</label>
             <input type="password" class="form-control" name="password">
         </div>
