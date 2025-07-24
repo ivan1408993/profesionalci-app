@@ -231,46 +231,44 @@ def search_driver():
     show_additional_fields = False
 
     if request.method == 'POST':
-        search_input = request.form.get('search_input', '').strip()
-        print(f"🔍 Pretraga za unetim: {search_input}")
+    search_input = request.form.get('search_input', '').strip()
+    print(f"🔍 Pretraga za unetim: {search_input}")
 
-        if search_input.isdigit() and len(search_input) == 13:
-            # Pretraga po JMBG
-            from app.utils import hash_jmbg_with_salt
-            all_drivers = Driver.query.all()
-            for d in all_drivers:
-                hashed = hash_jmbg_with_salt(search_input, d.salt)
-                if hashed == d.jmbg_hashed:
-                    driver = d
-                    break
-            print(f"🔎 Pronađen vozač po JMBG: {driver}")
-        
-        if not driver:
-            # Pretraga po broju tahograf kartice
-            card = DriverCard.query.filter_by(card_number=search_input).first()
-            print(f"🔎 Pronađena tahograf kartica: {card}")
-            if card:
-                driver = card.driver
+    if search_input.isdigit() and len(search_input) == 13:
+        # Pretraga po JMBG
+        from app.utils import hash_jmbg_with_salt
+        all_drivers = Driver.query.all()
+        for d in all_drivers:
+            hashed = hash_jmbg_with_salt(search_input, d.salt)
+            if hashed == d.jmbg_hashed:
+                driver = d
+                break
+        print(f"🔎 Pronađen vozač po JMBG: {driver}")
+    
+    if not driver:
+        # Pretraga po broju tahograf kartice
+        card = DriverCard.query.filter_by(card_number=search_input).first()
+        print(f"🔎 Pronađena tahograf kartica: {card}")
+        if card:
+            driver = card.driver
 
-        if not driver:
-            # Pretraga po broju CPC kartice
-            cpc_card_number = Driver.query.filter_by(cpc_card_number=search_input).first()
-            print(f"🔎 Pronađena CPC kartica: {cpc_card_number}")
-            if cpc_card_number:
-                driver = cpc_card_number.driver
+    if not driver:
+        # Pretraga po broju CPC kartice
+        driver = Driver.query.filter_by(cpc_card_number=search_input).first()
+        print(f"🔎 Pronađen vozač po CPC kartici: {driver}")
 
-        if not driver:
-            flash("Vozač sa unetim podacima nije pronađen.")
-            show_additional_fields = True
-        else:
-            for r in driver.ratings:
-                employer = Employer.query.get(r.employer_id)
-                ratings_info.append({
-                    'employer_name': employer.company_name if employer else "Nepoznat poslodavac",
-                    'stars': r.stars,
-                    'comment': r.comment,
-                    'rated_at': r.created_at.strftime('%d.%m.%Y') if r.created_at else ''
-                })
+    if not driver:
+        flash("Vozač sa unetim podacima nije pronađen.")
+        show_additional_fields = True
+    else:
+        for r in driver.ratings:
+            employer = Employer.query.get(r.employer_id)
+            ratings_info.append({
+                'employer_name': employer.company_name if employer else "Nepoznat poslodavac",
+                'stars': r.stars,
+                'comment': r.comment,
+                'rated_at': r.created_at.strftime('%d.%m.%Y') if r.created_at else ''
+            })
 
     already_employed_by_other = False
     if driver:
