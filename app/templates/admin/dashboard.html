@@ -29,6 +29,7 @@
         <th>Naziv firme</th>
         <th>PIB</th>
         <th>Email</th>
+        <th>Telefon</th>
         <th>Status</th>
         <th>Akcija</th>
     </tr>
@@ -44,6 +45,7 @@
         </td>
         <td>{{ employer.pib }}</td>
         <td>{{ employer.email }}</td>
+        <td>{{ employer.phone_number }}</td>
         <td>
             {% if employer.active %}
                 <span class="badge bg-success">Aktivna</span>
