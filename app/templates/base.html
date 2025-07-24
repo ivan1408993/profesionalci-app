@@ -144,18 +144,29 @@
                     <a class="nav-link dropdown-toggle" href="#" id="employerMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Dobrodošli, {{ session.get('company_name', 'Poslodavac') }}
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
-    <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">Početna</a></li>
+                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
+    <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">Početna-Kontrolna tabla</a></li>
     <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}">Moj profil</a></li>
-    <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}">Kontrolna tabla</a></li>
-    <li><a class="dropdown-item" href="{{ url_for('main.view_drivers') }}">Vozači</a></li>
-    <li><a class="dropdown-item" href="{{ url_for('main.view_ratings') }}">Ocene</a></li>
-    <li><a class="dropdown-item" href="{{ url_for('main.search_drivers') }}">Pretraga vozača</a></li>
+    <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}">Vozači</a></li>
+    <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}">Pretraga svih vozača</a></li>
     {# <li><a class="dropdown-item" href="{{ url_for('main.reports') }}">Izveštaji</a></li> #}
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}">Odjava</a></li>
-</ul>
-
+    </ul>
+                </li>
+                {% elif session.get('user_id') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.logout') }}">Odjava</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.login') }}">Prijava</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.register') }}">Registracija</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
     </nav>
     
