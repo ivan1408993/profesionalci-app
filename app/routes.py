@@ -231,7 +231,7 @@ def search_driver():
     show_additional_fields = False
 
     if request.method == 'POST':
-    search_input = request.form.get('search_input', '').strip()
+        search_input = request.form.get('search_input', '').strip()
     print(f"🔍 Pretraga za unetim: {search_input}")
 
     if search_input.isdigit() and len(search_input) == 13:
