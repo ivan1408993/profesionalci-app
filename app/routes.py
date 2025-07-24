@@ -372,11 +372,17 @@ def register():
         pib = request.form['pib'].strip()
         email = request.form['email'].strip()
         password = request.form['password']
+        phone_number = request.form['phone_number'].strip()  # ново поље
         password_hash = generate_password_hash(password)
 
         # Validacija PIB
         if not pib.isdigit() or len(pib) != 9:
             flash("PIB mora sadržati tačno 9 cifara.")
+            return redirect(url_for('main.register'))
+
+        # Validacija telefona - samo cifre, нпр. 6 до 15 цифара
+        if not phone_number.isdigit() or not (6 <= len(phone_number) <= 15):
+            flash("Telefon mora sadržati samo cifre i imati između 6 i 15 cifara.")
             return redirect(url_for('main.register'))
 
         # Provera da li već postoji firma sa istim PIB-om
@@ -401,6 +407,7 @@ def register():
             pib=pib,
             email=email,
             password_hash=password_hash,
+            phone_number=phone_number,  # додај овде
             active=True  # nova firma je aktivna po defaultu
         )
         db.session.add(new_employer)

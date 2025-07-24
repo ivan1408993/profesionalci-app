@@ -10,6 +10,7 @@ class Employer(db.Model, UserMixin):
     pib = db.Column(db.String(9), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
+    phone_number = db.Column(db.String(20), nullable=True)
     is_superadmin = db.Column(db.Boolean, default=False)
     active = db.Column(db.Boolean, default=True, nullable=False)
 
