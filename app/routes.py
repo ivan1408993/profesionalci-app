@@ -254,7 +254,7 @@ def search_driver():
 
         if not driver:
             # Pretraga po broju CPC kartice
-            cpc_card = CPCDriverCard.query.filter_by(card_number=search_input).first()
+            cpc_card = DriverCard.query.filter_by(cpc_card_number=search_input).first()
             print(f"🔎 Pronađena CPC kartica: {cpc_card}")
             if cpc_card:
                 driver = cpc_card.driver
