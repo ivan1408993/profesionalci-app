@@ -89,7 +89,7 @@ def add_driver_card(driver_id):
         # Dodaj novu karticu i deaktiviraj prethodne
         add_new_driver_card(driver, new_card_number, issue_date, expiry_date)
         flash("Nova kartica je uspešno dodata i aktivirana.")
-        return redirect(url_for('main.driver_profile', driver_id=driver.id))  # ili neka stranica sa detaljima vozača
+        return redirect(url_for('main.driver_detail', driver_id=driver.id))  # ili neka stranica sa detaljima vozača
 
     return render_template('add_card.html', driver=driver)
 
@@ -626,7 +626,7 @@ def deactivate_driver(driver_id):
 
     if not existing_rating or not existing_rating.comment:
         flash("Ne možete deaktivirati vozača dok ne unesete ocenu i komentar.")
-        return redirect(url_for('main.rate_driver'))
+        return redirect(url_for('main.drivers'))
 
     # Ako postoji ocena i komentar, dozvoli deaktivaciju
     driver.active = False
@@ -721,6 +721,13 @@ def driver_detail(driver_id):
     currently_employed_by_this_employer = (
         driver.active and driver.employer_id == employer_id
     )
+
+    # PROVERA: da li je ovaj poslodavac već ocenio ovog vozača
+    already_rated = Rating.query.filter_by(driver_id=driver.id, employer_id=employer_id).first()
+
+    if not already_rated:
+        flash("Molimo vas da ocenite vozača pre nastavka.")
+        return redirect(url_for('main.rate_driver', driver_id=driver.id))
 
     return render_template(
         'driver_detail.html',
