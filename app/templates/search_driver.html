@@ -2,19 +2,21 @@
 {% block title %}Pretraga vozača{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2>Pretraga vozača po JMBG, broju tahograf kartice ili CPC </h2>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="container" style="max-width: 600px;">
+    <h2 class="text-center mb-4">Pretraga vozača po JMBG, broju tahograf kartice ili CPC</h2>
 
-<form method="POST" action="{{ url_for('main.search_driver') }}" class="row g-3 align-items-center my-3">
-  <div class="col-auto flex-grow-1">
-    <label for="search_input" class="form-label">JMBG, broj tahograf kartice ili CPC:</label>
-    <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG, broj tahograf kartice ili CPC" required>
+    <form method="POST" action="{{ url_for('main.search_driver') }}" class="row g-3">
+      <div class="col-12">
+        <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG, broj tahograf kartice ili CPC" required>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Pretraži</button>
+      </div>
+    </form>
   </div>
+</div>
 
-    <div class="col-auto align-self-end">
-      <button type="submit" class="btn btn-primary">Pretraži</button>
-    </div>
-  </form>
 
   {% if driver %}
     <hr>
