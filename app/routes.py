@@ -606,32 +606,27 @@ def driver_exists(driver_id):
     return render_template('driver_exists.html', driver=driver, ratings_info=ratings_info, current_lang=session.get('lang', 'sr'))
 
 
-@main.route('/driver/<int:driver_id>/deactivate', methods=['POST'])
+@main.route('/deactivate_driver/<int:driver_id>', methods=['POST'])
 def deactivate_driver(driver_id):
     employer_id = session.get('user_id')
-    if not employer_id or session.get('user_type') != 'employer':
+    if not employer_id:
         flash("Morate biti prijavljeni kao poslodavac.")
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
-    if driver.employer_id != employer_id:
-        flash("Nemate dozvolu da menjate status ovog vozača.")
-        return redirect(url_for('main.drivers'))
 
-    # Provera da li postoji ocena od ovog poslodavca za ovog vozača
-    existing_rating = Rating.query.filter_by(
-        employer_id=employer_id,
-        driver_id=driver_id
-    ).first()
+    # Proverimo da li postoji ocena
+    existing_rating = Rating.query.filter_by(driver_id=driver_id, employer_id=employer_id).first()
+    if not existing_rating:
+        flash("Morate prvo oceniti vozača pre nego što ga označite kao neaktivnog.")
+        return redirect(url_for('main.rate_driver', driver_id=driver_id))
 
-    if not existing_rating or not existing_rating.comment:
-        flash("Ne možete deaktivirati vozača dok ne unesete ocenu i komentar.")
-        return redirect(url_for('main.rate_driver'))
-
-    # Ako postoji ocena i komentar, dozvoli deaktivaciju
-    driver.active = False
+    # Ako već postoji ocena – nastavljamo sa deaktivacijom
+    driver.is_active = False
     db.session.commit()
-    flash(f"Vozač {driver.full_name} je sada neaktivan.")
+    
+    full_name = f"{driver.first_name} {driver.last_name}"
+    flash(f"Vozač {full_name} je uspešno označen kao neaktivan.")
     return redirect(url_for('main.drivers'))
 
 
