@@ -20,7 +20,11 @@
     <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Pretraga po imenu, CPC ili tahograf kartici" value="{{ search or '' }}">
-            <button class="btn btn-outline-secondary" type="submit">🔍 Pretraži</button>
+            <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+                🔍 Pretraži
+            </button>
+        </div>
         </div>
     </form>
 
