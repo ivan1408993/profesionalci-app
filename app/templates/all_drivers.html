@@ -2,15 +2,29 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Svi vozači koji su radili u vašoj firmi</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Svi vozači koji su radili u vašoj firmi</h2>
+    </div>
 
-    <form method="get" class="form-inline mb-3">
-        <input type="text" name="search" class="form-control mr-2" placeholder="Pretraži po imenu ili kartici" value="{{ search or '' }}">
-        <button type="submit" class="btn btn-primary">Pretraži</button>
+    <form method="get" class="row g-2 align-items-center mb-4">
+        <div class="col-md-10">
+            <input 
+                type="text" 
+                name="search" 
+                class="form-control" 
+                placeholder="Pretraži po imenu ili broju kartice" 
+                value="{{ search or '' }}"
+            >
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+                🔍 Pretraži
+            </button>
+        </div>
     </form>
 
     {% if drivers %}
-    <div class="table-responsive">
+    <div class="table-responsive shadow-sm rounded">
         <table class="table table-hover align-middle">
             <thead class="table-light">
                 <tr>
@@ -26,32 +40,24 @@
             <tbody>
                 {% for driver in drivers %}
                 <tr class="{% if not driver.active %}table-secondary{% endif %}">
-
                     <td>{{ driver.full_name }}</td>
-
                     <td>
                         {% set active_card = driver.cards | selectattr('is_active') | first %}
                         {{ active_card.card_number if active_card else '—' }}
                     </td>
-
                     <td>{{ driver.cpc_card_number or '—' }}</td>
-
                     <td>
                         {% if driver.cpc_expiry_date %}
                             {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
-                        {% else %}
-                            — 
-                        {% endif %}
+                        {% else %} — {% endif %}
                     </td>
-
                     <td>
                         {% if driver.active %}
-                            <span class="text-success">Aktivan</span>
+                            <span class="badge bg-success">Aktivan</span>
                         {% else %}
-                            <span class="text-danger">Neaktivan</span>
+                            <span class="badge bg-danger">Neaktivan</span>
                         {% endif %}
                     </td>
-
                     <td>
                         {% if driver_ratings[driver.id] %}
                             {{ driver_ratings[driver.id] }} ⭐
@@ -59,18 +65,20 @@
                             -
                         {% endif %}
                     </td>
-
                     <td>
-                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-sm btn-info">Detalji</a>
+                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-sm btn-outline-primary">
+                            Detalji
+                        </a>
                     </td>
-
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>  {# ← Premestio ovde #}
-{% else %}
-    <div class="alert alert-info">Nema rezultata.</div>
-{% endif %}
-
+    </div>
+    {% else %}
+        <div class="alert alert-info mt-4 text-center">
+            Nema rezultata za zadatu pretragu.
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
