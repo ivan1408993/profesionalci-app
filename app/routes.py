@@ -626,7 +626,7 @@ def deactivate_driver(driver_id):
 
     if not existing_rating or not existing_rating.comment:
         flash("Ne možete deaktivirati vozača dok ne unesete ocenu i komentar.")
-        return redirect(url_for('main.drivers'))
+        return redirect(url_for('main.rate_driver'))
 
     # Ako postoji ocena i komentar, dozvoli deaktivaciju
     driver.active = False
