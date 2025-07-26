@@ -8,6 +8,7 @@ from sqlalchemy import or_
 import os
 import hashlib
 from app.utils import hash_jmbg
+from sqlalchemy import and_
 
 from sqlalchemy.orm import joinedload
 from .models import Driver, Rating, Employer
@@ -617,10 +618,22 @@ def deactivate_driver(driver_id):
         flash("Nemate dozvolu da menjate status ovog vozača.")
         return redirect(url_for('main.drivers'))
 
+    # Provera da li postoji ocena od ovog poslodavca za ovog vozača
+    existing_rating = Rating.query.filter_by(
+        employer_id=employer_id,
+        driver_id=driver_id
+    ).first()
+
+    if not existing_rating or not existing_rating.comment:
+        flash("Ne možete deaktivirati vozača dok ne unesete ocenu i komentar.")
+        return redirect(url_for('main.drivers'))
+
+    # Ako postoji ocena i komentar, dozvoli deaktivaciju
     driver.active = False
     db.session.commit()
     flash(f"Vozač {driver.full_name} je sada neaktivan.")
     return redirect(url_for('main.drivers'))
+
 
 
 
