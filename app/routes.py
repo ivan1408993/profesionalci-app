@@ -717,13 +717,6 @@ def driver_detail(driver_id):
         driver.active and driver.employer_id == employer_id
     )
 
-    # PROVERA: da li je ovaj poslodavac već ocenio ovog vozača
-    already_rated = Rating.query.filter_by(driver_id=driver.id, employer_id=employer_id).first()
-
-    if not already_rated:
-        flash("Molimo vas da ocenite vozača pre nastavka.")
-        return redirect(url_for('main.rate_driver', driver_id=driver.id))
-
     return render_template(
         'driver_detail.html',
         driver=driver,
