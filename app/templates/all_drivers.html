@@ -37,44 +37,45 @@
                 </tr>
             </thead>
             <tbody>
-                {% for driver in drivers %}
-                <tr class="{% if not driver.active %}table-secondary{% endif %}">
-                    <td>
-                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}">
-                            {{ driver.full_name }}
-                        </a>
-                    </td>
-                        {% set active_card = driver.cards | selectattr('is_active') | first %}
-                        {{ active_card.card_number if active_card else '—' }}
-                    </td>
-                    <td>{{ driver.cpc_card_number or '—' }}</td>
-                    <td>
-                        {% if driver.cpc_expiry_date %}
-                            {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
-                        {% else %} — {% endif %}
-                    </td>
-                    <td>
-                        {% if driver.active %}
-                            <span class="badge bg-success">Aktivan</span>
-                        {% else %}
-                            <span class="badge bg-danger">Neaktivan</span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if driver_ratings[driver.id] %}
-                            {{ driver_ratings[driver.id] }} ⭐
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-sm btn-outline-primary">
-                            Detalji
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
+    {% for driver in drivers %}
+    <tr class="{% if not driver.active %}table-secondary{% endif %}">
+        <td>
+            <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}">
+                {{ driver.full_name }}
+            </a>
+        </td>
+        <td>
+            {% set active_card = driver.cards | selectattr('is_active') | first %}
+            {{ active_card.card_number if active_card else '—' }}
+        </td>
+        <td>{{ driver.cpc_card_number or '—' }}</td>
+        <td>
+            {% if driver.cpc_expiry_date %}
+                {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
+            {% else %} — {% endif %}
+        </td>
+        <td>
+            {% if driver.active %}
+                <span class="badge bg-success">Aktivan</span>
+            {% else %}
+                <span class="badge bg-danger">Neaktivan</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if driver_ratings[driver.id] %}
+                {{ driver_ratings[driver.id] }} ⭐
+            {% else %}
+                -
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-sm btn-outline-primary">
+                Detalji
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
         </table>
     </div>
     {% else %}
