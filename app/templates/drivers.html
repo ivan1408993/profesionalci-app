@@ -17,16 +17,15 @@
 </div>
 
 
-    <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4">
-        <div class="input-group">
+    <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4 d-flex justify-content-center">
+        <div class="input-group" style="max-width: 600px;">
             <input type="text" name="search" class="form-control" placeholder="Pretraga po imenu, CPC ili tahograf kartici" value="{{ search or '' }}">
-            <div class="col-md-2">
-            <button type="submit" class="btn btn-primary w-100">
-                🔍 Pretraži
+            <button type="submit" class="btn btn-primary">
+            🔍 Pretraži
             </button>
         </div>
-        </div>
     </form>
+
 
     {% if drivers %}
     <div class="table-responsive">
