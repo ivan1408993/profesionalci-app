@@ -507,6 +507,8 @@ from app.models import Driver
 
 from sqlalchemy import func
 
+from sqlalchemy import or_, func
+
 @main.route('/drivers')
 def drivers():
     employer_id = session.get('user_id')
@@ -523,8 +525,14 @@ def drivers():
     page = request.args.get('page', 1, type=int)
     per_page = 10  # Možeš promeniti broj po strani ako želiš
 
-    # Osnovni query
-    drivers_query = Driver.query.filter_by(employer_id=employer.id, active=True)
+    # Novi parametri za filter i sortiranje
+    active_only = request.args.get('active', default='0') == '1'  # checkbox vrati '1' ako je čekiran
+    sort = request.args.get('sort', 'ime')  # podrazumevano sortiraj po imenu
+
+    # Osnovni query - dodaj filter po aktivnim ako je čekiran
+    drivers_query = Driver.query.filter_by(employer_id=employer.id)
+    if active_only:
+        drivers_query = drivers_query.filter_by(active=True)
 
     if search:
         drivers_query = drivers_query.filter(
@@ -535,11 +543,31 @@ def drivers():
             )
         )
 
-    # Paginacija vozača
-    pagination = drivers_query.order_by(Driver.full_name).paginate(page=page, per_page=per_page, error_out=False)
+    # Sortiranje
+    if sort == 'ocena':
+        # Sortiraj po prosečnoj oceni - treba join i grupisanje
+        from sqlalchemy.orm import aliased
+        avg_rating_subq = db.session.query(
+            Rating.driver_id,
+            func.avg(Rating.stars).label('avg_stars')
+        ).group_by(Rating.driver_id).subquery()
+
+        # Left outer join da uključi i vozače bez ocena
+        drivers_query = drivers_query.outerjoin(
+            avg_rating_subq,
+            Driver.id == avg_rating_subq.c.driver_id
+        ).order_by(
+            avg_rating_subq.c.avg_stars.desc().nullslast(),
+            Driver.full_name.asc()
+        )
+    else:
+        # Podrazumevano sortiraj po imenu
+        drivers_query = drivers_query.order_by(Driver.full_name.asc())
+
+    pagination = drivers_query.paginate(page=page, per_page=per_page, error_out=False)
     drivers_list = pagination.items
 
-    # Prosečne ocene
+    # Prosečne ocene za prikaz (da bismo imali brzo na šablonu)
     driver_ratings = {}
     for d in drivers_list:
         avg_rating = db.session.query(func.avg(Rating.stars)).filter(Rating.driver_id == d.id).scalar()
@@ -551,8 +579,11 @@ def drivers():
         driver_ratings=driver_ratings,
         search=search,
         pagination=pagination,
+        active_only=active_only,
+        sort=sort,
         current_lang=session.get('lang', 'sr')
     )
+
 
 @main.route('/drivers/search_card', methods=['GET', 'POST'])
 def search_driver_by_card():
