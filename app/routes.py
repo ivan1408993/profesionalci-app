@@ -922,20 +922,17 @@ def update_driver(driver_id):
 
     driver = Driver.query.get_or_404(driver_id)
 
-    # ✅ Proveri da li je vozač zaposlen kod trenutnog poslodavca
     if not driver.active or driver.employer_id != employer_id:
         flash("Nemate dozvolu da ažurirate ovog vozača.", "danger")
         return redirect(url_for('main.driver_detail', driver_id=driver_id))
 
     if request.method == 'POST':
-        # Prikupljanje podataka iz forme
         new_full_name = request.form.get('full_name', '').strip()
         new_card_number = request.form.get('card_number', '').strip()
         expiry_date_str = request.form.get('expiry_date', '').strip()
         cpc_card_number = request.form.get('cpc_card_number', '').strip()
         cpc_expiry_date_str = request.form.get('cpc_expiry_date', '').strip()
 
-        # Konverzija datuma
         expiry_date = None
         cpc_expiry_date = None
 
@@ -953,15 +950,22 @@ def update_driver(driver_id):
                 flash("Neispravan format isteka CPC kartice.", "warning")
                 return redirect(url_for('main.update_driver', driver_id=driver_id))
 
-        # Ažuriranje imena ako je promenjeno
         if new_full_name and new_full_name != driver.full_name:
             driver.full_name = new_full_name
 
-        # Pronađi trenutno aktivnu karticu
         current_card = next((card for card in driver.cards if card.is_active), None)
 
-        # Dodaj novu karticu ako je broj promenjen
+        # ✅ Provera: postoji li kartica s istim brojem za drugog vozača?
         if new_card_number and (not current_card or current_card.card_number != new_card_number):
+            existing_card = DriverCard.query.filter(
+                DriverCard.card_number == new_card_number,
+                DriverCard.driver_id != driver.id
+            ).first()
+            if existing_card:
+                flash("Ovaj broj tahograf kartice je već dodeljen drugom vozaču.", "danger")
+                return redirect(url_for('main.update_driver', driver_id=driver.id))
+
+            # ✅ Deaktiviraj prethodnu i dodaj novu karticu
             if current_card:
                 current_card.is_active = False
 
@@ -973,10 +977,9 @@ def update_driver(driver_id):
             )
             db.session.add(new_card)
             flash("Dodata je nova tahografska kartica.", "success")
-        else:
+        elif new_card_number:
             flash("Broj tahograf kartice nije promenjen.", "info")
 
-        # Ažuriraj CPC podatke
         driver.cpc_card_number = cpc_card_number or None
         driver.cpc_expiry_date = cpc_expiry_date
 
@@ -984,7 +987,6 @@ def update_driver(driver_id):
         flash("Podaci o vozaču su uspešno ažurirani.", "success")
         return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
-    # ✅ Za GET zahtev — pripremi datumi u obliku 'YYYY-MM-DD' za šablon
     active_card = next((card for card in driver.cards if card.is_active), None)
     expiry_date_str = active_card.expiry_date.strftime('%Y-%m-%d') if active_card and active_card.expiry_date else ''
     cpc_expiry_date_str = driver.cpc_expiry_date.strftime('%Y-%m-%d') if driver.cpc_expiry_date else ''

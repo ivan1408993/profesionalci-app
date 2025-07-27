@@ -24,14 +24,13 @@
         </div>
         
         <div class="mb-3">
-             <label for="card_number" class="form-label">Broj tahograf kartice</label>
+            <label for="card_number" class="form-label">Broj tahograf kartice</label>
             <input type="text" class="form-control" id="card_number" name="card_number"
-           pattern="^[A-Za-z0-9]{16}$" maxlength="16" minlength="16"
-           title="Broj tahograf kartice mora imati tačno 16 karaktera.">
+                   maxlength="16" minlength="16"
+                   title="Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).">
             <div class="form-text">Unesite samo ako je vozač dobio novu karticu</div>
             <div class="invalid-feedback">Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).</div>
         </div>
-
 
         <div class="mb-3">
             <label for="expiry_date" class="form-label">Datum isteka</label>
@@ -76,12 +75,22 @@
     {% endif %}
 </div>
 
-<!-- ✅ Bootstrap JS validacija -->
+<!-- ✅ Bootstrap validacija -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("driverForm");
 
         form.addEventListener("submit", function (event) {
+            const cardNumber = document.getElementById("card_number").value.trim();
+            const cardPattern = /^[A-Za-z0-9]{16}$/;
+
+            if (cardNumber && !cardPattern.test(cardNumber)) {
+                event.preventDefault();
+                event.stopPropagation();
+                alert("Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara.");
+                return;
+            }
+
             if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
