@@ -665,8 +665,9 @@ def deactivate_driver(driver_id):
         return redirect(url_for('main.rate_driver', driver_id=driver_id))
 
     # Ako već postoji ocena – nastavljamo sa deaktivacijom
-    driver.is_active = False
+    driver.active = False
     db.session.commit()
+
     
     full_name = driver.full_name
 
