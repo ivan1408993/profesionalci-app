@@ -173,6 +173,11 @@ def add_driver():
                 db.session.commit()
 
                 if card_number:
+                    existing_card = DriverCard.query.filter_by(card_number=card_number).first()
+                    if existing_card:
+                        flash("Tahograf kartica sa ovim brojem već postoji u sistemu.")
+                        return redirect(url_for('main.add_driver'))
+
                     new_card = DriverCard(
                         card_number=card_number,
                         driver_id=existing_driver.id,
@@ -189,6 +194,12 @@ def add_driver():
         # Dodavanje novog vozača sa novim salt-om
         salt = generate_salt()
         jmbg_hashed = hash_jmbg_with_salt(jmbg, salt)
+
+        if card_number:
+            existing_card = DriverCard.query.filter_by(card_number=card_number).first()
+            if existing_card:
+                flash("Tahograf kartica sa ovim brojem već postoji u sistemu.")
+                return redirect(url_for('main.add_driver'))
 
         new_driver = Driver(
             full_name=full_name,
