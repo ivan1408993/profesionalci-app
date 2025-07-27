@@ -7,27 +7,26 @@
     </a>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Vaši vozači</h2>
-    <div class="d-flex gap-2">
-        <a href="{{ url_for('main.all_drivers') }}" class="btn btn-primary btn-sm mb-4 custom-btn">
-            <i class="fas fa-users"></i> Svi vozači (uključujući i neaktivne)
-        </a>
-        <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary btn-sm mb-4 custom-btn">➕ Dodaj vozača</a>
+        <h2>Vaši vozači</h2>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('main.all_drivers') }}" class="btn btn-primary btn-sm mb-4 custom-btn">
+                <i class="fas fa-users"></i> Svi vozači (uključujući i neaktivne)
+            </a>
+            <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary btn-sm mb-4 custom-btn">➕ Dodaj vozača</a>
+        </div>
     </div>
-</div>
 
-
+    <!-- Pretraga -->
     <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4 d-flex justify-content-center">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Pretraga po imenu, CPC ili tahograf kartici" value="{{ search or '' }}">
             <button type="submit" class="btn btn-primary">
-            🔍 Pretraži
+                🔍 Pretraži
             </button>
         </div>
     </form>
 
-
-    {% if drivers %}
+    {% if pagination.items %}
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead class="table-light">
@@ -41,7 +40,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for driver in drivers %}
+                {% for driver in pagination.items %}
                 <tr>
                     <td>
                         <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}">
@@ -75,6 +74,42 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Paginacija -->
+    <nav aria-label="Paginacija vozača">
+        <ul class="pagination justify-content-center">
+            {% if pagination.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.drivers', page=pagination.prev_num, search=search) }}">Prethodna</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">Prethodna</span></li>
+            {% endif %}
+
+            {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                {% if page_num %}
+                    {% if page_num == pagination.page %}
+                        <li class="page-item active"><span class="page-link">{{ page_num }}</span></li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('main.drivers', page=page_num, search=search) }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.drivers', page=pagination.next_num, search=search) }}">Sledeća</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">Sledeća</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+
     {% else %}
     <div class="alert alert-info text-center" role="alert">
         Trenutno nemate nijednog vozača u sistemu.

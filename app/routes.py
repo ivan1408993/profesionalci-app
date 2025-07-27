@@ -9,6 +9,7 @@ import os
 import hashlib
 from app.utils import hash_jmbg
 from sqlalchemy import and_
+from flask_paginate import Pagination, get_page_args
 
 from sqlalchemy.orm import joinedload
 from .models import Driver, Rating, Employer
@@ -508,16 +509,13 @@ def drivers():
         return redirect(url_for('main.login'))
 
     search = request.args.get('search', '').strip()
+    page = request.args.get('page', 1, type=int)
+    per_page = 10  # Možeš promeniti broj po strani ako želiš
 
-    # Svi aktivni vozači ovog poslodavca
+    # Osnovni query
     drivers_query = Driver.query.filter_by(employer_id=employer.id, active=True)
 
     if search:
-        # Pošto JMBG više nije dostupan kao otvoreni podatak, NEMOŽEMO ga pretraživati
-        # Umesto toga, pretražujemo po:
-        # - full_name
-        # - broju tahograf kartice (iz povezanog modela DriverCard)
-        # - broju CPC kartice
         drivers_query = drivers_query.filter(
             or_(
                 Driver.full_name.ilike(f'%{search}%'),
@@ -526,9 +524,11 @@ def drivers():
             )
         )
 
-    drivers_list = drivers_query.all()
+    # Paginacija vozača
+    pagination = drivers_query.order_by(Driver.full_name).paginate(page=page, per_page=per_page, error_out=False)
+    drivers_list = pagination.items
 
-    # Proračun prosečnih ocena
+    # Prosečne ocene
     driver_ratings = {}
     for d in drivers_list:
         avg_rating = db.session.query(func.avg(Rating.stars)).filter(Rating.driver_id == d.id).scalar()
@@ -539,6 +539,7 @@ def drivers():
         drivers=drivers_list,
         driver_ratings=driver_ratings,
         search=search,
+        pagination=pagination,
         current_lang=session.get('lang', 'sr')
     )
 
