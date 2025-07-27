@@ -668,7 +668,8 @@ def deactivate_driver(driver_id):
     driver.is_active = False
     db.session.commit()
     
-    full_name = f"{driver.first_name} {driver.last_name}"
+    full_name = driver.full_name
+
     flash(f"Vozač {full_name} je uspešno označen kao neaktivan.")
     return redirect(url_for('main.drivers'))
 
