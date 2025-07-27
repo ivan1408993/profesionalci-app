@@ -651,17 +651,21 @@ def all_drivers():
         flash("Molimo prijavite se.")
         return redirect(url_for('main.login'))
 
-    search = request.args.get('search')
+    search = request.args.get('search', '').strip()
+    page = request.args.get('page', 1, type=int)
 
     # Filtriraj sve vozače koji su radili kod prijavljenog poslodavca, bez obzira na status
     drivers_query = Driver.query.filter_by(employer_id=employer_id)
+
     if search:
         drivers_query = drivers_query.filter(
-            (Driver.full_name.ilike(f'%{search}%')) | 
-            (Driver.card_number.ilike(f'%{search}%'))
+            (Driver.full_name.ilike(f'%{search}%')) |
+            (Driver.cards.any(DriverCard.card_number.ilike(f'%{search}%')))  # ispravka: koristi povezan model DriverCard
         )
 
-    drivers_list = drivers_query.all()
+    # Paginacija
+    pagination = drivers_query.order_by(Driver.full_name).paginate(page=page, per_page=10, error_out=False)
+    drivers_list = pagination.items
 
     # Izračunaj prosečnu ocenu za svaki vozač
     from sqlalchemy import func
@@ -670,7 +674,15 @@ def all_drivers():
         avg_rating = db.session.query(func.avg(Rating.stars)).filter(Rating.driver_id == d.id).scalar()
         driver_ratings[d.id] = round(avg_rating, 2) if avg_rating else None
 
-    return render_template('all_drivers.html', drivers=drivers_list, driver_ratings=driver_ratings, search=search, current_lang=session.get('lang', 'sr'))
+    return render_template(
+        'all_drivers.html',
+        drivers=drivers_list,
+        driver_ratings=driver_ratings,
+        search=search,
+        pagination=pagination,
+        current_lang=session.get('lang', 'sr')
+    )
+
 
 
 # Ruta za prikaz forme za ocenjivanje vozaca
