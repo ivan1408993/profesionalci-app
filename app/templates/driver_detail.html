@@ -81,23 +81,26 @@
             <hr class="my-4">
             <h4 class="mb-3"><i class="bi bi-star-fill text-warning"></i> Ocene vozača</h4>
 
-            {% if ratings %}
-                {% set avg = (ratings | map(attribute='stars') | sum) / (ratings | length) %}
-                <div class="mb-4">
-                    <strong>Prosečna ocena:</strong> {{ avg | round(2) }} / 5
-                    <div class="progress mt-2" style="height: 22px;">
-                        <div class="progress-bar 
-                            {% if avg >= 4 %} bg-success
-                            {% elif avg >= 2.5 %} bg-warning text-dark
-                            {% else %} bg-danger
-                            {% endif %}"
-                            {% set width = (avg / 5 * 100) | round(0) %}
-<div class="progress-bar" style="width: {{ width }}%;" role="progressbar">
-    {{ avg|round(1) }}⭐
+            {% set avg = (ratings | map(attribute='stars') | sum) / (ratings | length) %}
+<div class="mb-4">
+    <strong>Prosečna ocena:</strong> {{ avg | round(2) }} / 5
+
+    {% set width = (avg / 5 * 100) | round(0) %}
+    <div class="progress mt-2" style="height: 22px;">
+        <div class="progress-bar 
+            {% if avg >= 4 %}bg-success
+            {% elif avg >= 2.5 %}bg-warning text-dark
+            {% else %}bg-danger
+            {% endif %}" 
+            role="progressbar"
+            style="width: {{ width }}%;"
+            aria-valuenow="{{ width }}"
+            aria-valuemin="0"
+            aria-valuemax="100">
+            {{ avg|round(1) }} ⭐
+        </div>
+    </div>
 </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="list-group mb-4">
                     {% for r in ratings %}
