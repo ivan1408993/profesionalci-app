@@ -2,82 +2,92 @@
 
 {% block content %}
 <div class="container mt-5">
-    <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary mb-3">Nazad</a>
 
-    <div class="card shadow-sm">
+    <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left"></i> Nazad na listu vozača
+    </a>
+
+    <div class="card shadow-lg border-0">
         <div class="card-body">
-            <h2 class="card-title mb-3">Vozač: {{ driver.full_name }}</h2>
+            <h2 class="card-title mb-4">
+                <i class="bi bi-person-circle"></i> {{ driver.full_name }}
+            </h2>
 
             {% set active_card = driver.cards | selectattr('is_active') | first %}
-            <p><strong>Broj tahograf kartice:</strong>
-                {{ active_card.card_number if active_card else '—' }}
-            </p>
-            <p><strong>Važi do:</strong>
-                {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}
-            </p>
-
-            <p><strong>Status:</strong>
-                {% if driver.active %}
-                    <span class="text-success">Zaposlen</span>
-                    {% if driver.employer %}
-                        – {{ driver.employer.company_name }}
-                    {% endif %}
-                {% else %}
-                    <span class="text-danger">Nezaposlen</span>
-                {% endif %}
-            </p>
-
-            <div class="d-flex flex-wrap gap-2 mt-3">
-                {% if not driver.active %}
-                    <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST">
-                        <button type="submit" class="btn btn-success">Preuzmi vozača</button>
-                    </form>
-                {% elif driver.employer_id == session.get('user_id') %}
-                    <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning">Ažuriraj vozača</a>
-
-                    <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}">
-                        <button type="submit" class="btn btn-danger">Označi kao neaktivnog</button>
-                    </form>
-                {% endif %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong><i class="bi bi-credit-card-2-front"></i> Broj tahograf kartice:</strong>
+                        {{ active_card.card_number if active_card else '—' }}
+                    </p>
+                    <p><strong><i class="bi bi-calendar-event"></i> Važi do:</strong>
+                        {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong><i class="bi bi-briefcase"></i> Status:</strong>
+                        {% if driver.active %}
+                            <span class="badge bg-success">Zaposlen</span>
+                            {% if driver.employer %}
+                                – <span class="text-muted">{{ driver.employer.company_name }}</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="badge bg-danger">Nezaposlen</span>
+                        {% endif %}
+                    </p>
+                </div>
             </div>
 
-            <hr class="my-4">
-
-            <h4 class="mb-3">Ocene vozača:</h4>
-            {% if ratings %}
-                <ul class="list-group">
-                    {% for r in ratings %}
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div><strong>Ocena:</strong> {{ r.stars }} ⭐</div>
-                                <small class="text-muted">
-                                     Ocenio:
-{% if r.employer %}
-  <a href="{{ url_for('main.employer_detail', employer_id=r.employer.id) }}">
-    {{ r.employer.company_name }} | {{ r.created_at.strftime('%d.%m.%Y') }}
-  </a>
-{% else %}
-  Nepoznato
-{% endif %}
-
-                                </small>
-                            </div>
-                            <p class="mb-0"><strong>Komentar:</strong> {{ r.comment or "Nema komentara" }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <div class="alert alert-info mt-3">
-                    Vozač još nema nijednu ocenu.
-                </div>
+            {% if not driver.active %}
+                <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-success me-2">
+                        <i class="bi bi-plus-circle"></i> Preuzmi vozača
+                    </button>
+                </form>
+            {% elif driver.employer_id == session.get('user_id') %}
+                <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning me-2">
+                    <i class="bi bi-pencil-square"></i> Ažuriraj vozača
+                </a>
+                <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-x-circle"></i> Označi kao neaktivnog
+                    </button>
+                </form>
             {% endif %}
 
             <hr class="my-4">
 
-            <h4 class="mb-3">Istorija tahograf kartica</h4>
+            <h4 class="mb-3"><i class="bi bi-star-fill"></i> Ocene vozača</h4>
+            {% if ratings %}
+                <ul class="list-group mb-4">
+                    {% for r in ratings %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><strong>Ocena:</strong> {{ r.stars }} ⭐</div>
+                                <small class="text-muted">
+                                    Ocenio:
+                                    {% if r.employer %}
+                                        <a href="{{ url_for('main.employer_detail', employer_id=r.employer.id) }}">
+                                            {{ r.employer.company_name }}
+                                        </a> – {{ r.created_at.strftime('%d.%m.%Y') }}
+                                    {% else %}
+                                        Nepoznato
+                                    {% endif %}
+                                </small>
+                            </div>
+                            <p class="mt-2 mb-0"><strong>Komentar:</strong> {{ r.comment or "Nema komentara" }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="alert alert-info">
+                    Vozač još nema nijednu ocenu.
+                </div>
+            {% endif %}
+
+            <h4 class="mb-3"><i class="bi bi-clock-history"></i> Istorija tahograf kartica</h4>
             {% if driver.cards %}
                 {% set sorted_cards = driver.cards | sort(attribute='issue_date', reverse=True) %}
-                <p>Ukupno kartica: {{ driver.cards | length }}</p>
+                <p class="text-muted">Ukupno kartica: <strong>{{ driver.cards | length }}</strong></p>
                 <ul class="list-group">
                     {% for card in sorted_cards %}
                         <li class="list-group-item {% if card.is_active %}list-group-item-success{% endif %}">
@@ -85,9 +95,9 @@
                             {% if card.issue_date %} – izdana: {{ card.issue_date.strftime('%d.%m.%Y') }}{% endif %}
                             {% if card.expiry_date %}, ističe: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
                             {% if card.is_active %}
-                                <strong> (aktivna)</strong>
+                                <span class="badge bg-success ms-2">Aktivna</span>
                             {% else %}
-                                (neaktivna)
+                                <span class="badge bg-secondary ms-2">Neaktivna</span>
                             {% endif %}
                         </li>
                     {% endfor %}
@@ -95,6 +105,7 @@
             {% else %}
                 <p class="text-muted">Nema podataka o karticama.</p>
             {% endif %}
+
         </div>
     </div>
 </div>
