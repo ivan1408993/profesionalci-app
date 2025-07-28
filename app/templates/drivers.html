@@ -25,11 +25,6 @@
             </button>
         </div>
 
-        <label class="form-check-label d-flex align-items-center gap-1">
-            <input type="checkbox" name="active" value="1" class="form-check-input" {% if active_only %}checked{% endif %}>
-            Prikaži samo aktivne
-        </label>
-
         <select name="sort" class="form-select w-auto">
             <option value="ime" {% if sort == 'ime' %}selected{% endif %}>Sortiraj po imenu</option>
             <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>Sortiraj po oceni</option>
