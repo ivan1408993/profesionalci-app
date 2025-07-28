@@ -526,7 +526,7 @@ def drivers():
     per_page = 10
 
     # Novi parametri za filter i sortiranje
-    active_only = request.args.get('active', default='0') == '1'
+    active_only = request.args.get('active', default='1') == '1'
     sort = request.args.get('sort', 'ime')
 
     # Osnovni query - samo vozači za datog poslodavca
