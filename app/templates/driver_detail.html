@@ -3,41 +3,54 @@
 {% block content %}
 <div class="container mt-5">
 
+    <!-- Nazad -->
     <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-secondary mb-4">
         <i class="bi bi-arrow-left"></i> Nazad na listu vozača
     </a>
 
+    <!-- Kartica vozača -->
     <div class="card shadow-lg border-0">
         <div class="card-body">
+            
+            <!-- Naslov sa statusom -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="card-title mb-0">
+                    <i class="bi bi-person-circle"></i> {{ driver.full_name }}
+                </h2>
+                <div>
+                    {% if driver.active %}
+                        <span class="badge bg-success p-2">
+                            <i class="bi bi-check-circle-fill me-1"></i> Zaposlen
+                        </span>
+                        {% if driver.employer %}
+                            <span class="text-muted ms-2">{{ driver.employer.company_name }}</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="badge bg-danger p-2">
+                            <i class="bi bi-x-circle-fill me-1"></i> Nezaposlen
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
 
-            <!-- Naslov -->
-            <h2 class="card-title mb-4">
-                <i class="bi bi-person-circle"></i> {{ driver.full_name }}
-            </h2>
-
-            <!-- Osnovni podaci o kartici i status -->
+            <!-- Info kartice -->
             {% set active_card = driver.cards | selectattr('is_active') | first %}
             <div class="row g-3 mb-4">
                 <div class="col-md-6">
-                    <div class="p-3 border rounded bg-light">
-                        <p class="mb-1 text-muted"><i class="bi bi-credit-card-2-front"></i> Tahograf kartica</p>
-                        <h5>{{ active_card.card_number if active_card else '—' }}</h5>
-                        <p class="mb-0"><small>Važi do:
-                            {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}
-                        </small></p>
+                    <div class="bg-light border rounded shadow-sm p-3 h-100">
+                        <p class="text-muted mb-1"><i class="bi bi-credit-card-2-front"></i> Tahograf kartica</p>
+                        <h5 class="mb-1">{{ active_card.card_number if active_card else '—' }}</h5>
+                        <small class="text-muted">Važi do: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="p-3 border rounded bg-light">
-                        <p class="mb-1 text-muted"><i class="bi bi-briefcase"></i> Status</p>
-                        <h5>
-                            {% if driver.active %}
-                                <span class="badge bg-success">Zaposlen</span>
-                                {% if driver.employer %}
-                                    <span class="text-muted">– {{ driver.employer.company_name }}</span>
-                                {% endif %}
+                    <div class="bg-light border rounded shadow-sm p-3 h-100">
+                        <p class="text-muted mb-1"><i class="bi bi-building"></i> Poslodavac</p>
+                        <h5 class="mb-1">
+                            {% if driver.employer %}
+                                {{ driver.employer.company_name }}
                             {% else %}
-                                <span class="badge bg-danger">Nezaposlen</span>
+                                <span class="text-muted">—</span>
                             {% endif %}
                         </h5>
                     </div>
@@ -54,11 +67,11 @@
                     </form>
                 {% elif driver.employer_id == session.get('user_id') %}
                     <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning me-2">
-                        <i class="bi bi-pencil-square"></i> Ažuriraj vozača
+                        <i class="bi bi-pencil-square"></i> Ažuriraj
                     </a>
                     <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" class="d-inline">
                         <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-x-circle"></i> Označi kao neaktivnog
+                            <i class="bi bi-x-circle"></i> Deaktiviraj
                         </button>
                     </form>
                 {% endif %}
@@ -66,16 +79,22 @@
 
             <!-- Ocene -->
             <hr class="my-4">
-            <h4 class="mb-3"><i class="bi bi-star-fill"></i> Ocene vozača</h4>
+            <h4 class="mb-3"><i class="bi bi-star-fill text-warning"></i> Ocene vozača</h4>
 
             {% if ratings %}
                 {% set avg = (ratings | map(attribute='stars') | sum) / (ratings | length) %}
-                <div class="mb-3">
+                <div class="mb-4">
                     <strong>Prosečna ocena:</strong> {{ avg | round(2) }} / 5
-                    <div class="progress mt-2" style="height: 20px;">
-                        <div class="progress-bar bg-warning text-dark" role="progressbar"
-                             style="width: {{ (avg / 5 * 100) | round(0) }}%;">
-                            {{ avg | round(1) }} ⭐
+                    <div class="progress mt-2" style="height: 22px;">
+                        <div class="progress-bar 
+                            {% if avg >= 4 %} bg-success
+                            {% elif avg >= 2.5 %} bg-warning text-dark
+                            {% else %} bg-danger
+                            {% endif %}"
+                            {% set width = (avg / 5 * 100) | round(0) %}
+<div class="progress-bar" style="width: {{ width }}%;" role="progressbar">
+    {{ avg|round(1) }}⭐
+</div>
                         </div>
                     </div>
                 </div>
@@ -84,9 +103,7 @@
                     {% for r in ratings %}
                         <div class="list-group-item">
                             <div class="d-flex justify-content-between">
-                                <div>
-                                    <strong>Ocena:</strong> {{ r.stars }} ⭐
-                                </div>
+                                <div><strong>Ocena:</strong> {{ r.stars }} ⭐</div>
                                 <small class="text-muted">
                                     Ocenio:
                                     {% if r.employer %}
@@ -98,14 +115,14 @@
                                     {% endif %}
                                 </small>
                             </div>
-                            <p class="mt-2 mb-0"><strong>Komentar:</strong> {{ r.comment or "Nema komentara" }}</p>
+                            {% if r.comment %}
+                                <p class="mt-2 mb-0 text-muted"><i class="bi bi-chat-left-text"></i> {{ r.comment }}</p>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="alert alert-info">
-                    Vozač još nema nijednu ocenu.
-                </div>
+                <div class="alert alert-info">Vozač još nema nijednu ocenu.</div>
             {% endif %}
 
             <!-- Istorija kartica -->
@@ -115,10 +132,10 @@
             {% if driver.cards %}
                 {% set sorted_cards = driver.cards | sort(attribute='issue_date', reverse=True) %}
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-bordered align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Broj kartice</th>
+                                <th>Broj</th>
                                 <th>Izdana</th>
                                 <th>Ističe</th>
                                 <th>Status</th>
@@ -145,6 +162,7 @@
             {% else %}
                 <p class="text-muted">Nema podataka o karticama.</p>
             {% endif %}
+
         </div>
     </div>
 </div>
