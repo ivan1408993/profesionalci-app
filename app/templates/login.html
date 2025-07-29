@@ -3,50 +3,35 @@
 {% block title %}Prijava{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-  <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; border-radius: 1rem;">
-    <div class="text-center mb-4">
-      <h3 class="fw-bold">Dobrodošli nazad</h3>
-      <p class="text-muted">Prijavite se na svoj nalog</p>
-    </div>
+<div class="card-style">
+    <h2 class="text-center mb-4">Prijava</h2>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for msg in messages %}
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ msg }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
+          <div class="error-msg">{{ msg }}</div>
         {% endfor %}
       {% endif %}
     {% endwith %}
 
     <form method="POST" action="{{ url_for('main.login') }}">
-      <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-        <label for="email">Email adresa</label>
-      </div>
+        <div class="mb-3">
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Lozinka" required>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-custom">Prijavi se</button>
+        </div>
+        <p class="mt-3">
+    <a href="{{ url_for('main.reset_password_request') }}" class="text-info">Zaboravili ste lozinku?</a>
+</p>
 
-      <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Lozinka" required>
-        <label for="password">Lozinka</label>
-      </div>
-
-      <div class="d-grid">
-        <button type="submit" class="btn btn-primary btn-lg">Prijavi se</button>
-      </div>
-
-      <div class="text-end mt-2">
-        <a href="{{ url_for('main.reset_password_request') }}" class="small text-decoration-none">Zaboravili ste lozinku?</a>
-      </div>
     </form>
 
-    <hr class="my-4">
-
-    <p class="text-center mb-0">
-      Nemate nalog?
-      <a href="{{ url_for('main.register') }}" class="text-primary fw-semibold text-decoration-none">Registrujte se</a>
+    <p class="mt-3 text-center">
+        Nemate nalog? <a href="{{ url_for('main.register') }}">Registrujte se</a>
     </p>
-  </div>
 </div>
 {% endblock %}
