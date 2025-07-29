@@ -3,9 +3,9 @@
 {% block title %}Prijava{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
-        <h2 class="text-center mb-4">Dobrodošli nazad</h2>
+<div class="login-container d-flex justify-content-center align-items-center">
+    <div class="login-card p-4">
+        <h2 class="text-center text-light mb-4">Prijava</h2>
 
         {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -17,29 +17,84 @@
 
         <form method="POST" action="{{ url_for('main.login') }}">
             <div class="mb-3">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                    <input type="email" class="form-control" name="email" placeholder="Email adresa" required>
-                </div>
+                <input type="email" class="form-control input-dark" name="email" placeholder="Email adresa" required>
             </div>
             <div class="mb-3">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                    <input type="password" class="form-control" name="password" placeholder="Lozinka" required>
-                </div>
+                <input type="password" class="form-control input-dark" name="password" placeholder="Lozinka" required>
             </div>
             <div class="d-grid mb-2">
-                <button type="submit" class="btn btn-primary btn-block">Prijavi se</button>
+                <button type="submit" class="btn btn-warning neon-btn">Prijavi se</button>
             </div>
             <div class="text-center mb-2">
-                <a href="{{ url_for('main.reset_password_request') }}" class="text-decoration-none text-secondary">Zaboravili ste lozinku?</a>
+                <a href="{{ url_for('main.reset_password_request') }}" class="text-info">Zaboravljena lozinka?</a>
             </div>
         </form>
 
-        <hr>
-        <p class="text-center">
-            Nemate nalog? <a href="{{ url_for('main.register') }}">Registrujte se</a>
+        <p class="mt-3 text-center text-light">
+            Nemate nalog? <a href="{{ url_for('main.register') }}" class="text-warning">Registrujte se</a>
         </p>
     </div>
 </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.login-container {
+    min-height: 90vh;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    padding: 40px 15px;
+}
+
+.login-card {
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 12px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
+}
+
+/* Tamni inputi */
+.input-dark {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #444;
+}
+.input-dark::placeholder {
+    color: #bbb;
+}
+.input-dark:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+/* Neon dugme efekat */
+.neon-btn {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+}
+.neon-btn::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: #ffc107;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1;
+    border-radius: 6px;
+}
+.neon-btn:hover::before {
+    opacity: 1;
+}
+.neon-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 12px rgba(255, 193, 7, 0.5);
+}
+</style>
 {% endblock %}
