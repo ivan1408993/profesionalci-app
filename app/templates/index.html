@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="hero d-flex align-items-center justify-content-center text-center text-light">
+<div class="hero">
     <div>
         <h1 class="display-4 fw-bold text-warning">Profesionalci</h1>
         <p class="lead">Platforma za ocenjivanje i proveru profesionalnih vozača.</p>
@@ -16,9 +16,15 @@
 {% block styles %}
 <style>
 .hero {
-    min-height: 90vh;
+    min-height: 100vh;
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    padding: 50px 20px;
+    padding: 80px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
 }
 
 /* Neon dugmad */
