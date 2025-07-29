@@ -90,16 +90,27 @@
 
   {% if driver %}
   <!-- Rezultati pretrage -->
-  <div class="section-box mx-auto" style="max-width: 900px;">
-    <h4 class="text-center mb-4 section-title">📋 Rezultati pretrage</h4>
-    <div class="row">
-      <div class="col-md-6 mb-3"><strong>Ime i prezime:</strong> {{ driver.full_name }}</div>
+  <div class="section-box mx-auto p-4 bg-light rounded shadow-sm" style="max-width: 900px;">
+    <h4 class="text-center mb-3 section-title">📋 Rezultati pretrage</h4>
+    <hr class="mb-4">
+
+    <div class="row gy-3">
+      <div class="col-md-6"><strong>Ime i prezime:</strong><br> {{ driver.full_name }}</div>
+
       {% set active_card = driver.cards | selectattr('is_active') | first %}
-      <div class="col-md-6 mb-3"><strong>Broj tahograf kartice:</strong> {{ active_card.card_number if active_card else '—' }}</div>
-      <div class="col-md-6 mb-3"><strong>Broj CPC kartice:</strong> {{ driver.cpc_card_number or '—' }}</div>
-      <div class="col-md-6 mb-3"><strong>CPC važi do:</strong> {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}</div>
-      <div class="col-md-6 mb-3"><strong>Firma:</strong> {{ driver.employer.company_name if driver.employer else "Nije zaposlen" }}</div>
-      <div class="col-md-6 mb-3"><strong>Status:</strong>
+      <div class="col-md-6"><strong>Broj tahograf kartice:</strong><br> {{ active_card.card_number if active_card else '—' }}</div>
+
+      <div class="col-md-6"><strong>Broj CPC kartice:</strong><br> {{ driver.cpc_card_number or '—' }}</div>
+
+      <div class="col-md-6"><strong>CPC važi do:</strong><br> 
+        {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}
+      </div>
+
+      <div class="col-md-6"><strong>Firma:</strong><br> 
+        {{ driver.employer.company_name if driver.employer else "Nije zaposlen" }}
+      </div>
+
+      <div class="col-md-6"><strong>Status:</strong><br>
         {% if driver.active %}
           <span class="badge bg-success">Aktivan</span>
         {% else %}
@@ -107,6 +118,9 @@
         {% endif %}
       </div>
     </div>
+  </div>
+{% endif %}
+
 
     {% if driver.cards|length > 1 %}
     <hr>
