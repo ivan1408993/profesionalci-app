@@ -3,11 +3,11 @@
 {% block content %}
 <div class="hero d-flex align-items-center justify-content-center text-center text-light">
     <div>
-        <h1 class="display-4 fw-bold neon-text"><span class="text-warning">Profesionalci</span></h1>
+        <h1 class="display-4 fw-bold neon-text">Profesionalci</h1>
         <p class="lead">Platforma za ocenjivanje i proveru profesionalnih vozača.</p>
         <div class="mt-4">
-            <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg me-3 neon-btn">Prijavi se</a>
-            <a href="{{ url_for('main.register') }}" class="btn btn-warning btn-lg neon-btn">Registruj se</a>
+            <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg me-3">Prijavi se</a>
+            <a href="{{ url_for('main.register') }}" class="btn btn-warning btn-lg">Registruj se</a>
         </div>
     </div>
 </div>
@@ -21,26 +21,20 @@
     padding: 50px 20px;
 }
 
-/* Neon tekst efekat */
-.neon-text:hover {
-    color: #fff;
-    text-shadow:
-        0 0 5px #ffc107,
-        0 0 10px #ffc107,
-        0 0 20px #ffc107,
-        0 0 40px #ff8c00;
-    transition: 0.4s ease;
+/* Neonski efekat za h1 */
+.neon-text {
+    color: #ffc107; /* Bootstrap warning - žuta */
+    transition: text-shadow 0.3s ease;
+    text-shadow: 0 0 5px #ffeb3b88, 0 0 10px #ffeb3b66, 0 0 15px #ffeb3b44;
 }
 
-/* Neon dugmad efekat */
-.neon-btn:hover {
-    box-shadow:
-        0 0 5px #ffc107,
-        0 0 10px #ffc107,
-        0 0 20px #ffc107,
-        0 0 40px #ff8c00;
+.neon-text:hover {
+    text-shadow:
+        0 0 10px #fff176,
+        0 0 20px #ffeb3b,
+        0 0 30px #fff176,
+        0 0 40px #ffeb3b;
     transform: scale(1.05);
-    transition: 0.3s ease;
 }
 </style>
 {% endblock %}
