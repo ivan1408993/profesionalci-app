@@ -2,11 +2,66 @@
 {% block title %}Pretraga vozača{% endblock %}
 
 {% block content %}
+<style>
+  .section-box {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  .section-subtitle {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .list-group-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #333;
+  }
+
+  .badge {
+    font-size: 0.9rem;
+  }
+
+  .text-muted {
+    font-size: 0.95rem;
+  }
+
+  .table th, .table td {
+    background-color: #fff !important;
+    color: #212529;
+  }
+
+  .alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+  }
+</style>
+
 <div class="container">
+
   <!-- Sekcija za pretragu -->
-  <div class="p-4 mb-5 rounded shadow" style="background-color: rgba(255, 255, 255, 0.05); max-width: 800px; margin: auto;">
-    <h2 class="text-center mb-3">🔍 Pretraga vozača</h2>
-    <p class="text-center text-light-emphasis">Unesite JMBG, broj tahograf kartice ili CPC kartice</p>
+  <div class="section-box mx-auto" style="max-width: 800px;">
+    <h2 class="text-center section-title">🔍 Pretraga vozača</h2>
+    <p class="text-center section-subtitle">Unesite JMBG, broj tahograf kartice ili CPC kartice</p>
+
     <form method="POST" action="{{ url_for('main.search_driver') }}" class="row gx-2 gy-2 align-items-center justify-content-center">
       <div class="col-12 col-md-8">
         <input type="text" id="search_input" name="search_input" class="form-control" placeholder="1234567890123 ili CPC123456" required>
@@ -21,8 +76,8 @@
 
   {% if driver %}
   <!-- Rezultati pretrage -->
-  <div class="p-4 mb-4 rounded shadow animate__animated animate__fadeIn" style="background-color: rgba(255, 255, 255, 0.05); max-width: 900px; margin: auto;">
-    <h4 class="text-center mb-4">📋 Rezultati pretrage</h4>
+  <div class="section-box mx-auto" style="max-width: 900px;">
+    <h4 class="text-center mb-4 section-title">📋 Rezultati pretrage</h4>
     <div class="row">
       <div class="col-md-6 mb-3"><strong>Ime i prezime:</strong> {{ driver.full_name }}</div>
       {% set active_card = driver.cards | selectattr('is_active') | first %}
@@ -41,11 +96,11 @@
 
     {% if driver.cards|length > 1 %}
     <hr>
-    <h6>🗂 Istorija tahograf kartica</h6>
-    <ul class="list-group list-group-flush">
+    <h6 class="mb-2">🗂 Istorija tahograf kartica</h6>
+    <ul class="list-group">
       {% for card in driver.cards if not card.is_active %}
-      <li class="list-group-item bg-transparent border-secondary text-white">
-        {{ card.card_number }} — 
+      <li class="list-group-item">
+        {{ card.card_number }} —
         {% if card.issue_date %} izdata: {{ card.issue_date.strftime('%d.%m.%Y') }}, {% endif %}
         {% if card.expiry_date %} važi do: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
         <span class="text-muted">(neaktivna)</span>
@@ -67,11 +122,11 @@
 
   {% if ratings_info %}
   <!-- Ocene -->
-  <div class="p-4 rounded shadow animate__animated animate__fadeIn" style="background-color: rgba(255, 255, 255, 0.05); max-width: 900px; margin: auto;">
-    <h5 class="mb-3 text-center">⭐ Ocene prethodnih poslodavaca</h5>
+  <div class="section-box mx-auto" style="max-width: 900px;">
+    <h5 class="text-center mb-3 section-title">⭐ Ocene prethodnih poslodavaca</h5>
     <div class="table-responsive">
-      <table class="table table-dark table-striped table-bordered align-middle text-center">
-        <thead>
+      <table class="table table-bordered align-middle text-center">
+        <thead class="table-light">
           <tr>
             <th>Poslodavac</th>
             <th>Ocena</th>
@@ -101,8 +156,8 @@
   <div class="alert alert-warning text-center mt-4">⚠️ Vozač nije pronađen.</div>
 
   {% if show_additional_fields %}
-  <div class="p-4 mt-4 rounded shadow" style="background-color: rgba(255, 255, 255, 0.05); max-width: 600px; margin: auto;">
-    <h5 class="text-center mb-3">🔁 Dodatna provera</h5>
+  <div class="section-box mx-auto" style="max-width: 600px;">
+    <h5 class="text-center mb-3 section-title">🔁 Dodatna provera</h5>
     <form method="POST" action="{{ url_for('main.search_driver') }}">
       <input type="hidden" name="check_additional" value="1">
       <div class="mb-3">
