@@ -2,18 +2,12 @@
 
 {% block content %}
 <div class="hero d-flex align-items-center justify-content-center text-center text-light">
-    <div class="content-wrapper p-4 rounded shadow-lg">
-        <h1 class="display-3 fw-bold mb-3">
-            <span class="text-warning">Profesionalci</span>
-        </h1>
-        <p class="lead mb-4">Platforma za ocenjivanje i proveru profesionalnih vozača.</p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg px-4 py-2">
-                <i class="bi bi-box-arrow-in-right me-2"></i> Prijavi se
-            </a>
-            <a href="{{ url_for('main.register') }}" class="btn btn-warning btn-lg text-dark px-4 py-2">
-                <i class="bi bi-person-plus-fill me-2"></i> Registruj se
-            </a>
+    <div>
+        <h1 class="display-4 fw-bold neon-text">Profesionalci</h1>
+        <p class="lead">Platforma za ocenjivanje i proveru profesionalnih vozača.</p>
+        <div class="mt-4">
+            <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg me-3">Prijavi se</a>
+            <a href="{{ url_for('main.register') }}" class="btn btn-warning btn-lg">Registruj se</a>
         </div>
     </div>
 </div>
@@ -22,26 +16,25 @@
 {% block styles %}
 <style>
 .hero {
-    min-height: 100vh;
+    min-height: 90vh;
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
     padding: 50px 20px;
 }
 
-.content-wrapper {
-    background-color: rgba(0, 0, 0, 0.6);
-    max-width: 600px;
+/* Neonski efekat za h1 */
+.neon-text {
+    color: #ffc107; /* Bootstrap warning - žuta */
+    transition: text-shadow 0.3s ease;
+    text-shadow: 0 0 5px #ffeb3b88, 0 0 10px #ffeb3b66, 0 0 15px #ffeb3b44;
 }
 
-.btn-warning:hover {
-    background-color: #f1c40f;
-    color: #000;
-    transition: 0.3s ease;
-}
-
-.btn-outline-light:hover {
-    background-color: #ffffff;
-    color: #000;
-    transition: 0.3s ease;
+.neon-text:hover {
+    text-shadow:
+        0 0 10px #fff176,
+        0 0 20px #ffeb3b,
+        0 0 30px #fff176,
+        0 0 40px #ffeb3b;
+    transform: scale(1.05);
 }
 </style>
 {% endblock %}
