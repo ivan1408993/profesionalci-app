@@ -19,7 +19,7 @@
     <!-- Pretraga -->
     <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
         <div class="input-group" style="max-width: 1000px;">
-            <input type="text" name="search" class="form-control" placeholder="Pretraga po imenu, CPC ili tahograf kartici" value="{{ search or '' }}">
+            <input type="text" name="search" class="form-control" placeholder="Unesite ime, tahograf karticu ili CPC" value="{{ search or '' }}">
             <button type="submit" class="btn btn-primary">
                 🔍 Pretraži
             </button>
