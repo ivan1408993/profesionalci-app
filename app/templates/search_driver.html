@@ -2,116 +2,113 @@
 {% block title %}Pretraga vozača{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-auto">
-      <h2 class="text-center mb-4">
-        Pretraga vozača po JMBG, broju tahograf kartice ili CPC
-      </h2>
-    </div>
-  </div>
-
-  <form method="POST" action="{{ url_for('main.search_driver') }}" class="row g-3 align-items-center my-3">
-    <div class="col-auto flex-grow-1">
-      <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG, broj tahograf kartice ili CPC" required>
-    </div>
-      <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary"><i class="fas fa-search me-2"></i>Pretraži</button>
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+        <h2 class="text-center mb-4">Pretraga vozača</h2>
+        <p class="text-muted text-center mb-3">Pretraži po JMBG, broju tahograf kartice ili CPC</p>
+        
+        <form method="POST" action="{{ url_for('main.search_driver') }}">
+          <div class="input-group mb-3">
+            <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG, broj tahograf kartice ili CPC" required>
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search me-1"></i> Pretraži
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
-</div>
-
 
   {% if driver %}
-    <hr>
-    <h3>Rezultati:</h3>
-    <ul class="list-group mb-3">
-      <li class="list-group-item"><strong>Ime i prezime:</strong> {{ driver.full_name }}</li>
-      {% set active_card = driver.cards | selectattr('is_active') | first %}
-    <li class="list-group-item"><strong>Broj tahograf kartice:</strong> {{ active_card.card_number if active_card else '—' }}</li>
-    <li class="list-group-item"><strong>Broj CPC kartice:</strong> {{ driver.cpc_card_number if driver.cpc_card_number else '—' }}</li>
-    <li class="list-group-item"><strong>CPC važi do:</strong> 
-    {% if driver.cpc_expiry_date %}
-      {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
-      {% else %}
-      —
-    {% endif %}
-</li>
+  <div class="card mt-5 shadow-sm animate__animated animate__fadeIn">
+    <div class="card-body">
+      <h4 class="card-title">Rezultati pretrage</h4>
+      <ul class="list-group list-group-flush mt-3">
+        <li class="list-group-item"><strong>Ime i prezime:</strong> {{ driver.full_name }}</li>
+        {% set active_card = driver.cards | selectattr('is_active') | first %}
+        <li class="list-group-item"><strong>Broj tahograf kartice:</strong> {{ active_card.card_number if active_card else '—' }}</li>
+        <li class="list-group-item"><strong>Broj CPC kartice:</strong> {{ driver.cpc_card_number if driver.cpc_card_number else '—' }}</li>
+        <li class="list-group-item"><strong>CPC važi do:</strong> 
+          {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}
+        </li>
+        <li class="list-group-item"><strong>Firma:</strong> {{ driver.employer.company_name if driver.employer else "Nije zaposlen" }}</li>
+        <li class="list-group-item">
+          <strong>Status:</strong>
+          {% if driver.active %}
+            <span class="badge bg-success">Aktivan</span>
+          {% else %}
+            <span class="badge bg-secondary">Neaktivan</span>
+          {% endif %}
+        </li>
+      </ul>
 
-      <li class="list-group-item"><strong>Firma:</strong> {{ driver.employer.company_name if driver.employer else "Nije zaposlen" }}</li>
-      <li class="list-group-item"><strong>Status:</strong> 
-        {% if driver.active %}
-          <span class="badge bg-success">Aktivan</span>
-        {% else %}
-          <span class="badge bg-secondary">Neaktivan</span>
-        {% endif %}
-      </li>
-    </ul>
-
-    {% if driver.cards|length > 1 %}
-  <h5 class="mt-4">Istorija tahograf kartica:</h5>
-  <ul class="list-group">
-    {% for card in driver.cards if not card.is_active %}
-      <li class="list-group-item">
-        {{ card.card_number }} –
-        {% if card.issue_date %} izdata: {{ card.issue_date.strftime('%d.%m.%Y') }}, {% endif %}
-        {% if card.expiry_date %} važi do: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
-        <span class="text-muted">(neaktivna)</span>
-      </li>
-    {% endfor %}
-  </ul>
-{% endif %}
-
-    {# 👉 Dodaj ovde dugme ako vozač već radi kod nekog drugog #}
-{% if driver and already_employed_by_other %}
-  <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mb-3">
-    Ažuriraj vozača
-  </a>
-{% endif %}
-
-    {% if driver and not driver.active %}
-    <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST">
-        <button type="submit" class="btn btn-success mt-3">Preuzmi vozača</button>
-    </form>
-    {% endif %}
-
-    {% if ratings_info %}
-      <h4>Ocene:</h4>
-      <table class="table table-bordered table-striped">
-        <thead class="table-light">
-          <tr>
-            <th>Poslodavac</th>
-            <th>Ocena</th>
-            <th>Komentar</th>
-            <th>Datum</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for r in ratings_info %}
-          <tr>
-            <td>{{ r.employer_name }}</td>
-            <td>{{ r.stars }}</td>
-            <td>{{ r.comment }}</td>
-            <td>{{ r.rated_at }}</td>
-          </tr>
+      {% if driver.cards|length > 1 %}
+      <h6 class="mt-4">Istorija tahograf kartica:</h6>
+      <ul class="list-group">
+        {% for card in driver.cards if not card.is_active %}
+        <li class="list-group-item">
+          {{ card.card_number }} –
+          {% if card.issue_date %} izdata: {{ card.issue_date.strftime('%d.%m.%Y') }}, {% endif %}
+          {% if card.expiry_date %} važi do: {{ card.expiry_date.strftime('%d.%m.%Y') }}{% endif %}
+          <span class="text-muted">(neaktivna)</span>
+        </li>
         {% endfor %}
-        </tbody>
-      </table>
-    {% else %}
-      <p class="text-muted">Nema ocena.</p>
-    {% endif %}
+      </ul>
+      {% endif %}
+
+      {% if driver and already_employed_by_other %}
+        <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-4">Ažuriraj vozača</a>
+      {% endif %}
+
+      {% if not driver.active %}
+      <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST" class="mt-3">
+        <button type="submit" class="btn btn-success">Preuzmi vozača</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if ratings_info %}
+  <div class="card mt-4 shadow-sm animate__animated animate__fadeIn">
+    <div class="card-body">
+      <h5 class="card-title">Ocene</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Poslodavac</th>
+              <th>Ocena</th>
+              <th>Komentar</th>
+              <th>Datum</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in ratings_info %}
+            <tr>
+              <td>{{ r.employer_name }}</td>
+              <td>{{ r.stars }}</td>
+              <td>{{ r.comment }}</td>
+              <td>{{ r.rated_at }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <p class="text-muted mt-3">Nema ocena.</p>
+  {% endif %}
 
   {% elif request.method == 'POST' %}
-    <div class="alert alert-warning mt-4" role="alert">
-      Vozač nije pronađen.
-    </div>
+  <div class="alert alert-warning mt-4">Vozač nije pronađen.</div>
 
-    {% if show_additional_fields %}
-    <hr>
-    <h4>Dodatna provera</h4>
+  {% if show_additional_fields %}
+  <div class="card mt-4 p-4 shadow-sm">
+    <h5 class="mb-3">Dodatna provera</h5>
     <form method="POST" action="{{ url_for('main.search_driver') }}">
-      <!-- Skriveno polje da znamo da je ovo dodatna provera -->
       <input type="hidden" name="check_additional" value="1">
 
       <div class="mb-3">
@@ -126,9 +123,8 @@
 
       <button type="submit" class="btn btn-secondary">Proveri</button>
     </form>
-
-    
-    {% endif %}
+  </div>
+  {% endif %}
   {% endif %}
 </div>
 {% endblock %}
