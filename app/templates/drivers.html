@@ -2,9 +2,28 @@
 
 {% block content %}
 <div class="container mt-5">
-    <a href="{{ url_for('main.search_driver') }}" class="btn btn-warning mb-3 btn-sm mb-4 custom-btn">
-        <i class="fas fa-search me-2"></i>Pretraga svih vozača
+    <!-- GLOBALNA PRETRAGA -->
+<div class="alert alert-info d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2 mb-4 shadow-sm rounded-3 border border-primary">
+    <div class="d-flex align-items-center">
+        <i class="fas fa-globe me-2 text-primary fs-4"></i>
+        <div>
+            <strong>Globalna pretraga:</strong> Pronađite bilo kog vozača u sistemu, bez obzira na firmu.
+        </div>
+    </div>
+    <a href="{{ url_for('main.search_driver') }}"
+       class="btn btn-outline-primary btn-sm"
+       data-bs-toggle="tooltip"
+       title="Pretraga van vaše firme – svi vozači u sistemu">
+        <i class="fas fa-search me-2"></i> Pretraži sve vozače u sistemu
     </a>
+</div>
+
+<!-- RAZDVAJANJE OD LOKALNE PRETRAGE -->
+<hr class="my-4">
+<h5 class="mb-3">
+    <i class="fas fa-id-card me-2"></i> Pretraga vaših vozača
+</h5>
+
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Vaši vozači</h2>
