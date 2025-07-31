@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="container mt-5" style="max-width: 600px;">
-    <div class="p-4 bg-white rounded shadow">
-        <h2 class="mb-4 text-dark">
-            <i class="fas fa-user-plus me-2 text-success"></i> Dodaj novog vozača
+    <div class="p-4 rounded shadow" style="background-color: rgba(30, 40, 50, 0.85); border: 1px solid #0dcaf0;">
+        <h2 class="mb-4 text-info">
+            <i class="fas fa-user-plus me-2"></i> Dodaj novog vozača
         </h2>
 
         <form method="POST" action="{{ url_for('main.add_driver') }}"
@@ -12,65 +12,69 @@
             
             <!-- Ime i prezime -->
             <div class="mb-3">
-                <label for="full_name" class="form-label fw-semibold text-dark">
-                    <i class="fas fa-id-card me-1 text-primary"></i> Ime i prezime
+                <label for="full_name" class="form-label fw-semibold text-light">
+                    <i class="fas fa-id-card me-1 text-info"></i> Ime i prezime
                 </label>
-                <input type="text" class="form-control" id="full_name" name="full_name"
+                <input type="text" class="form-control bg-dark text-light border border-info" id="full_name" name="full_name"
                        required placeholder="Unesite ime i prezime">
             </div>
 
             <!-- JMBG -->
             <div class="mb-3">
-                <label for="jmbg" class="form-label fw-semibold text-dark">
-                    <i class="fas fa-fingerprint me-1 text-primary"></i> JMBG
+                <label for="jmbg" class="form-label fw-semibold text-light">
+                    <i class="fas fa-fingerprint me-1 text-info"></i> JMBG
                 </label>
-                <input type="text" class="form-control" id="jmbg" name="jmbg"
+                <input type="text" class="form-control bg-dark text-light border border-info" id="jmbg" name="jmbg"
                        required pattern="^\d{13}$" maxlength="13" minlength="13"
                        title="Unesite tačno 13 cifara JMBG-a." placeholder="13 cifara">
-                <div class="invalid-feedback">JMBG mora sadržati tačno 13 cifara.</div>
+                <div class="invalid-feedback bg-danger text-white rounded px-2 py-1 mt-1">
+                    JMBG mora sadržati tačno 13 cifara.
+                </div>
             </div>
 
             <!-- Broj tahograf kartice -->
             <div class="mb-3">
-                <label for="card_number" class="form-label fw-semibold text-dark">
-                    <i class="fas fa-id-badge me-1 text-primary"></i> Broj tahograf kartice
+                <label for="card_number" class="form-label fw-semibold text-light">
+                    <i class="fas fa-id-badge me-1 text-info"></i> Broj tahograf kartice
                 </label>
-                <input type="text" class="form-control" id="card_number" name="card_number"
+                <input type="text" class="form-control bg-dark text-light border border-info" id="card_number" name="card_number"
                        required pattern="^[A-Za-z0-9]{16}$" maxlength="16" minlength="16"
                        placeholder="16 karaktera" title="Unesite tačno 16 karaktera.">
-                <div class="invalid-feedback">Broj tahograf kartice mora imati tačno 16 karaktera.</div>
+                <div class="invalid-feedback bg-danger text-white rounded px-2 py-1 mt-1">
+                    Broj tahograf kartice mora imati tačno 16 karaktera.
+                </div>
             </div>
 
             <!-- Datum isteka -->
             <div class="mb-3">
-                <label for="expiry_date" class="form-label fw-semibold text-dark">
-                    <i class="fas fa-calendar-alt me-1 text-primary"></i> Kartica važi do
+                <label for="expiry_date" class="form-label fw-semibold text-light">
+                    <i class="fas fa-calendar-alt me-1 text-info"></i> Kartica važi do
                 </label>
-                <input type="date" class="form-control" id="expiry_date" name="expiry_date">
+                <input type="date" class="form-control bg-dark text-light border border-info" id="expiry_date" name="expiry_date">
             </div>
 
             <!-- CPC broj -->
             <div class="mb-3">
-                <label for="cpc_card_number" class="form-label fw-semibold text-dark">
-                    <i class="fas fa-id-card me-1 text-primary"></i> Broj CPC kartice
+                <label for="cpc_card_number" class="form-label fw-semibold text-light">
+                    <i class="fas fa-id-card me-1 text-info"></i> Broj CPC kartice
                 </label>
-                <input type="text" class="form-control" id="cpc_card_number" name="cpc_card_number" placeholder="Opcionalno">
+                <input type="text" class="form-control bg-dark text-light border border-info" id="cpc_card_number" name="cpc_card_number" placeholder="Opcionalno">
             </div>
 
             <!-- CPC istek -->
             <div class="mb-4">
-                <label for="cpc_expiry_date" class="form-label fw-semibold text-dark">
-                    <i class="fas fa-calendar-check me-1 text-primary"></i> CPC važi do
+                <label for="cpc_expiry_date" class="form-label fw-semibold text-light">
+                    <i class="fas fa-calendar-check me-1 text-info"></i> CPC važi do
                 </label>
-                <input type="date" class="form-control" id="cpc_expiry_date" name="cpc_expiry_date">
+                <input type="date" class="form-control bg-dark text-light border border-info" id="cpc_expiry_date" name="cpc_expiry_date">
             </div>
 
             <!-- Dugmad -->
             <div class="d-flex gap-3">
-                <button type="submit" class="btn btn-success px-4 shadow-sm">
+                <button type="submit" class="btn btn-info px-4 shadow-sm">
                     <i class="fas fa-save me-2"></i> Sačuvaj vozača
                 </button>
-                <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-secondary px-3">
+                <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-light px-3">
                     <i class="fas fa-arrow-left me-2"></i> Nazad
                 </a>
             </div>
