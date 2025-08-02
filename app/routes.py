@@ -1026,7 +1026,7 @@ def update_driver(driver_id):
         'update_driver.html',
         driver=driver,
         expiry_date_str=expiry_date_str,
-        cpc_expiry_date_str=cpc_expiry_date_str
+        cpc_expiry_date_str=cpc_expiry_date_str,
         current_date=current_date
     )
 
