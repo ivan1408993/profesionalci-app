@@ -38,17 +38,18 @@
         <div class="invalid-feedback">Mora imati tačno 16 karaktera (slova ili cifre).</div>
     </div>
 
-    <!-- Datum važenja tahograf kartice -->
-    <div class="mb-3">
-        <label for="expiry_date" class="form-label fw-semibold text-light">
-            <i class="fas fa-calendar-alt me-1 icon-highlight"></i> Tahograf kartica važi do
-        </label>
-        <input type="date"
+   <!-- Datum važenja CPC kartice -->
+        <div class="mb-4">
+            <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada CPC kartica prestaje da važi">
+                <i class="fas fa-calendar-check icon-highlight me-1"></i> Datum važenja CPC kartice
+            </label>
+           <input type="date"
        class="form-control bg-secondary bg-opacity-25 text-light border-0"
        name="expiry_date" id="expiry_date"
-       value="{{ expiry_date_str }}"
+       id="cpc_expiry_date"
+       value="{{ cpc_expiry_date_str }}"
        min="{{ current_date }}">
-    </div>
+        </div>
 
     <!-- CPC kartica -->
     <div class="mb-3">
