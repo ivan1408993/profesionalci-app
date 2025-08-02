@@ -531,8 +531,8 @@ def drivers():
     Driver.query.filter_by(employer_id=employer_id, active=True).all()
 
     # Ako checkbox "samo aktivni" -> filtriraj
-    if active_only:
-        drivers_query = drivers_query.filter(Driver.active == True)
+    #if active_only:
+     #   drivers_query = drivers_query.filter(Driver.active == True)
 
     # Pretraga
     if search:
