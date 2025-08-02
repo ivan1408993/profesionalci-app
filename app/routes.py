@@ -528,11 +528,11 @@ def drivers():
     sort = request.args.get('sort', 'ime')
 
     # Osnovni query - samo vozači za datog poslodavca
-    Driver.query.filter_by(employer_id=employer_id, active=True).all()
+    drivers_query = Driver.query.filter_by(employer_id=employer.id)
 
     # Ako checkbox "samo aktivni" -> filtriraj
-    #if active_only:
-     #   drivers_query = drivers_query.filter(Driver.active == True)
+    if active_only:
+        drivers_query = drivers_query.filter(Driver.active == True)
 
     # Pretraga
     if search:
@@ -663,6 +663,8 @@ def deactivate_driver(driver_id):
     # Ako već postoji ocena – nastavljamo sa deaktivacijom
     driver.active = False
     db.session.commit()
+    db.session.refresh(driver)  # Osvježi objekat iz baze
+    print(f"Status vozača nakon deaktivacije: active = {driver.active}")
 
     
     full_name = driver.full_name
