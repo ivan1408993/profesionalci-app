@@ -124,6 +124,8 @@ def add_driver():
         flash("Molimo prijavite se kao poslodavac.")
         return redirect(url_for('main.login'))
 
+    current_date = datetime.today().strftime('%Y-%m-%d')
+
     if request.method == 'POST':
         full_name = request.form['full_name'].strip()
         jmbg = request.form['jmbg'].strip()
