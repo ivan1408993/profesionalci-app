@@ -528,7 +528,7 @@ def drivers():
     sort = request.args.get('sort', 'ime')
 
     # Osnovni query - samo vozači za datog poslodavca
-    drivers_query = Driver.query.filter_by(employer_id=employer.id)
+    Driver.query.filter_by(employer_id=employer_id, active=True).all()
 
     # Ako checkbox "samo aktivni" -> filtriraj
     if active_only:
@@ -648,7 +648,7 @@ def driver_exists(driver_id):
 @main.route('/deactivate_driver/<int:driver_id>', methods=['POST'])
 def deactivate_driver(driver_id):
     employer_id = session.get('user_id')
-    if not employer_id:
+    if not employer_id or session.get('user_type') != 'employer':
         flash("Morate biti prijavljeni kao poslodavac.")
         return redirect(url_for('main.login'))
 
@@ -669,8 +669,6 @@ def deactivate_driver(driver_id):
 
     flash(f"Vozač {full_name} je uspešno označen kao neaktivan.")
     return redirect(url_for('main.drivers', active=1))
-
-
 
 
 @main.route('/drivers/all')
