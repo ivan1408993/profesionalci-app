@@ -952,7 +952,7 @@ def update_driver(driver_id):
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
-
+    current_date = datetime.today().strftime('%Y-%m-%d')
     if not driver.active or driver.employer_id != employer_id:
         flash("Nemate dozvolu da ažurirate ovog vozača.", "danger")
         return redirect(url_for('main.driver_detail', driver_id=driver_id))
@@ -1027,6 +1027,7 @@ def update_driver(driver_id):
         driver=driver,
         expiry_date_str=expiry_date_str,
         cpc_expiry_date_str=cpc_expiry_date_str
+        current_date=current_date
     )
 
 
