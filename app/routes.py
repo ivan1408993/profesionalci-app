@@ -521,7 +521,7 @@ def drivers():
 
     search = request.args.get('search', '').strip()
     page = request.args.get('page', 1, type=int)
-    per_page = 10
+    per_page = 20
 
     # Novi parametri za filter i sortiranje
     active_only = request.args.get('active', default='1') == '1'
