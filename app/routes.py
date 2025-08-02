@@ -316,7 +316,7 @@ def adopt_driver(driver_id):
             flash('Vozač je ponovo aktiviran u vašem sistemu.', 'success')
         else:
             flash('Vozač je već kod vas i aktivan je.', 'info')
-        return redirect(url_for('main.driver_detail', driver_id=driver.id))
+        return redirect(url_for('main.drivers', driver_id=driver.id))
 
     # Ako je vozač aktivan kod drugog poslodavca - NE DOZVOLJAVAMO preuzimanje
     if driver.active and driver.employer_id != employer_id:
