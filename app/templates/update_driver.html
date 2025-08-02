@@ -62,11 +62,9 @@
             <label for="cpc_card_number" class="form-label text-light fw-semibold">
                 <i class="fas fa-id-badge icon-highlight me-1"></i> Broj CPC kartice
             </label>
-            <input type="date"
-       class="form-control bg-secondary bg-opacity-25 text-light border-0"
-       name="expiry_date" id="expiry_date"
-       value="{{ expiry_date_str }}"
-       min="{{ current_date }}">
+            <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
+                   name="cpc_card_number" id="cpc_card_number"
+                   value="{{ driver.cpc_card_number or '' }}">
         </div>
 
         <!-- Istek CPC kartice -->
@@ -74,9 +72,12 @@
             <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada CPC kartica prestaje da važi">
                 <i class="fas fa-calendar-check icon-highlight me-1"></i> Istek CPC kartice
             </label>
-            <input type="date" class="form-control bg-secondary bg-opacity-25 text-light border-0"
-                   name="cpc_expiry_date" id="cpc_expiry_date"
-                   value="{{ cpc_expiry_date_str }}">
+           <input type="date"
+       class="form-control bg-secondary bg-opacity-25 text-light border-0"
+       name="expiry_date" id="expiry_date"
+       id="cpc_expiry_date"
+       value="{{ cpc_expiry_date_str }}"
+       min="{{ current_date }}">
         </div>
 
         <!-- Dugmad -->

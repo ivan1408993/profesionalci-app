@@ -43,7 +43,13 @@
         <label for="expiry_date" class="form-label fw-semibold text-light">
             <i class="fas fa-calendar-alt me-1 icon-highlight"></i> Kartica važi do
         </label>
-        <input type="date" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="expiry_date" name="expiry_date">
+        <input type="date"
+       class="form-control bg-secondary bg-opacity-25 text-light border-0"
+       name="expiry_date" id="expiry_date"
+       id="cpc_expiry_date"
+       value="{{ cpc_expiry_date_str }}"
+       min="{{ current_date }}">
+        </div>
     </div>
 
     <!-- CPC kartica -->
@@ -59,7 +65,13 @@
         <label for="cpc_expiry_date" class="form-label fw-semibold text-light">
             <i class="fas fa-calendar-check me-1 icon-highlight"></i> CPC važi do
         </label>
-        <input type="date" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="cpc_expiry_date" name="cpc_expiry_date">
+        <input type="date"
+       class="form-control bg-secondary bg-opacity-25 text-light border-0"
+       name="expiry_date" id="expiry_date"
+       id="cpc_expiry_date"
+       value="{{ cpc_expiry_date_str }}"
+       min="{{ current_date }}">
+        </div>
     </div>
 
     <!-- Dugmad -->
