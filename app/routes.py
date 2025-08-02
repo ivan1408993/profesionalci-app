@@ -505,8 +505,6 @@ def dashboard():
     
 from app.models import Driver
 
-from sqlalchemy import func
-
 from sqlalchemy import or_, func
 
 @main.route('/drivers')
@@ -670,7 +668,7 @@ def deactivate_driver(driver_id):
     full_name = driver.full_name
 
     flash(f"Vozač {full_name} je uspešno označen kao neaktivan.")
-    return redirect(url_for('main.drivers'))
+    return redirect(url_for('main.drivers', active=1))
 
 
 
