@@ -530,7 +530,10 @@ def drivers():
     sort = request.args.get('sort', 'ime')
 
     # Osnovni query - samo vozači za datog poslodavca
-    drivers_query = Driver.query.filter_by(employer_id=employer.id)
+    drivers_query = Driver.query.options(
+    db.joinedload(Driver.cards)
+    ).filter_by(employer_id=employer.id)
+
 
     # Ako checkbox "samo aktivni" -> filtriraj
     if active_only:
