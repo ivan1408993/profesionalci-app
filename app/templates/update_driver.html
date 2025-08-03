@@ -19,77 +19,80 @@
     {% endwith %}
 
     <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}" id="driverForm" novalidate
-          class="p-4 border rounded shadow-sm bg-dark bg-opacity-50">
+      class="p-4 border rounded shadow-sm bg-dark bg-opacity-50">
 
-        <!-- Ime i prezime -->
-        <div class="mb-3">
-            <label for="full_name" class="form-label text-light fw-semibold">
-                <i class="fas fa-user icon-highlight me-1"></i> Ime i prezime
-            </label>
-            <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
-                   name="full_name" id="full_name" value="{{ driver.full_name }}" required>
+    <!-- Ime i prezime -->
+    <div class="mb-3">
+        <label for="full_name" class="form-label text-light fw-semibold">
+            <i class="fas fa-user icon-highlight me-1"></i> Ime i prezime
+        </label>
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="full_name" id="full_name" value="{{ driver.full_name }}" required>
+    </div>
+
+    <!-- Broj tahograf kartice -->
+    <div class="mb-3">
+        <label for="card_number" class="form-label text-light fw-semibold">
+            <i class="fas fa-id-card icon-highlight me-1"></i> Broj tahograf kartice
+        </label>
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               id="card_number" name="card_number"
+               maxlength="16" minlength="16"
+               value="{{ card_number or '' }}"
+               placeholder="Unesite novi broj kartice (ako postoji promena)"
+               title="Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).">
+        <div class="form-text text-light">
+            Trenutni broj: <strong>{{ card_number or '—' }}</strong> &mdash; ostavite prazno ako ne menjate broj
         </div>
+        <div class="invalid-feedback">Broj mora imati tačno 16 karaktera (slova ili cifre).</div>
+    </div>
 
-        <!-- Broj tahograf kartice -->
-        <div class="mb-3">
-            <label for="card_number" class="form-label text-light fw-semibold">
-                <i class="fas fa-id-card icon-highlight me-1"></i> Broj tahograf kartice
-            </label>
-            <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
-                   id="card_number" name="card_number"
-                   maxlength="16" minlength="16"
-                   placeholder="Unesite novu karticu (ako postoji)"
-                   title="Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).">
-            <div class="form-text text-light">Unesite samo ako je vozač dobio novu karticu</div>
-            <div class="invalid-feedback">Broj mora imati tačno 16 karaktera (slova ili cifre).</div>
-        </div>
+    <!-- Datum važenja tahograf kartice -->
+    <div class="mb-3">
+        <label for="expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada tahograf kartica prestaje da važi">
+            <i class="fas fa-calendar-alt icon-highlight me-1"></i> Datum važenja tahograf kartice
+        </label>
+        <input type="date"
+               class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="expiry_date" id="expiry_date"
+               value="{{ expiry_date_str }}"
+               min="{{ current_date }}">
+    </div>
 
-        <!-- Datum važenja tahograf kartice -->
-        <div class="mb-3">
-            <label for="expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada tahograf kartica prestaje da važi">
-                <i class="fas fa-calendar-alt icon-highlight me-1"></i> Datum važenja tahograf kartice
-            </label>
-           <input type="date"
-       class="form-control bg-secondary bg-opacity-25 text-light border-0"
-       name="expiry_date" id="expiry_date"
-       value="{{ expiry_date_str }}"
-       min="{{ current_date }}">
+    <!-- Broj CPC kartice -->
+    <div class="mb-3">
+        <label for="cpc_card_number" class="form-label text-light fw-semibold">
+            <i class="fas fa-id-badge icon-highlight me-1"></i> Broj CPC kartice
+        </label>
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="cpc_card_number" id="cpc_card_number"
+               value="{{ driver.cpc_card_number or '' }}">
+    </div>
 
-        </div>
+    <!-- Datum važenja CPC kartice -->
+    <div class="mb-4">
+        <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada CPC kartica prestaje da važi">
+            <i class="fas fa-calendar-check icon-highlight me-1"></i> Datum važenja CPC kartice
+        </label>
+        <input type="date"
+               class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="cpc_expiry_date"
+               id="cpc_expiry_date"
+               value="{{ cpc_expiry_date_str }}"
+               min="{{ current_date }}">
+    </div>
 
-        <!-- Broj CPC kartice -->
-        <div class="mb-3">
-            <label for="cpc_card_number" class="form-label text-light fw-semibold">
-                <i class="fas fa-id-badge icon-highlight me-1"></i> Broj CPC kartice
-            </label>
-            <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
-                   name="cpc_card_number" id="cpc_card_number"
-                   value="{{ driver.cpc_card_number or '' }}">
-        </div>
+    <!-- Dugmad -->
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="fas fa-save me-2"></i> Sačuvaj promene
+        </button>
+        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary w-100">
+            <i class="fas fa-arrow-left me-2"></i> Nazad
+        </a>
+    </div>
+</form>
 
-        <!-- Datum važenja CPC kartice -->
-        <div class="mb-4">
-            <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada CPC kartica prestaje da važi">
-                <i class="fas fa-calendar-check icon-highlight me-1"></i> Datum važenja CPC kartice
-            </label>
-           <input type="date"
-       class="form-control bg-secondary bg-opacity-25 text-light border-0"
-       name="cpc_expiry_date"
-       id="cpc_expiry_date"
-       value="{{ cpc_expiry_date_str }}"
-       min="{{ current_date }}">
-        </div>
-
-        <!-- Dugmad -->
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-success w-100">
-                <i class="fas fa-save me-2"></i> Sačuvaj promene
-            </button>
-            <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary w-100">
-                <i class="fas fa-arrow-left me-2"></i> Nazad
-            </a>
-        </div>
-    </form>
 
     <!-- Istorija kartica -->
     <hr class="my-5 border-light">
