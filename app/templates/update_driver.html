@@ -41,9 +41,11 @@
                value="{{ driver.card_number or '' }}"
                placeholder="Unesite novi broj kartice (ako postoji promena)"
                title="Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).">
+        {% set active_card = driver.cards | selectattr('is_active') | first %}
         <div class="form-text text-light">
-            Trenutni broj: <strong>{{ driver.card_number or '—' }}</strong> &mdash; ostavite prazno ako ne menjate broj
+        Trenutni broj: <strong>{{ active_card.card_number if active_card else '—' }}</strong> &mdash; ostavite prazno ako ne menjate broj
         </div>
+
         <div class="invalid-feedback">Broj mora imati tačno 16 karaktera (slova ili cifre).</div>
     </div>
 
