@@ -64,6 +64,7 @@
                 <tr>
                     <th>Ime i prezime</th>
                     <th>Broj tahograf kartice</th>
+                    <th>Tahograf kartica važi do</th>
                     <th>CPC broj</th>
                     <th>CPC važi do</th>
                     <th>Ocena</th>
@@ -82,6 +83,13 @@
                         {% set active_card = driver.cards | selectattr('is_active') | first %}
                         {{ active_card.card_number if active_card else '—' }}
                     </td>
+                    <td>
+                        {% if active_card and active_card.expiry_date %}
+                        {{ active_card.expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %}   — 
+                        {% endif %}
+                        </td>
+
                     <td>{{ driver.cpc_card_number or '—' }}</td>
                     <td>
                         {% if driver.cpc_expiry_date %}
