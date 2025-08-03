@@ -45,11 +45,17 @@
             </button>
         </div>
 
-        <select name="sort" class="form-select w-auto">
-            <option value="ime" {% if sort == 'ime' %}selected{% endif %}>Sortiraj po imenu</option>
-            <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>Sortiraj po oceni</option>
-        </select>
+        <select name="sort" class="form-select w-auto" id="sortSelect">
+    <option value="ime" {% if sort == 'ime' %}selected{% endif %}>Sortiraj po imenu</option>
+    <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>Sortiraj po oceni</option>
+</select>
     </form>
+    <script>
+    document.getElementById('sortSelect').addEventListener('change', function () {
+        this.form.submit();
+    });
+</script>
+
 
     {% if pagination.items %}
     <div class="table-responsive">
