@@ -125,7 +125,6 @@ def add_driver():
         return redirect(url_for('main.login'))
 
     current_date = datetime.today().strftime('%Y-%m-%d')
-
     if request.method == 'POST':
         full_name = request.form['full_name'].strip()
         jmbg = request.form['jmbg'].strip()
@@ -231,7 +230,7 @@ def add_driver():
         flash("Novi vozač je uspešno dodat.")
         return redirect(url_for('main.drivers'))
 
-    return render_template('add_driver.html', current_lang=session.get('lang', 'sr'))
+    return render_template('add_driver.html', current_lang=session.get('lang', 'sr'), current_date=current_date)
 
 
 
