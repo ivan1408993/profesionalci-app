@@ -39,31 +39,24 @@
     <!-- Pretraga -->
 <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 w-100">
     
-    <!-- Pretraga i sortiranje -->
-<form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4">
-    <div class="row g-2">
-
-        <!-- Pretraga - glavno polje, zauzima više prostora -->
-        <div class="col-12 col-md-9">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Unesite ime, tahograf karticu ili CPC" value="{{ search or '' }}">
-                <button type="submit" class="btn btn-primary">
-                    🔍 Pretraži
-                </button>
-            </div>
+    <!-- Input za pretragu koji se rasteže -->
+    <div class="flex-grow-1 w-100" style="max-width: 1000px;">
+        <div class="input-group w-100">
+            <input type="text" name="search" class="form-control" placeholder="Unesite ime, tahograf karticu ili CPC" value="{{ search or '' }}">
+            <button type="submit" class="btn btn-primary">
+                🔍 Pretraži
+            </button>
         </div>
+    </div>
 
-        <!-- Sortiranje - kompaktno polje -->
-        <div class="col-12 col-md-3">
-            <select name="sort" class="form-select w-100" id="sortSelect">
-                <option value="ime" {% if sort == 'ime' %}selected{% endif %}>Sortiraj po imenu</option>
-                <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>Sortiraj po oceni</option>
-            </select>
-        </div>
-
+    <!-- Kompaktno polje za sortiranje -->
+    <div>
+        <select name="sort" class="form-select" style="min-width: 180px;" id="sortSelect">
+            <option value="ime" {% if sort == 'ime' %}selected{% endif %}>Sortiraj po imenu</option>
+            <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>Sortiraj po oceni</option>
+        </select>
     </div>
 </form>
-
     <script>
     document.getElementById('sortSelect').addEventListener('change', function () {
         this.form.submit();
