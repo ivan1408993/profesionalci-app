@@ -43,6 +43,17 @@
                         <small class="text-muted">Važi do: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
                     </div>
                 </div>
+<!-- Info CPC kartice -->
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="bg-light border rounded shadow-sm p-3 h-100">
+            <p class="text-muted mb-1"><i class="bi bi-credit-card-2-back"></i> CPC kartica</p>
+            {% set active_cpc = driver.cpc_cards | selectattr('is_active') | first %}
+            <h5 class="mb-1">{{ active_cpc.card_number if active_cpc else '—' }}</h5>
+            <small class="text-muted">Važi do: {{ active_cpc.expiry_date.strftime('%d.%m.%Y') if active_cpc and active_cpc.expiry_date else '—' }}</small>
+        </div>
+    </div>
+</div>
                 <div class="col-md-6">
                     <div class="bg-light border rounded shadow-sm p-3 h-100">
                         <p class="text-muted mb-1"><i class="bi bi-building"></i> Poslodavac</p>
