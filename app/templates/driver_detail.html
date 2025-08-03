@@ -135,8 +135,7 @@
                     <table class="table table-bordered align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Broj</th>
-                                <th>Izdana</th>
+                                <th>Broj kartice</th>
                                 <th>Ističe</th>
                                 <th>Status</th>
                             </tr>
@@ -145,7 +144,6 @@
                             {% for card in sorted_cards %}
                                 <tr class="{% if card.is_active %}table-success{% endif %}">
                                     <td><strong>{{ card.card_number }}</strong></td>
-                                    <td>{{ card.issue_date.strftime('%d.%m.%Y') if card.issue_date else '—' }}</td>
                                     <td>{{ card.expiry_date.strftime('%d.%m.%Y') if card.expiry_date else '—' }}</td>
                                     <td>
                                         {% if card.is_active %}
