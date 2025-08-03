@@ -37,18 +37,20 @@
     </div>
 
     <!-- Pretraga -->
-<form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4">
-    <div class="input-group w-100">
-        <input type="text" name="search" class="form-control" placeholder="Unesite ime, tahograf karticu ili CPC" value="{{ search or '' }}">
+<form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+    <!-- Input + dugme -->
+    <div class="input-group w-100" style="max-width: 1000px;">
+        <input type="text" name="search" class="form-control flex-grow-1" placeholder="Unesite ime, tahograf karticu ili CPC" value="{{ search or '' }}">
         <button type="submit" class="btn btn-primary">
             🔍 Pretraži
         </button>
     </div>
 
-        <select name="sort" class="form-select w-auto" id="sortSelect">
-    <option value="ime" {% if sort == 'ime' %}selected{% endif %}>Sortiraj po imenu</option>
-    <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>Sortiraj po oceni</option>
-</select>
+    <!-- Padajući meni -->
+    <select name="sort" class="form-select w-100 w-md-auto" id="sortSelect">
+        <option value="ime" {% if sort == 'ime' %}selected{% endif %}>Sortiraj po imenu</option>
+        <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>Sortiraj po oceni</option>
+    </select>
     </form>
     <script>
     document.getElementById('sortSelect').addEventListener('change', function () {
