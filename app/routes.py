@@ -181,12 +181,13 @@ def add_driver():
                         return redirect(url_for('main.add_driver'))
 
                     new_card = DriverCard(
-                        card_number=card_number,
-                        driver_id=existing_driver.id,
-                        is_active=True,
-                        issue_date=issue_date,
-                        expiry_date=expiry_date
+                    card_number=card_number,
+                    driver_id=existing_driver.id,
+                    is_active=True,
+                    issue_date=issue_date,
+                    expiry_date=expiry_date,
                     )
+
                     db.session.add(new_card)
                     db.session.commit()
 
