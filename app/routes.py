@@ -221,8 +221,7 @@ def add_driver():
                 driver_id=new_driver.id,
                 is_active=True,
                 issue_date=issue_date,
-                expiry_date=expiry_date,
-                current_date=current_date
+                expiry_date=expiry_date
             )
             db.session.add(new_card)
             db.session.commit()
