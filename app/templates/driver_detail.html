@@ -34,17 +34,17 @@
             </div>
 
             <!-- Info kartice -->
-            {% set active_card = driver.cards | selectattr('is_active') | first %}
-            <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                    <div class="bg-light border rounded shadow-sm p-3 h-100">
-                        <p class="text-muted mb-1"><i class="bi bi-credit-card-2-front"></i> Tahograf kartica</p>
-                        <h5 class="mb-1">{{ active_card.card_number if active_card else '—' }}</h5>
-                        <small class="text-muted">Važi do: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
-                    </div>
-                </div>
-<!-- Info CPC kartice -->
 <div class="row g-3 mb-4">
+    <!-- Tahograf kartica -->
+    <div class="col-md-6">
+        <div class="bg-light border rounded shadow-sm p-3 h-100">
+            <p class="text-muted mb-1"><i class="bi bi-credit-card-2-front"></i> Tahograf kartica</p>
+            <h5 class="mb-1">{{ active_card.card_number if active_card else '—' }}</h5>
+            <small class="text-muted">Važi do: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
+        </div>
+    </div>
+
+    <!-- CPC kartica -->
     <div class="col-md-6">
         <div class="bg-light border rounded shadow-sm p-3 h-100">
             <p class="text-muted mb-1"><i class="bi bi-credit-card-2-back"></i> CPC kartica</p>
@@ -54,21 +54,22 @@
             </small>
         </div>
     </div>
+
+    <!-- Poslodavac -->
+    <div class="col-md-6">
+        <div class="bg-light border rounded shadow-sm p-3 h-100">
+            <p class="text-muted mb-1"><i class="bi bi-building"></i> Poslodavac</p>
+            <h5 class="mb-1">
+                {% if driver.employer %}
+                    {{ driver.employer.company_name }}
+                {% else %}
+                    <span class="text-muted">—</span>
+                {% endif %}
+            </h5>
+        </div>
+    </div>
 </div>
 
-                <div class="col-md-6">
-                    <div class="bg-light border rounded shadow-sm p-3 h-100">
-                        <p class="text-muted mb-1"><i class="bi bi-building"></i> Poslodavac</p>
-                        <h5 class="mb-1">
-                            {% if driver.employer %}
-                                {{ driver.employer.company_name }}
-                            {% else %}
-                                <span class="text-muted">—</span>
-                            {% endif %}
-                        </h5>
-                    </div>
-                </div>
-            </div>
 
             <!-- Akcije -->
             <div class="mb-4">
