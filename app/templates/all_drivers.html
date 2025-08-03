@@ -2,9 +2,14 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Svi vozači koji su radili u vašoj firmi</h2>
-    </div>
+   <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Svi vozači koji su radili u vašoj firmi</h2>
+
+    <!-- Dugme za povratak na glavnu listu vozača -->
+    <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Nazad na listu vozača
+    </a>
+</div>
 
     <form method="get" class="row g-2 align-items-center mb-4">
         <div class="col-md-10">
