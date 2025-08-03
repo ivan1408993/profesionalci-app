@@ -989,7 +989,6 @@ def update_driver(driver_id):
 
         current_card = next((card for card in driver.cards if card.is_active), None)
 
-        # ✅ Provera: postoji li kartica s istim brojem za drugog vozača?
         if new_card_number and (not current_card or current_card.card_number != new_card_number):
             existing_card = DriverCard.query.filter(
                 DriverCard.card_number == new_card_number,
@@ -999,7 +998,6 @@ def update_driver(driver_id):
                 flash("Ovaj broj tahograf kartice je već dodeljen drugom vozaču.", "danger")
                 return redirect(url_for('main.update_driver', driver_id=driver.id))
 
-            # ✅ Deaktiviraj prethodnu i dodaj novu karticu
             if current_card:
                 current_card.is_active = False
 
@@ -1012,7 +1010,12 @@ def update_driver(driver_id):
             db.session.add(new_card)
             flash("Dodata je nova tahografska kartica.", "success")
         elif new_card_number:
-            flash("Broj tahograf kartice nije promenjen.", "info")
+            # Ažuriranje samo datuma ako broj nije menjan
+            if current_card:
+                current_card.expiry_date = expiry_date
+                flash("Datum važenja tahograf kartice je ažuriran.", "info")
+            else:
+                flash("Nema aktivne kartice za ažuriranje datuma.", "warning")
 
         driver.cpc_card_number = cpc_card_number or None
         driver.cpc_expiry_date = cpc_expiry_date
