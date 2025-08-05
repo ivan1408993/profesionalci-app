@@ -1075,3 +1075,11 @@ def privacy_policy():
 def employer_detail(employer_id):
     employer = Employer.query.get_or_404(employer_id)
     return render_template('employer_detail.html', employer=employer)
+
+@main.route('/about')
+def about():
+    return render_template('about.html')
+
+@main.route('/contact')
+def contact():
+    return render_template('contact.html')
