@@ -117,8 +117,8 @@ body {
 
 
 body {
-    background: linear-gradient(135deg, #2e2b24, #3d3a32, #514d45);
-    color: #fdfcf9;
+    background: linear-gradient(145deg, #e8f0f7, #dce9ed, #f8fafb);
+    color: #2c2c2c;
     min-height: 100vh;
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -129,7 +129,9 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    transition: background 0.6s ease-in-out;
 }
+
 
 .terms-text, .privacy-text {
     max-width: 800px;
