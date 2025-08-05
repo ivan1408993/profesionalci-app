@@ -26,7 +26,8 @@
         <label for="pib" class="form-label">
           <i class="fas fa-id-card me-1 text-secondary"></i> PIB
         </label>
-        <input type="text" class="form-control" name="pib" id="pib" required pattern="\d{9}" title="PIB mora sadržati tačno 9 cifara.">
+        <input type="text" class="form-control" name="pib" id="pib" required pattern="\d{9}" minlength="9" maxlength="9"
+       title="PIB mora sadržati tačno 9 cifara.">
       </div>
 
       <div class="mb-3">
@@ -129,4 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script>
+document.getElementById('pib').addEventListener('input', function(e) {
+    this.value = this.value.replace(/\D/g, '').slice(0, 9);
+});
+</script>
+
 {% endblock %}
