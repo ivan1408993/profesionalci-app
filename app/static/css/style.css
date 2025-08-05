@@ -117,7 +117,7 @@ body {
 
 
 body {
-    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    background: linear-gradient(135deg, #1a1a1a, #2c2c2c); /* tamna elegancija */
     color: #f5f5f5;
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
@@ -127,6 +127,22 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.gold {
+    color: #d4af37; /* prava zlatna boja */
+}
+
+.btn-gold {
+    background-color: #d4af37;
+    border: none;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.btn-gold:hover {
+    background-color: #c9a22d;
+    color: #fff;
+}
+
 
 
 .terms-text, .privacy-text {
