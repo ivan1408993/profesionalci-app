@@ -117,11 +117,17 @@ body {
 
 
 body {
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #f5f5f5;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+
 
 .terms-text, .privacy-text {
     max-width: 800px;
