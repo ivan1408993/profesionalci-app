@@ -5,6 +5,9 @@ from flask_babel import Babel
 from flask_mail import Mail  # ➕ Dodato
 from .helpers import konvertuj_tekst
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 db = SQLAlchemy()
 migrate = Migrate()
