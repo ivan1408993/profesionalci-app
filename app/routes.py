@@ -398,7 +398,6 @@ def activate_existing_driver(driver_id):
 
 
 
-# REGISTER
 @main.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -406,47 +405,65 @@ def register():
         pib = request.form['pib'].strip()
         email = request.form['email'].strip()
         password = request.form['password']
-        phone_number = request.form['phone_number'].strip()  # ново поље
+        phone_number = request.form['phone_number'].strip()
         password_hash = generate_password_hash(password)
 
         # Validacija PIB
         if not pib.isdigit() or len(pib) != 9:
-            flash("PIB mora sadržati tačno 9 cifara.")
+            flash("PIB mora sadržati tačno 9 cifara.", "danger")
             return redirect(url_for('main.register'))
 
-        # Validacija telefona - samo cifre, нпр. 6 до 15 цифара
+        # Validacija telefona - samo cifre, npr. 6 do 15 cifara
         if not phone_number.isdigit() or not (6 <= len(phone_number) <= 15):
-            flash("Telefon mora sadržati samo cifre i imati između 6 i 15 cifara.")
+            flash("Telefon mora sadržati samo cifre i imati između 6 i 15 cifara.", "danger")
             return redirect(url_for('main.register'))
 
         # Provera da li već postoji firma sa istim PIB-om
         existing_pib = Employer.query.filter_by(pib=pib).first()
         if existing_pib:
             if not existing_pib.active:
-                flash("Firma sa ovim PIB-om nije aktivna. Registracija nije moguća.")
+                flash("Firma sa ovim PIB-om nije aktivna. Registracija nije moguća.", "danger")
                 return redirect(url_for('main.register'))
             else:
-                flash("Postoji već nalog sa tim PIB-om.")
+                flash("Postoji već nalog sa tim PIB-om.", "danger")
                 return redirect(url_for('main.register'))
 
-        # PROVERA DA LI MEJL VEĆ POSTOJI
+        # Provera da li mejl već postoji
         existing_email = Employer.query.filter_by(email=email).first()
         if existing_email:
-            flash("E-mail adresa već postoji u sistemu. Izaberite drugu.")
+            flash("E-mail adresa već postoji u sistemu. Izaberite drugu.", "danger")
             return redirect(url_for('main.register'))
 
-        # Ako je sve u redu, dodaj novog poslodavca
+        # Dodaj novog poslodavca
         new_employer = Employer(
             company_name=company_name,
             pib=pib,
             email=email,
             password_hash=password_hash,
-            phone_number=phone_number,  # додај овде
-            active=True  # nova firma je aktivna po defaultu
+            phone_number=phone_number,
+            active=True
         )
         db.session.add(new_employer)
         db.session.commit()
-        flash("Uspešna registracija. Sada se možete prijaviti.")
+
+        # Pošalji mejl adminu o novoj registraciji
+        try:
+            admin_email = os.environ.get('MAIL_USERNAME')
+            msg = Message(
+                subject="Nova registracija poslodavca",
+                recipients=[admin_email],
+                body=f"Uspešno se registrovao poslodavac:\n\n"
+                     f"Naziv firme: {company_name}\n"
+                     f"PIB: {pib}\n"
+                     f"Telefon: {phone_number}\n"
+                     f"E-mail: {email}"
+            )
+            mail.send(msg)
+        except Exception as e:
+            # Ako slanje mejla ne uspe, možeš samo da loguješ ili flashuješ
+            flash("Registracija je uspešna, ali nije moguće poslati obaveštenje na mejl.", "warning")
+
+        flash("Uspešna registracija. Sada se možete prijaviti.", "success")
         return redirect(url_for('main.login'))
 
     return render_template('register.html', current_lang=session.get('lang', 'sr'))
