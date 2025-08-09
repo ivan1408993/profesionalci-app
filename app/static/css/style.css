@@ -129,19 +129,21 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-  .btn-back {
-        background: linear-gradient(135deg, #d4af37, #b8860b);
-        border: none;
-        color: #fff;
-        font-weight: 500;
-        border-radius: 8px;
-        transition: all 0.3s ease;
+  .btn-back-small {
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    border-radius: 6px;
+}
+.btn-back-small i {
+    font-size: 1rem;
+}
+@media (max-width: 576px) {
+    .btn-back-small span {
+        display: none; /* Na telefonu prikaz samo ikone */
     }
-    .btn-back:hover {
-        background: linear-gradient(135deg, #b8860b, #d4af37);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
-    }
+}
+
 
 nav.navbar {
     background: linear-gradient(90deg, #1a1f2b, #2b3548);
