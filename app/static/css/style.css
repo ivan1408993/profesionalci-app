@@ -1,173 +1,95 @@
-/* 🌞 Светли режим (подразумевани) */
-body.light-mode {
-    background-color: #f8f9fa;
-    color: #212529;
+/* ====================== Opšti stilovi ====================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #fdfcf9;
+    background: linear-gradient(135deg, #2e2b24, #3d3a32, #514d45);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Flex layout za footer na dnu i sadržaj preko cele visine */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    /* Prelazi za glatke promene boja */
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    overflow-x: hidden; /* sprečava horizontalni skrol */
 }
 
-.light-mode .card {
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    color: #212529;
+main {
+    flex: 1; /* rasteže se da popuni prostor između navigacije i footera */
 }
 
-.light-mode .form-control {
-    background-color: #ffffff;
-    color: #212529;
-    border: 1px solid #ced4da;
+/* ====================== Navigacija ====================== */
+nav.navbar {
+    background: linear-gradient(90deg, #1a1f2b, #2b3548);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    opacity: 1 !important;
 }
 
-.light-mode .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #ffffff;
+body {
+    /* Uzimamo u obzir visinu fiksirane navigacije */
+    padding-top: 70px;
 }
 
-.light-mode .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
+.navbar a {
+    color: #00bcd4 !important;
+    transition: color 0.3s ease;
 }
 
-.light-mode a {
-    color: #007b8a;
+.navbar a:hover {
+    color: white !important;
 }
 
-.light-mode a:hover {
-    color: #005f6b;
-    text-decoration: underline;
-}
-
-
-/* 🌙 Тамни режим */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-}
-
-.dark-mode .card {
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    color: #e0e0e0;
-}
-
-.dark-mode .form-control {
-    background-color: #2c2c2c;
-    color: #e0e0e0;
-    border: 1px solid #444;
-}
-
-.dark-mode .form-control::placeholder {
-    color: #999;
-}
-
-.dark-mode .btn-primary {
-    background-color: #00697c;
-    border-color: #00697c;
-    color: #ffffff;
-}
-
-.dark-mode .btn-primary:hover {
-    background-color: #004f5c;
-    border-color: #004f5c;
-}
-
-.dark-mode a {
-    color: #00bcd4;
-}
-
-.dark-mode a:hover {
-    color: #80deea;
-    text-decoration: underline;
-}
-
-
-/* ✅ Општи стилови */
+/* ====================== Kartice, dugmad, forme ====================== */
 .card {
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn {
     border-radius: 0.5rem;
     font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .form-control {
     border-radius: 0.5rem;
     padding: 0.6rem 0.75rem;
     font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-control::placeholder {
+    color: #ccc;
 }
 
 footer {
     font-size: 0.9rem;
+    color: #ccc;
 }
 
-/* Прелазна анимација приликом промене мода */
-body {
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.card, .form-control, .btn, a {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
+/* ====================== Specifični stilovi ====================== */
 .icon-highlight {
     color: #00bcd4; /* svetlo plava */
-}
-
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* da nema horizontalnog skrola */
-}
-
-body {
-    background: linear-gradient(135deg, #2e2b24, #3d3a32, #514d45);
-    color: #fdfcf9;
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* promena: umesto min-height, koristimo flex trik */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* ali ćemo resetovati padding kasnije */
-}
-
-main {
-    flex: 1; /* rasteže se da popuni prostor */
-}
-
-/* ako koristiš Bootstrap py-5 na kontejneru, smanji padding na malim ekranima */
-.container.py-5 {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-}
-
-
-.btn-back {
-    font-size: 1rem;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-.btn-back i {
-    font-size: 1.1rem;
-}
-
-@media (max-width: 576px) {
-    .btn-back {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
 }
 
 .about-card {
@@ -182,16 +104,6 @@ main {
     color: #555 !important;
 }
 
-
-
-nav.navbar {
-    background: linear-gradient(90deg, #1a1f2b, #2b3548);
-    background-color: #1a1f2b; /* fallback */
-    opacity: 1 !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-
 .terms-text, .privacy-text {
     max-width: 800px;
     color: white;
@@ -199,7 +111,7 @@ nav.navbar {
     line-height: 1.8;
     padding: 2.5rem 2rem;
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* poluprozirna crna pozadina */
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
@@ -233,65 +145,24 @@ nav.navbar {
     font-weight: 600;
 }
 
+/* Stil za dugme nazad */
+.btn-back {
+    font-size: 1rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
+.btn-back i {
+    font-size: 1.1rem;
+}
 
-        .card-style {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-            width: 100%;
-            max-width: 500px;
-            margin: auto;
-        }
-
-        .form-control {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            max-width: auto;
-        }
-
-        .form-control::placeholder {
-            color: #ccc;
-        }
-
-        .btn-custom {
-            background-color: #00bcd4;
-            border: none;
-            color: black;
-            font-weight: bold;
-        }
-
-        .btn-custom:hover {
-            background-color: #0097a7;
-            color: white;
-        }
-
-        .error-msg {
-            color: #ff6b6b;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-       .navbar {
-            background-color: rgba(0, 0, 0, 0.3);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5);
-        }
-        body {
-            padding-top: 70px;
-        }
-
-
-        .navbar a {
-            color: #00bcd4 !important;
-        }
-
-        .navbar a:hover {
-            color: white !important;
-        }
+@media (max-width: 576px) {
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+}
