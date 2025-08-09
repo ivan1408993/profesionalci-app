@@ -40,7 +40,7 @@ body {
 
     height: 100%;
     margin: 0;
-    padding: 70px 0 0 0; /* padding-top zbog fiksirane navbar */
+    padding: 60px 0 0 0; /* padding-top zbog fiksirane navbar */
 
     display: flex;
     flex-direction: column;
