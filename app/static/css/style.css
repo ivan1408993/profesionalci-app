@@ -117,7 +117,7 @@ body {
 
 
 body {
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    background: #2c5364;
     color: white;
     min-height: 100vh;
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
