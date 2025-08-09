@@ -26,6 +26,9 @@
 
 footer {
     font-size: 0.9rem;
+    margin: 0;          /* Уклоњен додатни margin */
+    padding: 1rem 0;    /* Лагани padding за визуелни простор */
+    flex-shrink: 0;     /* Да футер не смањује висину */
 }
 
 /* Прелазна анимација приликом промене мода */
@@ -40,8 +43,8 @@ body {
 
     height: 100%;
     margin: 0;
-    padding: 60px 0 0 0; /* padding-top zbog fiksirane navbar */
-    padding-bottom: 0; /* ukloni dodatni prostor na dnu */
+    padding: 60px 0 0 0; /* padding-top због фиксиране navbar */
+
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -56,20 +59,22 @@ html {
 }
 
 main {
-    flex: 1; /* popunjava preostali prostor između navigacije i footera */
+    flex: 1 0 auto; /* поправка: главни садржај се шири и "гура" футер доле */
 }
 
+/* Прелази за card, form-control, btn, a */
 .card, .form-control, .btn, a {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .icon-highlight {
-    color: #00bcd4; /* svetlo plava */
+    color: #00bcd4; /* светло плава */
 }
 
 /* Specifični stilovi za kartice */
 .about-card {
     background: linear-gradient(135deg, #ffffff, #f9fafb);
+    margin-bottom: 0; /* Уклоњен сувишни размак */
 }
 
 .about-card h1 {
@@ -85,7 +90,6 @@ nav.navbar {
     background: linear-gradient(90deg, #1a1f2b, #2b3548);
     background-color: #1a1f2b; /* fallback */
     opacity: 1 !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 
     position: fixed;
     top: 0;
@@ -112,7 +116,7 @@ nav.navbar {
     line-height: 1.8;
     padding: 2.5rem 2rem;
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* poluprozirna crna pozadina */
+    background-color: rgba(0, 0, 0, 0.5); /* полупрозирна црна позадина */
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
@@ -197,27 +201,4 @@ nav.navbar {
     color: #ff6b6b;
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
-}
-
-
-/* Смањи padding-bottom у контејнеру који садржи садржај */
-.container.py-5 {
-    padding-bottom: 1rem !important;
-}
-
-/* Уклони margin на дну око about-card ако је сувише велик */
-.about-card {
-    margin-bottom: 0;
-}
-
-/* Додатно: обезбедити да main расте да попуни простор */
-main {
-    flex: 1 0 auto;
-}
-
-/* Footer да не седи директно на садржају, мало размак */
-footer {
-    margin-top: 1rem;
-    padding: 1rem 0;
-    flex-shrink: 0;
 }
