@@ -1,71 +1,13 @@
-/* ====================== Opšti stilovi ====================== */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #fdfcf9;
-    background: #2c5364;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    /* Flex layout za footer na dnu i sadržaj preko cele visine */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-
-    /* Prelazi za glatke promene boja */
-    transition: background-color 0.3s ease, color 0.3s ease;
-
-    overflow-x: hidden; /* sprečava horizontalni skrol */
-}
-
-main {
-    flex: 1; /* rasteže se da popuni prostor između navigacije i footera */
-}
-
-/* ====================== Navigacija ====================== */
-nav.navbar {
-    background: linear-gradient(90deg, #1a1f2b, #2b3548);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    opacity: 1 !important;
-}
-
-body {
-    /* Uzimamo u obzir visinu fiksirane navigacije */
-    padding-top: 70px;
-}
-
-.navbar a {
-    color: #00bcd4 !important;
-    transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-    color: white !important;
-}
-
-/* ====================== Kartice, dugmad, forme ====================== */
+/* ✅ Општи стилови */
 .card {
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 1.5rem;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn {
     border-radius: 0.5rem;
     font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .form-control {
@@ -75,7 +17,7 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     color: white;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    max-width: auto;
 }
 
 .form-control::placeholder {
@@ -84,14 +26,48 @@ body {
 
 footer {
     font-size: 0.9rem;
-    color: #ccc;
 }
 
-/* ====================== Specifični stilovi ====================== */
+/* Прелазна анимација приликом промене мода */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background: #2c5364;
+    color: #fdfcf9;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    height: 100%;
+    margin: 0;
+    padding: 70px 0 0 0; /* padding-top zbog fiksirane navbar */
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    flex: 1; /* popunjava preostali prostor između navigacije i footera */
+}
+
+.card, .form-control, .btn, a {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 .icon-highlight {
     color: #00bcd4; /* svetlo plava */
 }
 
+/* Specifični stilovi za kartice */
 .about-card {
     background: linear-gradient(135deg, #ffffff, #f9fafb);
 }
@@ -104,6 +80,31 @@ footer {
     color: #555 !important;
 }
 
+/* Navigacija */
+nav.navbar {
+    background: linear-gradient(90deg, #1a1f2b, #2b3548);
+    background-color: #1a1f2b; /* fallback */
+    opacity: 1 !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar a {
+    color: #00bcd4 !important;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: white !important;
+}
+
+/* Tekst u uslovima korišćenja i politici privatnosti */
 .terms-text, .privacy-text {
     max-width: 800px;
     color: white;
@@ -111,7 +112,7 @@ footer {
     line-height: 1.8;
     padding: 2.5rem 2rem;
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* poluprozirna crna pozadina */
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
@@ -145,7 +146,7 @@ footer {
     font-weight: 600;
 }
 
-/* Stil za dugme nazad */
+/* Stilovi za dugme nazad */
 .btn-back {
     font-size: 1rem;
     padding: 8px 16px;
@@ -165,4 +166,35 @@ footer {
         justify-content: center;
         width: 100%;
     }
+}
+
+/* Dodatni stilovi za kartice */
+.card-style {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* Dugmad prilagođena */
+.btn-custom {
+    background-color: #00bcd4;
+    border: none;
+    color: black;
+    font-weight: bold;
+}
+
+.btn-custom:hover {
+    background-color: #0097a7;
+    color: white;
+}
+
+/* Poruke o grešci */
+.error-msg {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
 }
