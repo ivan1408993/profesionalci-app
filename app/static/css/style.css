@@ -116,18 +116,39 @@ body {
 }
 
 
-body {
-    /*background: linear-gradient(to right, #0f2027, #203a43, #2c5364);*/
-    background: #2c5364;
-    color: white;
-    min-height: 100vh;
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* da nema horizontalnog skrola */
+}
+
+body {
+    background: linear-gradient(135deg, #2e2b24, #3d3a32, #514d45);
+    color: #fdfcf9;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* promena: umesto min-height, koristimo flex trik */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ali ćemo resetovati padding kasnije */
 }
+
+main {
+    flex: 1; /* rasteže se da popuni prostor */
+}
+
+/* ako koristiš Bootstrap py-5 na kontejneru, smanji padding na malim ekranima */
+.container.py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
 
 .btn-back {
     font-size: 1rem;
