@@ -41,7 +41,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 60px 0 0 0; /* padding-top zbog fiksirane navbar */
-
+    padding-bottom: 0; /* ukloni dodatni prostor na dnu */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -197,4 +197,27 @@ nav.navbar {
     color: #ff6b6b;
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
+}
+
+
+/* Смањи padding-bottom у контејнеру који садржи садржај */
+.container.py-5 {
+    padding-bottom: 1rem !important;
+}
+
+/* Уклони margin на дну око about-card ако је сувише велик */
+.about-card {
+    margin-bottom: 0;
+}
+
+/* Додатно: обезбедити да main расте да попуни простор */
+main {
+    flex: 1 0 auto;
+}
+
+/* Footer да не седи директно на садржају, мало размак */
+footer {
+    margin-top: 1rem;
+    padding: 1rem 0;
+    flex-shrink: 0;
 }
