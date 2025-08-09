@@ -149,6 +149,19 @@ body {
     }
 }
 
+.about-card {
+    background: linear-gradient(135deg, #ffffff, #f9fafb);
+}
+
+.about-card h1 {
+    color: #333;
+}
+
+.about-card .text-muted {
+    color: #666 !important;
+}
+
+
 
 nav.navbar {
     background: linear-gradient(90deg, #1a1f2b, #2b3548);
