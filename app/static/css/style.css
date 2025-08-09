@@ -129,18 +129,23 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-  .btn-back-small {
-    padding: 4px 10px;
-    font-size: 0.9rem;
-    line-height: 1.2;
-    border-radius: 6px;
-}
-.btn-back-small i {
+.btn-back {
     font-size: 1rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
 }
+
+.btn-back i {
+    font-size: 1.1rem;
+}
+
 @media (max-width: 576px) {
-    .btn-back-small span {
-        display: none; /* Na telefonu prikaz samo ikone */
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 }
 
