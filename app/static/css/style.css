@@ -220,3 +220,17 @@ nav.navbar {
     z-index: 1100;
     margin-top: 56px; /* Ako je navbar visok oko 56px */
 }
+
+@media (max-width: 576px) {
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050;
+    background-color: rgba(0,0,0,0.5); /* malo tamnija pozadina da se istakne */
+  }
+  main {
+    padding-bottom: 60px; /* dovoljno prostora da sadržaj ne bude ispod footera */
+  }
+}
