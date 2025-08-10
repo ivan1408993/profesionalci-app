@@ -17,7 +17,7 @@
 <body>
 
  <!-- 🌐 Navigacija -->
-<nav class="navbar navbar-expand-lg navbar-dark px-3">
+<nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3">
     <a class="navbar-brand" href="{{ url_for('main.index') }}">Profesionalci</a>
 
     <!-- Jezički meni -->
@@ -103,7 +103,7 @@
 </div>-->
 
 <!-- 📦 Sadržaj stranice -->
-<main class="flex-grow-1 d-flex align-items-center">
+<main class="flex-grow-1">
     <div class="container my-4">
         {% block content %}{% endblock %}
     </div>
