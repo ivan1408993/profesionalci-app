@@ -51,7 +51,11 @@ main {
     padding-top: 56px; /* prostor zbog fiksirane navigacije */
 }
 
-/* Footer */
+main > .container {
+    padding-top: 56px; /* visina navbar-a */
+    padding-bottom: 20px; /* da se sadržaj ne zalepi za footer */
+}
+
 footer {
     flex-shrink: 0;
     font-size: 0.9rem;
