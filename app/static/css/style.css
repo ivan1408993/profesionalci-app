@@ -24,15 +24,12 @@
     color: #ccc;
 }
 
-footer {
-    font-size: 0.9rem;
-    margin: 0;          /* Уклоњен додатни margin */
-    padding: 1rem 0;    /* Лагани padding за визуелни простор */
-    flex-shrink: 0;     /* Да футер не смањује висину */
-    margin-top: 0; /* nema viška praznog prostora iznad */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-/* Прелазна анимација приликом промене мода */
 body {
     transition: background-color 0.3s ease, color 0.3s ease;
     background: #2c5364;
@@ -41,23 +38,24 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100%;
-    margin: 0;
+
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* ključ za footer na dnu */
     overflow-x: hidden;
 }
 
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+main {
+    flex: 1 0 auto; /* raste i gura footer dole */
+    padding-top: 56px; /* zbog fiksirane navbar */
 }
 
-main {
-    flex: 1 0 auto; /* поправка: главни садржај се шири и "гура" футер доле */
-    padding: 56px 0 0 0; /* padding-top због фиксиране navbar */
+footer {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    padding: 1rem 0;
+    margin: 0;
+    text-align: center;
 }
 
 /* Прелази за card, form-control, btn, a */
