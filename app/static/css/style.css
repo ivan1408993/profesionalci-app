@@ -41,15 +41,11 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     height: 100%;
     margin: 0;
-    padding: 60px 0 0 0; /* padding-top због фиксиране navbar */
-
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
     overflow-x: hidden;
 }
 
@@ -61,6 +57,7 @@ html {
 
 main {
     flex: 1 0 auto; /* поправка: главни садржај се шири и "гура" футер доле */
+    padding: 60px 0 0 0; /* padding-top због фиксиране navbar */
 }
 
 /* Прелази за card, form-control, btn, a */
