@@ -208,10 +208,8 @@ nav.navbar {
     box-shadow: 0 12px 20px rgba(0,0,0,0.2);
 }
 
-/* U style.css dodaj: */
 .flash-messages {
-    position: relative;  /* ili fixed, ako hoćeš da ostanu u viewportu */
-    z-index: 1100;       /* veći od navbar */
-    margin-top: 70px;    /* da ne budu odmah iza navbar */
+    position: relative;
+    z-index: 1100;
+    margin-top: 56px; /* Ako je navbar visok oko 56px */
 }
-
