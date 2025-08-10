@@ -107,7 +107,7 @@
 
 
 <!-- 📦 Sadržaj stranice -->
-<main class="flex-grow-1 py-5">
+<main class="flex-grow-1 py-4">
     <div class="container">
         {% block content %}{% endblock %}
     </div>
@@ -121,11 +121,11 @@
     {% block scripts %}{% endblock %}
 
 
-    <footer class="text-center mt-5 py-4" style="color: #ccc;">
+    <footer class="text-center py-3" style="color: #ccc;">
     <small>© 2025 Profesionalci | 
     <a href="{{ url_for('main.terms') }}" style="color: #00bcd4; text-decoration: none;">Uslovi korišćenja</a> | 
     <a href="{{ url_for('main.privacy_policy') }}" style="color: #00bcd4; text-decoration: none;">Politika privatnosti</a>
     </small>
-    </footer>
+</footer>
 </body>
 </html>
