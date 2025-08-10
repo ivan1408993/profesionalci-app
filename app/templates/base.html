@@ -28,7 +28,6 @@
             <option value="de" {% if current_lang == 'de' %}selected{% endif %}>Deutsch</option>
         </select>
     </form>
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -81,7 +80,6 @@
         </ul>
     </div>
 </nav>
-    
 
     <!-- Flash poruke -->
 <div class="container mt-3">
@@ -104,23 +102,17 @@
     {% endif %}
 </div>-->
 
-
-
 <!-- 📦 Sadržaj stranice -->
-<main class="flex-grow-1">
-    <div class="container">
+<main class="flex-grow-1 d-flex align-items-center">
+    <div class="container my-4">
         {% block content %}{% endblock %}
     </div>
 </main>
-
-
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     {% block scripts %}{% endblock %}
-
-
     <footer class="text-center py-3" style="color: #ccc;">
     <small>© 2025 Profesionalci | 
     <a href="{{ url_for('main.terms') }}" style="color: #00bcd4; text-decoration: none;">Uslovi korišćenja</a> | 
