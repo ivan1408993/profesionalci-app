@@ -2,33 +2,6 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
-
-/* ✅ Општи стилови */
-.card {
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
-}
-
-.btn {
-    border-radius: 0.5rem;
-    font-weight: 500;
-}
-
-.form-control {
-    border-radius: 0.5rem;
-    padding: 0.6rem 0.75rem;
-    font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    max-width: auto;
-}
-
-.form-control::placeholder {
-    color: #ccc;
-}
-
 html, body {
     height: 100%;          /* ključ da flex layout radi */
     margin: 0;
@@ -64,6 +37,32 @@ footer {
     margin: 0;
     text-align: center;
     background-color: rgba(0,0,0,0.2);
+}
+
+/* ✅ Општи стилови */
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    max-width: auto;
+}
+
+.form-control::placeholder {
+    color: #ccc;
 }
 
 /* Прелази за card, form-control, btn, a */
