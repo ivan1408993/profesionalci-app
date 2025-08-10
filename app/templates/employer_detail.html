@@ -4,14 +4,35 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Послодавац: {{ employer.company_name }}</h2>
-    <ul class="list-group mt-3">
-        <li class="list-group-item"><strong>Naziv firme:</strong> {{ employer.company_name }}</li>
-        <li class="list-group-item"><strong>PIB:</strong> {{ employer.pib }}</li>
-        <li class="list-group-item"><strong>Telefon:</strong> {{ employer.phone_number }}</li>
-        {# Касније можеш додати број телефона, адресу и друге податке #}
-    </ul>
-    
-    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary mt-3">Nazad na kontrolnu tablu</a>
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-gradient text-white rounded-top-4" 
+             style="background: linear-gradient(90deg, #1a1f2b, #2b3548);">
+            <h3 class="mb-0">
+                <i class="fas fa-building me-2"></i> 
+                {{ employer.company_name }}
+            </h3>
+        </div>
+        <div class="card-body p-4">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item py-3">
+                    <strong><i class="fas fa-briefcase me-2 text-primary"></i>Naziv firme:</strong> 
+                    {{ employer.company_name }}
+                </li>
+                <li class="list-group-item py-3">
+                    <strong><i class="fas fa-id-card me-2 text-success"></i>PIB:</strong> 
+                    {{ employer.pib }}
+                </li>
+                <li class="list-group-item py-3">
+                    <strong><i class="fas fa-phone me-2 text-warning"></i>Telefon:</strong> 
+                    {{ employer.phone_number }}
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer text-end bg-light rounded-bottom-4">
+            <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-1"></i> Nazad na kontrolnu tablu
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
