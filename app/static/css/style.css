@@ -25,10 +25,10 @@
 }
 
 html, body {
+    height: 100%;          /* ključ da flex layout radi */
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    position: sticky;
+    overflow-x: hidden;    /* sprečava horizontalni skrol */
 }
 
 body {
@@ -42,15 +42,16 @@ body {
 
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* ključ za footer na dnu */
-    overflow-x: hidden;
+    min-height: 100vh; /* drži footer na dnu */
 }
 
+/* Glavni sadržaj raste i gura footer dole */
 main {
-    flex: 1 0 auto; /* raste i gura footer dole */
-    padding-top: 56px; /* zbog fiksirane navbar */
+    flex: 1; /* umesto 1 0 auto — jednostavnije */
+    padding-top: 56px; /* prostor zbog fiksirane navigacije */
 }
 
+/* Footer */
 footer {
     flex-shrink: 0;
     font-size: 0.9rem;

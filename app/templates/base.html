@@ -82,7 +82,7 @@
 </nav>
 
 <!-- Flash poruke -->
-<div class="container flash-messages">
+<div class="container flash-messages" aria-live="polite">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
