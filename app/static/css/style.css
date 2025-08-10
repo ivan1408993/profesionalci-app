@@ -29,6 +29,7 @@ footer {
     margin: 0;          /* Уклоњен додатни margin */
     padding: 1rem 0;    /* Лагани padding за визуелни простор */
     flex-shrink: 0;     /* Да футер не смањује висину */
+    margin-top: 0; /* nema viška praznog prostora iznad */
 }
 
 /* Прелазна анимација приликом промене мода */
