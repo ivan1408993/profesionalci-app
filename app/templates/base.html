@@ -81,8 +81,8 @@
     </div>
 </nav>
 
-    <!-- Flash poruke -->
-<div class="container mt-3">
+<!-- Flash poruke -->
+<div class="container flash-messages">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
@@ -94,6 +94,7 @@
         {% endif %}
     {% endwith %}
 </div>
+
 
 <!-- Dugme nazad, osim na glavnoj stranici 
 <div class="container mt-3">
