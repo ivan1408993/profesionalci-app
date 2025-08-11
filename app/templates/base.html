@@ -52,12 +52,11 @@
                     Dobrodošli, {{ session.get('company_name', 'Poslodavac') }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
-                    <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}"><i class="fas fa-home me-2"></i>Početna - Kontrolna tabla</a></li>
+                   <!-- 👤  <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}"><i class="fas fa-home me-2"></i>Početna - Kontrolna tabla</a></li>-->
                     <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}"><i class="fas fa-user-circle me-2"></i>Moj profil</a></li>
                     <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>Vozači</a></li>
                     <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>Dodaj vozača</a></li>
                     <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>Pretraga svih vozača</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}"><i class="fas fa-cog me-2"></i>Podešavanja</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>Odjava</a></li>
                 </ul>
