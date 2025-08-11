@@ -19,6 +19,13 @@
     --small-muted-color: #ffffff;
     --driver-link-color: #48fa5f;
     --driver-link-hover-color: #ffffff;
+
+    /* Dodatne varijable za senke, navbar, footer, tabele */
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --navbar-bg: linear-gradient(90deg, #1a1f2b, #2b3548);
+    --footer-bg: rgba(0, 0, 0, 0.2);
+    --table-bg: rgba(0, 0, 0, 0.3);
+    --icon-color: #00bcd4; /* svetlo plava za ikonice u tamnoj temi */
 }
 
 body.light-theme {
@@ -37,6 +44,12 @@ body.light-theme {
     --small-muted-color: #666666;
     --driver-link-color: #006677;
     --driver-link-hover-color: #003344;
+
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --navbar-bg: linear-gradient(90deg, #e0e5ea, #cdd4db);
+    --footer-bg: rgba(200, 200, 200, 0.3);
+    --table-bg: rgba(255, 255, 255, 0.9);
+    --icon-color: #ffb700; /* zlatna za ikonice u svetloj temi */
 }
 
 html, body {
@@ -58,7 +71,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* drži footer na dnu */
-     --icon-color: #00bcd4; /* svetlo plava za tamnu temu */
 }
 
 /* Glavni sadržaj raste i gura footer dole */
@@ -74,14 +86,14 @@ footer {
     padding: 1rem 0;
     margin: 0;
     text-align: center;
-    background-color: rgba(0,0,0,0.2);
+    background-color: var(--footer-bg);
     border-top: 2px solid var(--link-color);
 }
 
 /* ✅ Општи стилови */
 .card {
     border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--card-shadow);
     padding: 1.5rem;
     background-color: var(--card-bg);
 }
@@ -130,8 +142,7 @@ footer {
 
 /* Navigacija */
 nav.navbar {
-    background: linear-gradient(90deg, #1a1f2b, #2b3548);
-    background-color: #1a1f2b; /* fallback */
+    background: var(--navbar-bg);
     opacity: 1 !important;
     margin-bottom: 1rem; /* ili padding-bottom: 1rem; */
     position: fixed;
@@ -301,7 +312,7 @@ nav.navbar {
 
 /* Tabela ocena */
 .section-box table {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--table-bg);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -389,6 +400,9 @@ nav.navbar {
     color: var(--small-muted-color);
     user-select: none;
 }
+
+/* Theme toggle dugme */
+
 #theme-toggle {
   border: none;
   background: transparent;
@@ -401,11 +415,8 @@ nav.navbar {
 #theme-toggle:hover {
   color: var(--link-color);
 }
+
 #theme-toggle svg {
   color: var(--icon-color);
   transition: color 0.3s ease;
-}
-
-body.light-theme {
-  --icon-color: #ffb700; /* topla zlatna za svetlu temu, vidi se na svetloj pozadini */
 }
