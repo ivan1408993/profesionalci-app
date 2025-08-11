@@ -31,9 +31,10 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
-<button id="theme-toggle" class="btn btn-custom" style="position: fixed; bottom: 1rem; right: 1rem; z-index: 1100;">
-    🌗 Promeni temu
-</button>
+    <button id="theme-toggle" aria-label="Promeni temu" class="btn btn-link text-custom" style="font-size: 1.25rem;">
+    <i id="theme-icon" class="fas fa-moon"></i>
+    </button>
+
     <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
             <!-- 🔗 Zajednički linkovi za sve -->
@@ -125,20 +126,28 @@
     {% block scripts %}{% endblock %}
 
 <script>
-    const toggleButton = document.getElementById('theme-toggle');
+  const toggleBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const body = document.body;
 
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-theme');
+  // Učitaj iz localStorage ili podesi na default (tamna)
+  let theme = localStorage.getItem('theme') || 'dark';
+  if (theme === 'light') {
+    body.classList.add('light-theme');
+    themeIcon.classList.replace('fa-moon', 'fa-sun');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('light-theme');
+
+    if (body.classList.contains('light-theme')) {
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+      localStorage.setItem('theme', 'dark');
     }
-
-    toggleButton.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        if (document.body.classList.contains('light-theme')) {
-            localStorage.setItem('theme', 'light');
-        } else {
-            localStorage.setItem('theme', 'dark');
-        }
-    });
+  });
 </script>
 </body>
 </html>
