@@ -300,3 +300,26 @@ nav.navbar {
     font-size: 1rem;
     border-radius: 8px;
 }
+
+/* 🔹 Posebna boja za naslove polja */
+.text-custom {
+    color: #00bcd4; /* glavna akcetna boja */
+    transition: color 0.2s ease-in-out;
+}
+
+.text-custom:hover {
+    color: #4dd0e1; /* malo svetlija varijanta na hover */
+}
+
+/* 🔹 Tanki razdelnik */
+.divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    margin: 1rem 0;
+}
