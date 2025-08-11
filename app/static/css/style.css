@@ -326,13 +326,13 @@ nav.navbar {
   transition: color 0.3s ease;
 }
 
-/*Link i sredjivanje linka za ime vozaca na stranici search_driver.html */
+/*Link i sredjivanje linka za ime vozaca na stranici search_driver.html u rezultatima pretrage */
 .driver-link {
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease, text-decoration-color 0.3s ease;
-    color: #00bcd4;
+    color: #48fa5f;
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
