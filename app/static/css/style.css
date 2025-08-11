@@ -238,7 +238,7 @@ nav.navbar {
 
 /* Sekcija */
 .section-box {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(156, 156, 156, 0.05);
     border-radius: 15px;
     padding: 2rem;
     margin-top: 1.5rem;
@@ -303,23 +303,17 @@ nav.navbar {
 
 /* 🔹 Posebna boja za naslove polja */
 .text-custom {
-    color: #f0f0f0; /* glavna akcetna boja */
+    color: #5a8dee; /* prijatna svetlo plava */
+    font-weight: 600;
     transition: color 0.2s ease-in-out;
 }
 
 .text-custom:hover {
-    color: #4dd0e1; /* malo svetlija varijanta na hover */
+    color: #82aefc; /* svetlija plava na hover */
 }
 
-/* 🔹 Tanki razdelnik */
 .divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(
-        to right,
-        transparent,
-        rgba(0, 0, 0, 0.2),
-        transparent
-    );
+    border-top: 3px solid #ffffff; /* bela linija*/
     margin: 1rem 0;
+    opacity: 0.85;
 }
