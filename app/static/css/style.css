@@ -303,7 +303,7 @@ nav.navbar {
 
 /* 🔹 Posebna boja za naslove polja */
 .text-custom {
-    color: #00bcd4; /* glavna akcetna boja */
+    color: #f0f0f0; /* glavna akcetna boja */
     transition: color 0.2s ease-in-out;
 }
 
@@ -318,7 +318,7 @@ nav.navbar {
     background: linear-gradient(
         to right,
         transparent,
-        rgba(255, 255, 255, 0.2),
+        rgba(0, 0, 0, 0.2),
         transparent
     );
     margin: 1rem 0;
