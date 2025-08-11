@@ -233,3 +233,70 @@ nav.navbar {
     padding-bottom: 60px; /* dovoljno prostora da sadržaj ne bude ispod footera
   }
 }*/
+
+/* 🎯 Search Driver stranica */
+
+/* Sekcija */
+.section-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.15);
+    border: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+/* Naslovi */
+.section-title {
+    color: #00bcd4;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Input polja */
+.section-box .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-box .form-control:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+}
+
+/* Tabela ocena */
+.section-box table {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.section-box thead {
+    background-color: rgba(0, 188, 212, 0.2);
+    color: #00bcd4;
+}
+
+.section-box tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Badge statusa */
+.badge {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+}
+
+/* Dugmad */
+.section-box .btn-custom {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+}
