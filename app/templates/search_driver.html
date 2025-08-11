@@ -7,13 +7,10 @@
   <!-- Sekcija za pretragu -->
   <div class="section-box mx-auto max-w-800">
     <h2 class="text-center section-title">🔍 Pretraga vozača</h2>
-    <p class="text-center section-subtitle">
-      Unesite JMBG, broj tahograf kartice ili CPC kartice
-    </p>
 
     <form method="POST" action="{{ url_for('main.search_driver') }}" class="row gx-2 gy-2 align-items-center justify-content-center">
       <div class="col-12 col-md-8">
-        <input type="text" id="search_input" name="search_input" class="form-control" placeholder="1234567890123 ili CPC123456" required>
+        <input type="text" id="search_input" name="search_input" class="form-control" placeholder="Unesite JMBG, broj tahograf kartice ili CPC kartice" required>
       </div>
       <div class="col-auto">
         <button class="btn btn-custom" type="submit">
