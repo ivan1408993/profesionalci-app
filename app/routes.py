@@ -717,16 +717,18 @@ def all_drivers():
     drivers_query = Driver.query.filter_by(employer_id=employer_id)
 
     if search:
+        # Pretraga po imenu, broju tahograf kartice i CPC kartici
         drivers_query = drivers_query.filter(
             (Driver.full_name.ilike(f'%{search}%')) |
-            (Driver.cards.any(DriverCard.card_number.ilike(f'%{search}%')))  # ispravka: koristi povezan model DriverCard
+            (Driver.cards.any(DriverCard.card_number.ilike(f'%{search}%'))) |
+            (Driver.cpc_card_number.ilike(f'%{search}%'))
         )
 
     # Paginacija
     pagination = drivers_query.order_by(Driver.full_name).paginate(page=page, per_page=10, error_out=False)
     drivers_list = pagination.items
 
-    # Izračunaj prosečnu ocenu za svaki vozač
+    # Izračunaj prosečnu ocenu za svakog vozača
     from sqlalchemy import func
     driver_ratings = {}
     for d in drivers_list:
@@ -741,6 +743,7 @@ def all_drivers():
         pagination=pagination,
         current_lang=session.get('lang', 'sr')
     )
+
 
 
 
