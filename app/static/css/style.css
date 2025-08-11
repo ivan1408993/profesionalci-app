@@ -388,15 +388,3 @@ nav.navbar {
     color: var(--small-muted-color);
     user-select: none;
 }
-#theme-toggle {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: var(--text-color);
-  transition: color 0.3s ease;
-  padding: 0.25rem 0.5rem;
-}
-
-#theme-toggle:hover {
-  color: var(--link-color);
-}
