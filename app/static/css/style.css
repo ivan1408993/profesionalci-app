@@ -317,3 +317,12 @@ nav.navbar {
     margin: 1rem 0;
     opacity: 0.85;
 }
+
+/*Podvucena linija za ime i prezime vozaca na stranici search_driver.html da se vidi da je link */
+.hover-underline:hover {
+  text-decoration: underline;
+  color: #55ff88; /*svetlo zelena */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
