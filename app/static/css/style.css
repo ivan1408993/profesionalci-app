@@ -326,3 +326,41 @@ nav.navbar {
   transition: color 0.3s ease;
 }
 
+/*Link i sredjivanje linka za ime vozaca na stranici search_driver.html */
+.driver-link {
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+    color: #00bcd4;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.driver-link:hover,
+.driver-link:focus {
+    color: #0097a7;
+    text-decoration: underline;
+    outline: none;
+}
+
+.driver-link i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+.driver-link:hover i,
+.driver-link:focus i {
+    transform: translateX(3px);
+}
+
+.small.text-muted {
+    margin-top: 0.15rem;
+    font-style: italic;
+    color: #ccc;
+    user-select: none;
+}
+
+

@@ -33,13 +33,13 @@
     <div class="col-md-6">
   <span class="text-custom">Ime i prezime:</span><br>
   <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" 
-     class="text-custom text-decoration-none fw-bold hover-underline" 
+     class="text-custom driver-link" 
      title="Pogledaj detalje o vozaču {{ driver.full_name }}">
     {{ driver.full_name }}
+    <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
   </a>
+  <div class="small text-muted">Kliknite za detalje</div>
 </div>
-
-
 
     {% set active_card = driver.cards | selectattr('is_active') | first %}
     <div class="col-md-6">
