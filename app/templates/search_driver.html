@@ -31,9 +31,12 @@
 
   <div class="row gy-3">
     <div class="col-md-6">
-      <span class="text-custom">Ime i prezime:</span><br>
-      {{ driver.full_name }}
-    </div>
+  <span class="text-custom">Ime i prezime:</span><br>
+  <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="text-custom text-decoration-none">
+    {{ driver.full_name }}
+  </a>
+</div>
+
 
     {% set active_card = driver.cards | selectattr('is_active') | first %}
     <div class="col-md-6">
