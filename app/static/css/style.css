@@ -243,12 +243,12 @@ nav.navbar {
     padding: 2rem;
     margin-top: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 188, 212, 0.15);
-    border: 1px solid rgba(0, 188, 212, 0.2);
+    border: 2px solid rgba(0, 188, 212, 0.2);
 }
 
 /* Naslovi */
 .section-title {
-    color: #00bcd4;
+    color: #ffffff;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
