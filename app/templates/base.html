@@ -31,9 +31,29 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <button id="theme-toggle" aria-label="Promeni temu" class="btn btn-link text-custom" style="font-size: 1.25rem;">
-    <i id="theme-icon" class="fas fa-moon"></i>
-    </button>
+    <button id="theme-toggle" aria-label="Promeni temu" class="btn btn-link" style="width: 36px; height: 36px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: transparent; border: none; cursor: pointer;">
+
+  <!-- Mesec (za tamnu temu) -->
+  <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display: block;">
+    <path d="M21 12.79A9 9 0 0 1 12.21 3a7 7 0 1 0 8.79 9.79z"/>
+  </svg>
+
+  <!-- Sunce (za svetlu temu), start hidden -->
+  <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display: none;">
+    <circle cx="12" cy="12" r="5"/>
+    <g stroke="currentColor" stroke-width="2">
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </g>
+  </svg>
+
+</button>
 
     <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
@@ -127,27 +147,34 @@
 
 <script>
   const toggleBtn = document.getElementById('theme-toggle');
-  const themeIcon = document.getElementById('theme-icon');
-  const body = document.body;
+const iconSun = document.getElementById('icon-sun');
+const iconMoon = document.getElementById('icon-moon');
+const body = document.body;
 
-  // Učitaj iz localStorage ili podesi na default (tamna)
-  let theme = localStorage.getItem('theme') || 'dark';
-  if (theme === 'light') {
-    body.classList.add('light-theme');
-    themeIcon.classList.replace('fa-moon', 'fa-sun');
+let theme = localStorage.getItem('theme') || 'dark';
+
+if (theme === 'light') {
+  body.classList.add('light-theme');
+  iconSun.style.display = 'block';
+  iconMoon.style.display = 'none';
+} else {
+  iconSun.style.display = 'none';
+  iconMoon.style.display = 'block';
+}
+
+toggleBtn.addEventListener('click', () => {
+  body.classList.toggle('light-theme');
+
+  if (body.classList.contains('light-theme')) {
+    iconSun.style.display = 'block';
+    iconMoon.style.display = 'none';
+    localStorage.setItem('theme', 'light');
+  } else {
+    iconSun.style.display = 'none';
+    iconMoon.style.display = 'block';
+    localStorage.setItem('theme', 'dark');
   }
-
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('light-theme');
-
-    if (body.classList.contains('light-theme')) {
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-      localStorage.setItem('theme', 'light');
-    } else {
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
-      localStorage.setItem('theme', 'dark');
-    }
-  });
+});
 </script>
 </body>
 </html>

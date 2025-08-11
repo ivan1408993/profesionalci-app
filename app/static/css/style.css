@@ -58,6 +58,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* drži footer na dnu */
+     --icon-color: #00bcd4; /* svetlo plava za tamnu temu */
 }
 
 /* Glavni sadržaj raste i gura footer dole */
@@ -399,4 +400,12 @@ nav.navbar {
 
 #theme-toggle:hover {
   color: var(--link-color);
+}
+#theme-toggle svg {
+  color: var(--icon-color);
+  transition: color 0.3s ease;
+}
+
+body.light-theme {
+  --icon-color: #ffb700; /* topla zlatna za svetlu temu, vidi se na svetloj pozadini */
 }
