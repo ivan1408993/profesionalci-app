@@ -420,3 +420,14 @@ nav.navbar {
   color: var(--icon-color);
   transition: color 0.3s ease;
 }
+.contact-card {
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    color: #2c3e50;
+    margin-bottom: 0;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+.contact-card .text-muted {
+    color: #555 !important;
+}
