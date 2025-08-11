@@ -303,7 +303,7 @@ nav.navbar {
 
 /* 🔹 Posebna boja za naslove polja */
 .text-custom {
-    color: #5a8dee; /* prijatna svetlo plava */
+    color: #ffffff; /* prijatna svetlo plava */
     font-weight: 600;
     transition: color 0.2s ease-in-out;
 }
