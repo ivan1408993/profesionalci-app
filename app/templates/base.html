@@ -31,14 +31,14 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <button id="theme-toggle" aria-label="Promeni temu" class="btn btn-link" style="width: 36px; height: 36px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: transparent; border: none; cursor: pointer;">
+  <!--  <button id="theme-toggle" aria-label="Promeni temu" class="btn btn-link" style="width: 36px; height: 36px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: transparent; border: none; cursor: pointer;">
 
-  <!-- Mesec (za tamnu temu) -->
+   Mesec (za tamnu temu)
   <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display: block;">
     <path d="M21 12.79A9 9 0 0 1 12.21 3a7 7 0 1 0 8.79 9.79z"/>
   </svg>
 
-  <!-- Sunce (za svetlu temu), start hidden -->
+  Sunce (za svetlu temu), start hidden
   <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display: none;">
     <circle cx="12" cy="12" r="5"/>
     <g stroke="currentColor" stroke-width="2">
@@ -53,7 +53,7 @@
     </g>
   </svg>
 
-</button>
+</button>-->
 
     <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
@@ -145,6 +145,7 @@
 
     {% block scripts %}{% endblock %}
 
+<!--Promena režima iz tamnog u svetli i obrnuto javascript
 <script>
   const toggleBtn = document.getElementById('theme-toggle');
 const iconSun = document.getElementById('icon-sun');
@@ -175,6 +176,6 @@ toggleBtn.addEventListener('click', () => {
     localStorage.setItem('theme', 'dark');
   }
 });
-</script>
+</script>-->
 </body>
 </html>
