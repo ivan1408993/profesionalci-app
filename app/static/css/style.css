@@ -27,7 +27,6 @@ body {
 main {
     flex: 1; /* umesto 1 0 auto — jednostavnije */
     padding-top: 56px; /* prostor zbog fiksirane navigacije */
-    min-height: calc(100vh - 56px - 60px); /* visina ekrana minus navbar i footer */
 }
 
 /* Footer */
