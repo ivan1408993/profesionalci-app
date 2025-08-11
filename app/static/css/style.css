@@ -2,6 +2,43 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
+
+:root {
+    /* Tamna tema - default vrednosti */
+    --bg-color: #2c5364;
+    --text-color: #fdfcf9;
+    --link-color: #00bcd4;
+    --btn-bg: #00bcd4;
+    --btn-color: black;
+    --btn-hover-bg: #0097a7;
+    --btn-hover-color: white;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --divider-color: #ffffff;
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-border: rgba(255, 255, 255, 0.2);
+    --small-muted-color: #ffffff;
+    --driver-link-color: #48fa5f;
+    --driver-link-hover-color: #ffffff;
+}
+
+body.light-theme {
+    /* Svetla tema */
+    --bg-color: #e5e9ef;
+    --text-color: #2c3e50;
+    --link-color: #007b8a;
+    --btn-bg: #007b8a;
+    --btn-color: white;
+    --btn-hover-bg: #005f66;
+    --btn-hover-color: white;
+    --card-bg: #ffffff;
+    --divider-color: #555555;
+    --input-bg: #f0f4f8;
+    --input-border: #cccccc;
+    --small-muted-color: #666666;
+    --driver-link-color: #006677;
+    --driver-link-hover-color: #003344;
+}
+
 html, body {
     height: 100%;          /* ključ da flex layout radi */
     margin: 0;
@@ -11,8 +48,8 @@ html, body {
 
 body {
     transition: background-color 0.3s ease, color 0.3s ease;
-    background: #2c5364;
-    color: #fdfcf9;
+    background: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -37,7 +74,7 @@ footer {
     margin: 0;
     text-align: center;
     background-color: rgba(0,0,0,0.2);
-    border-top: 2px solid #00bcd4;
+    border-top: 2px solid var(--link-color);
 }
 
 /* ✅ Општи стилови */
@@ -45,6 +82,7 @@ footer {
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 1.5rem;
+    background-color: var(--card-bg);
 }
 
 .btn {
@@ -56,14 +94,14 @@ footer {
     border-radius: 0.5rem;
     padding: 0.6rem 0.75rem;
     font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-color);
     max-width: auto;
 }
 
 .form-control::placeholder {
-    color: #ccc;
+    color: var(--small-muted-color);
 }
 
 /* Прелази за card, form-control, btn, a */
@@ -72,7 +110,7 @@ footer {
 }
 
 .icon-highlight {
-    color: #00bcd4; /* светло плава */
+    color: var(--link-color); /* светло плава */
 }
 
 /* Specifični stilovi za kartice */
@@ -104,7 +142,7 @@ nav.navbar {
 }
 
 .navbar a {
-    color: #00bcd4 !important;
+    color: var(--link-color) !important;
     transition: color 0.3s ease;
 }
 
@@ -115,12 +153,12 @@ nav.navbar {
 /* Tekst u uslovima korišćenja i politici privatnosti */
 .terms-text, .privacy-text {
     max-width: 800px;
-    color: white;
+    color: var(--text-color);
     font-size: 1.15rem;
     line-height: 1.8;
     padding: 2.5rem 2rem;
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* полупрозирна црна позадина */
+    background-color: rgba(0, 0, 0, 0.5); /* poluprozirna crna pozadina */
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
@@ -178,7 +216,7 @@ nav.navbar {
 
 /* Dodatni stilovi za kartice */
 .card-style {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--card-bg);
     padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
@@ -189,15 +227,15 @@ nav.navbar {
 
 /* Dugmad prilagođena */
 .btn-custom {
-    background-color: #00bcd4;
+    background-color: var(--btn-bg);
     border: none;
-    color: black;
+    color: var(--btn-color);
     font-weight: bold;
 }
 
 .btn-custom:hover {
-    background-color: #0097a7;
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
 }
 
 /* Poruke o grešci */
@@ -206,9 +244,11 @@ nav.navbar {
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
 }
+
 .hover-card {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .hover-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 20px rgba(0,0,0,0.2);
@@ -220,21 +260,7 @@ nav.navbar {
     margin-top: 56px; /* Ako je navbar visok oko 56px */
 }
 
-/*@media (max-width: 576px) {
-  footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1050;
-    background-color: rgba(0,0,0,0.5); /* malo tamnija pozadina da se istakne 
-  }
-  main {
-    padding-bottom: 60px; /* dovoljno prostora da sadržaj ne bude ispod footera
-  }
-}*/
-
-/* 🎯 Search Driver stranica */
+/*🎯 Search Driver stranica*/
 
 /* Sekcija */
 .section-box {
@@ -248,28 +274,28 @@ nav.navbar {
 
 /* Naslovi */
 .section-title {
-    color: #ffffff;
+    color: var(--text-color);
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
 .section-subtitle {
-    color: #ccc;
+    color: var(--small-muted-color);
     font-size: 1rem;
     margin-bottom: 1.5rem;
 }
 
 /* Input polja */
 .section-box .form-control {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-color);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .section-box .form-control:focus {
-    border-color: #00bcd4;
-    box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+    border-color: var(--link-color);
+    box-shadow: 0 0 8px var(--link-color);
 }
 
 /* Tabela ocena */
@@ -281,7 +307,7 @@ nav.navbar {
 
 .section-box thead {
     background-color: rgba(0, 188, 212, 0.2);
-    color: #00bcd4;
+    color: var(--link-color);
 }
 
 .section-box tbody tr:hover {
@@ -303,27 +329,27 @@ nav.navbar {
 
 /* 🔹 Posebna boja za naslove polja */
 .text-custom {
-    color: #ffffff; /* prijatna svetlo plava */
+    color: var(--text-color);
     font-weight: 600;
     transition: color 0.2s ease-in-out;
 }
 
 .text-custom:hover {
-    color: #82aefc; /* svetlija plava na hover */
+    color: var(--link-color);
 }
 
 .divider {
-    border-top: 3px solid #ffffff; /* bela linija*/
+    border-top: 3px solid var(--divider-color);
     margin: 1rem 0;
     opacity: 0.85;
 }
 
 /*Podvucena linija za ime i prezime vozaca na stranici search_driver.html da se vidi da je link */
 .hover-underline:hover {
-  text-decoration: underline;
-  color: #55ff88; /*svetlo zelena */
-  cursor: pointer;
-  transition: color 0.3s ease;
+    text-decoration: underline;
+    color: #55ff88; /* svetlo zelena */
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 /*Link i sredjivanje linka za ime vozaca na stranici search_driver.html u rezultatima pretrage */
@@ -332,7 +358,7 @@ nav.navbar {
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease, text-decoration-color 0.3s ease;
-    color: #48fa5f;
+    color: var(--driver-link-color);
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
@@ -340,7 +366,7 @@ nav.navbar {
 
 .driver-link:hover,
 .driver-link:focus {
-    color: #ffffff;
+    color: var(--driver-link-hover-color);
     text-decoration: underline;
     outline: none;
 }
@@ -359,8 +385,6 @@ nav.navbar {
 .small.text-muted {
     margin-top: 0.15rem;
     font-style: italic;
-    color: #ffffff;
+    color: var(--small-muted-color);
     user-select: none;
 }
-
-
