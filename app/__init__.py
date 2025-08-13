@@ -21,7 +21,10 @@ def get_locale():
     # 1. jezik iz session-a
     # 2. najbolji jezik iz browser-a
     # 3. fallback na sr
-    return session.get('lang') or request.accept_languages.best_match(['sr', 'en', 'de']) or 'sr'
+    lang = session.get('lang')
+    print("CURRENT SESSION LANG:", lang)  # debug ispis
+    return lang or request.accept_languages.best_match(['sr', 'en', 'de']) or 'sr'
+
 
 def create_app():
     app = Flask(__name__)
