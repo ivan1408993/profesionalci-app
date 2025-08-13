@@ -176,7 +176,7 @@ toggleBtn.addEventListener('click', () => {
 <!-- i18next jezgro -->
 <script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
 
-<!-- i18next backend (UMD verzija za browser) -->
+<!-- i18next backend -->
 <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.4.3/i18nextHttpBackend.min.js"></script>
 
 <!-- i18next language detector -->
@@ -184,7 +184,6 @@ toggleBtn.addEventListener('click', () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
   function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -192,37 +191,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Uzmi jezik iz localStorage ili iz Flask-a ili default na 'sr'
-  const savedLang = localStorage.getItem('selectedLang') || '{{ current_lang|default("sr") }}' || 'sr';
-  console.log('i18next selectedLang:', savedLang);
+  const savedLang = localStorage.getItem('selectedLang') || "{{ current_lang|default('sr') }}";
+  console.log("i18next selectedLang:", savedLang); // DEBUG
 
   i18next
     .use(i18nextHttpBackend)
     .use(i18nextBrowserLanguageDetector)
     .init({
+      lng: savedLang, // odmah setujemo jezik
       fallbackLng: 'sr',
       debug: true,
-      ns: ['translation'],         
+      ns: ['translation'],
       defaultNS: 'translation',
       backend: {
         loadPath: '/static/translations/{{lng}}.json'
       }
     }, function(err, t) {
       if (err) console.error('i18next init error:', err);
-
-      // Promeni jezik na savedLang i ažuriraj sadržaj
-      i18next.changeLanguage(savedLang, updateContent);
-
-      // Postavi selektovani jezik u meni
+      updateContent();
       const langSelect = document.getElementById('language-select');
       if (langSelect) langSelect.value = savedLang;
     });
 
-  // Event listener za promenu jezika iz menija
   const langSelect = document.getElementById('language-select');
   if (langSelect) {
     langSelect.addEventListener('change', function() {
-      const newLang = this.value;
+      const newLang = this.value || 'sr';
       i18next.changeLanguage(newLang, updateContent);
       localStorage.setItem('selectedLang', newLang);
     });
