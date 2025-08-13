@@ -44,7 +44,7 @@ msgstr "About us"
 
 #: app/templates/base.html:43
 msgid "✉️ Kontakt"
-msgstr "Contact"
+msgstr "✉️ Contact"
 
 #: app/templates/base.html:50
 msgid "Dobrodošli"
