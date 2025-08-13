@@ -174,11 +174,15 @@ toggleBtn.addEventListener('click', () => {
 });
 </script>-->
 <!-- i18next biblioteke -->
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- i18next biblioteke -->
 <script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
 <script src="https://unpkg.com/i18next-http-backend@1.4.1/dist/umd/i18nextHttpBackend.min.js"></script>
 <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
   function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -191,22 +195,28 @@ toggleBtn.addEventListener('click', () => {
     .use(i18nextBrowserLanguageDetector)
     .init({
       fallbackLng: 'sr',
-      debug: true,
-      backend: { loadPath: '/static/translations/{{lng}}.json' }
-    }, function() {
-      const savedLang = localStorage.getItem('selectedLang');
-      if (savedLang) {
-        i18next.changeLanguage(savedLang, updateContent);
-        document.getElementById('language-select').value = savedLang;
-      } else {
-        updateContent();
+      debug: false,
+      backend: {
+        loadPath: '/static/translations/{{lng}}.json'
       }
+    }, function(err, t) {
+      if (err) console.error('i18next init error:', err);
+      // Promena jezika na sačuvan ili default
+      const savedLang = localStorage.getItem('selectedLang') || 'sr';
+      i18next.changeLanguage(savedLang, updateContent);
+      const langSelect = document.getElementById('language-select');
+      if (langSelect) langSelect.value = savedLang;
     });
 
-  document.getElementById('language-select').addEventListener('change', function() {
-    i18next.changeLanguage(this.value, updateContent);
-    localStorage.setItem('selectedLang', this.value);
-  });
+  const langSelect = document.getElementById('language-select');
+  if (langSelect) {
+    langSelect.addEventListener('change', function() {
+      i18next.changeLanguage(this.value, updateContent);
+      localStorage.setItem('selectedLang', this.value);
+    });
+  }
+});
 </script>
+
 </body>
 </html>
