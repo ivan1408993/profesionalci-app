@@ -1,0 +1,24 @@
+{
+  "app": {
+    "brand": "Profis",
+    "title": "Anwendung"
+  },
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "dashboard": "Dashboard",
+    "drivers": "Fahrer",
+    "add_driver": "Fahrer hinzufügen",
+    "search_all_drivers": "Alle Fahrer suchen",
+    "settings": "Einstellungen",
+    "language": "Sprache"
+  },
+  "footer": {
+    "copyright": "© {year} Profis",
+    "terms": "Nutzungsbedingungen"
+  }
+}

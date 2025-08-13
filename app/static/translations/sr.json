@@ -1,0 +1,24 @@
+{
+  "app": {
+    "brand": "Profesionalci",
+    "title": "Aplikacija"
+  },
+  "nav": {
+    "home": "Početna",
+    "about": "O nama",
+    "contact": "Kontakt",
+    "login": "Prijava",
+    "register": "Registracija",
+    "logout": "Odjava",
+    "dashboard": "Kontrolna tabla",
+    "drivers": "Vozači",
+    "add_driver": "Dodaj vozača",
+    "search_all_drivers": "Pretraga svih vozača",
+    "settings": "Podešavanja",
+    "language": "Jezik"
+  },
+  "footer": {
+    "copyright": "© {year} Profesionalci",
+    "terms": "Uslovi korišćenja"
+  }
+}

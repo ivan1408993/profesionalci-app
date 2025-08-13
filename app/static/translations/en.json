@@ -1,0 +1,24 @@
+{
+  "app": {
+    "brand": "Professionals",
+    "title": "Application"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "drivers": "Drivers",
+    "add_driver": "Add Driver",
+    "search_all_drivers": "Search All Drivers",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "footer": {
+    "copyright": "© {year} Professionals",
+    "terms": "Terms of Service"
+  }
+}
