@@ -179,7 +179,7 @@ toggleBtn.addEventListener('click', () => {
 <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
 
 <script>
-  // Твоја функција за ажурирање садржаја
+  // Функција за ажурирање текста на страници
   function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -187,7 +187,7 @@ toggleBtn.addEventListener('click', () => {
     });
   }
 
-  // Иницијализација i18next
+  // Иницијализација i18next-а
   i18next
     .use(i18nextHttpBackend)
     .use(i18nextBrowserLanguageDetector)
@@ -197,24 +197,24 @@ toggleBtn.addEventListener('click', () => {
       backend: {
         loadPath: '/static/translations/{{lng}}.json'
       }
-    }, function(err, t) {
-      if (err) return console.error(err);
-      updateContent();
     });
 
-  // Слушач за промену језика (ако имаш dropdown)
-  document.getElementById('language-select').addEventListener('change', function() {
-    i18next.changeLanguage(this.value, updateContent);
-    localStorage.setItem('selectedLang', this.value);
-  });
-
-  // Ако желиш да памтиш језик из локалне меморије
-  document.addEventListener('DOMContentLoaded', () => {
+  // Kada i18next završi inicijalizaciju
+  i18next.on('initialized', function() {
+    // Ako postoji sačuvan jezik, koristi njega
     const savedLang = localStorage.getItem('selectedLang');
     if (savedLang) {
       i18next.changeLanguage(savedLang, updateContent);
       document.getElementById('language-select').value = savedLang;
+    } else {
+      updateContent();
     }
+  });
+
+  // Slušalac za promenu jezika iz dropdown-a
+  document.getElementById('language-select').addEventListener('change', function() {
+    i18next.changeLanguage(this.value, updateContent);
+    localStorage.setItem('selectedLang', this.value);
   });
 </script>
 
