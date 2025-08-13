@@ -184,6 +184,7 @@ toggleBtn.addEventListener('click', () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
   function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -191,32 +192,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Uzmi jezik iz localStorage ili iz Flask-a ili default na 'sr'
+  const savedLang = localStorage.getItem('selectedLang') || '{{ current_lang|default("sr") }}' || 'sr';
+  console.log('i18next selectedLang:', savedLang);
+
   i18next
     .use(i18nextHttpBackend)
     .use(i18nextBrowserLanguageDetector)
     .init({
       fallbackLng: 'sr',
       debug: true,
-      ns: ['translation'],         // default namespace
+      ns: ['translation'],         
       defaultNS: 'translation',
       backend: {
-        loadPath: '/static/translations/{{lng}}.json'  // fajlovi: sr.json, en.json, de.json
+        loadPath: '/static/translations/{{lng}}.json'
       }
     }, function(err, t) {
       if (err) console.error('i18next init error:', err);
 
-      const savedLang = localStorage.getItem('selectedLang') || 'sr';
+      // Promeni jezik na savedLang i ažuriraj sadržaj
       i18next.changeLanguage(savedLang, updateContent);
 
+      // Postavi selektovani jezik u meni
       const langSelect = document.getElementById('language-select');
       if (langSelect) langSelect.value = savedLang;
     });
 
+  // Event listener za promenu jezika iz menija
   const langSelect = document.getElementById('language-select');
   if (langSelect) {
     langSelect.addEventListener('change', function() {
-      i18next.changeLanguage(this.value, updateContent);
-      localStorage.setItem('selectedLang', this.value);
+      const newLang = this.value;
+      i18next.changeLanguage(newLang, updateContent);
+      localStorage.setItem('selectedLang', newLang);
     });
   }
 });
