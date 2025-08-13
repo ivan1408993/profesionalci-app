@@ -72,27 +72,27 @@ msgstr "Search all drivers"
 
 #: app/templates/base.html:58
 msgid "Odjava"
-msgstr ""
+msgstr "Sign Out"
 
 #: app/templates/base.html:65
 msgid "🚪 Odjava"
-msgstr ""
+msgstr "🚪 Sign out"
 
 #: app/templates/base.html:70
 msgid "Prijava"
-msgstr ""
+msgstr "Login"
 
 #: app/templates/base.html:73
 msgid "Registracija"
-msgstr ""
+msgstr "Register"
 
 #: app/templates/base.html:103
 msgid "Uslovi korišćenja"
-msgstr ""
+msgstr "Terms of Use"
 
 #: app/templates/base.html:104
 msgid "Politika privatnosti"
-msgstr ""
+msgstr "Privacy Policy"
 
 #: venv/Lib/site-packages/click/_termui_impl.py:600
 #, python-brace-format
