@@ -6,6 +6,8 @@ from flask_mail import Mail
 from .helpers import konvertuj_tekst
 import os
 from dotenv import load_dotenv
+from flask_session import Session
+from datetime import timedelta
 
 load_dotenv()
 
@@ -41,6 +43,18 @@ def create_app():
     app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
     app.config['MAIL_DEFAULT_SENDER'] = ('Profesionalci', os.environ.get('MAIL_USERNAME'))
+
+      # Konfiguriši session da se čuva u fajlovima (može i Redis, baza...)
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_PERMANENT'] = True
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
+    app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
+    os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
+
+
+    # Inicijalizuj Flask-Session
+    Session(app)
+
 
     # Inicijalizacija ekstenzija
     db.init_app(app)
