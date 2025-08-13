@@ -55,13 +55,13 @@
         <ul class="navbar-nav ms-auto">
             <!-- 🔗 Zajednički linkovi za sve -->
             <li class="nav-item">
-                <a class="nav-link" data-i18n="nav.home" href="{{ url_for('main.index') }}">🏠 Početna</a>
+                <a class="nav-link" data-i18n="nav.home" href="{{ url_for('main.index') }}"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-i18n="nav.about" href="{{ url_for('main.about') }}">ℹ️ O nama</a>
+                <a class="nav-link" data-i18n="nav.about" href="{{ url_for('main.about') }}"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-i18n="nav.contact" href="{{ url_for('main.contact') }}">✉️ Kontakt</a>
+                <a class="nav-link" data-i18n="nav.contact" href="{{ url_for('main.contact') }}"></a>
             </li>
 
             {% if session.get('user_type') == 'employer' and session.get('user_id') %}
@@ -173,6 +173,8 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 </script>-->
+<script src="{{ url_for('static', filename='js/i18next.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/i18nextXHRBackend.min.js') }}"></script>
 <!-- i18next core -->
 <script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
 <!-- backend -->
