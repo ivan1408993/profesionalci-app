@@ -173,21 +173,24 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 </script>-->
-<!-- На крају body тега, пре затварајућег </body> -->
 <script src="https://unpkg.com/i18next@21.9.1/i18next.min.js"></script>
 <script src="https://unpkg.com/i18next-http-backend@1.4.1/i18nextHttpBackend.min.js"></script>
 <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
 
 <script>
-  // Функција за ажурирање текста на страници
+  // Funkcija za update teksta na stranici
   function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      el.textContent = i18next.t(key);
+      const translated = i18next.t(key);
+      // Ako prevod postoji, postavi ga
+      if (translated !== key) {
+        el.textContent = translated;
+      }
     });
   }
 
-  // Иницијализација i18next-а
+  // Inicijalizacija i18next
   i18next
     .use(i18nextHttpBackend)
     .use(i18nextBrowserLanguageDetector)
@@ -195,28 +198,27 @@ toggleBtn.addEventListener('click', () => {
       fallbackLng: 'sr',
       debug: true,
       backend: {
-        loadPath: '/static/translations/{{lng}}.json'
+        loadPath: '{{ url_for("static", filename="translations/{{lng}}.json") }}'
+      }
+    }, function(err, t) {
+      if (err) return console.error(err);
+
+      // Proveri da li imamo sačuvan jezik
+      const savedLang = localStorage.getItem('selectedLang');
+      if (savedLang) {
+        i18next.changeLanguage(savedLang, updateContent);
+        document.getElementById('language-select').value = savedLang;
+      } else {
+        updateContent();
       }
     });
 
-  // Kada i18next završi inicijalizaciju
-  i18next.on('initialized', function() {
-    // Ako postoji sačuvan jezik, koristi njega
-    const savedLang = localStorage.getItem('selectedLang');
-    if (savedLang) {
-      i18next.changeLanguage(savedLang, updateContent);
-      document.getElementById('language-select').value = savedLang;
-    } else {
-      updateContent();
-    }
-  });
-
-  // Slušalac za promenu jezika iz dropdown-a
+  // Slušalac za promenu jezika
   document.getElementById('language-select').addEventListener('change', function() {
-    i18next.changeLanguage(this.value, updateContent);
-    localStorage.setItem('selectedLang', this.value);
+    const lang = this.value;
+    i18next.changeLanguage(lang, updateContent);
+    localStorage.setItem('selectedLang', lang);
   });
 </script>
-
 </body>
 </html>
