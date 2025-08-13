@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="{{ g.get('current_lang', 'sr') }}">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Aplikacija{% endblock %}</title>
+    <title>{% block title %}{{ _("Aplikacija") }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,78 +21,55 @@
     <a class="navbar-brand" href="{{ url_for('main.index') }}">Profesionalci</a>
 
  <!-- Jezički meni -->
-<select id="language-select">
-    <option value="sr" {% if current_lang == 'sr' %}selected{% endif %}>Srpski</option>
-    <option value="en" {% if current_lang == 'en' %}selected{% endif %}>English</option>
-    <option value="de" {% if current_lang == 'de' %}selected{% endif %}>Deutsch</option>
-</select>
-
-  <!--  <button id="theme-toggle" aria-label="Promeni temu" class="btn btn-link" style="width: 36px; height: 36px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: transparent; border: none; cursor: pointer;">
-
-   Mesec (za tamnu temu)
-  <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display: block;">
-    <path d="M21 12.79A9 9 0 0 1 12.21 3a7 7 0 1 0 8.79 9.79z"/>
-  </svg>
-
-  Sunce (za svetlu temu), start hidden
-  <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display: none;">
-    <circle cx="12" cy="12" r="5"/>
-    <g stroke="currentColor" stroke-width="2">
-      <line x1="12" y1="1" x2="12" y2="3"/>
-      <line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/>
-      <line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </g>
-  </svg>
-
-</button>-->
+<form method="get" style="display:inline;">
+    <select onchange="window.location.href='/set_language/'+this.value;">
+        <option value="sr" {% if session.get('lang') == 'sr' %}selected{% endif %}>🇷🇸 {{ _("Srpski") }}</option>
+        <option value="en" {% if session.get('lang') == 'en' %}selected{% endif %}>🇬🇧 {{ _("English") }}</option>
+        <option value="de" {% if session.get('lang') == 'de' %}selected{% endif %}>🇩🇪 {{ _("Deutsch") }}</option>
+    </select>
+</form>
 
     <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
             <!-- 🔗 Zajednički linkovi za sve -->
             <li class="nav-item">
-                <a class="nav-link" data-i18n="nav.home" href="{{ url_for('main.index') }}"></a>
+                <a class="nav-link" href="{{ url_for('main.index') }}">{{ _("🏠 Početna") }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-i18n="nav.about" href="{{ url_for('main.about') }}"></a>
+                <a class="nav-link" href="{{ url_for('main.about') }}">{{ _("ℹ️ O nama") }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-i18n="nav.contact" href="{{ url_for('main.contact') }}"></a>
+                <a class="nav-link" href="{{ url_for('main.contact') }}">{{ _("✉️ Kontakt") }}</a>
             </li>
 
             {% if session.get('user_type') == 'employer' and session.get('user_id') %}
             <!-- 👤 Poslodavac meni -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="employerMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dobrodošli, {{ session.get('company_name', 'Poslodavac') }}
+                    {{ _("Dobrodošli") }}, {{ session.get('company_name', _("Poslodavac")) }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
-                   <!-- 👤  <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}"><i class="fas fa-home me-2"></i>Početna - Kontrolna tabla</a></li>-->
-                    <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}"><i class="fas fa-user-circle me-2"></i>Moj profil</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>Moji vozači</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>Dodaj vozača</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>Pretraga svih vozača</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}"><i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>{{ _("Moji vozači") }}</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>{{ _("Dodaj vozača") }}</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>{{ _("Pretraga svih vozača") }}</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>Odjava</a></li>
+                    <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>{{ _("Odjava") }}</a></li>
                 </ul>
             </li>
 
             {% elif session.get('user_id') %}
             <!-- 👤 Vozač -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.logout') }}">🚪 Odjava</a>
+                <a class="nav-link" href="{{ url_for('main.logout') }}">{{ _("🚪 Odjava") }}</a>
             </li>
             {% else %}
             <!-- 🔐 Neregistrovani -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.login') }}">Prijava</a>
+                <a class="nav-link" href="{{ url_for('main.login') }}">{{ _("Prijava") }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.register') }}">Registracija</a>
+                <a class="nav-link" href="{{ url_for('main.register') }}">{{ _("Registracija") }}</a>
             </li>
             {% endif %}
         </ul>
@@ -113,14 +90,6 @@
     {% endwith %}
 </div>
 
-
-<!-- Dugme nazad, osim na glavnoj stranici 
-<div class="container mt-3">
-    {% if request.endpoint not in ['main.index', 'main.login'] and session.get('user_type') != 'employer' %}
-        <button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Назад</button>
-    {% endif %}
-</div>-->
-
 <!-- 📦 Sadržaj stranice -->
 <main class="flex-fill pt-4">
     <div class="container">
@@ -128,11 +97,10 @@
     </div>
 </main>
 
-
 <footer class="text-center py-3 mt-auto" style="color: #ccc;">
     <small>© 2025 Profesionalci | 
-    <a href="{{ url_for('main.terms') }}" style="color: #00bcd4; text-decoration: none;">Uslovi korišćenja</a> | 
-    <a href="{{ url_for('main.privacy_policy') }}" style="color: #00bcd4; text-decoration: none;">Politika privatnosti</a>
+    <a href="{{ url_for('main.terms') }}" style="color: #00bcd4; text-decoration: none;">{{ _("Uslovi korišćenja") }}</a> | 
+    <a href="{{ url_for('main.privacy_policy') }}" style="color: #00bcd4; text-decoration: none;">{{ _("Politika privatnosti") }}</a>
     </small>
 </footer>
 
@@ -140,97 +108,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     {% block scripts %}{% endblock %}
-
-<!--Promena režima iz tamnog u svetli i obrnuto javascript
-<script>
-  const toggleBtn = document.getElementById('theme-toggle');
-const iconSun = document.getElementById('icon-sun');
-const iconMoon = document.getElementById('icon-moon');
-const body = document.body;
-
-let theme = localStorage.getItem('theme') || 'dark';
-
-if (theme === 'light') {
-  body.classList.add('light-theme');
-  iconSun.style.display = 'block';
-  iconMoon.style.display = 'none';
-} else {
-  iconSun.style.display = 'none';
-  iconMoon.style.display = 'block';
-}
-
-toggleBtn.addEventListener('click', () => {
-  body.classList.toggle('light-theme');
-
-  if (body.classList.contains('light-theme')) {
-    iconSun.style.display = 'block';
-    iconMoon.style.display = 'none';
-    localStorage.setItem('theme', 'light');
-  } else {
-    iconSun.style.display = 'none';
-    iconMoon.style.display = 'block';
-    localStorage.setItem('theme', 'dark');
-  }
-});
-</script>-->
-<script src="{{ url_for('static', filename='js/i18next.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/i18nextXHRBackend.min.js') }}"></script>
-<!-- i18next core -->
-<script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
-<!-- backend -->
-<script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.4.3/i18nextHttpBackend.min.js"></script>
-<!-- language detector -->
-<script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // 1) Uzmi jezik pre init-a
-  const initialLang =
-    localStorage.getItem('selectedLang') ||
-    document.documentElement.getAttribute('lang') ||
-    'sr';
-
-  function updateContent() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      el.textContent = i18next.t(key);
-    });
-  }
-
-  // 2) Init sa fiksnim lng i languageOnly modom
-  i18next
-    .use(i18nextHttpBackend)
-    .use(i18nextBrowserLanguageDetector)
-    .init({
-      lng: initialLang,               // <<< bitno
-      fallbackLng: 'sr',
-      load: 'languageOnly',           // 'en-US' -> 'en'
-      supportedLngs: ['sr', 'en', 'de'],
-      debug: true,
-      backend: {
-        loadPath: '/static/translations/{{lng}}.json' // sr.json, en.json, de.json
-      },
-      detection: {
-        order: ['localStorage', 'htmlTag', 'navigator'],
-        caches: ['localStorage']
-      }
-    }, function (err) {
-      if (err) console.error('i18next init error:', err);
-      updateContent();
-      const sel = document.getElementById('language-select');
-      if (sel) sel.value = i18next.language; // sinhronizuj dropdown
-    });
-
-  // 3) Promena jezika iz dropdown-a
-  const langSelect = document.getElementById('language-select');
-  if (langSelect) {
-    langSelect.addEventListener('change', function () {
-      const newLng = this.value;
-      i18next.changeLanguage(newLng).then(updateContent);
-      localStorage.setItem('selectedLang', newLng);
-    });
-  }
-});
-</script>
 </body>
 </html>

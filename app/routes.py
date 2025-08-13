@@ -1111,3 +1111,9 @@ def about():
 @main.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@main.route('/set_language/<lang>')
+def set_language(lang):
+    if lang in ['sr', 'en', 'de']:
+        session['lang'] = lang
+    return redirect(request.referrer or url_for('main.index'))
