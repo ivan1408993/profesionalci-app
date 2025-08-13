@@ -20,7 +20,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3">
     <a class="navbar-brand" href="{{ url_for('main.index') }}">Profesionalci</a>
 
-   <!-- Jezički meni -->
+ <!-- Jezički meni -->
 <select id="language-select">
     <option value="sr" {% if current_lang == 'sr' %}selected{% endif %}>Srpski</option>
     <option value="en" {% if current_lang == 'en' %}selected{% endif %}>English</option>
@@ -184,9 +184,6 @@ toggleBtn.addEventListener('click', () => {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // provera da li je backend definisan
-  console.log('i18nextHttpBackend:', i18nextHttpBackend);
-
   function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -200,11 +197,17 @@ document.addEventListener('DOMContentLoaded', function() {
     .init({
       fallbackLng: 'sr',
       debug: true,
-      backend: { loadPath: '/static/translations/{{lng}}.json' }
+      ns: ['translation'],         // default namespace
+      defaultNS: 'translation',
+      backend: {
+        loadPath: '/static/translations/{{lng}}.json'  // fajlovi: sr.json, en.json, de.json
+      }
     }, function(err, t) {
       if (err) console.error('i18next init error:', err);
+
       const savedLang = localStorage.getItem('selectedLang') || 'sr';
       i18next.changeLanguage(savedLang, updateContent);
+
       const langSelect = document.getElementById('language-select');
       if (langSelect) langSelect.value = savedLang;
     });
