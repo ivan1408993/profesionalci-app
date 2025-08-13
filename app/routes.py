@@ -1116,4 +1116,5 @@ def contact():
 def set_language(lang):
     if lang in ['sr', 'en', 'de']:
         session['lang'] = lang
+        print("LANG SET TO:", session['lang'])
     return redirect(request.referrer or url_for('main.index'))
