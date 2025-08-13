@@ -173,12 +173,13 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 </script>-->
-<!-- i18next biblioteke -->
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- i18next biblioteke -->
 <script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
-<script src="https://unpkg.com/i18next-http-backend@1.4.1/dist/umd/i18nextHttpBackend.min.js"></script>
+<!-- Koristimo verziju koja definiše global i18nextHttpBackend -->
+<script src="https://unpkg.com/i18next-http-backend@1.4.1/i18nextHttpBackend.min.js"></script>
 <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
 
 <script>
@@ -191,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   i18next
-    .use(i18nextHttpBackend)
+    .use(i18nextHttpBackend)  // sada je globalno definisano
     .use(i18nextBrowserLanguageDetector)
     .init({
       fallbackLng: 'sr',
@@ -201,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, function(err, t) {
       if (err) console.error('i18next init error:', err);
-      // Promena jezika na sačuvan ili default
       const savedLang = localStorage.getItem('selectedLang') || 'sr';
       i18next.changeLanguage(savedLang, updateContent);
       const langSelect = document.getElementById('language-select');
@@ -217,6 +217,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-
 </body>
 </html>
