@@ -173,16 +173,20 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 </script>-->
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- i18next biblioteke -->
+<!-- i18next jezgro -->
 <script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
-<script src="https://unpkg.com/i18next-http-backend@1.4.1/dist/umd/i18nextHttpBackend.min.js"></script>
+
+<!-- i18next backend (UMD verzija za browser) -->
+<script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.4.3/i18nextHttpBackend.min.js"></script>
+
+<!-- i18next language detector -->
 <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // provera da li je backend definisan
+  console.log('i18nextHttpBackend:', i18nextHttpBackend);
+
   function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -195,16 +199,12 @@ document.addEventListener('DOMContentLoaded', function() {
     .use(i18nextBrowserLanguageDetector)
     .init({
       fallbackLng: 'sr',
-      debug: false,
-      backend: {
-        loadPath: '/static/translations/{{lng}}.json'
-      }
+      debug: true,
+      backend: { loadPath: '/static/translations/{{lng}}.json' }
     }, function(err, t) {
       if (err) console.error('i18next init error:', err);
-
       const savedLang = localStorage.getItem('selectedLang') || 'sr';
       i18next.changeLanguage(savedLang, updateContent);
-
       const langSelect = document.getElementById('language-select');
       if (langSelect) langSelect.value = savedLang;
     });
