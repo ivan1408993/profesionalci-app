@@ -194,8 +194,8 @@ toggleBtn.addEventListener('click', () => {
     .init({
       fallbackLng: 'sr',
       debug: true,
-     backend: {
-        loadPath: '/app/static/translations/{{lng}}.json'
+      backend: {
+        loadPath: '/static/translations/{{lng}}.json'
       }
     }, function(err, t) {
       if (err) return console.error(err);
@@ -217,5 +217,6 @@ toggleBtn.addEventListener('click', () => {
     }
   });
 </script>
+
 </body>
 </html>
