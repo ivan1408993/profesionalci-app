@@ -11,6 +11,9 @@ from app.utils import hash_jmbg
 from sqlalchemy import and_
 from flask_paginate import Pagination, get_page_args
 
+from flask_babel import _
+
+
 from sqlalchemy.orm import joinedload
 from .models import Driver, Rating, Employer
 
@@ -1118,11 +1121,6 @@ def set_language(lang):
         session['lang'] = lang
         print("LANG SET TO:", session['lang'])
     return redirect(request.referrer or url_for('main.index'))
-
-from flask import Blueprint
-from flask_babel import _
-
-main = Blueprint('main', __name__)
 
 @main.route("/test_translation")
 def test_translation():
