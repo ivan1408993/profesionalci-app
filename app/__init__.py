@@ -37,9 +37,7 @@ def create_app():
 
     # Babel podešavanja
     app.config['BABEL_DEFAULT_LOCALE'] = 'sr'
-    import os
-    app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(os.path.dirname(__file__), 'translations')
-
+    app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'app/translations'
 
     # Email podešavanja
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
