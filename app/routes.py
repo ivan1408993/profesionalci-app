@@ -1118,3 +1118,13 @@ def set_language(lang):
         session['lang'] = lang
         print("LANG SET TO:", session['lang'])
     return redirect(request.referrer or url_for('main.index'))
+
+from flask import Blueprint
+from flask_babel import _
+
+main = Blueprint('main', __name__)
+
+@main.route("/test_translation")
+def test_translation():
+    return _("Dobrodošli")
+
