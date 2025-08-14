@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-13 17:31+0200\n"
-"PO-Revision-Date: 2025-08-13 16:51+0200\n"
+"POT-Creation-Date: 2025-08-14 08:01+0200\n"
+"PO-Revision-Date: 2025-08-14 08:02+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sr\n"
 "Language-Team: sr <LL@li.org>\n"
@@ -19,79 +19,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
+#: app/routes.py:1127 app/templates/base.html:55
+msgid "Dobrodošli"
+msgstr ""
+
 #: app/templates/base.html:6
 msgid "Aplikacija"
 msgstr ""
 
-#: app/templates/base.html:27
+#: app/templates/base.html:33
 msgid "Srpski"
 msgstr ""
 
-#: app/templates/base.html:28
+#: app/templates/base.html:34
 msgid "English"
 msgstr ""
 
-#: app/templates/base.html:29
+#: app/templates/base.html:35
 msgid "Deutsch"
 msgstr ""
 
-#: app/templates/base.html:37
+#: app/templates/base.html:42
 msgid "🏠 Početna"
 msgstr ""
 
-#: app/templates/base.html:40
+#: app/templates/base.html:45
 msgid "ℹ️ O nama"
 msgstr ""
 
-#: app/templates/base.html:43
+#: app/templates/base.html:48
 msgid "✉️ Kontakt"
 msgstr ""
 
-#: app/templates/base.html:50
-msgid "Dobrodošli"
-msgstr ""
-
-#: app/templates/base.html:50
+#: app/templates/base.html:55
 msgid "Poslodavac"
 msgstr ""
 
-#: app/templates/base.html:53
+#: app/templates/base.html:58
 msgid "Moj profil"
 msgstr ""
 
-#: app/templates/base.html:54
+#: app/templates/base.html:59
 msgid "Moji vozači"
 msgstr ""
 
-#: app/templates/base.html:55
+#: app/templates/base.html:60
 msgid "Dodaj vozača"
 msgstr ""
 
-#: app/templates/base.html:56
+#: app/templates/base.html:61
 msgid "Pretraga svih vozača"
 msgstr ""
 
-#: app/templates/base.html:58
+#: app/templates/base.html:63
 msgid "Odjava"
 msgstr ""
 
-#: app/templates/base.html:65
+#: app/templates/base.html:70
 msgid "🚪 Odjava"
 msgstr ""
 
-#: app/templates/base.html:70
+#: app/templates/base.html:75
 msgid "Prijava"
 msgstr ""
 
-#: app/templates/base.html:73
+#: app/templates/base.html:78
 msgid "Registracija"
 msgstr ""
 
-#: app/templates/base.html:103
+#: app/templates/base.html:108
 msgid "Uslovi korišćenja"
 msgstr ""
 
-#: app/templates/base.html:104
+#: app/templates/base.html:109
 msgid "Politika privatnosti"
 msgstr ""
 
