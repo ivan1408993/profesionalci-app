@@ -21,23 +21,23 @@ msgstr ""
 
 #: app/templates/base.html:6
 msgid "Aplikacija"
-msgstr "Application"
+msgstr ""
 
 #: app/templates/base.html:27
 msgid "Srpski"
-msgstr "Srpski"
+msgstr ""
 
 #: app/templates/base.html:28
 msgid "English"
-msgstr "Engleski"
+msgstr ""
 
 #: app/templates/base.html:29
 msgid "Deutsch"
-msgstr "Nemački"
+msgstr ""
 
 #: app/templates/base.html:37
 msgid "🏠 Početna"
-msgstr "🏠 Početna"
+msgstr ""
 
 #: app/templates/base.html:40
 msgid "ℹ️ O nama"

@@ -36,7 +36,7 @@ msgstr "German"
 
 #: app/templates/base.html:37
 msgid "🏠 Početna"
-msgstr "Home"
+msgstr "🏠 Home"
 
 #: app/templates/base.html:40
 msgid "ℹ️ O nama"
