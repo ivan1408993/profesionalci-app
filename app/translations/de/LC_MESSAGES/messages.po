@@ -20,79 +20,80 @@ msgstr ""
 
 #: app/templates/base.html:6
 msgid "Aplikacija"
-msgstr ""
+msgstr "Anwendung"
 
 #: app/templates/base.html:27
 msgid "Srpski"
-msgstr ""
+msgstr "Serbisch"
 
 #: app/templates/base.html:28
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 #: app/templates/base.html:29
 msgid "Deutsch"
-msgstr ""
+msgstr "Deutsch"
 
 #: app/templates/base.html:37
 msgid "🏠 Početna"
-msgstr "🏠  Startseite"
+msgstr "🏠 Startseite"
 
 #: app/templates/base.html:40
 msgid "ℹ️ O nama"
-msgstr ""
+msgstr "ℹ️ Über uns"
 
 #: app/templates/base.html:43
 msgid "✉️ Kontakt"
-msgstr ""
+msgstr "✉️ Kontakt"
 
 #: app/templates/base.html:50
 msgid "Dobrodošli"
-msgstr ""
+msgstr "Willkommen"
 
 #: app/templates/base.html:50
 msgid "Poslodavac"
-msgstr ""
+msgstr "Arbeitgeber"
 
 #: app/templates/base.html:53
 msgid "Moj profil"
-msgstr ""
+msgstr "Mein Profil"
 
 #: app/templates/base.html:54
 msgid "Moji vozači"
-msgstr ""
+msgstr "Meine Fahrer"
 
 #: app/templates/base.html:55
 msgid "Dodaj vozača"
-msgstr ""
+msgstr "Fahrer hinzufügen"
 
 #: app/templates/base.html:56
 msgid "Pretraga svih vozača"
-msgstr ""
+msgstr "Alle Fahrer durchsuchen"
 
 #: app/templates/base.html:58
 msgid "Odjava"
-msgstr ""
+msgstr "Abmelden"
 
 #: app/templates/base.html:65
 msgid "🚪 Odjava"
-msgstr ""
+msgstr "🚪 Abmelden"
 
 #: app/templates/base.html:70
 msgid "Prijava"
-msgstr ""
+msgstr "Anmeldung"
 
 #: app/templates/base.html:73
 msgid "Registracija"
-msgstr ""
+msgstr "Registrierung"
 
 #: app/templates/base.html:103
 msgid "Uslovi korišćenja"
-msgstr ""
+msgstr "Nutzungsbedingungen"
 
 #: app/templates/base.html:104
 msgid "Politika privatnosti"
-msgstr ""
+msgstr "Datenschutzrichtlinie"
+
 
 #: venv/Lib/site-packages/click/_termui_impl.py:600
 #, python-brace-format
