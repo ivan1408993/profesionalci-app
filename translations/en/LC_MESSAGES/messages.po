@@ -871,7 +871,7 @@ msgstr "must contain at least one number"
 
 #: app/templates/register.html:101
 msgid "mora sadržati bar jedan specijalni znak (!@#$%^&*)"
-msgstr "must contain at least one special character (!@#$%^&*)"
+"Must contain at least one special character (!@#$%%^&*)"
 
 #: app/templates/register.html:105 app/templates/reset_password_form.html:57
 msgid "Jaka lozinka"
