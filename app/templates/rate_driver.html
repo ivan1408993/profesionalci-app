@@ -2,23 +2,25 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center text-light mb-4">Oceni vozača {{ driver.full_name }}</h2>
+    <h2 class="text-center text-light mb-4">
+        {{ _('Oceni vozača') }} {{ driver.full_name }}
+    </h2>
 
     <form method="POST" action="{{ url_for('main.rate_driver', driver_id=driver.id) }}" class="bg-dark text-light p-4 rounded shadow">
 
         {% if existing_rating %}
             <div class="alert alert-warning text-center">
-                Već ste ocenili ovog vozača – možete ažurirati ocenu i komentar.
+                {{ _('Već ste ocenili ovog vozača – možete ažurirati ocenu i komentar.') }}
             </div>
         {% endif %}
 
         <div class="mb-3">
-            <label for="comment" class="form-label">Komentar</label>
+            <label for="comment" class="form-label">{{ _('Komentar') }}</label>
             <textarea class="form-control" name="comment" id="comment" rows="4" required>{{ existing_rating.comment if existing_rating else '' }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label class="form-label d-block">Ocena</label>
+            <label class="form-label d-block">{{ _('Ocena') }}</label>
             <div class="star-rating fs-3">
                 <span class="star" onclick="selectStar(1)">&#9733;</span>
                 <span class="star" onclick="selectStar(2)">&#9733;</span>
@@ -30,12 +32,16 @@
         </div>
 
         <button type="submit" class="btn btn-warning w-100">
-            {% if existing_rating %}Ažuriraj ocenu{% else %}Pošalji ocenu{% endif %}
+            {% if existing_rating %}
+                {{ _('Ažuriraj ocenu') }}
+            {% else %}
+                {{ _('Pošalji ocenu') }}
+            {% endif %}
         </button>
     </form>
 
     <div class="text-center mt-3">
-        <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-light">Nazad na listu vozača</a>
+        <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-light">{{ _('Nazad na listu vozača') }}</a>
     </div>
 </div>
 {% endblock %}

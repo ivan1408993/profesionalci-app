@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Послодавац - {{ employer.company_name }}{% endblock %}
+{% block title %}{{ _('Послодавац') }} - {{ employer.company_name }}{% endblock %}
 
 {% block content %}
 <div class="container py-4">
@@ -8,7 +8,7 @@
     <div class="text-center mb-4">
         <h1 class="fw-bold display-5">
             <i class="fas fa-user-tie text-primary me-2"></i>
-            Detalji o poslodavcu
+            {{ _('Detalji o poslodavcu') }}
         </h1>
     </div>
 
@@ -24,22 +24,22 @@
         <div class="card-body p-4 bg-light">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item py-3 border-0">
-                    <strong><i class="fas fa-briefcase me-2 text-primary"></i>Naziv firme:</strong> 
+                    <strong><i class="fas fa-briefcase me-2 text-primary"></i>{{ _('Naziv firme:') }}</strong> 
                     {{ employer.company_name }}
                 </li>
                 <li class="list-group-item py-3 border-0">
-                    <strong><i class="fas fa-id-card me-2 text-success"></i>PIB:</strong> 
+                    <strong><i class="fas fa-id-card me-2 text-success"></i>{{ _('PIB:') }}</strong> 
                     {{ employer.pib }}
                 </li>
                 <li class="list-group-item py-3 border-0">
-                    <strong><i class="fas fa-phone me-2 text-warning"></i>Telefon:</strong> 
+                    <strong><i class="fas fa-phone me-2 text-warning"></i>{{ _('Telefon:') }}</strong> 
                     {{ employer.phone_number }}
                 </li>
             </ul>
         </div>
         <div class="card-footer text-end bg-white rounded-bottom-4">
             <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-primary btn-lg px-4">
-                <i class="fas fa-arrow-left me-1"></i> Nazad na kontrolnu tablu
+                <i class="fas fa-arrow-left me-1"></i> {{ _('Nazad na kontrolnu tablu') }}
             </a>
         </div>
     </div>

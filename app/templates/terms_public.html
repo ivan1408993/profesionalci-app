@@ -1,40 +1,40 @@
 {% extends "base.html" %}
 
-{% block title %}Uslovi korišćenja{% endblock %}
+{% block title %}{{ _('Uslovi korišćenja') }}{% endblock %}
 
 {% block content %}
 <div class="container py-5 terms-text" style="max-width: 800px; color: white;">
 
-    <h2 class="text-center mb-4">Uslovi korišćenja</h2>
+    <h2 class="text-center mb-4">{{ _('Uslovi korišćenja') }}</h2>
 
-    <h5 class="mt-4">1. Namena aplikacije</h5>
+    <h5 class="mt-4">1. {{ _('Namena aplikacije') }}</h5>
     <p>
-        Ova veb aplikacija namenjena je isključivo poslodavcima u transportnoj industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz istorije angažmana kod različitih poslodavaca.
+        {{ _('Ova veb aplikacija namenjena je isključivo poslodavcima u transportnoj industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz istorije angažmana kod različitih poslodavaca.') }}
     </p>
 
-    <h5 class="mt-4">2. Obrada ličnih podataka</h5>
+    <h5 class="mt-4">2. {{ _('Obrada ličnih podataka') }}</h5>
     <p>
-        Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i obrađivati podatke o zaposlenima u skladu sa važećim zakonskim propisima i u kontekstu radnog odnosa ili procesa zapošljavanja.
+        {{ _('Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i obrađivati podatke o zaposlenima u skladu sa važećim zakonskim propisima i u kontekstu radnog odnosa ili procesa zapošljavanja.') }}
     </p>
 
-    <h5 class="mt-4">3. Pristup podacima</h5>
+    <h5 class="mt-4">3. {{ _('Pristup podacima') }}</h5>
     <p>
-        Samo registrovani poslodavci imaju pristup podacima o vozačima koji su zaposleni ili u procesu zapošljavanja.
+        {{ _('Samo registrovani poslodavci imaju pristup podacima o vozačima koji su zaposleni ili u procesu zapošljavanja.') }}
     </p>
 
-    <h5 class="mt-4">4. Zabrana zloupotrebe</h5>
+    <h5 class="mt-4">4. {{ _('Zabrana zloupotrebe') }}</h5>
     <p>
-        Zabranjeno je neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje podataka dobijenih kroz aplikaciju. Svako kršenje ovih pravila može dovesti do onemogućavanja pristupa aplikaciji i pravnih sankcija.
+        {{ _('Zabranjeno je neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje podataka dobijenih kroz aplikaciju. Svako kršenje ovih pravila može dovesti do onemogućavanja pristupa aplikaciji i pravnih sankcija.') }}
     </p>
 
-    <h5 class="mt-4">5. Tehnička podrška</h5>
+    <h5 class="mt-4">5. {{ _('Tehnička podrška') }}</h5>
     <p>
-        U slučaju tehničkih problema, obratite se administratoru aplikacije putem zvaničnog kontakt obrasca.
+        {{ _('U slučaju tehničkih problema, obratite se administratoru aplikacije putem zvaničnog kontakt obrasca.') }}
     </p>
 
     <hr class="mt-5">
     <p class="text-center mt-4">
-        Korišćenjem aplikacije prihvatate sve navedene uslove.
+        {{ _('Korišćenjem aplikacije prihvatate sve navedene uslove.') }}
     </p>
 </div>
 {% endblock %}

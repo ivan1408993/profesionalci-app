@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Registracija{% endblock %}
+{% block title %}{{ _('Registracija') }}{% endblock %}
 
 {% block content %}
 <div class="container mt-5" style="max-width: 450px;">
-    <h2 class="mb-4 text-center">Registracija poslodavca</h2>
+    <h2 class="mb-4 text-center">{{ _('Registracija poslodavca') }}</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -17,36 +17,37 @@
       <!-- Polja... -->
       <div class="mb-3">
         <label for="company_name" class="form-label">
-          <i class="fas fa-building me-1 text-secondary"></i> Naziv firme
+          <i class="fas fa-building me-1 text-secondary"></i> {{ _('Naziv firme') }}
         </label>
         <input type="text" class="form-control" name="company_name" id="company_name" required>
       </div>
 
       <div class="mb-3">
         <label for="pib" class="form-label">
-          <i class="fas fa-id-card me-1 text-secondary"></i> PIB
+          <i class="fas fa-id-card me-1 text-secondary"></i> {{ _('PIB') }}
         </label>
         <input type="text" class="form-control" name="pib" id="pib" required pattern="\d{9}" minlength="9" maxlength="9"
-       title="PIB mora sadržati tačno 9 cifara.">
+       title="{{ _('PIB mora sadržati tačno 9 cifara.') }}">
       </div>
 
       <div class="mb-3">
         <label for="phone_number" class="form-label">
-          <i class="fas fa-phone me-1 text-secondary"></i> Telefon
+          <i class="fas fa-phone me-1 text-secondary"></i> {{ _('Telefon') }}
         </label>
-        <input type="text" class="form-control" id="phone_number" name="phone_number" required pattern="\d+" title="Unesite samo cifre">
+        <input type="text" class="form-control" id="phone_number" name="phone_number" required pattern="\d+" 
+               title="{{ _('Unesite samo cifre') }}">
       </div>
 
       <div class="mb-3">
         <label for="email" class="form-label">
-          <i class="fas fa-envelope me-1 text-secondary"></i> E-mail
+          <i class="fas fa-envelope me-1 text-secondary"></i> {{ _('E-mail') }}
         </label>
         <input type="email" class="form-control" name="email" id="email" required>
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label">
-          <i class="fas fa-lock me-1 text-secondary"></i> Lozinka
+          <i class="fas fa-lock me-1 text-secondary"></i> {{ _('Lozinka') }}
         </label>
         <input type="password" class="form-control" name="password" id="password" required>
         <div id="password-strength" class="mt-2 small"></div>
@@ -55,17 +56,19 @@
       <div class="form-check mb-3">
         <input class="form-check-input" type="checkbox" id="termsCheck" required>
         <label class="form-check-label" for="termsCheck">
-          Slažem se sa <a href="{{ url_for('main.terms') }}" target="_blank">uslovima korišćenja</a> i
-          <a href="{{ url_for('main.privacy_policy') }}" target="_blank">politikom privatnosti</a>
+          {{ _('Slažem se sa') }} 
+          <a href="{{ url_for('main.terms') }}" target="_blank">{{ _('uslovima korišćenja') }}</a> 
+          {{ _('i') }} 
+          <a href="{{ url_for('main.privacy_policy') }}" target="_blank">{{ _('politikom privatnosti') }}</a>
         </label>
       </div>
 
       <button type="submit" class="btn btn-success w-100" id="registerBtn" disabled>
-        <i class="fas fa-user-plus me-1"></i> Registruj se
+        <i class="fas fa-user-plus me-1"></i> {{ _('Registruj se') }}
       </button>
 
       <a href="{{ url_for('main.login') }}" class="btn btn-secondary w-100 mt-2">
-        <i class="fas fa-arrow-left me-1"></i> Povratak na prijavu
+        <i class="fas fa-arrow-left me-1"></i> {{ _('Povratak na prijavu') }}
       </a>
     </form>
 </div>
@@ -78,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const termsCheck = document.getElementById('termsCheck');
     const registerBtn = document.getElementById('registerBtn');
 
-    // Aktivira dugme ako je čekirano
     termsCheck.addEventListener('change', function () {
         registerBtn.disabled = !this.checked;
     });
@@ -87,24 +89,24 @@ document.addEventListener('DOMContentLoaded', function() {
         let messages = [];
 
         if (val.length < 8) {
-            messages.push('mora imati najmanje 8 karaktera');
+            messages.push('{{ _("mora imati najmanje 8 karaktera") }}');
         }
         if (!/[A-Z]/.test(val)) {
-            messages.push('mora sadržati bar jedno veliko slovo');
+            messages.push('{{ _("mora sadržati bar jedno veliko slovo") }}');
         }
         if (!/[0-9]/.test(val)) {
-            messages.push('mora sadržati bar jedan broj');
+            messages.push('{{ _("mora sadržati bar jedan broj") }}');
         }
         if (!/[!@#$%^&*]/.test(val)) {
-            messages.push('mora sadržati bar jedan specijalni znak (!@#$%^&*)');
+            messages.push('{{ _("mora sadržati bar jedan specijalni znak (!@#$%^&*)") }}');
         }
 
         if (messages.length === 0) {
-            strengthDiv.textContent = 'Jaka lozinka';
+            strengthDiv.textContent = '{{ _("Jaka lozinka") }}';
             strengthDiv.style.color = 'green';
             return true;
         } else {
-            strengthDiv.textContent = 'Lozinka nije dovoljno jaka: ' + messages.join(', ');
+            strengthDiv.textContent = '{{ _("Lozinka nije dovoljno jaka:") }} ' + messages.join(', ');
             strengthDiv.style.color = 'red';
             return false;
         }
@@ -119,13 +121,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!checkPasswordStrength(password)) {
             e.preventDefault();
-            alert('Lozinka nije dovoljno jaka. Molimo ispravite pre slanja.');
+            alert('{{ _("Lozinka nije dovoljno jaka. Molimo ispravite pre slanja.") }}');
             return;
         }
 
         if (!termsCheck.checked) {
             e.preventDefault();
-            alert('Morate se složiti sa uslovima korišćenja i politikom privatnosti.');
+            alert('{{ _("Morate se složiti sa uslovima korišćenja i politikom privatnosti.") }}');
         }
     });
 });

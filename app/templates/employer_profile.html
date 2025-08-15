@@ -1,31 +1,31 @@
 {% extends 'base.html' %}
-{% block title %}Moj profil{% endblock %}
+{% block title %}{{ _('Moj profil') }}{% endblock %}
 
 {% block content %}
 <div class="card-style">
-    <h3 class="mb-4">Moj profil</h3>
+    <h3 class="mb-4">{{ _('Moj profil') }}</h3>
     <form method="POST" action="{{ url_for('main.employer_profile') }}">
         <div class="form-group mb-3">
-            <label>Naziv firme</label>
+            <label>{{ _('Naziv firme') }}</label>
             <input type="text" class="form-control" name="company_name" value="{{ employer.company_name }}" required>
         </div>
         <div class="form-group mb-3">
-            <label>PIB (nepromenljiv)</label>
+            <label>{{ _('PIB (nepromenljiv)') }}</label>
             <input type="text" class="form-control" value="{{ employer.pib }}" readonly tabindex="-1">
         </div>
         <div class="form-group mb-3">
-            <label>Imejl</label>
+            <label>{{ _('Imejl') }}</label>
             <input type="email" class="form-control" name="email" value="{{ employer.email }}" required>
         </div>
         <div class="form-group mb-3">
-            <label>Broj telefona</label>
-            <input type="tel" pattern="[0-9]+" class="form-control" name="phone_number" value="{{ employer.phone_number or '' }}" placeholder="Unesite broj telefona (samo cifre)">
+            <label>{{ _('Broj telefona') }}</label>
+            <input type="tel" pattern="[0-9]+" class="form-control" name="phone_number" value="{{ employer.phone_number or '' }}" placeholder="{{ _('Unesite broj telefona (samo cifre)') }}">
         </div>
         <div class="form-group mb-3">
-            <label>Nova lozinka (ostavite prazno ako ne menjate)</label>
+            <label>{{ _('Nova lozinka (ostavite prazno ako ne menjate)') }}</label>
             <input type="password" class="form-control" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Sačuvaj izmene</button>
+        <button type="submit" class="btn btn-primary">{{ _('Sačuvaj izmene') }}</button>
     </form>
 </div>
 {% endblock %}

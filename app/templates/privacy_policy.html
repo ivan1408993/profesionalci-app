@@ -1,101 +1,81 @@
 {% extends "base.html" %}
 
-{% block title %}Politika privatnosti{% endblock %}
+{% block title %}{{ _('Politika privatnosti') }}{% endblock %}
 
 {% block content %}
 <div class="privacy-text">
-    <h2 class="text-center mb-4">Politika privatnosti</h2>
+    <h2 class="text-center mb-4">{{ _('Politika privatnosti') }}</h2>
 
     <p>
-        Ova Politika privatnosti opisuje načine na koje aplikacija <strong>Profesionalci</strong> prikuplja, koristi, čuva i štiti vaše lične podatke u skladu sa Opštom uredbom o zaštiti podataka (GDPR), Zakonom o zaštiti podataka o ličnosti Republike Srbije i drugim relevantnim propisima.
+        {{ _("Ova Politika privatnosti opisuje načine na koje aplikacija") }}
+        <strong>{{ _('Profesionalci') }}</strong>
+        {{ _("prikuplja, koristi, čuva i štiti vaše lične podatke u skladu sa Opštom uredbom o zaštiti podataka (GDPR), Zakonom o zaštiti podataka o ličnosti Republike Srbije i drugim relevantnim propisima.") }}
     </p>
 
-    <h5>1. Kontrolor podataka</h5>
+    <h5>{{ _('1. Kontrolor podataka') }}</h5>
     <p>
-        Kontrolor vaših ličnih podataka je vlasnik aplikacije <strong>Profesionalci</strong>, sa sedištem u Republici Srbiji. Za sva pitanja u vezi obrade podataka možete kontaktirati administratora preko zvaničnih kanala.
+        {{ _("Kontrolor vaših ličnih podataka je vlasnik aplikacije") }}
+        <strong>{{ _('Profesionalci') }}</strong>,
+        {{ _("sa sedištem u Republici Srbiji. Za sva pitanja u vezi obrade podataka možete kontaktirati administratora preko zvaničnih kanala.") }}
     </p>
 
-    <h5>2. Prikupljanje podataka</h5>
-    <p>
-        Prikupljamo lične podatke koje nam dobrovoljno dostavljate prilikom registracije i korišćenja aplikacije, uključujući, ali ne ograničavajući se na:
-    </p>
+    <h5>{{ _('2. Prikupljanje podataka') }}</h5>
+    <p>{{ _('Prikupljamo lične podatke koje nam dobrovoljno dostavljate prilikom registracije i korišćenja aplikacije, uključujući, ali ne ograničavajući se na:') }}</p>
     <ul>
-        <li>Podaci o poslodavcu: naziv firme, PIB, kontakt informacije, e-mail adresa, lozinka;</li>
-        <li>Podaci o vozačima u skladu sa zakonom i ugovorom o radu;</li>
-        <li>Druge informacije koje nam dostavite prilikom korišćenja usluga aplikacije.</li>
+        <li>{{ _('Podaci o poslodavcu: naziv firme, PIB, kontakt informacije, e-mail adresa, lozinka;') }}</li>
+        <li>{{ _('Podaci o vozačima u skladu sa zakonom i ugovorom o radu;') }}</li>
+        <li>{{ _('Druge informacije koje nam dostavite prilikom korišćenja usluga aplikacije.') }}</li>
     </ul>
 
-    <h5>3. Pravna osnova za obradu podataka</h5>
-    <p>
-        Obrada vaših podataka vrši se na osnovu:
-    </p>
+    <h5>{{ _('3. Pravna osnova za obradu podataka') }}</h5>
+    <p>{{ _('Obrada vaših podataka vrši se na osnovu:') }}</p>
     <ul>
-        <li>Vašeg pristanka (na primer, pri registraciji);</li>
-        <li>Ispunjenja ugovora ili predugovornih radnji (radni odnosi, zapošljavanje);</li>
-        <li>Izvršenja zakonskih obaveza koje se odnose na poslodavca;</li>
-        <li>Zakonitih interesa vlasnika aplikacije, kao što je obezbeđenje bezbednosti i sprečavanje zloupotreba.</li>
+        <li>{{ _('Vašeg pristanka (na primer, pri registraciji);') }}</li>
+        <li>{{ _('Ispunjenja ugovora ili predugovornih radnji (radni odnosi, zapošljavanje);') }}</li>
+        <li>{{ _('Izvršenja zakonskih obaveza koje se odnose na poslodavca;') }}</li>
+        <li>{{ _('Zakonitih interesa vlasnika aplikacije, kao što je obezbeđenje bezbednosti i sprečavanje zloupotreba.') }}</li>
     </ul>
 
-    <h5>4. Svrha obrade podataka</h5>
-    <p>
-        Vaši lični podaci se koriste isključivo u sledeće svrhe:
-    </p>
+    <h5>{{ _('4. Svrha obrade podataka') }}</h5>
+    <p>{{ _('Vaši lični podaci se koriste isključivo u sledeće svrhe:') }}</p>
     <ul>
-        <li>Upravljanje radnim odnosima i zapošljavanjem vozača;</li>
-        <li>Ocenjivanje i praćenje rada vozača;</li>
-        <li>Obezbeđenje funkcionalnosti i bezbednosti aplikacije;</li>
-        <li>Iskustvena i tehnička podrška.</li>
+        <li>{{ _('Upravljanje radnim odnosima i zapošljavanjem vozača;') }}</li>
+        <li>{{ _('Ocenjivanje i praćenje rada vozača;') }}</li>
+        <li>{{ _('Obezbeđenje funkcionalnosti i bezbednosti aplikacije;') }}</li>
+        <li>{{ _('Iskustvena i tehnička podrška.') }}</li>
     </ul>
 
-    <h5>5. Čuvanje i bezbednost podataka</h5>
-    <p>
-        Primenjujemo tehničke i organizacione mere zaštite podataka kako bismo obezbedili njihovu poverljivost, integritet i dostupnost. Lični podaci se čuvaju onoliko dugo koliko je potrebno za ispunjenje svrha obrade, uključujući i zakonske obaveze čuvanja evidencija u radnom odnosu.
-    </p>
+    <h5>{{ _('5. Čuvanje i bezbednost podataka') }}</h5>
+    <p>{{ _('Primenjujemo tehničke i organizacione mere zaštite podataka kako bismo obezbedili njihovu poverljivost, integritet i dostupnost. Lični podaci se čuvaju onoliko dugo koliko je potrebno za ispunjenje svrha obrade, uključujući i zakonske obaveze čuvanja evidencija u radnom odnosu.') }}</p>
 
-    <h5>6. Čuvanje i obrada podataka o vozačima</h5>
-    <p>
-        Podaci o vozačima se čuvaju u skladu sa važećim zakonskim propisima o vođenju evidencija u radnom odnosu, kao i radi očuvanja integriteta istorije rada, ocenjivanja i komentara.
-    </p>
-    <p>
-        Pristup ovim podacima je strogo ograničen i zaštićen u skladu sa propisima o zaštiti podataka o ličnosti.
-    </p>
+    <h5>{{ _('6. Čuvanje i obrada podataka o vozačima') }}</h5>
+    <p>{{ _('Podaci o vozačima se čuvaju u skladu sa važećim zakonskim propisima o vođenju evidencija u radnom odnosu, kao i radi očuvanja integriteta istorije rada, ocenjivanja i komentara.') }}</p>
+    <p>{{ _('Pristup ovim podacima je strogo ograničen i zaštićen u skladu sa propisima o zaštiti podataka o ličnosti.') }}</p>
 
-    <h5>7. Pristup i deljenje podataka</h5>
-    <p>
-        Pristup vašim ličnim podacima imaju samo ovlašćeni korisnici aplikacije i zaposleni koji su ovlašćeni za obradu. Ne delimo vaše podatke sa trećim licima osim u slučajevima kada to zahteva zakon ili je neophodno radi pružanja usluga.
-    </p>
+    <h5>{{ _('7. Pristup i deljenje podataka') }}</h5>
+    <p>{{ _('Pristup vašim ličnim podacima imaju samo ovlašćeni korisnici aplikacije i zaposleni koji su ovlašćeni za obradu. Ne delimo vaše podatke sa trećim licima osim u slučajevima kada to zahteva zakon ili je neophodno radi pružanja usluga.') }}</p>
 
-    <h5>8. Vaša prava</h5>
-    <p>
-        U skladu sa važećim propisima, imate sledeća prava u vezi sa svojim ličnim podacima, osim za podatke koji su zakonski obavezni za trajno čuvanje u evidencijama radnog odnosa:
-    </p>
+    <h5>{{ _('8. Vaša prava') }}</h5>
+    <p>{{ _('U skladu sa važećim propisima, imate sledeća prava u vezi sa svojim ličnim podacima, osim za podatke koji su zakonski obavezni za trajno čuvanje u evidencijama radnog odnosa:') }}</p>
     <ul>
-        <li>Pravo pristupa svojim podacima;</li>
-        <li>Pravo na ispravku netačnih ili nepotpunih podataka;</li>
-        <li>Pravo na ograničavanje obrade podataka;</li>
-        <li>Pravo na prenosivost podataka;</li>
-        <li>Pravo da u bilo kom trenutku povučete pristanak za obradu podataka kada je obrada zasnovana na pristanku, osim za zakonski obavezne podatke;</li>
-        <li>Pravo na podnošenje žalbe nadzornom organu za zaštitu podataka u Republici Srbiji.</li>
+        <li>{{ _('Pravo pristupa svojim podacima;') }}</li>
+        <li>{{ _('Pravo na ispravku netačnih ili nepotpunih podataka;') }}</li>
+        <li>{{ _('Pravo na ograničavanje obrade podataka;') }}</li>
+        <li>{{ _('Pravo na prenosivost podataka;') }}</li>
+        <li>{{ _('Pravo da u bilo kom trenutku povučete pristanak za obradu podataka kada je obrada zasnovana na pristanku, osim za zakonski obavezne podatke;') }}</li>
+        <li>{{ _('Pravo na podnošenje žalbe nadzornom organu za zaštitu podataka u Republici Srbiji.') }}</li>
     </ul>
 
-    <h5>9. Kolačići (Cookies)</h5>
-    <p>
-        Aplikacija koristi kolačiće za poboljšanje korisničkog iskustva i funkcionisanje nekih funkcionalnosti. Koriste se samo neophodni kolačići koji ne prikupljaju lične podatke.
-    </p>
+    <h5>{{ _('9. Kolačići (Cookies)') }}</h5>
+    <p>{{ _('Aplikacija koristi kolačiće za poboljšanje korisničkog iskustva i funkcionisanje nekih funkcionalnosti. Koriste se samo neophodni kolačići koji ne prikupljaju lične podatke.') }}</p>
 
-    <h5>10. Izmene politike privatnosti</h5>
-    <p>
-        Zadržavamo pravo da izmenimo ovu politiku privatnosti u skladu sa zakonskim izmenama ili promenama u funkcionisanju aplikacije. Sve izmene biće objavljene na ovoj stranici.
-    </p>
+    <h5>{{ _('10. Izmene politike privatnosti') }}</h5>
+    <p>{{ _('Zadržavamo pravo da izmenimo ovu politiku privatnosti u skladu sa zakonskim izmenama ili promenama u funkcionisanju aplikacije. Sve izmene biće objavljene na ovoj stranici.') }}</p>
 
-    <h5>11. Kontakt</h5>
-    <p>
-        Za sva pitanja, zahteve ili prijave u vezi sa zaštitom ličnih podataka, možete nas kontaktirati putem zvaničnih kanala aplikacije.
-    </p>
+    <h5>{{ _('11. Kontakt') }}</h5>
+    <p>{{ _('Za sva pitanja, zahteve ili prijave u vezi sa zaštitom ličnih podataka, možete nas kontaktirati putem zvaničnih kanala aplikacije.') }}</p>
 
     <hr>
-    <p class="text-center mt-4">
-        Korišćenjem aplikacije saglasni ste sa ovom politikom privatnosti.
-    </p>
+    <p class="text-center mt-4">{{ _('Korišćenjem aplikacije saglasni ste sa ovom politikom privatnosti.') }}</p>
 </div>
 {% endblock %}

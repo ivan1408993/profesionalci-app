@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Postojeći vozač - {{ driver.full_name }}{% endblock %}
+{% block title %}{{ _("Postojeći vozač") }} - {{ driver.full_name }}{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Vozač već postoji u sistemu</h2>
+    <h2>{{ _("Vozač već postoji u sistemu") }}</h2>
 
-    <p><strong>Ime i prezime:</strong> {{ driver.full_name }}</p>
-    <p><strong>Broj tahografske kartice:</strong> {{ driver.card_number }}</p>
+    <p><strong>{{ _("Ime i prezime") }}:</strong> {{ driver.full_name }}</p>
+    <p><strong>{{ _("Broj tahografske kartice") }}:</strong> {{ driver.card_number }}</p>
 
-    <h3>Istorija rada kod drugih poslodavaca i ocene:</h3>
+    <h3>{{ _("Istorija rada kod drugih poslodavaca i ocene") }}:</h3>
     {% if ratings_info %}
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Poslodavac</th>
-                    <th>Ocena</th>
-                    <th>Komentar</th>
-                    <th>Datum</th>
+                    <th>{{ _("Poslodavac") }}</th>
+                    <th>{{ _("Ocena") }}</th>
+                    <th>{{ _("Komentar") }}</th>
+                    <th>{{ _("Datum") }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,30 +32,28 @@
             </tbody>
         </table>
     {% else %}
-        <p>Nema podataka o ranijim poslodavcima i ocenama.</p>
+        <p>{{ _("Nema podataka o ranijim poslodavcima i ocenama.") }}</p>
     {% endif %}
 
     {% if not already_employed_by_other %}
         <form method="POST" action="{{ url_for('main.activate_existing_driver', driver_id=driver.id) }}">
             <button type="submit" class="btn btn-primary mt-3">
-                Aktiviraj i dodaj vozača u moju firmu
+                {{ _("Aktiviraj i dodaj vozača u moju firmu") }}
             </button>
             <a href="{{ url_for('main.add_driver') }}" class="btn btn-secondary ms-2">
-                Otkaži
+                {{ _("Otkaži") }}
             </a>
         </form>
         {% if already_employed_by_other %}
-         <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
-             Ažuriraj vozača
-             </a>
+            <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-3">
+                {{ _("Ažuriraj vozača") }}
+            </a>
         {% endif %}
-     {% else %}
+    {% else %}
         <a href="{{ url_for('main.add_driver') }}" class="btn btn-secondary mt-3">
-            Nazad
+            {{ _("Nazad") }}
         </a>
     {% endif %}
-
-{% endif %}
 
 </div>
 {% endblock %}

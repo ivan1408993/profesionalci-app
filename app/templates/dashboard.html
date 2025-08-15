@@ -3,24 +3,24 @@
 {% block content %}
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="container">
-        <h1 class="mb-4 text-center">Panel poslodavca</h1>
+        <h1 class="mb-4 text-center">{{ _("Panel poslodavca") }}</h1>
 
         <div class="row g-4 justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Dodaj vozača</h5>
-                        <p class="card-text">Unesite novog vozača u sistem.</p>
-                        <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary w-100">Dodaj</a>
+                        <h5 class="card-title">{{ _("Dodaj vozača") }}</h5>
+                        <p class="card-text">{{ _("Unesite novog vozača u sistem.") }}</p>
+                        <a href="{{ url_for('main.add_driver') }}" class="btn btn-primary w-100">{{ _("Dodaj") }}</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Pregled vozača</h5>
-                        <p class="card-text">Pogledajte vozače koji rade ili su radili kod vas.</p>
-                        <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-primary w-100">Prikaži</a>
+                        <h5 class="card-title">{{ _("Pregled vozača") }}</h5>
+                        <p class="card-text">{{ _("Pogledajte vozače koji rade ili su radili kod vas.") }}</p>
+                        <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-primary w-100">{{ _("Prikaži") }}</a>
                     </div>
                 </div>
             </div>

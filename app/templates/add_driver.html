@@ -4,49 +4,48 @@
 <div class="container mt-5" style="max-width: 600px;">
     <div class="p-4 rounded shadow" style="background-color: rgba(30, 40, 50, 0.85); border: 1px solid #0dcaf0;">
         <h2 class="mb-4 text-info">
-            <i class="fas fa-user-plus me-2"></i> Dodaj novog vozača
+            <i class="fas fa-user-plus me-2"></i> {{ _("Dodaj novog vozača") }}
         </h2>
 
         <form method="POST" action="{{ url_for('main.add_driver') }}" id="driverForm" novalidate class="p-4 border rounded shadow-sm bg-dark bg-opacity-50">
     <!-- Ime i prezime -->
     <div class="mb-3">
         <label for="full_name" class="form-label fw-semibold text-light">
-            <i class="fas fa-id-card me-1 icon-highlight"></i> Ime i prezime
+            <i class="fas fa-id-card me-1 icon-highlight"></i> {{ _("Ime i prezime") }}
         </label>
-        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="full_name" name="full_name" required placeholder="Unesite ime i prezime">
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="full_name" name="full_name" required placeholder="{{ _('Unesite ime i prezime') }}">
     </div>
 
     <!-- JMBG -->
     <div class="mb-3">
         <label for="jmbg" class="form-label fw-semibold text-light">
-            <i class="fas fa-fingerprint me-1 icon-highlight"></i> JMBG
+            <i class="fas fa-fingerprint me-1 icon-highlight"></i> {{ _("JMBG") }}
         </label>
         <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="jmbg" name="jmbg"
                required pattern="^\d{13}$" maxlength="13" minlength="13"
-               title="Unesite tačno 13 cifara JMBG-a." placeholder="13 cifara">
-        <div class="invalid-feedback">JMBG mora sadržati tačno 13 cifara.</div>
+               title="{{ _('Unesite tačno 13 cifara JMBG-a.') }}" placeholder="{{ _('13 cifara') }}">
+        <div class="invalid-feedback">{{ _("JMBG mora sadržati tačno 13 cifara.") }}</div>
     </div>
 
     <!-- Tahograf kartica -->
     <div class="mb-3">
         <label for="card_number" class="form-label fw-semibold text-light">
-            <i class="fas fa-id-badge me-1 icon-highlight"></i> Broj tahograf kartice
+            <i class="fas fa-id-badge me-1 icon-highlight"></i> {{ _("Broj tahograf kartice") }}
         </label>
         <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="card_number" name="card_number"
                required pattern="^[A-Za-z0-9]{16}$" maxlength="16" minlength="16"
-               title="Broj tahograf kartice mora imati tačno 16 karaktera." placeholder="16 karaktera">
-        <div class="invalid-feedback">Mora imati tačno 16 karaktera (slova ili cifre).</div>
+               title="{{ _('Broj tahograf kartice mora imati tačno 16 karaktera.') }}" placeholder="{{ _('16 karaktera') }}">
+        <div class="invalid-feedback">{{ _("Mora imati tačno 16 karaktera (slova ili cifre).") }}</div>
     </div>
 
    <!-- Datum važenja tahograf kartice -->
         <div class="mb-4">
-            <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada CPC kartica prestaje da važi">
-                <i class="fas fa-calendar-check icon-highlight me-1"></i> Datum važenja tahograf kartice
+            <label for="expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="{{ _('Datum kada CPC kartica prestaje da važi') }}">
+                <i class="fas fa-calendar-check icon-highlight me-1"></i> {{ _("Datum važenja tahograf kartice") }}
             </label>
            <input type="date"
        class="form-control bg-secondary bg-opacity-25 text-light border-0"
        name="expiry_date" id="expiry_date"
-       id="cpc_expiry_date"
        value="{{ cpc_expiry_date_str }}"
        min="{{ current_date }}">
         </div>
@@ -54,20 +53,19 @@
     <!-- CPC kartica -->
     <div class="mb-3">
         <label for="cpc_card_number" class="form-label fw-semibold text-light">
-            <i class="fas fa-id-card me-1 icon-highlight"></i> Broj CPC kartice
+            <i class="fas fa-id-card me-1 icon-highlight"></i> {{ _("Broj CPC kartice") }}
         </label>
-        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="cpc_card_number" name="cpc_card_number" placeholder="Opcionalno">
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="cpc_card_number" name="cpc_card_number" placeholder="{{ _('Opcionalno') }}">
     </div>
 
     <!-- Datum važenja CPC kartice -->
     <div class="mb-4">
-            <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="Datum kada CPC kartica prestaje da važi">
-                <i class="fas fa-calendar-check icon-highlight me-1"></i> Datum važenja CPC kartice
+            <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="{{ _('Datum kada CPC kartica prestaje da važi') }}">
+                <i class="fas fa-calendar-check icon-highlight me-1"></i> {{ _("Datum važenja CPC kartice") }}
             </label>
            <input type="date"
        class="form-control bg-secondary bg-opacity-25 text-light border-0"
-       name="expiry_date" id="expiry_date"
-       id="cpc_expiry_date"
+       name="cpc_expiry_date" id="cpc_expiry_date"
        value="{{ cpc_expiry_date_str }}"
        min="{{ current_date }}">
         </div>
@@ -75,10 +73,10 @@
     <!-- Dugmad -->
     <div class="d-flex gap-3">
         <button type="submit" class="btn btn-success px-4">
-            <i class="fas fa-save me-2"></i> Sačuvaj vozača
+            <i class="fas fa-save me-2"></i> {{ _("Sačuvaj vozača") }}
         </button>
         <a href="{{ url_for('main.drivers') }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left me-1"></i> Nazad
+            <i class="fas fa-arrow-left me-1"></i> {{ _("Nazad") }}
         </a>
     </div>
 </form>

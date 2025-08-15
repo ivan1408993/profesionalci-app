@@ -1,17 +1,18 @@
-# Translations template for PROJECT.
+# German translations for PROJECT.
 # Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-08-15 16:31+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,608 +20,603 @@ msgstr ""
 
 #: app/routes.py:1127 app/templates/base.html:55
 msgid "Dobrodošli"
-msgstr ""
+msgstr "Willkommen"
 
 #: app/templates/about.html:8
 msgid "O nama"
-msgstr ""
+msgstr "Über uns"
 
 #: app/templates/about.html:11
 msgid "Gradimo most između"
-msgstr ""
+msgstr "Wir bauen eine Brücke zwischen"
 
 #: app/templates/about.html:12
 msgid "poslodavaca"
-msgstr ""
+msgstr "Arbeitgebern"
 
 #: app/templates/about.html:13 app/templates/about.html:29
 #: app/templates/register.html:61
 msgid "i"
-msgstr ""
+msgstr "und"
 
 #: app/templates/about.html:14
 msgid "profesionalnih vozača"
-msgstr ""
+msgstr "professionellen Fahrern"
 
 #: app/templates/about.html:15
 msgid "kroz ocenjivanje i transparentnost."
-msgstr ""
+msgstr "durch Bewertung und Transparenz."
 
 #: app/templates/about.html:19 app/templates/index.html:6
 #: app/templates/privacy_policy.html:11 app/templates/privacy_policy.html:18
 msgid "Profesionalci"
-msgstr ""
+msgstr "Profis"
 
 #: app/templates/about.html:20
-msgid ""
-"omogućavaju poslodavcima da ocenjuju vozače na osnovu njihovih radnih "
-"performansi, stvarajući fer i otvoreno radno okruženje."
-msgstr ""
+msgid "omogućavaju poslodavcima da ocenjuju vozače na osnovu njihovih radnih performansi, stvarajući fer i otvoreno radno okruženje."
+msgstr "ermöglichen es Arbeitgebern, Fahrer basierend auf ihrer Arbeitsleistung zu bewerten und schaffen so ein faires und transparentes Arbeitsumfeld."
 
 #: app/templates/about.html:26
-msgid ""
-"Naš sistem pomaže firmama da pronađu vozače koji se ističu kvalitetom, a "
-"vozačima daje priliku da izgrade svoju profesionalnu reputaciju kroz "
-"objektivne ocene."
-msgstr ""
+msgid "Naš sistem pomaže firmama da pronađu vozače koji se ističu kvalitetom, a vozačima daje priliku da izgrade svoju profesionalnu reputaciju kroz objektivne ocene."
+msgstr "Unser System hilft Unternehmen, Fahrer zu finden, die sich durch Qualität auszeichnen, und bietet den Fahrern die Möglichkeit, ihre professionelle Reputation durch objektive Bewertungen aufzubauen."
 
 #: app/templates/about.html:27
 msgid "Verujemo da su"
-msgstr ""
+msgstr "Wir glauben, dass"
 
 #: app/templates/about.html:28
 msgid "poverenje"
-msgstr ""
+msgstr "Vertrauen"
 
 #: app/templates/about.html:30
 msgid "transparentnost"
-msgstr ""
+msgstr "Transparenz"
 
 #: app/templates/about.html:31
 msgid "ključ uspešne saradnje."
-msgstr ""
+msgstr "der Schlüssel zu erfolgreicher Zusammenarbeit ist."
 
 #: app/templates/about.html:35
 msgid "Naša misija: Podizanje standarda u industriji profesionalnog transporta."
-msgstr ""
+msgstr "Unsere Mission: Die Standards in der professionellen Transportbranche zu erhöhen."
 
 #: app/templates/add_driver.html:7
 msgid "Dodaj novog vozača"
-msgstr ""
+msgstr "Neuen Fahrer hinzufügen"
 
 #: app/templates/add_driver.html:14 app/templates/all_drivers.html:38
 #: app/templates/driver_exists.html:9 app/templates/drivers.html:67
 #: app/templates/search_driver.html:138
 msgid "Ime i prezime"
-msgstr ""
+msgstr "Vor- und Nachname"
 
 #: app/templates/add_driver.html:16
 msgid "Unesite ime i prezime"
-msgstr ""
+msgstr "Vor- und Nachname eingeben"
 
 #: app/templates/add_driver.html:22
 msgid "JMBG"
-msgstr ""
+msgstr "JMBG"
 
 #: app/templates/add_driver.html:26
 msgid "Unesite tačno 13 cifara JMBG-a."
-msgstr ""
+msgstr "Geben Sie genau 13 Ziffern des JMBG ein."
 
 #: app/templates/add_driver.html:26
 msgid "13 cifara"
-msgstr ""
+msgstr "13 Ziffern"
 
 #: app/templates/add_driver.html:27
 msgid "JMBG mora sadržati tačno 13 cifara."
-msgstr ""
+msgstr "Der JMBG muss genau 13 Ziffern enthalten."
 
 #: app/templates/add_driver.html:33 app/templates/driver_detail.html:150
 #: app/templates/drivers.html:68
 msgid "Broj tahograf kartice"
-msgstr ""
+msgstr "Fahrerkartennummer"
 
 #: app/templates/add_driver.html:37
 msgid "Broj tahograf kartice mora imati tačno 16 karaktera."
-msgstr ""
+msgstr "Die Fahrerkartennummer muss genau 16 Zeichen enthalten."
 
 #: app/templates/add_driver.html:37
 msgid "16 karaktera"
-msgstr ""
+msgstr "16 Zeichen"
 
 #: app/templates/add_driver.html:38
 msgid "Mora imati tačno 16 karaktera (slova ili cifre)."
-msgstr ""
+msgstr "Es müssen genau 16 Zeichen (Buchstaben oder Zahlen) sein."
 
 #: app/templates/add_driver.html:43 app/templates/add_driver.html:63
 msgid "Datum kada CPC kartica prestaje da važi"
-msgstr ""
+msgstr "Ablaufdatum der CPC-Karte"
 
 #: app/templates/add_driver.html:44
 msgid "Datum važenja tahograf kartice"
-msgstr ""
+msgstr "Gültigkeitsdatum der Fahrerkart"
 
 #: app/templates/add_driver.html:56 app/templates/search_driver.html:142
 msgid "Broj CPC kartice"
-msgstr ""
+msgstr "CPC-Kartennummer"
 
 #: app/templates/add_driver.html:58
 msgid "Opcionalno"
-msgstr ""
+msgstr "Optional"
 
 #: app/templates/add_driver.html:64
 msgid "Datum važenja CPC kartice"
-msgstr ""
+msgstr "Gültigkeitsdatum der CPC-Karte"
 
 #: app/templates/add_driver.html:76
 msgid "Sačuvaj vozača"
-msgstr ""
+msgstr "Fahrer speichern"
 
 #: app/templates/add_driver.html:79 app/templates/driver_exists.html:54
 msgid "Nazad"
-msgstr ""
+msgstr "Zurück"
 
 #: app/templates/all_drivers.html:10 app/templates/driver_detail.html:8
 #: app/templates/rate_driver.html:44
 msgid "Nazad na listu vozača"
-msgstr ""
+msgstr "Zurück zur Fahrerliste"
 
 #: app/templates/all_drivers.html:14
 msgid "Svi vozači koji su radili u vašoj firmi"
-msgstr ""
+msgstr "Alle Fahrer, die in Ihrem Unternehmen gearbeitet haben"
 
 #: app/templates/all_drivers.html:22
 msgid "Pretraži po imenu ili broju kartice"
-msgstr ""
+msgstr "Suche nach Name oder Kartennummer"
 
 #: app/templates/all_drivers.html:28 app/templates/drivers.html:44
 #: app/templates/search_driver.html:17
 msgid "Pretraži"
-msgstr ""
+msgstr "Suchen"
 
 #: app/templates/all_drivers.html:39
 msgid "Broj kartice"
-msgstr ""
+msgstr "Kartennummer"
 
 #: app/templates/all_drivers.html:40 app/templates/drivers.html:70
 msgid "CPC broj"
-msgstr ""
+msgstr "CPC-Nummer"
 
 #: app/templates/all_drivers.html:41 app/templates/drivers.html:71
 msgid "CPC važi do"
-msgstr ""
+msgstr "CPC gültig bis"
 
 #: app/templates/all_drivers.html:42 app/templates/driver_detail.html:152
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: app/templates/all_drivers.html:43 app/templates/driver_detail.html:100
 msgid "Prosečna ocena"
-msgstr ""
+msgstr "Durchschnittliche Bewertung"
 
 #: app/templates/all_drivers.html:66 app/templates/search_driver.html:60
 msgid "Aktivan"
-msgstr ""
+msgstr "Aktiv"
 
 #: app/templates/all_drivers.html:68 app/templates/search_driver.html:62
 msgid "Neaktivan"
-msgstr ""
+msgstr "Inaktiv"
 
 #: app/templates/all_drivers.html:84 app/templates/drivers.html:124
 msgid "Paginacija vozača"
-msgstr ""
+msgstr "Fahrer-Paginierung"
 
 #: app/templates/all_drivers.html:88 app/templates/all_drivers.html:91
 #: app/templates/drivers.html:128 app/templates/drivers.html:131
 msgid "Prethodna"
-msgstr ""
+msgstr "Vorherige"
 
 #: app/templates/all_drivers.html:110 app/templates/all_drivers.html:113
 #: app/templates/drivers.html:150 app/templates/drivers.html:153
 msgid "Sledeća"
-msgstr ""
+msgstr "Nächste"
 
 #: app/templates/all_drivers.html:120
 msgid "Nema rezultata za zadatu pretragu."
-msgstr ""
+msgstr "Keine Ergebnisse für die gewählte Suche."
 
 #: app/templates/base.html:6
 msgid "Aplikacija"
-msgstr ""
+msgstr "Anwendung"
 
 #: app/templates/base.html:33
 msgid "Srpski"
-msgstr ""
+msgstr "Serbisch"
 
 #: app/templates/base.html:34
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 #: app/templates/base.html:35
 msgid "Deutsch"
-msgstr ""
+msgstr "Deutsch"
 
 #: app/templates/base.html:42
 msgid "🏠 Početna"
-msgstr ""
+msgstr "🏠 Startseite"
 
 #: app/templates/base.html:45
 msgid "ℹ️ O nama"
-msgstr ""
+msgstr "ℹ️ Über uns"
 
 #: app/templates/base.html:48
 msgid "✉️ Kontakt"
-msgstr ""
+msgstr "✉️ Kontakt"
 
 #: app/templates/base.html:55 app/templates/driver_detail.html:61
 #: app/templates/driver_exists.html:17 app/templates/search_driver.html:105
 msgid "Poslodavac"
-msgstr ""
+msgstr "Arbeitgeber"
 
 #: app/templates/base.html:58 app/templates/employer_profile.html:2
 #: app/templates/employer_profile.html:6
 msgid "Moj profil"
-msgstr ""
+msgstr "Mein Profil"
 
 #: app/templates/base.html:59
 msgid "Moji vozači"
-msgstr ""
+msgstr "Meine Fahrer"
 
 #: app/templates/base.html:60 app/templates/dashboard.html:12
 #: app/templates/drivers.html:33
 msgid "Dodaj vozača"
-msgstr ""
+msgstr "Fahrer hinzufügen"
 
 #: app/templates/base.html:61
 msgid "Pretraga svih vozača"
-msgstr ""
+msgstr "Alle Fahrer durchsuchen"
 
 #: app/templates/base.html:63
 msgid "Odjava"
-msgstr ""
+msgstr "Abmelden"
 
 #: app/templates/base.html:70
 msgid "🚪 Odjava"
-msgstr ""
+msgstr "🚪 Abmelden"
 
 #: app/templates/base.html:75 app/templates/login.html:3
 #: app/templates/login.html:7
 msgid "Prijava"
-msgstr ""
+msgstr "Anmeldung"
 
 #: app/templates/base.html:78 app/templates/register.html:2
 msgid "Registracija"
-msgstr ""
+msgstr "Registrierung"
 
 #: app/templates/base.html:108 app/templates/terms.html:3
 #: app/templates/terms.html:8 app/templates/terms_public.html:3
 #: app/templates/terms_public.html:8
 msgid "Uslovi korišćenja"
-msgstr ""
+msgstr "Nutzungsbedingungen"
 
 #: app/templates/base.html:109 app/templates/privacy_policy.html:3
 #: app/templates/privacy_policy.html:7
 msgid "Politika privatnosti"
-msgstr ""
+msgstr "Datenschutzrichtlinie"
 
 #: app/templates/contact.html:7
 msgid "Kontaktirajte nas"
-msgstr ""
+msgstr "Kontaktieren Sie uns"
 
 #: app/templates/contact.html:8
 msgid "Imate pitanje, sugestiju ili prijavu problema? Javite nam se!"
-msgstr ""
+msgstr "Haben Sie eine Frage, einen Vorschlag oder ein Problem zu melden? Kontaktieren Sie uns!"
 
 #: app/templates/contact.html:13
 msgid "Email:"
-msgstr ""
+msgstr "E-Mail:"
 
 #: app/templates/contact.html:13 app/templates/contact.html:16
 #: app/templates/contact.html:19
 msgid "Uskoro"
-msgstr ""
+msgstr "Bald"
 
 #: app/templates/contact.html:16 app/templates/employer_detail.html:35
 msgid "Telefon:"
-msgstr ""
+msgstr "Telefon:"
 
 #: app/templates/contact.html:19
 msgid "Adresa:"
-msgstr ""
+msgstr "Adresse:"
 
 #: app/templates/contact.html:24
 msgid "Odgovaramo u roku od"
-msgstr ""
+msgstr "Wir antworten innerhalb von"
 
 #: app/templates/contact.html:24
 msgid "sata"
-msgstr ""
+msgstr "Stunden"
 
 #: app/templates/contact.html:24
 msgid "radnim danima."
-msgstr ""
+msgstr "an Werktagen."
 
 #: app/templates/dashboard.html:6
 msgid "Panel poslodavca"
-msgstr ""
+msgstr "Arbeitgeber-Panel"
 
 #: app/templates/dashboard.html:13
 msgid "Unesite novog vozača u sistem."
-msgstr ""
+msgstr "Neuen Fahrer ins System eintragen."
 
 #: app/templates/dashboard.html:14
 msgid "Dodaj"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: app/templates/dashboard.html:21
 msgid "Pregled vozača"
-msgstr ""
+msgstr "Fahrerliste"
 
 #: app/templates/dashboard.html:22
 msgid "Pogledajte vozače koji rade ili su radili kod vas."
-msgstr ""
+msgstr "Sehen Sie Fahrer, die aktuell oder früher bei Ihnen gearbeitet haben."
 
 #: app/templates/dashboard.html:23
 msgid "Prikaži"
-msgstr ""
+msgstr "Anzeigen"
 
 #: app/templates/driver_detail.html:23
 msgid "Zaposlen"
-msgstr ""
+msgstr "Beschäftigt"
 
 #: app/templates/driver_detail.html:30
 msgid "Nezaposlen"
-msgstr ""
+msgstr "Arbeitslos"
 
 #: app/templates/driver_detail.html:41
 msgid "Tahograf kartica"
-msgstr ""
+msgstr "Fahrerkart"
 
 #: app/templates/driver_detail.html:43 app/templates/driver_detail.html:52
 msgid "Važi do"
-msgstr ""
+msgstr "Gültig bis"
 
 #: app/templates/driver_detail.html:50
 msgid "CPC kartica"
-msgstr ""
+msgstr "CPC-Karte"
 
 #: app/templates/driver_detail.html:78 app/templates/search_driver.html:92
 msgid "Preuzmi vozača"
-msgstr ""
+msgstr "Fahrer übernehmen"
 
 #: app/templates/driver_detail.html:83
 msgid "Ažuriraj"
-msgstr ""
+msgstr "Aktualisieren"
 
 #: app/templates/driver_detail.html:87
 msgid "Deaktiviraj"
-msgstr ""
+msgstr "Deaktivieren"
 
 #: app/templates/driver_detail.html:95
 msgid "Ocene vozača"
-msgstr ""
+msgstr "Fahrerbewertungen"
 
 #: app/templates/driver_detail.html:118 app/templates/driver_exists.html:18
 #: app/templates/drivers.html:72 app/templates/rate_driver.html:23
 #: app/templates/search_driver.html:106
 msgid "Ocena"
-msgstr ""
+msgstr "Bewertung"
 
 #: app/templates/driver_detail.html:120
 msgid "Ocenio"
-msgstr ""
+msgstr "Bewertet von"
 
 #: app/templates/driver_detail.html:126
 msgid "Nepoznato"
-msgstr ""
+msgstr "Unbekannt"
 
 #: app/templates/driver_detail.html:137
 msgid "Vozač još nema nijednu ocenu."
-msgstr ""
+msgstr "Der Fahrer hat noch keine Bewertung."
 
 #: app/templates/driver_detail.html:142 app/templates/search_driver.html:69
 msgid "Istorija tahograf kartica"
-msgstr ""
+msgstr "Historie der Fahrerkarten"
 
 #: app/templates/driver_detail.html:151
 msgid "Ističe"
-msgstr ""
+msgstr "Läuft ab"
 
 #: app/templates/driver_detail.html:162
 msgid "Aktivna"
-msgstr ""
+msgstr "Aktiv"
 
 #: app/templates/driver_detail.html:164
 msgid "Neaktivna"
-msgstr ""
+msgstr "Inaktiv"
 
 #: app/templates/driver_detail.html:173
 msgid "Nema podataka o karticama."
-msgstr ""
+msgstr "Keine Kartendaten vorhanden."
 
 #: app/templates/driver_exists.html:3
 msgid "Postojeći vozač"
-msgstr ""
+msgstr "Bestehender Fahrer"
 
 #: app/templates/driver_exists.html:7
 msgid "Vozač već postoji u sistemu"
-msgstr ""
+msgstr "Fahrer ist bereits im System vorhanden"
 
 #: app/templates/driver_exists.html:10
 msgid "Broj tahografske kartice"
-msgstr ""
+msgstr "Fahrerkartennummer"
 
 #: app/templates/driver_exists.html:12
 msgid "Istorija rada kod drugih poslodavaca i ocene"
-msgstr ""
+msgstr "Beschäftigungshistorie bei anderen Arbeitgebern und Bewertungen"
 
 #: app/templates/driver_exists.html:19 app/templates/rate_driver.html:18
 #: app/templates/search_driver.html:107
 msgid "Komentar"
-msgstr ""
+msgstr "Kommentar"
 
 #: app/templates/driver_exists.html:20 app/templates/search_driver.html:108
 msgid "Datum"
-msgstr ""
+msgstr "Datum"
 
 #: app/templates/driver_exists.html:35
 msgid "Nema podataka o ranijim poslodavcima i ocenama."
-msgstr ""
+msgstr "Keine Daten zu früheren Arbeitgebern und Bewertungen."
 
 #: app/templates/driver_exists.html:41
 msgid "Aktiviraj i dodaj vozača u moju firmu"
-msgstr ""
+msgstr "Aktivieren und Fahrer zu meinem Unternehmen hinzufügen"
 
 #: app/templates/driver_exists.html:44
 msgid "Otkaži"
-msgstr ""
+msgstr "Abbrechen"
 
 #: app/templates/driver_exists.html:49 app/templates/search_driver.html:87
 msgid "Ažuriraj vozača"
-msgstr ""
+msgstr "Fahrer aktualisieren"
 
 #: app/templates/drivers.html:10
 msgid "Napredna pretraga:"
-msgstr ""
+msgstr "Erweiterte Suche:"
 
 #: app/templates/drivers.html:10
 msgid "Pronađite bilo kog vozača u sistemu, bez obzira na firmu."
-msgstr ""
+msgstr "Finden Sie jeden Fahrer im System, unabhängig vom Unternehmen."
 
 #: app/templates/drivers.html:16
 msgid "Pretraži sve vozače u sistemu"
-msgstr ""
+msgstr "Alle Fahrer im System durchsuchen"
 
 #: app/templates/drivers.html:23
 msgid "Pretraga vaših vozača"
-msgstr ""
+msgstr "Ihre Fahrer durchsuchen"
 
 #: app/templates/drivers.html:27
 msgid "Vaši vozači"
-msgstr ""
+msgstr "Ihre Fahrer"
 
 #: app/templates/drivers.html:30
 msgid "Svi vozači (uključujući i neaktivne)"
-msgstr ""
+msgstr "Alle Fahrer (einschließlich inaktiver)"
 
 #: app/templates/drivers.html:42
 msgid "Unesite ime, tahograf karticu ili CPC"
-msgstr ""
+msgstr "Geben Sie Name, Fahrerkartennummer oder CPC ein"
 
 #: app/templates/drivers.html:51
 msgid "Sortiraj po imenu"
-msgstr ""
+msgstr "Nach Name sortieren"
 
 #: app/templates/drivers.html:52
 msgid "Sortiraj po oceni"
-msgstr ""
+msgstr "Nach Bewertung sortieren"
 
 #: app/templates/drivers.html:69
 msgid "Tahograf kartica važi do"
-msgstr ""
+msgstr "Fahrerkarte gültig bis"
 
 #: app/templates/drivers.html:73 app/templates/drivers.html:114
 msgid "Oceni"
-msgstr ""
+msgstr "Bewerten"
 
 #: app/templates/drivers.html:106
 msgid "Još nije ocenjen"
-msgstr ""
+msgstr "Noch nicht bewertet"
 
 #: app/templates/drivers.html:113
 msgid "Ponovo oceni"
-msgstr ""
+msgstr "Erneut bewerten"
 
 #: app/templates/drivers.html:113
 msgid "Oceni ovog vozača"
-msgstr ""
+msgstr "Diesen Fahrer bewerten"
 
 #: app/templates/drivers.html:160
 msgid "Trenutno nemate nijednog vozača u sistemu."
-msgstr ""
+msgstr "Derzeit haben Sie keinen Fahrer im System."
 
 #: app/templates/employer_detail.html:3
 msgid "Послодавац"
-msgstr ""
+msgstr "Arbeitgeber"
 
 #: app/templates/employer_detail.html:11
 msgid "Detalji o poslodavcu"
-msgstr ""
+msgstr "Arbeitgeberdetails"
 
 #: app/templates/employer_detail.html:27
 msgid "Naziv firme:"
-msgstr ""
+msgstr "Firmenname:"
 
 #: app/templates/employer_detail.html:31
 msgid "PIB:"
-msgstr ""
+msgstr "USt-IdNr.:"
 
 #: app/templates/employer_detail.html:42
 msgid "Nazad na kontrolnu tablu"
-msgstr ""
+msgstr "Zurück zum Dashboard"
 
 #: app/templates/employer_profile.html:9 app/templates/register.html:20
 msgid "Naziv firme"
-msgstr ""
+msgstr "Firmenname"
 
 #: app/templates/employer_profile.html:13
 msgid "PIB (nepromenljiv)"
-msgstr ""
+msgstr "USt-IdNr. (unveränderlich)"
 
 #: app/templates/employer_profile.html:17
 msgid "Imejl"
-msgstr ""
+msgstr "E-Mail"
 
 #: app/templates/employer_profile.html:21
 msgid "Broj telefona"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: app/templates/employer_profile.html:22
 msgid "Unesite broj telefona (samo cifre)"
-msgstr ""
+msgstr "Telefonnummer eingeben (nur Ziffern)"
 
 #: app/templates/employer_profile.html:25
 msgid "Nova lozinka (ostavite prazno ako ne menjate)"
-msgstr ""
+msgstr "Neues Passwort (leer lassen, wenn nicht geändert)"
 
 #: app/templates/employer_profile.html:28
 msgid "Sačuvaj izmene"
-msgstr ""
+msgstr "Änderungen speichern"
 
 #: app/templates/index.html:7
 msgid "Platforma za ocenjivanje i proveru profesionalnih vozača."
-msgstr ""
+msgstr "Plattform zur Bewertung und Überprüfung von Berufskraftfahrern."
 
 #: app/templates/index.html:9 app/templates/login.html:25
 msgid "Prijavi se"
-msgstr ""
+msgstr "Anmelden"
 
 #: app/templates/index.html:10 app/templates/register.html:67
 msgid "Registruj se"
-msgstr ""
+msgstr "Registrieren"
 
 #: app/templates/login.html:19
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 #: app/templates/login.html:22 app/templates/register.html:50
 msgid "Lozinka"
-msgstr ""
+msgstr "Passwort"
 
 #: app/templates/login.html:28
 msgid "Zaboravili ste lozinku?"
-msgstr ""
+msgstr "Passwort vergessen?"
 
 #: app/templates/login.html:33
 msgid "Nemate nalog?"
-msgstr ""
+msgstr "Noch keinen Account?"
 
 #: app/templates/login.html:33
 msgid "Registrujte se"
-msgstr ""
+msgstr "Registrieren"
 
 #: app/templates/privacy_policy.html:10
 msgid "Ova Politika privatnosti opisuje načine na koje aplikacija"
-msgstr ""
+msgstr "Diese Datenschutzrichtlinie beschreibt, wie die Anwendung"
 
 #: app/templates/privacy_policy.html:12
 msgid ""
@@ -628,101 +624,103 @@ msgid ""
 "uredbom o zaštiti podataka (GDPR), Zakonom o zaštiti podataka o ličnosti "
 "Republike Srbije i drugim relevantnim propisima."
 msgstr ""
+"personenbezogene Daten erhebt, verwendet, speichert und schützt, in Übereinstimmung mit "
+"der Datenschutz-Grundverordnung (DSGVO), dem Datenschutzgesetz der Republik Serbien und anderen relevanten Vorschriften."
 
 #: app/templates/privacy_policy.html:15
 msgid "1. Kontrolor podataka"
-msgstr ""
+msgstr "1. Datenverantwortlicher"
 
 #: app/templates/privacy_policy.html:17
 msgid "Kontrolor vaših ličnih podataka je vlasnik aplikacije"
-msgstr ""
+msgstr "Verantwortlich für Ihre personenbezogenen Daten ist der Eigentümer der Anwendung"
 
 #: app/templates/privacy_policy.html:19
 msgid ""
 "sa sedištem u Republici Srbiji. Za sva pitanja u vezi obrade podataka "
 "možete kontaktirati administratora preko zvaničnih kanala."
-msgstr ""
+msgstr "mit Sitz in der Republik Serbien. Für alle Fragen zur Datenverarbeitung können Sie den Administrator über die offiziellen Kanäle kontaktieren."
 
 #: app/templates/privacy_policy.html:22
 msgid "2. Prikupljanje podataka"
-msgstr ""
+msgstr "2. Datenerhebung"
 
 #: app/templates/privacy_policy.html:23
 msgid ""
 "Prikupljamo lične podatke koje nam dobrovoljno dostavljate prilikom "
 "registracije i korišćenja aplikacije, uključujući, ali ne ograničavajući "
 "se na:"
-msgstr ""
+msgstr "Wir erheben personenbezogene Daten, die Sie uns freiwillig bei der Registrierung und Nutzung der Anwendung bereitstellen, einschließlich, aber nicht beschränkt auf:"
 
 #: app/templates/privacy_policy.html:25
 msgid ""
 "Podaci o poslodavcu: naziv firme, PIB, kontakt informacije, e-mail "
 "adresa, lozinka;"
-msgstr ""
+msgstr "Arbeitgeberdaten: Firmenname, USt-IdNr., Kontaktdaten, E-Mail-Adresse, Passwort;"
 
 #: app/templates/privacy_policy.html:26
 msgid "Podaci o vozačima u skladu sa zakonom i ugovorom o radu;"
-msgstr ""
+msgstr "Fahrerdaten gemäß Gesetz und Arbeitsvertrag;"
 
 #: app/templates/privacy_policy.html:27
 msgid ""
 "Druge informacije koje nam dostavite prilikom korišćenja usluga "
 "aplikacije."
-msgstr ""
+msgstr "Andere Informationen, die Sie uns bei der Nutzung der Dienste der Anwendung bereitstellen."
 
 #: app/templates/privacy_policy.html:30
 msgid "3. Pravna osnova za obradu podataka"
-msgstr ""
+msgstr "3. Rechtsgrundlage für die Datenverarbeitung"
 
 #: app/templates/privacy_policy.html:31
 msgid "Obrada vaših podataka vrši se na osnovu:"
-msgstr ""
+msgstr "Die Verarbeitung Ihrer Daten erfolgt auf Grundlage von:"
 
 #: app/templates/privacy_policy.html:33
 msgid "Vašeg pristanka (na primer, pri registraciji);"
-msgstr ""
+msgstr "Ihrer Einwilligung (z. B. bei der Registrierung);"
 
 #: app/templates/privacy_policy.html:34
 msgid "Ispunjenja ugovora ili predugovornih radnji (radni odnosi, zapošljavanje);"
-msgstr ""
+msgstr "Erfüllung eines Vertrags oder vorvertraglicher Maßnahmen (Arbeitsverhältnisse, Beschäftigung);"
 
 #: app/templates/privacy_policy.html:35
 msgid "Izvršenja zakonskih obaveza koje se odnose na poslodavca;"
-msgstr ""
+msgstr "Erfüllung gesetzlicher Verpflichtungen des Arbeitgebers;"
 
 #: app/templates/privacy_policy.html:36
 msgid ""
 "Zakonitih interesa vlasnika aplikacije, kao što je obezbeđenje "
 "bezbednosti i sprečavanje zloupotreba."
-msgstr ""
+msgstr "Berechtigtes Interesse des Anwendungsinhabers, wie z. B. Gewährleistung der Sicherheit und Verhinderung von Missbrauch."
 
 #: app/templates/privacy_policy.html:39
 msgid "4. Svrha obrade podataka"
-msgstr ""
+msgstr "4. Zweck der Datenverarbeitung"
 
 #: app/templates/privacy_policy.html:40
 msgid "Vaši lični podaci se koriste isključivo u sledeće svrhe:"
-msgstr ""
+msgstr "Ihre personenbezogenen Daten werden ausschließlich für folgende Zwecke verwendet:"
 
 #: app/templates/privacy_policy.html:42
 msgid "Upravljanje radnim odnosima i zapošljavanjem vozača;"
-msgstr ""
+msgstr "Verwaltung von Arbeitsverhältnissen und Fahrerbeschäftigung;"
 
 #: app/templates/privacy_policy.html:43
 msgid "Ocenjivanje i praćenje rada vozača;"
-msgstr ""
+msgstr "Bewertung und Überwachung der Fahrerleistung;"
 
 #: app/templates/privacy_policy.html:44
 msgid "Obezbeđenje funkcionalnosti i bezbednosti aplikacije;"
-msgstr ""
+msgstr "Sicherstellung der Funktionalität und Sicherheit der Anwendung;"
 
 #: app/templates/privacy_policy.html:45
 msgid "Iskustvena i tehnička podrška."
-msgstr ""
+msgstr "Erfahrungs- und technischer Support."
 
 #: app/templates/privacy_policy.html:48
 msgid "5. Čuvanje i bezbednost podataka"
-msgstr ""
+msgstr "5. Speicherung und Sicherheit der Daten"
 
 #: app/templates/privacy_policy.html:49
 msgid ""
@@ -731,10 +729,11 @@ msgid ""
 " čuvaju onoliko dugo koliko je potrebno za ispunjenje svrha obrade, "
 "uključujući i zakonske obaveze čuvanja evidencija u radnom odnosu."
 msgstr ""
+"Wir wenden technische und organisatorische Maßnahmen zum Schutz der Daten an, um deren Vertraulichkeit, Integrität und Verfügbarkeit zu gewährleisten. Personenbezogene Daten werden so lange gespeichert, wie es für die Erfüllung der Verarbeitungszwecke erforderlich ist, einschließlich gesetzlicher Aufbewahrungspflichten im Arbeitsverhältnis."
 
 #: app/templates/privacy_policy.html:51
 msgid "6. Čuvanje i obrada podataka o vozačima"
-msgstr ""
+msgstr "6. Speicherung und Verarbeitung von Fahrerdaten"
 
 #: app/templates/privacy_policy.html:52
 msgid ""
@@ -742,16 +741,18 @@ msgid ""
 "vođenju evidencija u radnom odnosu, kao i radi očuvanja integriteta "
 "istorije rada, ocenjivanja i komentara."
 msgstr ""
+"Fahrerdaten werden gemäß den geltenden gesetzlichen Vorschriften zur Führung von Arbeitsunterlagen gespeichert, sowie zur Wahrung der Integrität der Arbeitsgeschichte, Bewertungen und Kommentare."
 
 #: app/templates/privacy_policy.html:53
 msgid ""
 "Pristup ovim podacima je strogo ograničen i zaštićen u skladu sa "
 "propisima o zaštiti podataka o ličnosti."
 msgstr ""
+"Der Zugriff auf diese Daten ist streng eingeschränkt und gemäß den Datenschutzbestimmungen geschützt."
 
 #: app/templates/privacy_policy.html:55
 msgid "7. Pristup i deljenje podataka"
-msgstr ""
+msgstr "7. Zugriff und Weitergabe von Daten"
 
 #: app/templates/privacy_policy.html:56
 msgid ""
@@ -760,10 +761,11 @@ msgid ""
 "licima osim u slučajevima kada to zahteva zakon ili je neophodno radi "
 "pružanja usluga."
 msgstr ""
+"Zugriff auf Ihre personenbezogenen Daten haben nur autorisierte Anwendungsbenutzer und Mitarbeiter, die zur Verarbeitung befugt sind. Wir geben Ihre Daten nicht an Dritte weiter, außer in Fällen, in denen dies gesetzlich vorgeschrieben oder zur Erbringung von Dienstleistungen erforderlich ist."
 
 #: app/templates/privacy_policy.html:58
 msgid "8. Vaša prava"
-msgstr ""
+msgstr "8. Ihre Rechte"
 
 #: app/templates/privacy_policy.html:59
 msgid ""
@@ -771,38 +773,41 @@ msgid ""
 "ličnim podacima, osim za podatke koji su zakonski obavezni za trajno "
 "čuvanje u evidencijama radnog odnosa:"
 msgstr ""
+"Gemäß den geltenden Vorschriften haben Sie folgende Rechte in Bezug auf Ihre personenbezogenen Daten, außer für Daten, die gesetzlich zur dauerhaften Aufbewahrung in Arbeitsunterlagen verpflichtet sind:"
 
 #: app/templates/privacy_policy.html:61
 msgid "Pravo pristupa svojim podacima;"
-msgstr ""
+msgstr "Recht auf Zugang zu Ihren Daten;"
 
 #: app/templates/privacy_policy.html:62
 msgid "Pravo na ispravku netačnih ili nepotpunih podataka;"
-msgstr ""
+msgstr "Recht auf Berichtigung unrichtiger oder unvollständiger Daten;"
 
 #: app/templates/privacy_policy.html:63
 msgid "Pravo na ograničavanje obrade podataka;"
-msgstr ""
+msgstr "Recht auf Einschränkung der Datenverarbeitung;"
 
 #: app/templates/privacy_policy.html:64
 msgid "Pravo na prenosivost podataka;"
-msgstr ""
+msgstr "Recht auf Datenübertragbarkeit;"
 
 #: app/templates/privacy_policy.html:65
 msgid ""
 "Pravo da u bilo kom trenutku povučete pristanak za obradu podataka kada "
 "je obrada zasnovana na pristanku, osim za zakonski obavezne podatke;"
 msgstr ""
+"Recht, jederzeit die Einwilligung zur Datenverarbeitung zu widerrufen, wenn die Verarbeitung auf Einwilligung basiert, außer für gesetzlich vorgeschriebene Daten;"
 
 #: app/templates/privacy_policy.html:66
 msgid ""
 "Pravo na podnošenje žalbe nadzornom organu za zaštitu podataka u "
 "Republici Srbiji."
 msgstr ""
+"Recht, eine Beschwerde bei der Datenschutzaufsichtsbehörde der Republik Serbien einzureichen."
 
 #: app/templates/privacy_policy.html:69
 msgid "9. Kolačići (Cookies)"
-msgstr ""
+msgstr "9. Cookies"
 
 #: app/templates/privacy_policy.html:70
 msgid ""
@@ -810,10 +815,11 @@ msgid ""
 "funkcionisanje nekih funkcionalnosti. Koriste se samo neophodni kolačići "
 "koji ne prikupljaju lične podatke."
 msgstr ""
+"Die Anwendung verwendet Cookies zur Verbesserung der Benutzererfahrung und der Funktionalität. Es werden nur notwendige Cookies verwendet, die keine personenbezogenen Daten sammeln."
 
 #: app/templates/privacy_policy.html:72
 msgid "10. Izmene politike privatnosti"
-msgstr ""
+msgstr "10. Änderungen der Datenschutzrichtlinie"
 
 #: app/templates/privacy_policy.html:73
 msgid ""
@@ -821,259 +827,262 @@ msgid ""
 "zakonskim izmenama ili promenama u funkcionisanju aplikacije. Sve izmene "
 "biće objavljene na ovoj stranici."
 msgstr ""
+"Wir behalten uns das Recht vor, diese Datenschutzrichtlinie im Einklang mit gesetzlichen Änderungen oder Änderungen in der Funktionsweise der Anwendung zu ändern. Alle Änderungen werden auf dieser Seite veröffentlicht."
 
 #: app/templates/privacy_policy.html:75
 msgid "11. Kontakt"
-msgstr ""
+msgstr "11. Kontakt"
 
 #: app/templates/privacy_policy.html:76
 msgid ""
 "Za sva pitanja, zahteve ili prijave u vezi sa zaštitom ličnih podataka, "
 "možete nas kontaktirati putem zvaničnih kanala aplikacije."
 msgstr ""
+"Für alle Fragen, Anfragen oder Meldungen zum Datenschutz können Sie uns über die offiziellen Kanäle der Anwendung kontaktieren."
 
 #: app/templates/privacy_policy.html:79
 msgid "Korišćenjem aplikacije saglasni ste sa ovom politikom privatnosti."
-msgstr ""
+msgstr "Durch die Nutzung der Anwendung stimmen Sie dieser Datenschutzrichtlinie zu."
 
 #: app/templates/rate_driver.html:6
 msgid "Oceni vozača"
-msgstr ""
+msgstr "Fahrer bewerten"
 
 #: app/templates/rate_driver.html:13
 msgid "Već ste ocenili ovog vozača – možete ažurirati ocenu i komentar."
-msgstr ""
+msgstr "Sie haben diesen Fahrer bereits bewertet – Sie können Bewertung und Kommentar aktualisieren."
 
 #: app/templates/rate_driver.html:36
 msgid "Ažuriraj ocenu"
-msgstr ""
+msgstr "Bewertung aktualisieren"
 
 #: app/templates/rate_driver.html:38
 msgid "Pošalji ocenu"
-msgstr ""
+msgstr "Bewertung absenden"
 
 #: app/templates/register.html:6
 msgid "Registracija poslodavca"
-msgstr ""
+msgstr "Registrierung des Arbeitgebers"
 
 #: app/templates/register.html:27
 msgid "PIB"
-msgstr ""
+msgstr "USt-IdNr."
 
 #: app/templates/register.html:30
 msgid "PIB mora sadržati tačno 9 cifara."
-msgstr ""
+msgstr "Die USt-IdNr. muss genau 9 Ziffern enthalten."
 
 #: app/templates/register.html:35
 msgid "Telefon"
-msgstr ""
+msgstr "Telefon"
 
 #: app/templates/register.html:38
 msgid "Unesite samo cifre"
-msgstr ""
+msgstr "Nur Ziffern eingeben"
 
 #: app/templates/register.html:43
 msgid "E-mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: app/templates/register.html:59
 msgid "Slažem se sa"
-msgstr ""
+msgstr "Ich stimme zu"
 
 #: app/templates/register.html:60
 msgid "uslovima korišćenja"
-msgstr ""
+msgstr "den Nutzungsbedingungen"
 
 #: app/templates/register.html:62
 msgid "politikom privatnosti"
-msgstr ""
+msgstr "der Datenschutzrichtlinie"
 
 #: app/templates/register.html:71
 msgid "Povratak na prijavu"
-msgstr ""
+msgstr "Zurück zur Anmeldung"
 
 #: app/templates/register.html:92
 msgid "mora imati najmanje 8 karaktera"
-msgstr ""
+msgstr "muss mindestens 8 Zeichen enthalten"
 
 #: app/templates/register.html:95
 msgid "mora sadržati bar jedno veliko slovo"
-msgstr ""
+msgstr "muss mindestens einen Großbuchstaben enthalten"
 
 #: app/templates/register.html:98
 msgid "mora sadržati bar jedan broj"
-msgstr ""
+msgstr "muss mindestens eine Zahl enthalten"
 
 #: app/templates/register.html:101
 msgid "mora sadržati bar jedan specijalni znak (!@#$%^&*)"
-msgstr ""
+msgstr "muss mindestens ein Sonderzeichen enthalten (!@#$%^&*)"
 
 #: app/templates/register.html:105 app/templates/reset_password_form.html:57
 msgid "Jaka lozinka"
-msgstr ""
+msgstr "Starkes Passwort"
 
 #: app/templates/register.html:109 app/templates/reset_password_form.html:61
 msgid "Lozinka nije dovoljno jaka:"
-msgstr ""
+msgstr "Passwort ist nicht stark genug:"
 
 #: app/templates/register.html:124 app/templates/reset_password_form.html:77
 msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
-msgstr ""
+msgstr "Passwort ist nicht stark genug. Bitte korrigieren Sie vor dem Absenden."
 
 #: app/templates/register.html:130
 msgid "Morate se složiti sa uslovima korišćenja i politikom privatnosti."
-msgstr ""
+msgstr "Sie müssen den Nutzungsbedingungen und der Datenschutzrichtlinie zustimmen."
 
 #: app/templates/reset_password_form.html:2
 msgid "Nova lozinka"
-msgstr ""
+msgstr "Neues Passwort"
 
 #: app/templates/reset_password_form.html:6
 msgid "Unesite novu lozinku"
-msgstr ""
+msgstr "Neues Passwort eingeben"
 
 #: app/templates/reset_password_form.html:18
 msgid "Nova lozinka:"
-msgstr ""
+msgstr "Neues Passwort:"
 
 #: app/templates/reset_password_form.html:23
 msgid "Potvrdi lozinku:"
-msgstr ""
+msgstr "Passwort bestätigen:"
 
 #: app/templates/reset_password_form.html:29
 msgid "Postavi lozinku"
-msgstr ""
+msgstr "Passwort festlegen"
 
 #: app/templates/reset_password_form.html:44
 msgid "Mora imati najmanje 8 karaktera"
-msgstr ""
+msgstr "Muss mindestens 8 Zeichen enthalten"
 
 #: app/templates/reset_password_form.html:47
 msgid "Mora sadržati bar jedno veliko slovo"
-msgstr ""
+msgstr "Muss mindestens einen Großbuchstaben enthalten"
 
 #: app/templates/reset_password_form.html:50
 msgid "Mora sadržati bar jedan broj"
-msgstr ""
+msgstr "Muss mindestens eine Zahl enthalten"
 
 #: app/templates/reset_password_form.html:53
 msgid "Mora sadržati bar jedan specijalni znak (!@#$%^&*)"
-msgstr ""
+msgstr "Muss mindestens ein Sonderzeichen enthalten (!@#$%^&*)"
 
 #: app/templates/reset_password_form.html:83
 msgid "Lozinke se ne poklapaju."
-msgstr ""
+msgstr "Passwörter stimmen nicht überein."
 
 #: app/templates/reset_password_request.html:2
 #: app/templates/reset_password_request.html:6
 msgid "Resetovanje lozinke"
-msgstr ""
+msgstr "Passwort zurücksetzen"
 
 #: app/templates/reset_password_request.html:7
 msgid "Unesite vaš imejl da biste dobili link za postavljanje nove lozinke."
-msgstr ""
+msgstr "Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten."
 
 #: app/templates/reset_password_request.html:19
 msgid "Imejl adresa:"
-msgstr ""
+msgstr "E-Mail-Adresse:"
 
 #: app/templates/reset_password_request.html:20
 msgid "unesite@email.com"
-msgstr ""
+msgstr "geben Sie@email.com ein"
 
 #: app/templates/reset_password_request.html:22
 msgid "Pošalji link"
-msgstr ""
+msgstr "Link senden"
 
 #: app/templates/search_driver.html:2 app/templates/search_driver.html:9
 msgid "Pretraga vozača"
-msgstr ""
+msgstr "Fahrersuche"
 
 #: app/templates/search_driver.html:13
 msgid "Unesite JMBG, broj tahograf kartice ili CPC kartice"
-msgstr ""
+msgstr "Geben Sie JMBG, Fahrerkartennummer oder CPC-Kartennummer ein"
 
 #: app/templates/search_driver.html:26
 msgid "Rezultati pretrage"
-msgstr ""
+msgstr "Suchergebnisse"
 
 #: app/templates/search_driver.html:31
 msgid "Ime i prezime:"
-msgstr ""
+msgstr "Vor- und Nachname:"
 
 #: app/templates/search_driver.html:34
 msgid "Pogledaj detalje o vozaču"
-msgstr ""
+msgstr "Fahrerdetails ansehen"
 
 #: app/templates/search_driver.html:38
 msgid "Kliknite za detalje"
-msgstr ""
+msgstr "Klicken Sie für Details"
 
 #: app/templates/search_driver.html:43
 msgid "Broj tahograf kartice:"
-msgstr ""
+msgstr "Fahrerkartennummer:"
 
 #: app/templates/search_driver.html:48
 msgid "Broj CPC kartice:"
-msgstr ""
+msgstr "CPC-Kartennummer:"
 
 #: app/templates/search_driver.html:53
 msgid "Firma:"
-msgstr ""
+msgstr "Firma:"
 
 #: app/templates/search_driver.html:54
 msgid "Nije zaposlen"
-msgstr ""
+msgstr "Nicht beschäftigt"
 
 #: app/templates/search_driver.html:58
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: app/templates/search_driver.html:73
 msgid "Broj kartice:"
-msgstr ""
+msgstr "Kartennummer:"
 
 #: app/templates/search_driver.html:75
 msgid "Izdata:"
-msgstr ""
+msgstr "Ausgestellt:"
 
 #: app/templates/search_driver.html:78
 msgid "Važi do:"
-msgstr ""
+msgstr "Gültig bis:"
 
 #: app/templates/search_driver.html:80
 msgid "neaktivna"
-msgstr ""
+msgstr "inaktiv"
 
 #: app/templates/search_driver.html:100
 msgid "Ocene prethodnih poslodavaca"
-msgstr ""
+msgstr "Bewertungen früherer Arbeitgeber"
 
 #: app/templates/search_driver.html:125
 msgid "Nema ocena."
-msgstr ""
+msgstr "Keine Bewertungen."
 
 #: app/templates/search_driver.html:130
 msgid "Vozač nije pronađen."
-msgstr ""
+msgstr "Fahrer nicht gefunden."
 
 #: app/templates/search_driver.html:134
 msgid "Dodatna provera"
-msgstr ""
+msgstr "Zusätzliche Prüfung"
 
 #: app/templates/search_driver.html:145
 msgid "Proveri"
-msgstr ""
+msgstr "Überprüfen"
 
 #: app/templates/terms.html:11
 msgid ""
 "Stranica sa uslovima korišćenja dostupna je isključivo registrovanim "
 "poslodavcima koji koriste aplikaciju kao ovlašćeni korisnici."
 msgstr ""
+"Die Seite mit den Nutzungsbedingungen ist ausschließlich registrierten Arbeitgebern zugänglich, die die Anwendung als autorisierte Benutzer verwenden."
 
 #: app/templates/terms.html:14 app/templates/terms_public.html:10
 msgid "Namena aplikacije"
-msgstr ""
+msgstr "Zweck der Anwendung"
 
 #: app/templates/terms.html:16 app/templates/terms_public.html:12
 msgid ""
@@ -1081,10 +1090,11 @@ msgid ""
 "industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz "
 "istorije angažmana kod različitih poslodavaca."
 msgstr ""
+"Diese Webanwendung ist ausschließlich für Arbeitgeber in der Transportbranche bestimmt, um die Arbeit der Fahrer zu dokumentieren und zu bewerten, einschließlich der Anzeige der Beschäftigungshistorie bei verschiedenen Arbeitgebern."
 
 #: app/templates/terms.html:19 app/templates/terms_public.html:15
 msgid "Obrada ličnih podataka"
-msgstr ""
+msgstr "Verarbeitung personenbezogener Daten"
 
 #: app/templates/terms.html:21
 msgid ""
@@ -1093,10 +1103,11 @@ msgid ""
 "podataka i privatnosti, isključivo u kontekstu radnog odnosa ili procesa "
 "zapošljavanja."
 msgstr ""
+"Durch die Nutzung der Anwendung stimmen Sie zu, dass Arbeitgeber Daten von Beschäftigten gemäß den geltenden Datenschutzgesetzen und -vorschriften erfassen und verarbeiten dürfen, ausschließlich im Kontext des Arbeitsverhältnisses oder des Einstellungsprozesses."
 
 #: app/templates/terms.html:24
 msgid "Zaštita podataka o ličnosti"
-msgstr ""
+msgstr "Schutz personenbezogener Daten"
 
 #: app/templates/terms.html:26
 msgid ""
@@ -1105,10 +1116,11 @@ msgid ""
 "bezbednosnim standardima i zakonodavstvom o zaštiti podataka. Pristup "
 "ovim podacima je ograničen samo na ovlašćene korisnike."
 msgstr ""
+"Personenbezogene Daten, einschließlich eindeutiger Identifikationsnummern, werden als vertraulich behandelt und gemäß den höchsten Sicherheitsstandards und den Datenschutzgesetzen geschützt. Der Zugriff auf diese Daten ist nur autorisierten Benutzern gestattet."
 
 #: app/templates/terms.html:29 app/templates/terms_public.html:20
 msgid "Pristup podacima"
-msgstr ""
+msgstr "Datenzugriff"
 
 #: app/templates/terms.html:31
 msgid ""
@@ -1116,10 +1128,11 @@ msgid ""
 "broja tahograf kartice, broja CPC kartice i drugih relevantnih "
 "identifikacionih podataka."
 msgstr ""
+"Nur registrierte Arbeitgeber können auf Fahrerdaten über Fahrerkartennummer, CPC-Kartennummer und andere relevante Identifikationsdaten zugreifen."
 
 #: app/templates/terms.html:34 app/templates/terms_public.html:25
 msgid "Zabrana zloupotrebe"
-msgstr ""
+msgstr "Missbrauchsverbot"
 
 #: app/templates/terms.html:36
 msgid ""
@@ -1127,20 +1140,22 @@ msgid ""
 "otkrivanje podataka. Korisnici koji prekrše pravila biće onemogućeni u "
 "daljem korišćenju aplikacije i mogu snositi pravne posledice."
 msgstr ""
+"Jegliche unbefugte Nutzung, Kopieren, Übertragen oder Offenlegung von Daten ist untersagt. Benutzer, die gegen die Regeln verstoßen, werden von der weiteren Nutzung der Anwendung ausgeschlossen und können rechtlich belangt werden."
 
 #: app/templates/terms.html:39 app/templates/terms_public.html:30
 msgid "Tehnička podrška"
-msgstr ""
+msgstr "Technischer Support"
 
 #: app/templates/terms.html:41 app/templates/terms_public.html:32
 msgid ""
 "U slučaju tehničkih problema, obratite se administratoru aplikacije putem"
 " zvaničnog kontakt obrasca."
 msgstr ""
+"Bei technischen Problemen wenden Sie sich bitte über das offizielle Kontaktformular an den Anwendungsadministrator."
 
 #: app/templates/terms.html:46 app/templates/terms_public.html:37
 msgid "Korišćenjem aplikacije prihvatate sve navedene uslove."
-msgstr ""
+msgstr "Durch die Nutzung der Anwendung akzeptieren Sie alle genannten Bedingungen."
 
 #: app/templates/terms_public.html:17
 msgid ""
@@ -1148,12 +1163,14 @@ msgid ""
 "obrađivati podatke o zaposlenima u skladu sa važećim zakonskim propisima "
 "i u kontekstu radnog odnosa ili procesa zapošljavanja."
 msgstr ""
+"Durch die Nutzung der Anwendung stimmen Sie zu, dass Arbeitgeber Daten von Beschäftigten gemäß den geltenden gesetzlichen Vorschriften erfassen und verarbeiten dürfen, ausschließlich im Kontext des Arbeitsverhältnisses oder des Einstellungsprozesses."
 
 #: app/templates/terms_public.html:22
 msgid ""
 "Samo registrovani poslodavci imaju pristup podacima o vozačima koji su "
 "zaposleni ili u procesu zapošljavanja."
 msgstr ""
+"Nur registrierte Arbeitgeber haben Zugriff auf Daten von Fahrern, die beschäftigt oder im Einstellungsprozess sind."
 
 #: app/templates/terms_public.html:27
 msgid ""
@@ -1161,4 +1178,6 @@ msgid ""
 "podataka dobijenih kroz aplikaciju. Svako kršenje ovih pravila može "
 "dovesti do onemogućavanja pristupa aplikaciji i pravnih sankcija."
 msgstr ""
+"Die unbefugte Nutzung, das Kopieren, Übertragen oder Offenlegen von Daten, die über die Anwendung erhalten wurden, ist untersagt. Jede Verletzung dieser Regeln kann zum Ausschluss von der Anwendung und zu rechtlichen Konsequenzen führen."
+
 

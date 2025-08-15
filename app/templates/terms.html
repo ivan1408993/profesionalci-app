@@ -1,49 +1,49 @@
 {% extends "base.html" %}
 
-{% block title %}Uslovi korišćenja{% endblock %}
+{% block title %}{{ _('Uslovi korišćenja') }}{% endblock %}
 
 {% block content %}
 <div class="container py-5 terms-text" style="max-width: 800px; color: white;">
 
-    <h2 class="text-center mb-4">Uslovi korišćenja</h2>
+    <h2 class="text-center mb-4">{{ _('Uslovi korišćenja') }}</h2>
 
     <p class="mb-4 text-white text-center">
-    Stranica sa uslovima korišćenja dostupna je isključivo registrovanim poslodavcima koji koriste aplikaciju kao ovlašćeni korisnici.
+        {{ _('Stranica sa uslovima korišćenja dostupna je isključivo registrovanim poslodavcima koji koriste aplikaciju kao ovlašćeni korisnici.') }}
     </p>
 
-    <h5 class="mt-4">1. Namena aplikacije</h5>
+    <h5 class="mt-4">1. {{ _('Namena aplikacije') }}</h5>
     <p>
-        Ova veb aplikacija namenjena je isključivo poslodavcima u transportnoj industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz istorije angažmana kod različitih poslodavaca.
+        {{ _('Ova veb aplikacija namenjena je isključivo poslodavcima u transportnoj industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz istorije angažmana kod različitih poslodavaca.') }}
     </p>
 
-    <h5 class="mt-4">2. Obrada ličnih podataka</h5>
+    <h5 class="mt-4">2. {{ _('Obrada ličnih podataka') }}</h5>
     <p>
-        Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i obrađivati podatke o zaposlenima u skladu sa važećim zakonima o zaštiti podataka i privatnosti, isključivo u kontekstu radnog odnosa ili procesa zapošljavanja.
+        {{ _('Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i obrađivati podatke o zaposlenima u skladu sa važećim zakonima o zaštiti podataka i privatnosti, isključivo u kontekstu radnog odnosa ili procesa zapošljavanja.') }}
     </p>
 
-    <h5 class="mt-4">3. Zaštita podataka o ličnosti</h5>
+    <h5 class="mt-4">3. {{ _('Zaštita podataka o ličnosti') }}</h5>
     <p>
-        Podaci o ličnosti, uključujući jedinstvene identifikacione brojeve, tretiraju se kao poverljivi i zaštićeni su u skladu sa najvišim bezbednosnim standardima i zakonodavstvom o zaštiti podataka. Pristup ovim podacima je ograničen samo na ovlašćene korisnike.
+        {{ _('Podaci o ličnosti, uključujući jedinstvene identifikacione brojeve, tretiraju se kao poverljivi i zaštićeni su u skladu sa najvišim bezbednosnim standardima i zakonodavstvom o zaštiti podataka. Pristup ovim podacima je ograničen samo na ovlašćene korisnike.') }}
     </p>
 
-    <h5 class="mt-4">4. Pristup podacima</h5>
+    <h5 class="mt-4">4. {{ _('Pristup podacima') }}</h5>
     <p>
-        Samo registrovani poslodavci mogu pregledati podatke o vozačima putem broja tahograf kartice, broja CPC kartice i drugih relevantnih identifikacionih podataka.
+        {{ _('Samo registrovani poslodavci mogu pregledati podatke o vozačima putem broja tahograf kartice, broja CPC kartice i drugih relevantnih identifikacionih podataka.') }}
     </p>
 
-    <h5 class="mt-4">5. Zabrana zloupotrebe</h5>
+    <h5 class="mt-4">5. {{ _('Zabrana zloupotrebe') }}</h5>
     <p>
-        Zabranjeno je svako neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje podataka. Korisnici koji prekrše pravila biće onemogućeni u daljem korišćenju aplikacije i mogu snositi pravne posledice.
+        {{ _('Zabranjeno je svako neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje podataka. Korisnici koji prekrše pravila biće onemogućeni u daljem korišćenju aplikacije i mogu snositi pravne posledice.') }}
     </p>
 
-    <h5 class="mt-4">6. Tehnička podrška</h5>
+    <h5 class="mt-4">6. {{ _('Tehnička podrška') }}</h5>
     <p>
-        U slučaju tehničkih problema, obratite se administratoru aplikacije putem zvaničnog kontakt obrasca.
+        {{ _('U slučaju tehničkih problema, obratite se administratoru aplikacije putem zvaničnog kontakt obrasca.') }}
     </p>
 
     <hr class="mt-5">
     <p class="text-center mt-4">
-        Korišćenjem aplikacije prihvatate sve navedene uslove.
+        {{ _('Korišćenjem aplikacije prihvatate sve navedene uslove.') }}
     </p>
 </div>
 {% endblock %}

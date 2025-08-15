@@ -5,7 +5,7 @@
 
     <!-- Nazad -->
     <a href="{{ url_for('main.drivers') }}" class="btn btn-outline-secondary mb-4">
-        <i class="bi bi-arrow-left"></i> Nazad na listu vozača
+        <i class="bi bi-arrow-left"></i> {{ _("Nazad na listu vozača") }}
     </a>
 
     <!-- Kartica vozača -->
@@ -20,14 +20,14 @@
                 <div>
                     {% if driver.active %}
                         <span class="badge bg-success p-2">
-                            <i class="bi bi-check-circle-fill me-1"></i> Zaposlen
+                            <i class="bi bi-check-circle-fill me-1"></i> {{ _("Zaposlen") }}
                         </span>
                         {% if driver.employer %}
                             <span class="text-muted ms-2">{{ driver.employer.company_name }}</span>
                         {% endif %}
                     {% else %}
                         <span class="badge bg-danger p-2">
-                            <i class="bi bi-x-circle-fill me-1"></i> Nezaposlen
+                            <i class="bi bi-x-circle-fill me-1"></i> {{ _("Nezaposlen") }}
                         </span>
                     {% endif %}
                 </div>
@@ -38,52 +38,53 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-6">
                     <div class="bg-light border rounded shadow-sm p-3 h-100">
-                        <p class="text-muted mb-1"><i class="bi bi-credit-card-2-front"></i> Tahograf kartica</p>
+                        <p class="text-muted mb-1"><i class="bi bi-credit-card-2-front"></i> {{ _("Tahograf kartica") }}</p>
                         <h5 class="mb-1">{{ active_card.card_number if active_card else '—' }}</h5>
-                        <small class="text-muted">Važi do: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
+                        <small class="text-muted">{{ _("Važi do") }}: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
                     </div>
                 </div>
-    <!-- CPC kartica -->
-    <div class="col-md-6">
-        <div class="bg-light border rounded shadow-sm p-3 h-100">
-            <p class="text-muted mb-1"><i class="bi bi-credit-card-2-back"></i> CPC kartica</p>
-            <h5 class="mb-1">{{ driver.cpc_card_number or '—' }}</h5>
-            <small class="text-muted">Važi do: 
-                {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}
-            </small>
-        </div>
-    </div>
 
-    <!-- Poslodavac -->
-    <div class="col-md-6">
-        <div class="bg-light border rounded shadow-sm p-3 h-100">
-            <p class="text-muted mb-1"><i class="bi bi-building"></i> Poslodavac</p>
-            <h5 class="mb-1">
-                {% if driver.employer %}
-                    {{ driver.employer.company_name }}
-                {% else %}
-                    <span class="text-muted">—</span>
-                {% endif %}
-            </h5>
-        </div>
-    </div>
-</div>
+                <!-- CPC kartica -->
+                <div class="col-md-6">
+                    <div class="bg-light border rounded shadow-sm p-3 h-100">
+                        <p class="text-muted mb-1"><i class="bi bi-credit-card-2-back"></i> {{ _("CPC kartica") }}</p>
+                        <h5 class="mb-1">{{ driver.cpc_card_number or '—' }}</h5>
+                        <small class="text-muted">{{ _("Važi do") }}: 
+                            {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Poslodavac -->
+                <div class="col-md-6">
+                    <div class="bg-light border rounded shadow-sm p-3 h-100">
+                        <p class="text-muted mb-1"><i class="bi bi-building"></i> {{ _("Poslodavac") }}</p>
+                        <h5 class="mb-1">
+                            {% if driver.employer %}
+                                {{ driver.employer.company_name }}
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </h5>
+                    </div>
+                </div>
+            </div>
 
             <!-- Akcije -->
             <div class="mb-4">
                 {% if not driver.active %}
                     <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST" class="d-inline">
                         <button type="submit" class="btn btn-success me-2">
-                            <i class="bi bi-plus-circle"></i> Preuzmi vozača
+                            <i class="bi bi-plus-circle"></i> {{ _("Preuzmi vozača") }}
                         </button>
                     </form>
                 {% elif driver.employer_id == session.get('user_id') %}
                     <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning me-2">
-                        <i class="bi bi-pencil-square"></i> Ažuriraj
+                        <i class="bi bi-pencil-square"></i> {{ _("Ažuriraj") }}
                     </a>
                     <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" class="d-inline">
                         <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-x-circle"></i> Deaktiviraj
+                            <i class="bi bi-x-circle"></i> {{ _("Deaktiviraj") }}
                         </button>
                     </form>
                 {% endif %}
@@ -91,22 +92,21 @@
 
             <!-- Ocene -->
             <hr class="my-4">
-            <h4 class="mb-3"><i class="bi bi-star-fill text-warning"></i> Ocene vozača</h4>
+            <h4 class="mb-3"><i class="bi bi-star-fill text-warning"></i> {{ _("Ocene vozača") }}</h4>
 
             {% if ratings %}
                 {% set avg = (ratings | map(attribute='stars') | sum) / (ratings | length) %}
                 <div class="mb-4">
-                    <strong>Prosečna ocena:</strong> {{ avg | round(2) }} / 5
+                    <strong>{{ _("Prosečna ocena") }}:</strong> {{ avg | round(2) }} / 5
                     <div class="progress mt-2" style="height: 22px;">
+                        {% set width = (avg / 5 * 100) | round(0) %}
                         <div class="progress-bar 
                             {% if avg >= 4 %} bg-success
                             {% elif avg >= 2.5 %} bg-warning text-dark
                             {% else %} bg-danger
                             {% endif %}"
-                            {% set width = (avg / 5 * 100) | round(0) %}
-<div class="progress-bar" style="width: {{ width }}%;" role="progressbar">
-    {{ avg|round(1) }}⭐
-</div>
+                            style="width: {{ width }}%;" role="progressbar">
+                            {{ avg|round(1) }}⭐
                         </div>
                     </div>
                 </div>
@@ -115,15 +115,15 @@
                     {% for r in ratings %}
                         <div class="list-group-item">
                             <div class="d-flex justify-content-between">
-                                <div><strong>Ocena:</strong> {{ r.stars }} ⭐</div>
+                                <div><strong>{{ _("Ocena") }}:</strong> {{ r.stars }} ⭐</div>
                                 <small class="text-muted">
-                                    Ocenio:
+                                    {{ _("Ocenio") }}:
                                     {% if r.employer %}
                                         <a href="{{ url_for('main.employer_detail', employer_id=r.employer.id) }}">
                                             {{ r.employer.company_name }}
                                         </a> – {{ r.created_at.strftime('%d.%m.%Y') }}
                                     {% else %}
-                                        Nepoznato
+                                        {{ _("Nepoznato") }}
                                     {% endif %}
                                 </small>
                             </div>
@@ -134,12 +134,12 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="alert alert-info">Vozač još nema nijednu ocenu.</div>
+                <div class="alert alert-info">{{ _("Vozač još nema nijednu ocenu.") }}</div>
             {% endif %}
 
             <!-- Istorija kartica -->
             <hr class="my-4">
-            <h4 class="mb-3"><i class="bi bi-clock-history"></i> Istorija tahograf kartica</h4>
+            <h4 class="mb-3"><i class="bi bi-clock-history"></i> {{ _("Istorija tahograf kartica") }}</h4>
 
             {% if driver.cards %}
                 {% set sorted_cards = driver.cards | sort(attribute='issue_date', reverse=True) %}
@@ -147,9 +147,9 @@
                     <table class="table table-bordered align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Broj tahograf kartice</th>
-                                <th>Ističe</th>
-                                <th>Status</th>
+                                <th>{{ _("Broj tahograf kartice") }}</th>
+                                <th>{{ _("Ističe") }}</th>
+                                <th>{{ _("Status") }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -159,9 +159,9 @@
                                     <td>{{ card.expiry_date.strftime('%d.%m.%Y') if card.expiry_date else '—' }}</td>
                                     <td>
                                         {% if card.is_active %}
-                                            <span class="badge bg-success">Aktivna</span>
+                                            <span class="badge bg-success">{{ _("Aktivna") }}</span>
                                         {% else %}
-                                            <span class="badge bg-secondary">Neaktivna</span>
+                                            <span class="badge bg-secondary">{{ _("Neaktivna") }}</span>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -170,7 +170,7 @@
                     </table>
                 </div>
             {% else %}
-                <p class="text-muted">Nema podataka o karticama.</p>
+                <p class="text-muted">{{ _("Nema podataka o karticama.") }}</p>
             {% endif %}
 
         </div>
