@@ -21,20 +21,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3">
     <a class="navbar-brand" href="{{ url_for('main.index') }}">Profesionalci</a>
 
+ <!-- Jezički meni -->
+<!-- Jezički meni -->
+<div class="d-flex align-items-center ms-3">
+  <a href="/set_language/sr" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
+  <a href="/set_language/en" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %}">🇬🇧</a>
+  <a href="/set_language/de" class="lang-flag {% if g.current_lang == 'de' %}active{% endif %}">🇩🇪</a>
+</div>
+
+
 <!-- Toggler za mobilni meni -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
             aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
- <!-- Jezički meni -->
-<form method="get" style="display:inline;">
-    <select onchange="window.location.href='/set_language/' + this.value;">
-        <option value="sr" {% if g.current_lang == 'sr' %}selected{% endif %}>🇷🇸 {{ _("Srpski") }}</option>
-        <option value="en" {% if g.current_lang == 'en' %}selected{% endif %}>🇬🇧 {{ _("English") }}</option>
-        <option value="de" {% if g.current_lang == 'de' %}selected{% endif %}>🇩🇪 {{ _("Deutsch") }}</option>
-    </select>
-</form>
     <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
             <!-- 🔗 Zajednički linkovi za sve -->
