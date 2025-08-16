@@ -19,29 +19,12 @@
 
  <!-- 🌐 Navigacija -->
 <nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3">
-     <!--<a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
     <i class="fas fa-truck-moving fa-lg me-2 truck-icon"></i>
     <span>Profesionalci</span>
-</a>-->
-
-<a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
-    <lottie-player 
-        src="https://assets9.lottiefiles.com/packages/lf20_truck.json"  
-        background="transparent"  
-        speed="1"  
-        style="width: 40px; height: 40px;"  
-        loop autoplay>
-    </lottie-player>
-    <span class="ms-2">Profesionalci</span>
 </a>
 
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
-
-
-
  <!-- Jezički meni -->
-
 <div class="d-flex align-items-center ms-3">
   <a href="/set_language/sr" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
   <a href="/set_language/en" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %}">🇬🇧</a>
