@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-15 16:31+0200\n"
+"POT-Creation-Date: 2025-08-16 09:27+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,9 +18,218 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/routes.py:1127 app/templates/base.html:55
+#: app/routes.py:1111 app/templates/base.html:55 check_babel.py:10
+#: check_babel.py:13 check_babel.py:16
 msgid "Dobrodošli"
 msgstr "Welcome"
+
+#: app/routes.py:63 app/routes.py:248 app/routes.py:674 app/routes.py:784
+#: app/routes.py:972
+msgid "Morate biti prijavljeni kao poslodavac."
+msgstr "You must be logged in as an employer."
+
+#: app/routes.py:81
+msgid "Neispravan format datuma izdavanja."
+msgstr "Invalid issue date format."
+
+#: app/routes.py:88
+msgid "Neispravan format datuma isteka."
+msgstr "Invalid expiration date format."
+
+#: app/routes.py:94
+msgid "Ova kartica već postoji u sistemu."
+msgstr "This card already exists in the system."
+
+#: app/routes.py:99
+msgid "Nova kartica je uspešno dodata i aktivirana."
+msgstr "A new card has been successfully added and activated."
+
+#: app/routes.py:131
+msgid "Molimo prijavite se kao poslodavac."
+msgstr "Please log in as an employer."
+
+#: app/routes.py:141 app/templates/add_driver.html:27
+msgid "JMBG mora sadržati tačno 13 cifara."
+msgstr "JMBG must contain exactly 13 digits."
+
+#: app/routes.py:151 app/templates/add_driver.html:37
+msgid "Broj tahograf kartice mora imati tačno 16 karaktera."
+msgstr "Tachograph card number must be exactly 16 characters."
+
+#: app/routes.py:168
+msgid "Vozač već radi kod vas."
+msgstr "The driver is already employed in your company."
+
+#: app/routes.py:172
+msgid "Vozač već radi kod drugog poslodavca."
+msgstr "The driver is already employed by another employer."
+
+#: app/routes.py:186 app/routes.py:210
+msgid "Tahograf kartica sa ovim brojem već postoji u sistemu."
+msgstr "A tachograph card with this number already exists in the system."
+
+#: app/routes.py:200
+msgid "Postojeći vozač je preuzet u vašu firmu."
+msgstr "The existing driver has been assigned to your company."
+
+#: app/routes.py:236
+msgid "Novi vozač je uspešno dodat."
+msgstr "The new driver has been successfully added."
+
+#: app/routes.py:285
+msgid "Vozač sa unetim podacima nije pronađen."
+msgstr "No driver was found with the provided data."
+
+#: app/routes.py:315
+msgid "Nemate dozvolu za ovu akciju."
+msgstr "You do not have permission for this action."
+
+#: app/routes.py:325
+msgid "Vozač je ponovo aktiviran u vašem sistemu."
+msgstr "The driver has been reactivated in your system."
+
+#: app/routes.py:327
+msgid "Vozač je već kod vas i aktivan je."
+msgstr "The driver is already employed in your company and is active."
+
+#: app/routes.py:332
+msgid "Vozač je već aktivan kod drugog poslodavca i ne može se preuzeti."
+msgstr "The driver is already active with another employer and cannot be reassigned."
+
+#: app/routes.py:349 app/routes.py:871 app/routes.py:882 app/routes.py:931
+msgid "Nemate pristup ovoj stranici."
+msgstr "You do not have access to this page."
+
+#: app/routes.py:361
+msgid "Broj telefona može sadržati samo cifre."
+msgstr "The phone number can contain digits only."
+
+#: app/routes.py:371
+msgid "Podaci su uspešno ažurirani."
+msgstr "Data has been successfully updated."
+
+#: app/routes.py:382 app/routes.py:523 app/routes.py:533 app/routes.py:610
+#: app/routes.py:645 app/routes.py:702
+msgid "Molimo prijavite se."
+msgstr "Please log in."
+
+#: app/routes.py:389
+msgid ""
+"Ovaj vozač je trenutno zaposlen kod drugog poslodavca i ne možete ga "
+"preuzeti."
+msgstr "This driver is currently employed by another employer and cannot be reassigned."
+
+#: app/routes.py:419 app/templates/register.html:30
+msgid "PIB mora sadržati tačno 9 cifara."
+msgstr "VAT number must contain exactly 9 digits."
+
+#: app/routes.py:424
+msgid "Telefon mora sadržati samo cifre i imati između 6 i 15 cifara."
+msgstr "The phone number must contain only digits and be between 6 and 15 digits long."
+
+#: app/routes.py:431
+msgid "Firma sa ovim PIB-om nije aktivna. Registracija nije moguća."
+msgstr "The company with this VAT number is not active. Registration is not possible."
+
+#: app/routes.py:434
+msgid "Postoji već nalog sa tim PIB-om."
+msgstr "An account with this VAT number already exists."
+
+#: app/routes.py:440
+msgid "E-mail adresa već postoji u sistemu. Izaberite drugu."
+msgstr "This email address already exists in the system. Please choose another one."
+
+#: app/routes.py:475
+msgid "Uspešna registracija. Sada se možete prijaviti."
+msgstr "Registration successful. You can now log in."
+
+#: app/routes.py:486
+msgid "Uspešno ste se odjavili."
+msgstr "You have successfully logged out."
+
+#: app/routes.py:500
+msgid "Vaša firma nije aktivna. Prijava nije moguća."
+msgstr "Your company is not active. Login is not possible."
+
+#: app/routes.py:512
+msgid "Pogrešan email ili lozinka."
+msgstr "Incorrect email or password."
+
+#: app/routes.py:538 app/routes.py:615
+msgid "Greška pri autentikaciji."
+msgstr "Authentication error."
+
+#: app/routes.py:624
+msgid "Vozač sa datim brojem tahograf kartice ne postoji."
+msgstr "No driver exists with the given tachograph card number."
+
+#: app/routes.py:635
+msgid "Vozač već radi u vašoj firmi."
+msgstr "The driver is already employed in your company."
+
+#: app/routes.py:682
+msgid "Morate prvo oceniti vozača pre nego što ga označite kao neaktivnog."
+msgstr "You must rate the driver before marking them as inactive."
+
+#: app/routes.py:746
+msgid "Morate biti prijavljeni kao poslodavac da biste ocenili vozača."
+msgstr "You must be logged in as an employer to rate a driver."
+
+#: app/routes.py:763
+msgid "Ocena je uspešno ažurirana."
+msgstr "The rating has been successfully updated."
+
+#: app/routes.py:773
+msgid "Ocena je uspešno dodata."
+msgstr "The rating has been successfully added."
+
+#: app/routes.py:817
+msgid "Ako email postoji u sistemu, link za reset je poslat."
+msgstr "If the email exists in the system, a reset link has been sent."
+
+#: app/routes.py:827
+msgid "Link nije validan ili je istekao."
+msgstr "The link is invalid or has expired."
+
+#: app/routes.py:836 app/templates/reset_password_form.html:83
+msgid "Lozinke se ne poklapaju."
+msgstr "Passwords do not match."
+
+#: app/routes.py:843
+msgid "Lozinka je uspešno promenjena."
+msgstr "The password has been successfully changed."
+
+#: app/routes.py:954
+msgid "Nemate pristup ovoj akciji."
+msgstr "You do not have access to this action."
+
+#: app/routes.py:981
+msgid "Nemate dozvolu da ažurirate ovog vozača."
+msgstr "You do not have permission to update this driver."
+
+#: app/routes.py:1003
+msgid "Neispravan format datuma isteka tahograf kartice."
+msgstr "Invalid tachograph card expiration date format."
+
+#: app/routes.py:1011
+msgid "Neispravan format datuma isteka CPC kartice."
+msgstr "Invalid CPC card expiration date format."
+
+#: app/routes.py:1026
+msgid "Ovaj broj tahograf kartice je već dodeljen drugom vozaču."
+msgstr "This tachograph card number is already assigned to another driver."
+
+#: app/routes.py:1041
+msgid "Dodata je nova tahografska kartica."
+msgstr "A new tachograph card has been added."
+
+#: app/routes.py:1046
+msgid "Datum važenja tahograf kartice je ažuriran."
+msgstr "The tachograph card expiration date has been updated."
+
+#: app/routes.py:1053
+msgid "Podaci o vozaču su uspešno ažurirani."
+msgstr "Driver information has been successfully updated."
 
 #: app/templates/about.html:8
 msgid "O nama"
@@ -57,8 +266,8 @@ msgid ""
 "omogućavaju poslodavcima da ocenjuju vozače na osnovu njihovih radnih "
 "performansi, stvarajući fer i otvoreno radno okruženje."
 msgstr ""
-"allow employers to rate drivers based on their work performance, creating a "
-"fair and transparent work environment."
+"allow employers to rate drivers based on their work performance, creating"
+" a fair and transparent work environment."
 
 #: app/templates/about.html:26
 msgid ""
@@ -66,8 +275,9 @@ msgid ""
 "vozačima daje priliku da izgrade svoju profesionalnu reputaciju kroz "
 "objektivne ocene."
 msgstr ""
-"Our system helps companies find drivers who excel in quality and gives drivers "
-"the opportunity to build their professional reputation through objective ratings."
+"Our system helps companies find drivers who excel in quality and gives "
+"drivers the opportunity to build their professional reputation through "
+"objective ratings."
 
 #: app/templates/about.html:27
 msgid "Verujemo da su"
@@ -115,18 +325,10 @@ msgstr "Enter exactly 13 digits of the JMBG."
 msgid "13 cifara"
 msgstr "13 digits"
 
-#: app/templates/add_driver.html:27
-msgid "JMBG mora sadržati tačno 13 cifara."
-msgstr "JMBG must contain exactly 13 digits."
-
 #: app/templates/add_driver.html:33 app/templates/driver_detail.html:150
 #: app/templates/drivers.html:68
 msgid "Broj tahograf kartice"
 msgstr "Tachograph Card Number"
-
-#: app/templates/add_driver.html:37
-msgid "Broj tahograf kartice mora imati tačno 16 karaktera."
-msgstr "Tachograph card number must be exactly 16 characters."
 
 #: app/templates/add_driver.html:37
 msgid "16 karaktera"
@@ -139,7 +341,6 @@ msgstr "Must be exactly 16 characters (letters or digits)."
 #: app/templates/add_driver.html:43 app/templates/add_driver.html:63
 msgid "Datum kada CPC kartica prestaje da važi"
 msgstr "CPC card expiration date"
-
 
 #: app/templates/add_driver.html:44
 msgid "Datum važenja tahograf kartice"
@@ -439,7 +640,6 @@ msgstr "Active"
 msgid "Neaktivna"
 msgstr "Inactive"
 
-
 #: app/templates/driver_detail.html:173
 msgid "Nema podataka o karticama."
 msgstr "No card data available."
@@ -630,8 +830,14 @@ msgid "Ova Politika privatnosti opisuje načine na koje aplikacija"
 msgstr "This Privacy Policy describes the ways in which the application"
 
 #: app/templates/privacy_policy.html:12
-msgid "prikuplja, koristi, čuva i štiti vaše lične podatke u skladu sa Opštom uredbom o zaštiti podataka (GDPR), Zakonom o zaštiti podataka o ličnosti Republike Srbije i drugim relevantnim propisima."
-msgstr "collects, uses, stores, and protects your personal data in accordance with the General Data Protection Regulation (GDPR), the Personal Data Protection Act of the Republic of Serbia, and other relevant regulations."
+msgid ""
+"prikuplja, koristi, čuva i štiti vaše lične podatke u skladu sa Opštom "
+"uredbom o zaštiti podataka (GDPR), Zakonom o zaštiti podataka o ličnosti "
+"Republike Srbije i drugim relevantnim propisima."
+msgstr ""
+"collects, uses, stores, and protects your personal data in accordance "
+"with the General Data Protection Regulation (GDPR), the Personal Data "
+"Protection Act of the Republic of Serbia, and other relevant regulations."
 
 #: app/templates/privacy_policy.html:15
 msgid "1. Kontrolor podataka"
@@ -642,27 +848,42 @@ msgid "Kontrolor vaših ličnih podataka je vlasnik aplikacije"
 msgstr "The controller of your personal data is the owner of the application"
 
 #: app/templates/privacy_policy.html:19
-msgid "sa sedištem u Republici Srbiji. Za sva pitanja u vezi obrade podataka možete kontaktirati administratora preko zvaničnih kanala."
-msgstr "based in the Republic of Serbia. For any questions regarding data processing, you can contact the administrator through official channels."
+msgid ""
+"sa sedištem u Republici Srbiji. Za sva pitanja u vezi obrade podataka "
+"možete kontaktirati administratora preko zvaničnih kanala."
+msgstr ""
+"based in the Republic of Serbia. For any questions regarding data "
+"processing, you can contact the administrator through official channels."
 
 #: app/templates/privacy_policy.html:22
 msgid "2. Prikupljanje podataka"
 msgstr "2. Data Collection"
 
 #: app/templates/privacy_policy.html:23
-msgid "Prikupljamo lične podatke koje nam dobrovoljno dostavljate prilikom registracije i korišćenja aplikacije, uključujući, ali ne ograničavajući se na:"
-msgstr "We collect personal data that you voluntarily provide during registration and use of the application, including but not limited to:"
+msgid ""
+"Prikupljamo lične podatke koje nam dobrovoljno dostavljate prilikom "
+"registracije i korišćenja aplikacije, uključujući, ali ne ograničavajući "
+"se na:"
+msgstr ""
+"We collect personal data that you voluntarily provide during registration"
+" and use of the application, including but not limited to:"
 
 #: app/templates/privacy_policy.html:25
-msgid "Podaci o poslodavcu: naziv firme, PIB, kontakt informacije, e-mail adresa, lozinka;"
-msgstr "Employer data: company name, VAT number, contact information, email address, password;"
+msgid ""
+"Podaci o poslodavcu: naziv firme, PIB, kontakt informacije, e-mail "
+"adresa, lozinka;"
+msgstr ""
+"Employer data: company name, VAT number, contact information, email "
+"address, password;"
 
 #: app/templates/privacy_policy.html:26
 msgid "Podaci o vozačima u skladu sa zakonom i ugovorom o radu;"
 msgstr "Driver data in accordance with law and employment contracts;"
 
 #: app/templates/privacy_policy.html:27
-msgid "Druge informacije koje nam dostavite prilikom korišćenja usluga aplikacije."
+msgid ""
+"Druge informacije koje nam dostavite prilikom korišćenja usluga "
+"aplikacije."
 msgstr "Other information you provide while using the application's services."
 
 #: app/templates/privacy_policy.html:30
@@ -679,15 +900,21 @@ msgstr "Your consent (e.g., during registration);"
 
 #: app/templates/privacy_policy.html:34
 msgid "Ispunjenja ugovora ili predugovornih radnji (radni odnosi, zapošljavanje);"
-msgstr "Performance of a contract or pre-contractual actions (employment relationships);"
+msgstr ""
+"Performance of a contract or pre-contractual actions (employment "
+"relationships);"
 
 #: app/templates/privacy_policy.html:35
 msgid "Izvršenja zakonskih obaveza koje se odnose na poslodavca;"
 msgstr "Compliance with legal obligations relating to the employer;"
 
 #: app/templates/privacy_policy.html:36
-msgid "Zakonitih interesa vlasnika aplikacije, kao što je obezbeđenje bezbednosti i sprečavanje zloupotreba."
-msgstr "Legitimate interests of the application owner, such as ensuring security and preventing abuse."
+msgid ""
+"Zakonitih interesa vlasnika aplikacije, kao što je obezbeđenje "
+"bezbednosti i sprečavanje zloupotreba."
+msgstr ""
+"Legitimate interests of the application owner, such as ensuring security "
+"and preventing abuse."
 
 #: app/templates/privacy_policy.html:39
 msgid "4. Svrha obrade podataka"
@@ -718,36 +945,67 @@ msgid "5. Čuvanje i bezbednost podataka"
 msgstr "5. Data Storage and Security"
 
 #: app/templates/privacy_policy.html:49
-msgid "Primenjujemo tehničke i organizacione mere zaštite podataka kako bismo obezbedili njihovu poverljivost, integritet i dostupnost. Lični podaci se čuvaju onoliko dugo koliko je potrebno za ispunjenje svrha obrade, uključujući i zakonske obaveze čuvanja evidencija u radnom odnosu."
-msgstr "We implement technical and organizational measures to ensure the confidentiality, integrity, and availability of data. Personal data is retained only as long as necessary to fulfill the purposes of processing, including legal obligations for record-keeping in employment."
+msgid ""
+"Primenjujemo tehničke i organizacione mere zaštite podataka kako bismo "
+"obezbedili njihovu poverljivost, integritet i dostupnost. Lični podaci se"
+" čuvaju onoliko dugo koliko je potrebno za ispunjenje svrha obrade, "
+"uključujući i zakonske obaveze čuvanja evidencija u radnom odnosu."
+msgstr ""
+"We implement technical and organizational measures to ensure the "
+"confidentiality, integrity, and availability of data. Personal data is "
+"retained only as long as necessary to fulfill the purposes of processing,"
+" including legal obligations for record-keeping in employment."
 
 #: app/templates/privacy_policy.html:51
 msgid "6. Čuvanje i obrada podataka o vozačima"
 msgstr "6. Storage and Processing of Driver Data"
 
 #: app/templates/privacy_policy.html:52
-msgid "Podaci o vozačima se čuvaju u skladu sa važećim zakonskim propisima o vođenju evidencija u radnom odnosu, kao i radi očuvanja integriteta istorije rada, ocenjivanja i komentara."
-msgstr "Driver data is stored in accordance with applicable legal regulations on employment record keeping, as well as to preserve the integrity of work history, ratings, and comments."
+msgid ""
+"Podaci o vozačima se čuvaju u skladu sa važećim zakonskim propisima o "
+"vođenju evidencija u radnom odnosu, kao i radi očuvanja integriteta "
+"istorije rada, ocenjivanja i komentara."
+msgstr ""
+"Driver data is stored in accordance with applicable legal regulations on "
+"employment record keeping, as well as to preserve the integrity of work "
+"history, ratings, and comments."
 
 #: app/templates/privacy_policy.html:53
-msgid "Pristup ovim podacima je strogo ograničen i zaštićen u skladu sa propisima o zaštiti podataka o ličnosti."
-msgstr "Access to this data is strictly limited and protected in accordance with personal data protection regulations."
+msgid ""
+"Pristup ovim podacima je strogo ograničen i zaštićen u skladu sa "
+"propisima o zaštiti podataka o ličnosti."
+msgstr ""
+"Access to this data is strictly limited and protected in accordance with "
+"personal data protection regulations."
 
 #: app/templates/privacy_policy.html:55
 msgid "7. Pristup i deljenje podataka"
 msgstr "7. Access and Data Sharing"
 
 #: app/templates/privacy_policy.html:56
-msgid "Pristup vašim ličnim podacima imaju samo ovlašćeni korisnici aplikacije i zaposleni koji su ovlašćeni za obradu. Ne delimo vaše podatke sa trećim licima osim u slučajevima kada to zahteva zakon ili je neophodno radi pružanja usluga."
-msgstr "Only authorized application users and employees authorized to process data have access to your personal data. We do not share your data with third parties except as required by law or necessary to provide services."
+msgid ""
+"Pristup vašim ličnim podacima imaju samo ovlašćeni korisnici aplikacije i"
+" zaposleni koji su ovlašćeni za obradu. Ne delimo vaše podatke sa trećim "
+"licima osim u slučajevima kada to zahteva zakon ili je neophodno radi "
+"pružanja usluga."
+msgstr ""
+"Only authorized application users and employees authorized to process "
+"data have access to your personal data. We do not share your data with "
+"third parties except as required by law or necessary to provide services."
 
 #: app/templates/privacy_policy.html:58
 msgid "8. Vaša prava"
 msgstr "8. Your Rights"
 
 #: app/templates/privacy_policy.html:59
-msgid "U skladu sa važećim propisima, imate sledeća prava u vezi sa svojim ličnim podacima, osim za podatke koji su zakonski obavezni za trajno čuvanje u evidencijama radnog odnosa:"
-msgstr "In accordance with applicable regulations, you have the following rights regarding your personal data, except for data legally required to be permanently retained in employment records:"
+msgid ""
+"U skladu sa važećim propisima, imate sledeća prava u vezi sa svojim "
+"ličnim podacima, osim za podatke koji su zakonski obavezni za trajno "
+"čuvanje u evidencijama radnog odnosa:"
+msgstr ""
+"In accordance with applicable regulations, you have the following rights "
+"regarding your personal data, except for data legally required to be "
+"permanently retained in employment records:"
 
 #: app/templates/privacy_policy.html:61
 msgid "Pravo pristupa svojim podacima;"
@@ -766,36 +1024,61 @@ msgid "Pravo na prenosivost podataka;"
 msgstr "Right to data portability;"
 
 #: app/templates/privacy_policy.html:65
-msgid "Pravo da u bilo kom trenutku povučete pristanak za obradu podataka kada je obrada zasnovana na pristanku, osim za zakonski obavezne podatke;"
-msgstr "Right to withdraw consent for data processing at any time when processing is based on consent, except for legally required data;"
+msgid ""
+"Pravo da u bilo kom trenutku povučete pristanak za obradu podataka kada "
+"je obrada zasnovana na pristanku, osim za zakonski obavezne podatke;"
+msgstr ""
+"Right to withdraw consent for data processing at any time when processing"
+" is based on consent, except for legally required data;"
 
 #: app/templates/privacy_policy.html:66
-msgid "Pravo na podnošenje žalbe nadzornom organu za zaštitu podataka u Republici Srbiji."
-msgstr "Right to lodge a complaint with the data protection authority in the Republic of Serbia."
+msgid ""
+"Pravo na podnošenje žalbe nadzornom organu za zaštitu podataka u "
+"Republici Srbiji."
+msgstr ""
+"Right to lodge a complaint with the data protection authority in the "
+"Republic of Serbia."
 
 #: app/templates/privacy_policy.html:69
 msgid "9. Kolačići (Cookies)"
 msgstr "9. Cookies"
 
 #: app/templates/privacy_policy.html:70
-msgid "Aplikacija koristi kolačiće za poboljšanje korisničkog iskustva i funkcionisanje nekih funkcionalnosti. Koriste se samo neophodni kolačići koji ne prikupljaju lične podatke."
-msgstr "The application uses cookies to enhance user experience and support certain functionalities. Only essential cookies that do not collect personal data are used."
+msgid ""
+"Aplikacija koristi kolačiće za poboljšanje korisničkog iskustva i "
+"funkcionisanje nekih funkcionalnosti. Koriste se samo neophodni kolačići "
+"koji ne prikupljaju lične podatke."
+msgstr ""
+"The application uses cookies to enhance user experience and support "
+"certain functionalities. Only essential cookies that do not collect "
+"personal data are used."
 
 #: app/templates/privacy_policy.html:72
 msgid "10. Izmene politike privatnosti"
 msgstr "10. Changes to the Privacy Policy"
 
 #: app/templates/privacy_policy.html:73
-msgid "Zadržavamo pravo da izmenimo ovu politiku privatnosti u skladu sa zakonskim izmenama ili promenama u funkcionisanju aplikacije. Sve izmene biće objavljene na ovoj stranici."
-msgstr "We reserve the right to modify this privacy policy in accordance with legal changes or changes in the operation of the application. All changes will be published on this page."
+msgid ""
+"Zadržavamo pravo da izmenimo ovu politiku privatnosti u skladu sa "
+"zakonskim izmenama ili promenama u funkcionisanju aplikacije. Sve izmene "
+"biće objavljene na ovoj stranici."
+msgstr ""
+"We reserve the right to modify this privacy policy in accordance with "
+"legal changes or changes in the operation of the application. All changes"
+" will be published on this page."
 
 #: app/templates/privacy_policy.html:75
 msgid "11. Kontakt"
 msgstr "11. Contact"
 
 #: app/templates/privacy_policy.html:76
-msgid "Za sva pitanja, zahteve ili prijave u vezi sa zaštitom ličnih podataka, možete nas kontaktirati putem zvaničnih kanala aplikacije."
-msgstr "For any questions, requests, or reports regarding personal data protection, you can contact us through the official channels of the application."
+msgid ""
+"Za sva pitanja, zahteve ili prijave u vezi sa zaštitom ličnih podataka, "
+"možete nas kontaktirati putem zvaničnih kanala aplikacije."
+msgstr ""
+"For any questions, requests, or reports regarding personal data "
+"protection, you can contact us through the official channels of the "
+"application."
 
 #: app/templates/privacy_policy.html:79
 msgid "Korišćenjem aplikacije saglasni ste sa ovom politikom privatnosti."
@@ -807,7 +1090,9 @@ msgstr "Rate Driver"
 
 #: app/templates/rate_driver.html:13
 msgid "Već ste ocenili ovog vozača – možete ažurirati ocenu i komentar."
-msgstr "You have already rated this driver – you can update the rating and comment."
+msgstr ""
+"You have already rated this driver – you can update the rating and "
+"comment."
 
 #: app/templates/rate_driver.html:36
 msgid "Ažuriraj ocenu"
@@ -824,10 +1109,6 @@ msgstr "Employer Registration"
 #: app/templates/register.html:27
 msgid "PIB"
 msgstr "VAT Number"
-
-#: app/templates/register.html:30
-msgid "PIB mora sadržati tačno 9 cifara."
-msgstr "VAT number must contain exactly 9 digits."
 
 #: app/templates/register.html:35
 msgid "Telefon"
@@ -870,6 +1151,7 @@ msgid "mora sadržati bar jedan broj"
 msgstr "must contain at least one number"
 
 #: app/templates/register.html:101
+#, python-format
 msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
 msgstr "Must contain at least one special character (!@#$%%^&*)"
 
@@ -924,10 +1206,6 @@ msgstr "Must contain at least one number"
 #: app/templates/reset_password_form.html:53
 msgid "Mora sadržati bar jedan specijalni znak (!@#$%^&*)"
 msgstr "Must contain at least one special character (!@#$%^&*)"
-
-#: app/templates/reset_password_form.html:83
-msgid "Lozinke se ne poklapaju."
-msgstr "Passwords do not match."
 
 #: app/templates/reset_password_request.html:2
 #: app/templates/reset_password_request.html:6
@@ -1031,70 +1309,626 @@ msgid "Proveri"
 msgstr "Check"
 
 #: app/templates/terms.html:11
-msgid "Stranica sa uslovima korišćenja dostupna je isključivo registrovanim poslodavcima koji koriste aplikaciju kao ovlašćeni korisnici."
-msgstr "The Terms of Use page is available exclusively to registered employers who use the application as authorized users."
+msgid ""
+"Stranica sa uslovima korišćenja dostupna je isključivo registrovanim "
+"poslodavcima koji koriste aplikaciju kao ovlašćeni korisnici."
+msgstr ""
+"The Terms of Use page is available exclusively to registered employers "
+"who use the application as authorized users."
 
 #: app/templates/terms.html:14 app/templates/terms_public.html:10
 msgid "Namena aplikacije"
 msgstr "Purpose of the Application"
 
 #: app/templates/terms.html:16 app/templates/terms_public.html:12
-msgid "Ova veb aplikacija namenjena je isključivo poslodavcima u transportnoj industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz istorije angažmana kod različitih poslodavaca."
-msgstr "This web application is intended exclusively for employers in the transport industry for recording and evaluating drivers' performance, including displaying their work history with different employers."
+msgid ""
+"Ova veb aplikacija namenjena je isključivo poslodavcima u transportnoj "
+"industriji radi evidencije i ocenjivanja rada vozača, uključujući prikaz "
+"istorije angažmana kod različitih poslodavaca."
+msgstr ""
+"This web application is intended exclusively for employers in the "
+"transport industry for recording and evaluating drivers' performance, "
+"including displaying their work history with different employers."
 
 #: app/templates/terms.html:19 app/templates/terms_public.html:15
 msgid "Obrada ličnih podataka"
 msgstr "Processing of Personal Data"
 
 #: app/templates/terms.html:21
-msgid "Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i obrađivati podatke o zaposlenima u skladu sa važećim zakonima o zaštiti podataka i privatnosti, isključivo u kontekstu radnog odnosa ili procesa zapošljavanja."
-msgstr "By using the application, you agree that employers may enter and process employee data in accordance with applicable data protection and privacy laws, exclusively in the context of employment or hiring processes."
+msgid ""
+"Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i "
+"obrađivati podatke o zaposlenima u skladu sa važećim zakonima o zaštiti "
+"podataka i privatnosti, isključivo u kontekstu radnog odnosa ili procesa "
+"zapošljavanja."
+msgstr ""
+"By using the application, you agree that employers may enter and process "
+"employee data in accordance with applicable data protection and privacy "
+"laws, exclusively in the context of employment or hiring processes."
 
 #: app/templates/terms.html:24
 msgid "Zaštita podataka o ličnosti"
 msgstr "Protection of Personal Data"
 
 #: app/templates/terms.html:26
-msgid "Podaci o ličnosti, uključujući jedinstvene identifikacione brojeve, tretiraju se kao poverljivi i zaštićeni su u skladu sa najvišim bezbednosnim standardima i zakonodavstvom o zaštiti podataka. Pristup ovim podacima je ograničen samo na ovlašćene korisnike."
-msgstr "Personal data, including unique identification numbers, is treated as confidential and protected according to the highest security standards and data protection legislation. Access to this data is limited to authorized users only."
+msgid ""
+"Podaci o ličnosti, uključujući jedinstvene identifikacione brojeve, "
+"tretiraju se kao poverljivi i zaštićeni su u skladu sa najvišim "
+"bezbednosnim standardima i zakonodavstvom o zaštiti podataka. Pristup "
+"ovim podacima je ograničen samo na ovlašćene korisnike."
+msgstr ""
+"Personal data, including unique identification numbers, is treated as "
+"confidential and protected according to the highest security standards "
+"and data protection legislation. Access to this data is limited to "
+"authorized users only."
 
 #: app/templates/terms.html:29 app/templates/terms_public.html:20
 msgid "Pristup podacima"
 msgstr "Data Access"
 
 #: app/templates/terms.html:31
-msgid "Samo registrovani poslodavci mogu pregledati podatke o vozačima putem broja tahograf kartice, broja CPC kartice i drugih relevantnih identifikacionih podataka."
-msgstr "Only registered employers can view driver data using tachograph card numbers, CPC card numbers, and other relevant identification data."
+msgid ""
+"Samo registrovani poslodavci mogu pregledati podatke o vozačima putem "
+"broja tahograf kartice, broja CPC kartice i drugih relevantnih "
+"identifikacionih podataka."
+msgstr ""
+"Only registered employers can view driver data using tachograph card "
+"numbers, CPC card numbers, and other relevant identification data."
 
 #: app/templates/terms.html:34 app/templates/terms_public.html:25
 msgid "Zabrana zloupotrebe"
 msgstr "Prohibition of Misuse"
 
 #: app/templates/terms.html:36
-msgid "Zabranjeno je svako neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje podataka. Korisnici koji prekrše pravila biće onemogućeni u daljem korišćenju aplikacije i mogu snositi pravne posledice."
-msgstr "Any unauthorized use, copying, transfer, or disclosure of data is prohibited. Users who violate these rules will be blocked from further using the application and may face legal consequences."
+msgid ""
+"Zabranjeno je svako neovlašćeno korišćenje, kopiranje, prenos ili "
+"otkrivanje podataka. Korisnici koji prekrše pravila biće onemogućeni u "
+"daljem korišćenju aplikacije i mogu snositi pravne posledice."
+msgstr ""
+"Any unauthorized use, copying, transfer, or disclosure of data is "
+"prohibited. Users who violate these rules will be blocked from further "
+"using the application and may face legal consequences."
 
 #: app/templates/terms.html:39 app/templates/terms_public.html:30
 msgid "Tehnička podrška"
 msgstr "Technical Support"
 
 #: app/templates/terms.html:41 app/templates/terms_public.html:32
-msgid "U slučaju tehničkih problema, obratite se administratoru aplikacije putem zvaničnog kontakt obrasca."
-msgstr "In case of technical issues, contact the application administrator via the official contact form."
+msgid ""
+"U slučaju tehničkih problema, obratite se administratoru aplikacije putem"
+" zvaničnog kontakt obrasca."
+msgstr ""
+"In case of technical issues, contact the application administrator via "
+"the official contact form."
 
 #: app/templates/terms.html:46 app/templates/terms_public.html:37
 msgid "Korišćenjem aplikacije prihvatate sve navedene uslove."
 msgstr "By using the application, you accept all the stated terms."
 
 #: app/templates/terms_public.html:17
-msgid "Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i obrađivati podatke o zaposlenima u skladu sa važećim zakonskim propisima i u kontekstu radnog odnosa ili procesa zapošljavanja."
-msgstr "By using the application, you agree that employers may enter and process employee data in accordance with applicable laws and within the context of employment or hiring processes."
+msgid ""
+"Korišćenjem aplikacije saglasni ste da poslodavci mogu unositi i "
+"obrađivati podatke o zaposlenima u skladu sa važećim zakonskim propisima "
+"i u kontekstu radnog odnosa ili procesa zapošljavanja."
+msgstr ""
+"By using the application, you agree that employers may enter and process "
+"employee data in accordance with applicable laws and within the context "
+"of employment or hiring processes."
 
 #: app/templates/terms_public.html:22
-msgid "Samo registrovani poslodavci imaju pristup podacima o vozačima koji su zaposleni ili u procesu zapošljavanja."
-msgstr "Only registered employers have access to data about drivers who are employed or in the process of being hired."
+msgid ""
+"Samo registrovani poslodavci imaju pristup podacima o vozačima koji su "
+"zaposleni ili u procesu zapošljavanja."
+msgstr ""
+"Only registered employers have access to data about drivers who are "
+"employed or in the process of being hired."
 
 #: app/templates/terms_public.html:27
-msgid "Zabranjeno je neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje podataka dobijenih kroz aplikaciju. Svako kršenje ovih pravila može dovesti do onemogućavanja pristupa aplikaciji i pravnih sankcija."
-msgstr "Unauthorized use, copying, transfer, or disclosure of data obtained through the application is prohibited. Any violation of these rules may result in access to the application being blocked and legal sanctions."
+msgid ""
+"Zabranjeno je neovlašćeno korišćenje, kopiranje, prenos ili otkrivanje "
+"podataka dobijenih kroz aplikaciju. Svako kršenje ovih pravila može "
+"dovesti do onemogućavanja pristupa aplikaciji i pravnih sankcija."
+msgstr ""
+"Unauthorized use, copying, transfer, or disclosure of data obtained "
+"through the application is prohibited. Any violation of these rules may "
+"result in access to the application being blocked and legal sanctions."
+
+#: venv/Lib/site-packages/click/_termui_impl.py:600
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: venv/Lib/site-packages/click/_termui_impl.py:604
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1084
+#: venv/Lib/site-packages/click/core.py:1121
+#, python-brace-format
+msgid "{text} {deprecated_message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1140
+msgid "Options"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1202
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/core.py:1221
+#, python-brace-format
+msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1405
+msgid "Aborted!"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1779
+msgid "Commands"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1810
+msgid "Missing command."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1888
+#, python-brace-format
+msgid "No such command {name!r}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2303
+msgid "Value must be an iterable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2324
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/core.py:2404
+#, python-brace-format
+msgid ""
+"DeprecationWarning: The {param_type} {name!r} is "
+"deprecated.{extra_message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2807
+#, python-brace-format
+msgid "env var: {var}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2810
+#, python-brace-format
+msgid "default: {default}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2814
+msgid "required"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2870
+msgid "(dynamic)"
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:465
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:522
+msgid "Show the version and exit."
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:548
+msgid "Show this message and exit."
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:50
+#: venv/Lib/site-packages/click/exceptions.py:89
+#, python-brace-format
+msgid "Error: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:81
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:130
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:132
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:190
+msgid "Missing argument"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:192
+msgid "Missing option"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:194
+msgid "Missing parameter"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:196
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:203
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:223
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:235
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/exceptions.py:282
+msgid "unknown error"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:289
+#, python-brace-format
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/formatting.py:156
+msgid "Usage:"
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:200
+#, python-brace-format
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:383
+#, python-brace-format
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:444
+#, python-brace-format
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/shell_completion.py:326
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: venv/Lib/site-packages/click/shell_completion.py:333
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:162
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:178
+msgid "Error: The value you entered was invalid."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:180
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:191
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:247
+msgid "Error: invalid input"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:866
+msgid "Press any key to continue..."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:332
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:369
+#, python-brace-format
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/types.py:460
+#, python-brace-format
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/types.py:482
+#, python-brace-format
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:538
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:679
+#, python-brace-format
+msgid "{value!r} is not a valid boolean."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:703
+#, python-brace-format
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:893
+msgid "file"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:895
+msgid "directory"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:897
+msgid "path"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:944
+#, python-brace-format
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:953
+#, python-brace-format
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:961
+#, python-brace-format
+msgid "{name} {filename!r} is a directory."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:970
+#, python-brace-format
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:979
+#, python-brace-format
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:988
+#, python-brace-format
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:1055
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/flask_wtf/file.py:55
+#: venv/Lib/site-packages/wtforms/validators.py:293
+#: venv/Lib/site-packages/wtforms/validators.py:323
+msgid "This field is required."
+msgstr ""
+
+#: venv/Lib/site-packages/flask_wtf/file.py:94
+#, python-brace-format
+msgid "File does not have an approved extension: {extensions}"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_wtf/file.py:101
+msgid "File does not have an approved extension."
+msgstr ""
+
+#: venv/Lib/site-packages/transliterate/utils.py:55
+#: venv/Lib/site-packages/transliterate/utils.py:90
+#: venv/Lib/site-packages/transliterate/utils.py:118
+#, python-format
+msgid "Language pack for code %s is not found."
+msgstr ""
+
+#: venv/Lib/site-packages/transliterate/utils.py:79
+#: venv/Lib/site-packages/transliterate/utils.py:110
+msgid "``language_code`` is optional with ``reversed`` set to True only."
+msgstr ""
+
+#: venv/Lib/site-packages/transliterate/utils.py:221
+#, python-format
+msgid "Can't detect language for the text \"%s\" given."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:86
+#, python-format
+msgid "Invalid field name '%s'."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:99
+#, python-format
+msgid "Field must be equal to %(other_name)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:146
+#, python-format
+msgid "Field must be at least %(min)d character long."
+msgid_plural "Field must be at least %(min)d characters long."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:152
+#, python-format
+msgid "Field cannot be longer than %(max)d character."
+msgid_plural "Field cannot be longer than %(max)d characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:158
+#, python-format
+msgid "Field must be exactly %(max)d character long."
+msgid_plural "Field must be exactly %(max)d characters long."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:164
+#, python-format
+msgid "Field must be between %(min)d and %(max)d characters long."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:216
+#, python-format
+msgid "Number must be at least %(min)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:219
+#, python-format
+msgid "Number must be at most %(max)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:222
+#, python-format
+msgid "Number must be between %(min)s and %(max)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:358
+msgid "Invalid input."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:422
+msgid "Invalid email address."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:460
+msgid "Invalid IP address."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:503
+msgid "Invalid Mac address."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:540
+msgid "Invalid URL."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:561
+msgid "Invalid UUID."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:595
+#, python-format
+msgid "Invalid value, must be one of: %(values)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:631
+#, python-format
+msgid "Invalid value, can't be any of: %(values)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:700
+msgid "This field cannot be edited."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:716
+msgid "This field is disabled and cannot have a value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/core.py:96
+msgid "Invalid CSRF Token."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/session.py:64
+msgid "CSRF token missing."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/session.py:72
+msgid "CSRF failed."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/session.py:77
+msgid "CSRF token expired."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:142
+msgid "Invalid Choice: could not coerce."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:149
+#: venv/Lib/site-packages/wtforms/fields/choices.py:203
+msgid "Choices cannot be None."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:155
+msgid "Not a valid choice."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:194
+msgid "Invalid choice(s): one or more data inputs could not be coerced."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:212
+#, python-format
+msgid "'%(value)s' is not a valid choice for this field."
+msgid_plural "'%(value)s' are not valid choices for this field."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:52
+msgid "Not a valid datetime value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:78
+msgid "Not a valid date value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:104
+msgid "Not a valid time value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:149
+msgid "Not a valid week value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:82
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:92
+msgid "Not a valid integer value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:168
+msgid "Not a valid decimal value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:197
+msgid "Not a valid float value."
+msgstr ""
 

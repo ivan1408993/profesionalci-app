@@ -12,7 +12,8 @@ from sqlalchemy import and_
 from flask_paginate import Pagination, get_page_args
 
 from flask_babel import _
-
+from flask import current_app
+from flask_mail import Message
 
 from sqlalchemy.orm import joinedload
 from .models import Driver, Rating, Employer
@@ -24,6 +25,9 @@ from .utils import verify_reset_token
 
 from .decorators import login_required, superadmin_required
 from app.models import Driver, DriverCard
+from app.models import Driver
+from sqlalchemy import or_, func
+
 
 main = Blueprint('main', __name__)
 
@@ -56,7 +60,7 @@ def add_new_driver_card(driver, new_card_number, expiry_date=None):
 def add_driver_card(driver_id):
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Morate biti prijavljeni kao poslodavac.")
+        flash(_("Morate biti prijavljeni kao poslodavac."))
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
@@ -74,25 +78,25 @@ def add_driver_card(driver_id):
             try:
                 issue_date = datetime.strptime(issue_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash("Neispravan format datuma izdavanja.")
+                flash(_("Neispravan format datuma izdavanja."))
                 return redirect(url_for('main.add_driver_card', driver_id=driver.id))
 
         if expiry_date_str:
             try:
                 expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash("Neispravan format datuma isteka.")
+                flash(_("Neispravan format datuma isteka."))
                 return redirect(url_for('main.add_driver_card', driver_id=driver.id))
 
         # Provera da li kartica već postoji (jedinstveni broj)
         existing_card = DriverCard.query.filter_by(card_number=new_card_number).first()
         if existing_card:
-            flash("Ova kartica već postoji u sistemu.")
+            flash(_("Ova kartica već postoji u sistemu."))
             return redirect(url_for('main.add_driver_card', driver_id=driver.id))
 
         # Dodaj novu karticu i deaktiviraj prethodne
         add_new_driver_card(driver, new_card_number, issue_date, expiry_date)
-        flash("Nova kartica je uspešno dodata i aktivirana.")
+        flash(_("Nova kartica je uspešno dodata i aktivirana."))
         return redirect(url_for('main.driver_detail', driver_id=driver.id))  # ili neka stranica sa detaljima vozača
 
     return render_template('add_card.html', driver=driver)
@@ -124,7 +128,7 @@ from app.utils import generate_salt, hash_jmbg_with_salt
 def add_driver():
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Molimo prijavite se kao poslodavac.")
+        flash(_("Molimo prijavite se kao poslodavac."))
         return redirect(url_for('main.login'))
 
     current_date = datetime.today().strftime('%Y-%m-%d')
@@ -134,7 +138,7 @@ def add_driver():
 
         # Provera dužine JMBG
         if len(jmbg) != 13 or not jmbg.isdigit():
-            flash("JMBG mora sadržati tačno 13 cifara.")
+            flash(_("JMBG mora sadržati tačno 13 cifara."))
             return redirect(url_for('main.add_driver'))
 
         card_number = request.form.get('card_number', '').strip()
@@ -144,7 +148,7 @@ def add_driver():
         cpc_expiry_date_str = request.form.get('cpc_expiry_date', '').strip()
 
         if card_number and len(card_number) != 16:
-            flash("Broj tahograf kartice mora imati tačno 16 karaktera.")
+            flash(_("Broj tahograf kartice mora imati tačno 16 karaktera."))
             return redirect(url_for('main.add_driver'))
 
         issue_date = datetime.strptime(issue_date_str, '%Y-%m-%d').date() if issue_date_str else None
@@ -161,11 +165,11 @@ def add_driver():
 
         if existing_driver:
             if existing_driver.active and existing_driver.employer_id == employer_id:
-                flash("Vozač već radi kod vas.")
+                flash(_("Vozač već radi kod vas."))
                 return redirect(url_for('main.drivers'))
 
             elif existing_driver.active and existing_driver.employer_id != employer_id:
-                flash("Vozač već radi kod drugog poslodavca.")
+                flash(_("Vozač već radi kod drugog poslodavca."))
                 return redirect(url_for('main.search_driver'))
 
             else:
@@ -179,7 +183,7 @@ def add_driver():
                 if card_number:
                     existing_card = DriverCard.query.filter_by(card_number=card_number).first()
                     if existing_card:
-                        flash("Tahograf kartica sa ovim brojem već postoji u sistemu.")
+                        flash(_("Tahograf kartica sa ovim brojem već postoji u sistemu."))
                         return redirect(url_for('main.add_driver'))
 
                     new_card = DriverCard(
@@ -193,7 +197,7 @@ def add_driver():
                     db.session.add(new_card)
                     db.session.commit()
 
-                flash("Postojeći vozač je preuzet u vašu firmu.")
+                flash(_("Postojeći vozač je preuzet u vašu firmu."))
                 return redirect(url_for('main.drivers'))
 
         # Dodavanje novog vozača sa novim salt-om
@@ -203,7 +207,7 @@ def add_driver():
         if card_number:
             existing_card = DriverCard.query.filter_by(card_number=card_number).first()
             if existing_card:
-                flash("Tahograf kartica sa ovim brojem već postoji u sistemu.")
+                flash(_("Tahograf kartica sa ovim brojem već postoji u sistemu."))
                 return redirect(url_for('main.add_driver'))
 
         new_driver = Driver(
@@ -229,7 +233,7 @@ def add_driver():
             db.session.add(new_card)
             db.session.commit()
 
-        flash("Novi vozač je uspešno dodat.")
+        flash(_("Novi vozač je uspešno dodat."))
         return redirect(url_for('main.drivers'))
 
     return render_template('add_driver.html', current_lang=session.get('lang', 'sr'), current_date=current_date)
@@ -241,7 +245,7 @@ def add_driver():
 def search_driver():
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Morate biti prijavljeni kao poslodavac.")
+        flash(_("Morate biti prijavljeni kao poslodavac."))
         return redirect(url_for('main.login'))
 
     driver = None
@@ -278,7 +282,7 @@ def search_driver():
                 driver = cpc_card_number
 
         if not driver:
-            flash("Vozač sa unetim podacima nije pronađen.")
+            flash(_("Vozač sa unetim podacima nije pronađen."))
             show_additional_fields = True
         else:
             for r in driver.ratings:
@@ -308,7 +312,7 @@ def search_driver():
 @main.route('/adopt_driver/<int:driver_id>', methods=['POST'])
 def adopt_driver(driver_id):
     if 'user_id' not in session or session.get('user_type') != 'employer':
-        flash('Nemate dozvolu za ovu akciju.', 'danger')
+        flash(_('Nemate dozvolu za ovu akciju.', 'danger'))
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
@@ -318,14 +322,14 @@ def adopt_driver(driver_id):
         if not driver.active:
             driver.active = True
             db.session.commit()
-            flash('Vozač je ponovo aktiviran u vašem sistemu.', 'success')
+            flash(_('Vozač je ponovo aktiviran u vašem sistemu.', 'success'))
         else:
-            flash('Vozač je već kod vas i aktivan je.', 'info')
+            flash(_('Vozač je već kod vas i aktivan je.', 'info'))
         return redirect(url_for('main.drivers', driver_id=driver.id))
 
     # Ako je vozač aktivan kod drugog poslodavca - NE DOZVOLJAVAMO preuzimanje
     if driver.active and driver.employer_id != employer_id:
-        flash('Vozač je već aktivan kod drugog poslodavca i ne može se preuzeti.', 'warning')
+        flash(_('Vozač je već aktivan kod drugog poslodavca i ne može se preuzeti.', 'warning'))
         return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
     # Vozač nije aktivan ili nema poslodavca, može se preuzeti
@@ -333,7 +337,7 @@ def adopt_driver(driver_id):
     driver.active = True
     db.session.commit()
 
-    flash(f'Vozač {driver.full_name} je uspešno preuzet u vašu firmu.', 'success')
+    flash(_(f'Vozač {driver.full_name} je uspešno preuzet u vašu firmu.'), 'success')
     return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
 
@@ -342,7 +346,7 @@ def adopt_driver(driver_id):
 @main.route('/profile', methods=['GET', 'POST'])
 def employer_profile():
     if session.get('user_type') != 'employer':
-        flash("Nemate pristup ovoj stranici.")
+        flash(_("Nemate pristup ovoj stranici."))
         return redirect(url_for('main.index'))
 
     employer_id = session.get('user_id')
@@ -354,7 +358,7 @@ def employer_profile():
 
         phone_number = request.form.get('phone_number', '').strip()
         if phone_number and not phone_number.isdigit():
-            flash("Broj telefona može sadržati samo cifre.")
+            flash(_("Broj telefona može sadržati samo cifre."))
             return redirect(url_for('main.employer_profile'))
 
         employer.phone_number = phone_number
@@ -364,7 +368,7 @@ def employer_profile():
             employer.password_hash = generate_password_hash(new_password)
 
         db.session.commit()
-        flash("Podaci su uspešno ažurirani.")
+        flash(_("Podaci su uspešno ažurirani."))
         return redirect(url_for('main.drivers'))
 
     return render_template('employer_profile.html', employer=employer, current_lang=session.get('lang', 'sr'))
@@ -375,34 +379,29 @@ def employer_profile():
 def activate_existing_driver(driver_id):
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Molimo prijavite se.")
+        flash(_("Molimo prijavite se."))
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
 
     # Ako je već aktivan kod drugog poslodavca → zabrana
     if driver.active and driver.employer_id != employer_id:
-        flash("Ovaj vozač je trenutno zaposlen kod drugog poslodavca i ne možete ga preuzeti.")
+        flash(_("Ovaj vozač je trenutno zaposlen kod drugog poslodavca i ne možete ga preuzeti."))
         return redirect(url_for('main.drivers'))
 
     # Ako je već kod ovog poslodavca → samo osiguraj da je aktivan
     if driver.employer_id == employer_id:
         driver.active = True
         db.session.commit()
-        flash(f"Vozač {driver.full_name} je sada aktivan kod vaše firme.")
+        flash(_(f"Vozač {driver.full_name} je sada aktivan kod vaše firme."))
         return redirect(url_for('main.drivers'))
 
     # Ako je neaktivan → preuzmi i aktiviraj
     driver.employer_id = employer_id
     driver.active = True
     db.session.commit()
-    flash(f"Vozač {driver.full_name} je uspešno dodat vašoj firmi.")
+    flash(_(f"Vozač {driver.full_name} je uspešno dodat vašoj firmi."))
     return redirect(url_for('main.drivers'))
-
-
-
-from flask import current_app
-from flask_mail import Message
 
 # REGISTER
 @main.route('/register', methods=['GET', 'POST'])
@@ -417,28 +416,28 @@ def register():
 
         # Validacija PIB
         if not pib.isdigit() or len(pib) != 9:
-            flash("PIB mora sadržati tačno 9 cifara.")
+            flash(_("PIB mora sadržati tačno 9 cifara."))
             return redirect(url_for('main.register'))
 
         # Validacija telefona - samo cifre, нпр. 6 до 15 цифара
         if not phone_number.isdigit() or not (6 <= len(phone_number) <= 15):
-            flash("Telefon mora sadržati samo cifre i imati između 6 i 15 cifara.")
+            flash(_("Telefon mora sadržati samo cifre i imati između 6 i 15 cifara."))
             return redirect(url_for('main.register'))
 
         # Provera da li već postoji firma sa istim PIB-om
         existing_pib = Employer.query.filter_by(pib=pib).first()
         if existing_pib:
             if not existing_pib.active:
-                flash("Firma sa ovim PIB-om nije aktivna. Registracija nije moguća.")
+                flash(_("Firma sa ovim PIB-om nije aktivna. Registracija nije moguća."))
                 return redirect(url_for('main.register'))
             else:
-                flash("Postoji već nalog sa tim PIB-om.")
+                flash(_("Postoji već nalog sa tim PIB-om."))
                 return redirect(url_for('main.register'))
 
         # PROVERA DA LI MEJL VEĆ POSTOJI
         existing_email = Employer.query.filter_by(email=email).first()
         if existing_email:
-            flash("E-mail adresa već postoji u sistemu. Izaberite drugu.")
+            flash(_("E-mail adresa već postoji u sistemu. Izaberite drugu."))
             return redirect(url_for('main.register'))
 
         # Ako je sve u redu, dodaj novog poslodavca
@@ -473,7 +472,7 @@ def register():
             # Opcionalno: loguj grešku, ali ne prekidaj registraciju
             print(f"Greška pri slanju mejla: {e}")
 
-        flash("Uspešna registracija. Sada se možete prijaviti.")
+        flash(_("Uspešna registracija. Sada se možete prijaviti."))
         return redirect(url_for('main.login'))
 
     return render_template('register.html', current_lang=session.get('lang', 'sr'))
@@ -484,7 +483,7 @@ def register():
 @main.route('/logout')
 def logout():
     session.clear()
-    flash("Uspešno ste se odjavili.")
+    flash(_("Uspešno ste se odjavili."))
     return redirect(url_for('main.index'))
 
 @main.route('/login', methods=['GET', 'POST'])
@@ -498,7 +497,7 @@ def login():
 
             # ✅ Provera da li je firma aktivna
             if not employer.active:
-                flash("Vaša firma nije aktivna. Prijava nije moguća.")
+                flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
                 return redirect(url_for('main.login'))
 
             session['user_id'] = employer.id
@@ -510,16 +509,10 @@ def login():
             else:
                 return redirect(url_for('main.drivers'))
 
-        flash("Pogrešan email ili lozinka.")
+        flash(_("Pogrešan email ili lozinka."))
         return redirect(url_for('main.login'))
 
     return render_template('login.html', current_lang=session.get('lang', 'sr'))
-
-
-
-
-
-from flask import session
 
 @main.route('/dashboard')
 def dashboard():
@@ -527,26 +520,22 @@ def dashboard():
     company_name = session.get('company_name')
     if not company_name:
         # Ako nema podataka u sesiji, redirekt na prijavu
-        flash("Molimo prijavite se.")
+        flash(_("Molimo prijavite se."))
         return redirect(url_for('main.login'))
 
     return render_template('dashboard.html', company_name=company_name, current_lang=session.get('lang', 'sr'))
 
-    
-from app.models import Driver
-
-from sqlalchemy import or_, func
 
 @main.route('/drivers')
 def drivers():
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Molimo prijavite se.")
+        flash(_("Molimo prijavite se."))
         return redirect(url_for('main.login'))
 
     employer = Employer.query.get(employer_id)
     if not employer:
-        flash("Greška pri autentikaciji.")
+        flash(_("Greška pri autentikaciji."))
         return redirect(url_for('main.login'))
 
     search = request.args.get('search', '').strip()
@@ -618,12 +607,12 @@ def drivers():
 def search_driver_by_card():
     company_name = session.get('company_name')
     if not company_name:
-        flash("Molimo prijavite se.")
+        flash(_("Molimo prijavite se."))
         return redirect(url_for('main.login'))
 
     employer = Employer.query.filter_by(company_name=company_name).first()
     if not employer:
-        flash("Greška pri autentikaciji.")
+        flash(_("Greška pri autentikaciji."))
         return redirect(url_for('main.login'))
 
     if request.method == 'POST':
@@ -632,7 +621,7 @@ def search_driver_by_card():
         driver = Driver.query.filter_by(card_number=card_number).first()
 
         if not driver:
-            flash("Vozač sa datim brojem tahograf kartice ne postoji.")
+            flash(_("Vozač sa datim brojem tahograf kartice ne postoji."))
             return redirect(url_for('main.search_driver_by_card'))
 
         # Ako vozač nije trenutno kod ovog poslodavca, prikaži mu detalje gde je sve radio
@@ -643,7 +632,7 @@ def search_driver_by_card():
             return render_template('driver_exists.html', driver=driver, employer=employer, current_lang=session.get('lang', 'sr'))
 
         # Ako je vozač trenutno kod ovog poslodavca - preusmeri ga na listu vozača ili detalje
-        flash("Vozač već radi u vašoj firmi.")
+        flash(_("Vozač već radi u vašoj firmi."))
         return redirect(url_for('main.drivers'))
 
     return render_template('search_driver.html', current_lang=session.get('lang', 'sr'))
@@ -653,7 +642,7 @@ def search_driver_by_card():
 def driver_exists(driver_id):
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Molimo prijavite se.")
+        flash(_("Molimo prijavite se."))
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
@@ -682,7 +671,7 @@ def driver_exists(driver_id):
 def deactivate_driver(driver_id):
     employer_id = session.get('user_id')
     if not employer_id or session.get('user_type') != 'employer':
-        flash("Morate biti prijavljeni kao poslodavac.")
+        flash(_("Morate biti prijavljeni kao poslodavac."))
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
@@ -690,7 +679,7 @@ def deactivate_driver(driver_id):
     # Proverimo da li postoji ocena
     existing_rating = Rating.query.filter_by(driver_id=driver_id, employer_id=employer_id).first()
     if not existing_rating:
-        flash("Morate prvo oceniti vozača pre nego što ga označite kao neaktivnog.")
+        flash(_("Morate prvo oceniti vozača pre nego što ga označite kao neaktivnog."))
         return redirect(url_for('main.rate_driver', driver_id=driver_id))
 
     # Ako već postoji ocena – nastavljamo sa deaktivacijom
@@ -702,7 +691,7 @@ def deactivate_driver(driver_id):
     
     full_name = driver.full_name
 
-    flash(f"Vozač {full_name} je uspešno označen kao neaktivan.")
+    flash(_(f"Vozač {full_name} je uspešno označen kao neaktivan."))
     return redirect(url_for('main.drivers', active=1))
 
 
@@ -710,7 +699,7 @@ def deactivate_driver(driver_id):
 def all_drivers():
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Molimo prijavite se.")
+        flash(_("Molimo prijavite se."))
         return redirect(url_for('main.login'))
 
     search = request.args.get('search', '').strip()
@@ -748,15 +737,13 @@ def all_drivers():
     )
 
 
-
-
 # Ruta za prikaz forme za ocenjivanje vozaca
 @main.route('/drivers/<int:driver_id>/rate', methods=['GET', 'POST'])
 def rate_driver(driver_id):
     # Provera da li je prijavljen poslodavac
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Morate biti prijavljeni kao poslodavac da biste ocenili vozača.")
+        flash(_("Morate biti prijavljeni kao poslodavac da biste ocenili vozača."))
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
@@ -773,7 +760,7 @@ def rate_driver(driver_id):
             existing_rating.stars = rating_value
             existing_rating.comment = comment
             existing_rating.created_at = datetime.utcnow()
-            flash('Ocena je uspešno ažurirana.')
+            flash(_('Ocena je uspešno ažurirana.'))
         else:
             # Kreiraj novu ocenu
             new_rating = Rating(
@@ -783,7 +770,7 @@ def rate_driver(driver_id):
                 comment=comment
             )
             db.session.add(new_rating)
-            flash('Ocena je uspešno dodata.')
+            flash(_('Ocena je uspešno dodata.'))
 
         db.session.commit()
         return redirect(url_for('main.drivers'))
@@ -794,7 +781,7 @@ def rate_driver(driver_id):
 def driver_detail(driver_id):
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Morate biti prijavljeni kao poslodavac.")
+        flash(_("Morate biti prijavljeni kao poslodavac."))
         return redirect(url_for('main.login'))
 
     driver = Driver.query.options(
@@ -827,7 +814,7 @@ def reset_password_request():
             send_reset_email(email, reset_url)
         
         # Uvek vraćamo istu poruku radi bezbednosti
-        flash("Ako email postoji u sistemu, link za reset je poslat.", 'info')
+        flash(_("Ako email postoji u sistemu, link za reset je poslat.", 'info'))
         return redirect(url_for('main.login'))
 
     return render_template('reset_password_request.html', current_lang=session.get('lang', 'sr'))
@@ -837,7 +824,7 @@ def reset_password_request():
 def reset_password_token(token):
     email = verify_reset_token(token)
     if not email:
-        flash('Link nije validan ili je istekao.', 'danger')
+        flash(_('Link nije validan ili je istekao.', 'danger'))
         return redirect(url_for('main.login'))
 
     if request.method == 'POST':
@@ -846,18 +833,17 @@ def reset_password_token(token):
 
         # Provera da li se lozinke poklapaju
         if new_password != confirm_password:
-            flash("Lozinke se ne poklapaju.", "danger")
+            flash(_("Lozinke se ne poklapaju.", "danger"))
             return redirect(url_for('main.reset_password_token', token=token))
 
         employer = Employer.query.filter_by(email=email).first()
         if employer:
             employer.password_hash = generate_password_hash(new_password)
             db.session.commit()
-            flash('Lozinka je uspešno promenjena.', 'success')
+            flash(_('Lozinka je uspešno promenjena.', 'success'))
             return redirect(url_for('main.login'))
 
     return render_template('reset_password_form.html', token=token, current_lang=session.get('lang', 'sr'))
-
 
 
 from flask_mail import Message
@@ -882,7 +868,7 @@ from flask_login import login_required, current_user
 @login_required
 def sve_firme():
     if not current_user.is_superadmin:
-        flash("Nemate pristup ovoj stranici.", "danger")
+        flash(_("Nemate pristup ovoj stranici.", "danger"))
         return redirect(url_for('index'))
 
     from models import Employer  # ili kako ti je naziv modela za poslodavce
@@ -893,7 +879,7 @@ def sve_firme():
 @main.route('/admin/dashboard')
 def admin_dashboard():
     if session.get('user_type') != 'superadmin':
-        flash("Nemate pristup ovoj stranici.")
+        flash(_("Nemate pristup ovoj stranici."))
         return redirect(url_for('main.login'))
 
     # Pretraga firmi
@@ -942,7 +928,7 @@ def admin_dashboard():
 @main.route('/admin/employer/<int:employer_id>/drivers')
 def admin_employer_drivers(employer_id):
     if session.get('user_type') != 'superadmin':
-        flash("Nemate pristup ovoj stranici.")
+        flash(_("Nemate pristup ovoj stranici."))
         return redirect(url_for('main.login'))
 
     employer = Employer.query.get_or_404(employer_id)
@@ -965,14 +951,14 @@ def change_language():
 @main.route('/admin/employer/<int:employer_id>/toggle_status')
 def toggle_employer_status(employer_id):
     if session.get('user_type') != 'superadmin':
-        flash("Nemate pristup ovoj akciji.")
+        flash(_("Nemate pristup ovoj akciji."))
         return redirect(url_for('main.login'))
 
     employer = Employer.query.get_or_404(employer_id)
     employer.active = not employer.active
     db.session.commit()
 
-    flash(f"Status firme '{employer.company_name}' je uspešno promenjen.")
+    flash(_(f"Status firme '{employer.company_name}' je uspešno promenjen."))
     return redirect(url_for('main.admin_dashboard'))
 
 
@@ -983,7 +969,7 @@ def update_driver(driver_id):
     # Provera da li je poslodavac prijavljen
     employer_id = session.get('user_id')
     if not employer_id:
-        flash("Morate biti prijavljeni kao poslodavac.", "danger")
+        flash(_("Morate biti prijavljeni kao poslodavac.", "danger"))
         return redirect(url_for('main.login'))
 
     # Učitavanje vozača
@@ -992,7 +978,7 @@ def update_driver(driver_id):
 
     # Provera prava pristupa: vozač mora biti aktivan i pripadati poslodavcu
     if not driver.active or driver.employer_id != employer_id:
-        flash("Nemate dozvolu da ažurirate ovog vozača.", "danger")
+        flash(_("Nemate dozvolu da ažurirate ovog vozača.", "danger"))
         return redirect(url_for('main.driver_detail', driver_id=driver_id))
 
     # Pronalazak aktivne tahograf kartice
@@ -1014,7 +1000,7 @@ def update_driver(driver_id):
             try:
                 expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash("Neispravan format datuma isteka tahograf kartice.", "warning")
+                flash(_("Neispravan format datuma isteka tahograf kartice.", "warning"))
                 return redirect(url_for('main.update_driver', driver_id=driver_id))
 
         # Parsiranje datuma isteka CPC kartice
@@ -1022,7 +1008,7 @@ def update_driver(driver_id):
             try:
                 cpc_expiry_date = datetime.strptime(cpc_expiry_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash("Neispravan format datuma isteka CPC kartice.", "warning")
+                flash(_("Neispravan format datuma isteka CPC kartice.", "warning"))
                 return redirect(url_for('main.update_driver', driver_id=driver_id))
 
         # Ažuriranje imena ako je promenjeno
@@ -1037,7 +1023,7 @@ def update_driver(driver_id):
                 DriverCard.driver_id != driver.id
             ).first()
             if existing_card:
-                flash("Ovaj broj tahograf kartice je već dodeljen drugom vozaču.", "danger")
+                flash(_("Ovaj broj tahograf kartice je već dodeljen drugom vozaču.", "danger"))
                 return redirect(url_for('main.update_driver', driver_id=driver.id))
 
             # Deaktivacija stare kartice
@@ -1052,19 +1038,19 @@ def update_driver(driver_id):
                 expiry_date=expiry_date
             )
             db.session.add(new_card)
-            flash("Dodata je nova tahografska kartica.", "success")
+            flash(_("Dodata je nova tahografska kartica.", "success"))
 
         # Ako broj kartice nije promenjen, ali treba ažurirati datum važenja
         elif current_card and expiry_date:
             current_card.expiry_date = expiry_date
-            flash("Datum važenja tahograf kartice je ažuriran.", "info")
+            flash(_("Datum važenja tahograf kartice je ažuriran.", "info"))
 
         # Ažuriranje CPC kartice i datuma važenja
         driver.cpc_card_number = cpc_card_number or None
         driver.cpc_expiry_date = cpc_expiry_date
 
         db.session.commit()
-        flash("Podaci o vozaču su uspešno ažurirani.", "success")
+        flash(_("Podaci o vozaču su uspešno ažurirani.", "success"))
         return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
     # GET zahtev - priprema podataka za prikaz u formi
@@ -1081,8 +1067,6 @@ def update_driver(driver_id):
         cpc_expiry_date_str=cpc_expiry_date_str,
         current_date=current_date
     )
-
-
 
 @main.route('/terms')
 def terms():
@@ -1125,4 +1109,3 @@ def set_language(lang):
 @main.route("/test_translation")
 def test_translation():
     return _("Dobrodošli")
-
