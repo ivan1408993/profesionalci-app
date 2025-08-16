@@ -24,13 +24,6 @@
     <span>Profesionalci</span>
 </a>
 
- <!-- Jezički meni -->
-<div class="d-flex align-items-center ms-3">
-  <a href="/set_language/sr" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
-  <a href="/set_language/en" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %}">🇬🇧</a>
-  <a href="/set_language/de" class="lang-flag {% if g.current_lang == 'de' %}active{% endif %}">🇩🇪</a>
-</div>
-
 <!-- Jezički meni 2 - kasnija verzija
 <form method="get" class="ms-3">
   <select class="form-select lang-select" onchange="window.location.href='/set_language/' + this.value;">
@@ -40,12 +33,18 @@
   </select>
 </form>-->
 
-
 <!-- Toggler za mobilni meni -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
             aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    
+<!-- Jezički meni -->
+<div class="d-flex align-items-center ms-3">
+  <a href="/set_language/sr" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
+  <a href="/set_language/en" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %}">🇬🇧</a>
+  <a href="/set_language/de" class="lang-flag {% if g.current_lang == 'de' %}active{% endif %}">🇩🇪</a>
+</div>
 
     <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
