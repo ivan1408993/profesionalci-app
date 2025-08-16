@@ -378,8 +378,12 @@ nav.navbar {
   border-bottom: 2px solid gold;
 }
 
+
+
+/*__________________
+EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
 .lang-select {
-  border: 2px solid #ffc107; /* жута ивица */
+  border: 2px solid #ffc107; /* жута ивица
   font-size: 1.1rem;
   padding: 4px 8px;
   background-color: #212529;
@@ -398,11 +402,11 @@ nav.navbar {
   display: inline-block;
 }
 
-/* ефекат вијорења заставе */
+ ефекат вијорења заставе
 @keyframes wave {
   0% { transform: rotate(0deg); }
   25% { transform: rotate(5deg); }
   50% { transform: rotate(0deg); }
   75% { transform: rotate(-5deg); }
   100% { transform: rotate(0deg); }
-}
+}*/
