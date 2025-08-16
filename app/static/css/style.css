@@ -377,3 +377,32 @@ nav.navbar {
 .lang-flag.active {
   border-bottom: 2px solid gold;
 }
+
+.lang-select {
+  border: 2px solid #ffc107; /* жута ивица */
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  background-color: #212529;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.lang-select:hover {
+  transform: scale(1.05);
+  border-color: #fff;
+}
+
+.lang-select option {
+  animation: wave 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+/* ефекат вијорења заставе */
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
