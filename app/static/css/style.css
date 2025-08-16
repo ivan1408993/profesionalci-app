@@ -410,3 +410,15 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
   75% { transform: rotate(-5deg); }
   100% { transform: rotate(0deg); }
 }*/
+
+/*kretanje kamiona pored imena profesionalci u base.html*/
+.truck-icon {
+    animation: moveTruck 3s linear infinite;
+    position: relative;
+}
+
+@keyframes moveTruck {
+    0%   { left: 0; }
+    50%  { left: 5px; }
+    100% { left: 0; }
+}
