@@ -742,7 +742,7 @@ msgid "Trenutno nemate nijednog vozača u sistemu."
 msgstr ""
 
 #: app/templates/employer_detail.html:3
-msgid "Послодавац"
+msgid "Poslodavac"
 msgstr ""
 
 #: app/templates/employer_detail.html:11

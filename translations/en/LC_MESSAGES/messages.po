@@ -746,7 +746,7 @@ msgid "Trenutno nemate nijednog vozača u sistemu."
 msgstr "You currently have no drivers in the system."
 
 #: app/templates/employer_detail.html:3
-msgid "Послодавац"
+msgid "Poslodavac"
 msgstr "Employer"
 
 #: app/templates/employer_detail.html:11

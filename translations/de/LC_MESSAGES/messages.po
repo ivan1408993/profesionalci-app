@@ -750,7 +750,7 @@ msgid "Trenutno nemate nijednog vozača u sistemu."
 msgstr "Derzeit haben Sie keinen Fahrer im System."
 
 #: app/templates/employer_detail.html:3
-msgid "Послодавац"
+msgid "Poslodavac"
 msgstr "Arbeitgeber"
 
 #: app/templates/employer_detail.html:11
