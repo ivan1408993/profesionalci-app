@@ -30,7 +30,11 @@
     </form>
 
     <p class="mt-3 text-center">
-        {{ _('Nemate nalog?') }} <a href="{{ url_for('main.register') }}">{{ _('Registrujte se') }}</a>
-    </p>
+    {{ _('Nemate nalog?') }}
+    <a href="{{ url_for('main.register') }}" class="btn btn-warning ms-2">
+        {{ _('Registrujte se') }}
+    </a>
+</p>
+
 </div>
 {% endblock %}
