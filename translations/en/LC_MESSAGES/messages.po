@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-16 15:38+0200\n"
+"POT-Creation-Date: 2025-08-17 07:59+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 
 #: app/routes.py:63 app/routes.py:248 app/routes.py:674 app/routes.py:784
-#: app/routes.py:972
+#: app/routes.py:973
 msgid "Morate biti prijavljeni kao poslodavac."
 msgstr "You must be logged in as an employer."
 
@@ -93,7 +93,7 @@ msgstr ""
 "The driver is already active with another employer and cannot be "
 "reassigned."
 
-#: app/routes.py:349 app/routes.py:871 app/routes.py:882 app/routes.py:931
+#: app/routes.py:349 app/routes.py:872 app/routes.py:883 app/routes.py:932
 msgid "Nemate pristup ovoj stranici."
 msgstr "You do not have access to this page."
 
@@ -188,55 +188,60 @@ msgstr "The rating has been successfully updated."
 msgid "Ocena je uspešno dodata."
 msgstr "The rating has been successfully added."
 
-#: app/routes.py:817
+#: app/routes.py:818
 msgid "Ako email postoji u sistemu, link za reset je poslat."
 msgstr "If the email exists in the system, a reset link has been sent."
 
-#: app/routes.py:827
+#: app/routes.py:828
 msgid "Link nije validan ili je istekao."
 msgstr "The link is invalid or has expired."
 
-#: app/routes.py:836 app/templates/reset_password_form.html:83
+#: app/routes.py:837 app/templates/reset_password_form.html:83
 msgid "Lozinke se ne poklapaju."
 msgstr "Passwords do not match."
 
-#: app/routes.py:843
+#: app/routes.py:844
 msgid "Lozinka je uspešno promenjena."
 msgstr "The password has been successfully changed."
 
-#: app/routes.py:954
+#: app/routes.py:955
 msgid "Nemate pristup ovoj akciji."
 msgstr "You do not have access to this action."
 
-#: app/routes.py:981
+#: app/routes.py:982
 msgid "Nemate dozvolu da ažurirate ovog vozača."
 msgstr "You do not have permission to update this driver."
 
-#: app/routes.py:1003
+#: app/routes.py:1004
 msgid "Neispravan format datuma isteka tahograf kartice."
 msgstr "Invalid tachograph card expiration date format."
 
-#: app/routes.py:1011
+#: app/routes.py:1012
 msgid "Neispravan format datuma isteka CPC kartice."
 msgstr "Invalid CPC card expiration date format."
 
-#: app/routes.py:1026
+#: app/routes.py:1027
 msgid "Ovaj broj tahograf kartice je već dodeljen drugom vozaču."
 msgstr "This tachograph card number is already assigned to another driver."
 
-#: app/routes.py:1041
+#: app/routes.py:1042
 msgid "Dodata je nova tahografska kartica."
 msgstr "A new tachograph card has been added."
 
-#: app/routes.py:1046
+#: app/routes.py:1047
 msgid "Datum važenja tahograf kartice je ažuriran."
 msgstr "The tachograph card expiration date has been updated."
 
-#: app/routes.py:1053
+#: app/routes.py:1054
 msgid "Podaci o vozaču su uspešno ažurirani."
 msgstr "Driver information has been successfully updated."
 
-#: app/routes.py:1111 app/templates/base.html:51
+#: app/routes.py:1094
+#, fuzzy
+msgid "Morate biti prijavljeni kao poslodavac da biste videli ovu stranicu."
+msgstr "You must be logged in as an employer to rate a driver."
+
+#: app/routes.py:1118 app/templates/base.html:51
 msgid "Dobrodošli"
 msgstr "Welcome"
 

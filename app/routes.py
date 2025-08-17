@@ -312,7 +312,7 @@ def search_driver():
 @main.route('/adopt_driver/<int:driver_id>', methods=['POST'])
 def adopt_driver(driver_id):
     if 'user_id' not in session or session.get('user_type') != 'employer':
-        flash(_('Nemate dozvolu za ovu akciju.', 'danger'))
+        flash(_('Nemate dozvolu za ovu akciju.'), 'danger')
         return redirect(url_for('main.login'))
 
     driver = Driver.query.get_or_404(driver_id)
@@ -322,14 +322,14 @@ def adopt_driver(driver_id):
         if not driver.active:
             driver.active = True
             db.session.commit()
-            flash(_('Vozač je ponovo aktiviran u vašem sistemu.', 'success'))
+            flash(_('Vozač je ponovo aktiviran u vašem sistemu.'), 'success')
         else:
-            flash(_('Vozač je već kod vas i aktivan je.', 'info'))
+            flash(_('Vozač je već kod vas i aktivan je.'), 'info')
         return redirect(url_for('main.drivers', driver_id=driver.id))
 
     # Ako je vozač aktivan kod drugog poslodavca - NE DOZVOLJAVAMO preuzimanje
     if driver.active and driver.employer_id != employer_id:
-        flash(_('Vozač je već aktivan kod drugog poslodavca i ne može se preuzeti.', 'warning'))
+        flash(_('Vozač je već aktivan kod drugog poslodavca i ne može se preuzeti.'), 'warning')
         return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
     # Vozač nije aktivan ili nema poslodavca, može se preuzeti
@@ -815,7 +815,7 @@ def reset_password_request():
             send_reset_email(email, reset_url)
         
         # Uvek vraćamo istu poruku radi bezbednosti
-        flash(_("Ako email postoji u sistemu, link za reset je poslat.", 'info'))
+        flash(_("Ako email postoji u sistemu, link za reset je poslat."), 'info')
         return redirect(url_for('main.login'))
 
     return render_template('reset_password_request.html', current_lang=session.get('lang', 'sr'))
@@ -825,7 +825,7 @@ def reset_password_request():
 def reset_password_token(token):
     email = verify_reset_token(token)
     if not email:
-        flash(_('Link nije validan ili je istekao.', 'danger'))
+        flash(_('Link nije validan ili je istekao.'), 'danger')
         return redirect(url_for('main.login'))
 
     if request.method == 'POST':
@@ -834,14 +834,14 @@ def reset_password_token(token):
 
         # Provera da li se lozinke poklapaju
         if new_password != confirm_password:
-            flash(_("Lozinke se ne poklapaju.", "danger"))
+            flash(_("Lozinke se ne poklapaju."), "danger")
             return redirect(url_for('main.reset_password_token', token=token))
 
         employer = Employer.query.filter_by(email=email).first()
         if employer:
             employer.password_hash = generate_password_hash(new_password)
             db.session.commit()
-            flash(_('Lozinka je uspešno promenjena.', 'success'))
+            flash(_('Lozinka je uspešno promenjena.'), 'success')
             return redirect(url_for('main.login'))
 
     return render_template('reset_password_form.html', token=token, current_lang=session.get('lang', 'sr'))
@@ -869,7 +869,7 @@ from flask_login import login_required, current_user
 @login_required
 def sve_firme():
     if not current_user.is_superadmin:
-        flash(_("Nemate pristup ovoj stranici.", "danger"))
+        flash(_("Nemate pristup ovoj stranici."), "danger")
         return redirect(url_for('index'))
 
     from models import Employer  # ili kako ti je naziv modela za poslodavce
@@ -970,7 +970,7 @@ def update_driver(driver_id):
     # Provera da li je poslodavac prijavljen
     employer_id = session.get('user_id')
     if not employer_id:
-        flash(_("Morate biti prijavljeni kao poslodavac.", "danger"))
+        flash(_("Morate biti prijavljeni kao poslodavac."), "danger")
         return redirect(url_for('main.login'))
 
     # Učitavanje vozača
@@ -979,7 +979,7 @@ def update_driver(driver_id):
 
     # Provera prava pristupa: vozač mora biti aktivan i pripadati poslodavcu
     if not driver.active or driver.employer_id != employer_id:
-        flash(_("Nemate dozvolu da ažurirate ovog vozača.", "danger"))
+        flash(_("Nemate dozvolu da ažurirate ovog vozača."), "danger")
         return redirect(url_for('main.driver_detail', driver_id=driver_id))
 
     # Pronalazak aktivne tahograf kartice
@@ -1001,7 +1001,7 @@ def update_driver(driver_id):
             try:
                 expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash(_("Neispravan format datuma isteka tahograf kartice.", "warning"))
+                flash(_("Neispravan format datuma isteka tahograf kartice."), "warning")
                 return redirect(url_for('main.update_driver', driver_id=driver_id))
 
         # Parsiranje datuma isteka CPC kartice
@@ -1009,7 +1009,7 @@ def update_driver(driver_id):
             try:
                 cpc_expiry_date = datetime.strptime(cpc_expiry_date_str, '%Y-%m-%d').date()
             except ValueError:
-                flash(_("Neispravan format datuma isteka CPC kartice.", "warning"))
+                flash(_("Neispravan format datuma isteka CPC kartice."), "warning")
                 return redirect(url_for('main.update_driver', driver_id=driver_id))
 
         # Ažuriranje imena ako je promenjeno
@@ -1024,7 +1024,7 @@ def update_driver(driver_id):
                 DriverCard.driver_id != driver.id
             ).first()
             if existing_card:
-                flash(_("Ovaj broj tahograf kartice je već dodeljen drugom vozaču.", "danger"))
+                flash(_("Ovaj broj tahograf kartice je već dodeljen drugom vozaču."), "danger")
                 return redirect(url_for('main.update_driver', driver_id=driver.id))
 
             # Deaktivacija stare kartice
@@ -1039,19 +1039,19 @@ def update_driver(driver_id):
                 expiry_date=expiry_date
             )
             db.session.add(new_card)
-            flash(_("Dodata je nova tahografska kartica.", "success"))
+            flash(_("Dodata je nova tahografska kartica."), "success")
 
         # Ako broj kartice nije promenjen, ali treba ažurirati datum važenja
         elif current_card and expiry_date:
             current_card.expiry_date = expiry_date
-            flash(_("Datum važenja tahograf kartice je ažuriran.", "info"))
+            flash(_("Datum važenja tahograf kartice je ažuriran."), "info")
 
         # Ažuriranje CPC kartice i datuma važenja
         driver.cpc_card_number = cpc_card_number or None
         driver.cpc_expiry_date = cpc_expiry_date
 
         db.session.commit()
-        flash(_("Podaci o vozaču su uspešno ažurirani.", "success"))
+        flash(_("Podaci o vozaču su uspešno ažurirani."), "success")
         return redirect(url_for('main.driver_detail', driver_id=driver.id))
 
     # GET zahtev - priprema podataka za prikaz u formi
