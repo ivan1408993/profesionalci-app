@@ -779,9 +779,9 @@ def rate_driver(driver_id):
 
 @main.route('/drivers/<int:driver_id>')
 def driver_detail(driver_id):
-    employer_id = session.get('user_id')
-    if not employer_id:
-        flash(_("Morate biti prijavljeni kao poslodavac."))
+    # ✅ Dozvoljen pristup samo poslodavcima
+    if session.get('user_type') != 'employer' or not session.get('user_id'):
+        flash(_("Morate biti prijavljeni kao poslodavac."), "warning")
         return redirect(url_for('main.login'))
 
     driver = Driver.query.options(
@@ -789,8 +789,9 @@ def driver_detail(driver_id):
         joinedload(Driver.ratings).joinedload(Rating.employer)
     ).get_or_404(driver_id)
 
+    # ✅ Dozvoljeno menjanje samo ako je ovaj poslodavac aktivni poslodavac vozača
     currently_employed_by_this_employer = (
-        driver.active and driver.employer_id == employer_id
+        driver.active and driver.employer_id == session.get('user_id')
     )
 
     return render_template(
@@ -1088,8 +1089,14 @@ def privacy_policy():
 
 @main.route('/employer/<int:employer_id>')
 def employer_detail(employer_id):
+    # ✅ Dozvoljen pristup samo ulogovanim poslodavcima
+    if session.get('user_type') != 'employer' or not session.get('user_id'):
+        flash(_("Morate biti prijavljeni kao poslodavac da biste videli ovu stranicu."), "warning")
+        return redirect(url_for('main.login'))
+
     employer = Employer.query.get_or_404(employer_id)
     return render_template('employer_detail.html', employer=employer)
+
 
 @main.route('/about')
 def about():
