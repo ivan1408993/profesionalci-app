@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Ažuriranje vozača') }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+    <h2 class="mb-4 text-center text-light">
+        <i class="fas fa-user-edit me-2 icon-highlight"></i> {{ _('Ažuriraj podatke o vozaču') }}
+    </h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ _('Zatvori') }}"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('main.update_driver', driver_id=driver.id) }}" id="driverForm" novalidate
+      class="p-4 border rounded shadow-sm bg-dark bg-opacity-50">
+
+    <!-- Ime i prezime -->
+    <div class="mb-3">
+        <label for="full_name" class="form-label text-light fw-semibold">
+            <i class="fas fa-user icon-highlight me-1"></i> {{ _('Ime i prezime') }}
+        </label>
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="full_name" id="full_name" value="{{ driver.full_name }}" required>
+    </div>
+
+    <!-- Broj tahograf kartice -->
+    <div class="mb-3">
+        <label for="card_number" class="form-label text-light fw-semibold">
+            <i class="fas fa-id-card icon-highlight me-1"></i> {{ _('Broj tahograf kartice') }}
+        </label>
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               id="card_number" name="card_number"
+               maxlength="16" minlength="16"
+               value="{{ driver.card_number or '' }}"
+               placeholder="{{ _('Unesite novi broj kartice (ako postoji promena)') }}"
+               title="{{ _('Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre).') }}">
+        {% set active_card = driver.cards | selectattr('is_active') | first %}
+        <div class="form-text text-light">
+        {{ _('Trenutni broj') }}: <strong>{{ active_card.card_number if active_card else '—' }}</strong> &mdash; {{ _('ostavite prazno ako ne menjate broj') }}
+        </div>
+
+        <div class="invalid-feedback">{{ _('Broj mora imati tačno 16 karaktera (slova ili cifre).') }}</div>
+    </div>
+
+    <!-- Datum važenja tahograf kartice -->
+    <div class="mb-3">
+        <label for="expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="{{ _('Datum kada tahograf kartica prestaje da važi') }}">
+            <i class="fas fa-calendar-alt icon-highlight me-1"></i> {{ _('Datum važenja tahograf kartice') }}
+        </label>
+        <input type="date"
+               class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="expiry_date" id="expiry_date"
+               value="{{ expiry_date_str }}"
+               min="{{ current_date }}">
+    </div>
+
+    <!-- Broj CPC kartice -->
+    <div class="mb-3">
+        <label for="cpc_card_number" class="form-label text-light fw-semibold">
+            <i class="fas fa-id-badge icon-highlight me-1"></i> {{ _('Broj CPC kartice') }}
+        </label>
+        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="cpc_card_number" id="cpc_card_number"
+               value="{{ driver.cpc_card_number or '' }}">
+    </div>
+
+    <!-- Datum važenja CPC kartice -->
+    <div class="mb-4">
+        <label for="cpc_expiry_date" class="form-label text-light fw-semibold" data-bs-toggle="tooltip" title="{{ _('Datum kada CPC kartica prestaje da važi') }}">
+            <i class="fas fa-calendar-check icon-highlight me-1"></i> {{ _('Datum važenja CPC kartice') }}
+        </label>
+        <input type="date"
+               class="form-control bg-secondary bg-opacity-25 text-light border-0"
+               name="cpc_expiry_date"
+               id="cpc_expiry_date"
+               value="{{ cpc_expiry_date_str }}"
+               min="{{ current_date }}">
+    </div>
+
+    <!-- Dugmad -->
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="fas fa-save me-2"></i> {{ _('Sačuvaj promene') }}
+        </button>
+        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary w-100">
+            <i class="fas fa-arrow-left me-2"></i> {{ _('Nazad') }}
+        </a>
+    </div>
+</form>
+
+<!-- Istorija kartica -->
+<hr class="my-5 border-light">
+<h4 class="mb-3 text-light"><i class="fas fa-history icon-highlight me-2"></i> {{ _('Istorija tahograf kartica') }}</h4>
+
+{% if driver.cards %}
+    <ul class="list-group shadow-sm">
+    {% for card in driver.cards|sort(attribute='issue_date', reverse=True) %}
+       <li class="list-group-item d-flex justify-content-between align-items-center {% if card.is_active %}active-card{% endif %}">
+            <span>
+                <i class="fas fa-credit-card me-2 text-muted"></i>
+                {{ card.card_number }}
+                {% if card.expiry_date %}
+                    — {{ _('važi do') }}: <strong>{{ card.expiry_date.strftime('%d.%m.%Y') }}</strong>
+                {% endif %}
+            </span>
+            {% if card.is_active %}
+                <span class="badge bg-success">{{ _('Aktivna') }}</span>
+            {% else %}
+                <span class="badge bg-secondary">{{ _('Neaktivna') }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p class="text-muted">{{ _('Nema podataka o prethodnim karticama.') }}</p>
+{% endif %}
+</div>
+
+<!-- Validacija forme -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("driverForm");
+
+        form.addEventListener("submit", function (event) {
+            const cardNumber = document.getElementById("card_number").value.trim();
+            const cardPattern = /^[A-Za-z0-9]{16}$/;
+
+            if (cardNumber && !cardPattern.test(cardNumber)) {
+                event.preventDefault();
+                event.stopPropagation();
+                alert("{{ _('Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara.') }}");
+                return;
+            }
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add("was-validated");
+        });
+    });
+</script>
+
+<script>
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+
+<!-- Dodatni stil za ikone -->
+<style>
+.icon-highlight {
+    color: #00bcd4;
+    transition: color 0.3s ease;
+}
+.icon-highlight:hover {
+    color: #17e7ff;
+}
+
+.form-text {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+}
+
+.btn-success:hover {
+    background-color: #198754;
+    opacity: 0.9;
+}
+
+.btn-secondary:hover {
+    background-color: #6c757d;
+    opacity: 0.9;
+}
+
+.badge.bg-success {
+    font-size: 0.8rem;
+}
+
+.list-group-item.active-card {
+    background-color: #d1e7dd;
+    border-left: 5px solid #198754;
+}
+</style>
+{% endblock %}
