@@ -1,13 +1,13 @@
-# English translations for PROJECT.
-# Copyright (C) 2025 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# English translations for Profesionalci.
+# Copyright (C) 2025 Profesionalci Team
+# This file is distributed under the same license as the Profesionalci project.
+# Author: Ivan Lazić <lazici19@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-17 07:59+0200\n"
+"POT-Creation-Date: 2025-08-17 20:33+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -237,7 +237,6 @@ msgid "Podaci o vozaču su uspešno ažurirani."
 msgstr "Driver information has been successfully updated."
 
 #: app/routes.py:1094
-#, fuzzy
 msgid "Morate biti prijavljeni kao poslodavac da biste videli ovu stranicu."
 msgstr "You must be logged in as an employer to rate a driver."
 
@@ -319,7 +318,7 @@ msgstr "Add New Driver"
 
 #: app/templates/add_driver.html:14 app/templates/all_drivers.html:38
 #: app/templates/driver_exists.html:9 app/templates/drivers.html:67
-#: app/templates/search_driver.html:138
+#: app/templates/search_driver.html:138 app/templates/update_driver.html:27
 msgid "Ime i prezime"
 msgstr "Full Name"
 
@@ -340,7 +339,7 @@ msgid "13 cifara"
 msgstr "13 digits"
 
 #: app/templates/add_driver.html:33 app/templates/driver_detail.html:150
-#: app/templates/drivers.html:68
+#: app/templates/drivers.html:68 app/templates/update_driver.html:36
 msgid "Broj tahograf kartice"
 msgstr "Tachograph Card Number"
 
@@ -353,14 +352,16 @@ msgid "Mora imati tačno 16 karaktera (slova ili cifre)."
 msgstr "Must be exactly 16 characters (letters or digits)."
 
 #: app/templates/add_driver.html:43 app/templates/add_driver.html:63
+#: app/templates/update_driver.html:76
 msgid "Datum kada CPC kartica prestaje da važi"
 msgstr "CPC card expiration date"
 
-#: app/templates/add_driver.html:44
+#: app/templates/add_driver.html:44 app/templates/update_driver.html:55
 msgid "Datum važenja tahograf kartice"
 msgstr "Tachograph Card Expiration Date"
 
 #: app/templates/add_driver.html:56 app/templates/search_driver.html:142
+#: app/templates/update_driver.html:67
 msgid "Broj CPC kartice"
 msgstr "CPC Card Number"
 
@@ -368,7 +369,7 @@ msgstr "CPC Card Number"
 msgid "Opcionalno"
 msgstr "Optional"
 
-#: app/templates/add_driver.html:64
+#: app/templates/add_driver.html:64 app/templates/update_driver.html:77
 msgid "Datum važenja CPC kartice"
 msgstr "CPC Card Expiration Date"
 
@@ -377,6 +378,7 @@ msgid "Sačuvaj vozača"
 msgstr "Save Driver"
 
 #: app/templates/add_driver.html:79 app/templates/driver_exists.html:54
+#: app/templates/update_driver.html:93
 msgid "Nazad"
 msgstr "Back"
 
@@ -628,6 +630,7 @@ msgid "Vozač još nema nijednu ocenu."
 msgstr "The driver has not received any ratings yet."
 
 #: app/templates/driver_detail.html:142 app/templates/search_driver.html:69
+#: app/templates/update_driver.html:100
 msgid "Istorija tahograf kartica"
 msgstr "Tachograph Card History"
 
@@ -635,11 +638,11 @@ msgstr "Tachograph Card History"
 msgid "Ističe"
 msgstr "Expires"
 
-#: app/templates/driver_detail.html:162
+#: app/templates/driver_detail.html:162 app/templates/update_driver.html:114
 msgid "Aktivna"
 msgstr "Active"
 
-#: app/templates/driver_detail.html:164
+#: app/templates/driver_detail.html:164 app/templates/update_driver.html:116
 msgid "Neaktivna"
 msgstr "Inactive"
 
@@ -1430,6 +1433,59 @@ msgstr ""
 "Unauthorized use, copying, transfer, or disclosure of data obtained "
 "through the application is prohibited. Any violation of these rules may "
 "result in access to the application being blocked and legal sanctions."
+
+#: app/templates/update_driver.html:2
+msgid "Ažuriranje vozača"
+msgstr "Update Driver"
+
+#: app/templates/update_driver.html:7
+msgid "Ažuriraj podatke o vozaču"
+msgstr "Update Driver details"
+
+
+#: app/templates/update_driver.html:15
+msgid "Zatvori"
+msgstr ""
+
+#: app/templates/update_driver.html:42
+msgid "Unesite novi broj kartice (ako postoji promena)"
+msgstr ""
+
+#: app/templates/update_driver.html:43
+msgid "Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre)."
+msgstr "Tachograph card number must be exactly 16 characters."
+
+#: app/templates/update_driver.html:46
+msgid "Trenutni broj"
+msgstr ""
+
+#: app/templates/update_driver.html:46
+msgid "ostavite prazno ako ne menjate broj"
+msgstr "New password (leave blank if not changing)"
+
+#: app/templates/update_driver.html:49
+msgid "Broj mora imati tačno 16 karaktera (slova ili cifre)."
+msgstr "Must be exactly 16 characters (letters or digits)."
+
+#: app/templates/update_driver.html:54
+msgid "Datum kada tahograf kartica prestaje da važi"
+msgstr "CPC card expiration date"
+
+#: app/templates/update_driver.html:90
+msgid "Sačuvaj promene"
+msgstr "Save Changes"
+
+#: app/templates/update_driver.html:110
+msgid "važi do"
+msgstr "Valid Until"
+
+#: app/templates/update_driver.html:122
+msgid "Nema podataka o prethodnim karticama."
+msgstr "No card data available."
+
+#: app/templates/update_driver.html:138
+msgid "Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara."
+msgstr "Tachograph card number must be exactly 16 characters."
 
 #~ msgid "Srpski"
 #~ msgstr "Serbian"
