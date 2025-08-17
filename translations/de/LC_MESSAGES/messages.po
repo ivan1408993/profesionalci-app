@@ -1,7 +1,7 @@
-# German translations for PROJECT.
-# Copyright (C) 2025 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# German translations for Profesionalci.
+# Copyright (C) 2025 Profesionalci Team
+# This file is distributed under the same license as the Profesionalci project.
+# Autor: Ivan Lazić <lazici19@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
@@ -1479,19 +1479,19 @@ msgstr "Fahrer aktualisieren"
 
 #: app/templates/update_driver.html:15
 msgid "Zatvori"
-msgstr ""
+msgstr "Schließen"
 
 #: app/templates/update_driver.html:42
 msgid "Unesite novi broj kartice (ako postoji promena)"
-msgstr ""
+msgstr "Neue Kartennummer eingeben (falls es eine Änderung gibt)"
 
 #: app/templates/update_driver.html:43
 msgid "Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre)."
-msgstr "Die Fahrerkartennummer muss genau 16 Zeichen enthalten."
+msgstr "Die Fahrerkartennummer muss genau 16 Zeichen (Buchstaben oder Ziffern) enthalten."
 
 #: app/templates/update_driver.html:46
 msgid "Trenutni broj"
-msgstr ""
+msgstr "Aktuelle Nummer"
 
 #: app/templates/update_driver.html:46
 msgid "ostavite prazno ako ne menjate broj"

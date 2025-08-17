@@ -1,7 +1,7 @@
-# Serbian translations for PROJECT.
-# Copyright (C) 2025 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# Serbian translations for Profesionalci.
+# Copyright (C) 2025 Profesionalci Team
+# This file is distributed under the same license as the Profesionalci project.
+# Autor: Ivan Lazić <lazici19@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""

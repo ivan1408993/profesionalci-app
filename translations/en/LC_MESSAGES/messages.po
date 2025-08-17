@@ -1445,19 +1445,19 @@ msgstr "Update Driver details"
 
 #: app/templates/update_driver.html:15
 msgid "Zatvori"
-msgstr ""
+msgstr "Close"
 
 #: app/templates/update_driver.html:42
 msgid "Unesite novi broj kartice (ako postoji promena)"
-msgstr ""
+msgstr "Enter a new card number (if there is a change)"
 
 #: app/templates/update_driver.html:43
 msgid "Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre)."
-msgstr "Tachograph card number must be exactly 16 characters."
+msgstr "Tachograph card number must be exactly 16 characters (letters or digits)."
 
 #: app/templates/update_driver.html:46
 msgid "Trenutni broj"
-msgstr ""
+msgstr "Current number"
 
 #: app/templates/update_driver.html:46
 msgid "ostavite prazno ako ne menjate broj"
