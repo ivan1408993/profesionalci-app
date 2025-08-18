@@ -1174,7 +1174,7 @@ msgstr "muss mindestens eine Zahl enthalten"
 #: app/templates/register.html:101
 #, python-format
 msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
-msgstr "Muss mindestens ein Sonderzeichen enthalten (!@#$%^&*)"
+msgstr "Muss mindestens ein Sonderzeichen enthalten (!@#$%%^&*)"
 
 #: app/templates/register.html:106 app/templates/reset_password_form.html:57
 msgid "Jaka lozinka"
