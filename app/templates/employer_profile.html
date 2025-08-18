@@ -3,55 +3,62 @@
 
 {% block content %}
 <div class="container mt-5" style="max-width: 500px;">
-    <div class="card shadow-lg p-4 bg-light">
-        <h3 class="mb-4 text-center text-primary">{{ _('Moj profil') }}</h3>
+    <div class="card shadow-lg p-4" style="background-color: #2c3e50; color: #ecf0f1; border-radius: 12px;">
+        <h3 class="mb-4 text-center" style="color: #1abc9c;">{{ _('Moj profil') }}</h3>
 
         <form method="POST" action="{{ url_for('main.employer_profile') }}">
             <!-- Naziv firme -->
             <div class="mb-3 input-group">
-                <span class="input-group-text bg-secondary text-white">
+                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
                     <i class="fas fa-building"></i>
                 </span>
-                <input type="text" class="form-control" name="company_name" value="{{ employer.company_name }}" placeholder="{{ _('Naziv firme') }}" required>
+                <input type="text" class="form-control" name="company_name" value="{{ employer.company_name }}" placeholder="{{ _('Naziv firme') }}" required
+                       style="background-color: #34495e; color: #ecf0f1; border: none;">
             </div>
 
             <!-- PIB -->
             <div class="mb-3 input-group">
-                <span class="input-group-text bg-secondary text-white">
+                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
                     <i class="fas fa-id-card"></i>
                 </span>
-                <input type="text" class="form-control" value="{{ employer.pib }}" readonly tabindex="-1" placeholder="{{ _('PIB (nepromenljiv)') }}">
+                <input type="text" class="form-control" value="{{ employer.pib }}" readonly tabindex="-1"
+                       style="background-color: #34495e; color: #bdc3c7; border: none;">
             </div>
 
             <!-- Email -->
             <div class="mb-3 input-group">
-                <span class="input-group-text bg-secondary text-white">
+                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
                     <i class="fas fa-envelope"></i>
                 </span>
-                <input type="email" class="form-control" name="email" value="{{ employer.email }}" placeholder="{{ _('Imejl') }}" required>
+                <input type="email" class="form-control" name="email" value="{{ employer.email }}" placeholder="{{ _('Imejl') }}" required
+                       style="background-color: #34495e; color: #ecf0f1; border: none;">
             </div>
 
             <!-- Telefon -->
             <div class="mb-3 input-group">
-                <span class="input-group-text bg-secondary text-white">
+                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
                     <i class="fas fa-phone"></i>
                 </span>
-                <input type="tel" pattern="[0-9]+" class="form-control" name="phone_number" value="{{ employer.phone_number or '' }}" placeholder="{{ _('Broj telefona (samo cifre)') }}">
+                <input type="tel" pattern="[0-9]+" class="form-control" name="phone_number" value="{{ employer.phone_number or '' }}" placeholder="{{ _('Broj telefona (samo cifre)') }}"
+                       style="background-color: #34495e; color: #ecf0f1; border: none;">
             </div>
 
             <!-- Lozinka -->
             <div class="mb-3">
-                <label class="form-label">
-                    <i class="fas fa-lock me-1 text-secondary"></i> {{ _('Nova lozinka (ostavite prazno ako ne menjate)') }}
+                <label class="form-label" style="color: #ecf0f1;">
+                    <i class="fas fa-lock me-1 text-info"></i> {{ _('Nova lozinka (ostavite prazno ako ne menjate)') }}
                 </label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="{{ _('Unesite novu lozinku') }}">
+                <input type="password" class="form-control" name="password" id="password" placeholder="{{ _('Unesite novu lozinku') }}"
+                       style="background-color: #34495e; color: #ecf0f1; border: none;">
                 <div id="password-strength" class="mt-2 small"></div>
-                <div class="password-strength-bar" style="background: rgba(0,0,0,0.1); height:6px; border-radius:3px; margin-top:3px;">
+                <div class="password-strength-bar" style="background: rgba(255,255,255,0.1); height:6px; border-radius:3px; margin-top:3px;">
                     <div id="strength-bar" style="height:6px; width:0%; border-radius:3px;"></div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-3">{{ _('Sačuvaj izmene') }}</button>
+            <button type="submit" class="btn w-100 mt-3" style="background-color: #1abc9c; color: #2c3e50; font-weight: bold;">
+                {{ _('Sačuvaj izmene') }}
+            </button>
         </form>
     </div>
 </div>
@@ -79,19 +86,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (/[0-9]/.test(val)) strength += 25; else messages.push('{{ _("mora sadržati bar jedan broj") }}');
         if (/[!@#$%^&*]/.test(val)) strength += 25; else messages.push('{{ _("mora sadržati bar jedan specijalni znak (!@#$%%^&*)") }}');
 
-        // Update progress bara
         strengthBar.style.width = strength + '%';
-        if (strength < 50) strengthBar.style.backgroundColor = '#dc3545'; // crvena
-        else if (strength < 75) strengthBar.style.backgroundColor = '#ffc107'; // narandžasta
-        else strengthBar.style.backgroundColor = '#28a745'; // zelena
+        if (strength < 50) strengthBar.style.backgroundColor = '#e74c3c'; // crvena
+        else if (strength < 75) strengthBar.style.backgroundColor = '#f39c12'; // narandžasta
+        else strengthBar.style.backgroundColor = '#2ecc71'; // zelena
 
-        // Update teksta jačine
         if (messages.length === 0) {
             strengthDiv.textContent = '{{ _("Jaka lozinka") }}';
-            strengthDiv.style.color = '#28a745';
+            strengthDiv.style.color = '#2ecc71';
         } else {
             strengthDiv.textContent = '{{ _("Lozinka nije dovoljno jaka:") }} ' + messages.join(', ');
-            strengthDiv.style.color = '#dc3545';
+            strengthDiv.style.color = '#e74c3c';
         }
 
         return messages.length === 0;
