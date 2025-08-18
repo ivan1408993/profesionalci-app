@@ -1521,8 +1521,8 @@ msgstr "Keine Kartendaten vorhanden."
 msgid "Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara."
 msgstr "Die Fahrerkartennummer muss genau 16 Zeichen enthalten."
 
-#~ msgid "mora sadržati bar jedan specijalni znak (!@#$%^&*)"
-#~ msgstr "muss mindestens ein Sonderzeichen enthalten (!@#$%^&*)"
+#~ msgid "mora sadržati bar jedan specijalni znak (!@#$^%&*)"
+#~ msgstr "muss mindestens ein Sonderzeichen enthalten (!@#$^%&*)"
 
 #~ msgid "Srpski"
 #~ msgstr "Serbisch"

@@ -1126,9 +1126,7 @@ def set_language(lang):
     if lang not in ['sr', 'en', 'de']:
         lang = 'sr'
 
-    session['lang'] = lang  # i dalje ga čuvamo u sesiji
     resp = redirect(request.referrer or url_for('main.index'))
-    # čuvamo i u cookie da preživi logout
     resp.set_cookie('lang', lang, max_age=30*24*60*60)  # 30 dana
     return resp
 

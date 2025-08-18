@@ -17,13 +17,10 @@ babel = Babel()
 mail = Mail()
 
 def get_locale():
-    # 1. jezik iz session-a
-    if 'lang' in session:
-        return session['lang']
-    # 2. jezik iz cookie-ja
+    # 1. cookie lang
     if request.cookies.get('lang'):
         return request.cookies.get('lang')
-    # 3. browser accept-languages
+    # 2. browser accept-languages
     return request.accept_languages.best_match(['sr', 'en', 'de']) or 'sr'
 
 
