@@ -97,9 +97,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!/[0-9]/.test(val)) {
             messages.push('{{ _("mora sadržati bar jedan broj") }}');
         }
-        if (!/[!@#$%^&*]/.test(val)) {
-            messages.push('{{ _("mora sadržati bar jedan specijalni znak (!@#$^%&*)") }}');
+       if (!/[!@#$%^&*]/.test(val)) {
+            messages.push('{{ _("mora sadržati bar jedan specijalni znak (!@#$%%^&*)") }}');
         }
+
 
         if (messages.length === 0) {
             strengthDiv.textContent = '{{ _("Jaka lozinka") }}';

@@ -1,13 +1,14 @@
 # English translations for Profesionalci.
 # Copyright (C) 2025 Profesionalci Team
-# This file is distributed under the same license as the Profesionalci project.
+# This file is distributed under the same license as the Profesionalci
+# project.
 # Author: Ivan Lazić <lazici19@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-17 20:33+0200\n"
+"POT-Creation-Date: 2025-08-18 15:17+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,8 +19,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/routes.py:63 app/routes.py:248 app/routes.py:674 app/routes.py:784
-#: app/routes.py:973
+#: app/routes.py:63 app/routes.py:248 app/routes.py:684 app/routes.py:794
+#: app/routes.py:988
 msgid "Morate biti prijavljeni kao poslodavac."
 msgstr "You must be logged in as an employer."
 
@@ -93,7 +94,7 @@ msgstr ""
 "The driver is already active with another employer and cannot be "
 "reassigned."
 
-#: app/routes.py:349 app/routes.py:872 app/routes.py:883 app/routes.py:932
+#: app/routes.py:349 app/routes.py:882 app/routes.py:893 app/routes.py:942
 msgid "Nemate pristup ovoj stranici."
 msgstr "You do not have access to this page."
 
@@ -105,8 +106,8 @@ msgstr "The phone number can contain digits only."
 msgid "Podaci su uspešno ažurirani."
 msgstr "Data has been successfully updated."
 
-#: app/routes.py:382 app/routes.py:523 app/routes.py:533 app/routes.py:610
-#: app/routes.py:645 app/routes.py:702
+#: app/routes.py:382 app/routes.py:533 app/routes.py:543 app/routes.py:620
+#: app/routes.py:655 app/routes.py:712
 msgid "Molimo prijavite se."
 msgstr "Please log in."
 
@@ -148,99 +149,95 @@ msgstr ""
 msgid "Uspešna registracija. Sada se možete prijaviti."
 msgstr "Registration successful. You can now log in."
 
-#: app/routes.py:486
-msgid "Uspešno ste se odjavili."
-msgstr "You have successfully logged out."
-
-#: app/routes.py:500
+#: app/routes.py:510
 msgid "Vaša firma nije aktivna. Prijava nije moguća."
 msgstr "Your company is not active. Login is not possible."
 
-#: app/routes.py:512
+#: app/routes.py:522
 msgid "Pogrešan email ili lozinka."
 msgstr "Incorrect email or password."
 
-#: app/routes.py:538 app/routes.py:615
+#: app/routes.py:548 app/routes.py:625
 msgid "Greška pri autentikaciji."
 msgstr "Authentication error."
 
-#: app/routes.py:624
+#: app/routes.py:634
 msgid "Vozač sa datim brojem tahograf kartice ne postoji."
 msgstr "No driver exists with the given tachograph card number."
 
-#: app/routes.py:635
+#: app/routes.py:645
 msgid "Vozač već radi u vašoj firmi."
 msgstr "The driver is already employed in your company."
 
-#: app/routes.py:682
+#: app/routes.py:692
 msgid "Morate prvo oceniti vozača pre nego što ga označite kao neaktivnog."
 msgstr "You must rate the driver before marking them as inactive."
 
-#: app/routes.py:746
+#: app/routes.py:756
 msgid "Morate biti prijavljeni kao poslodavac da biste ocenili vozača."
 msgstr "You must be logged in as an employer to rate a driver."
 
-#: app/routes.py:763
+#: app/routes.py:773
 msgid "Ocena je uspešno ažurirana."
 msgstr "The rating has been successfully updated."
 
-#: app/routes.py:773
+#: app/routes.py:783
 msgid "Ocena je uspešno dodata."
 msgstr "The rating has been successfully added."
 
-#: app/routes.py:818
+#: app/routes.py:828
 msgid "Ako email postoji u sistemu, link za reset je poslat."
 msgstr "If the email exists in the system, a reset link has been sent."
 
-#: app/routes.py:828
+#: app/routes.py:838
 msgid "Link nije validan ili je istekao."
 msgstr "The link is invalid or has expired."
 
-#: app/routes.py:837 app/templates/reset_password_form.html:83
+#: app/routes.py:847 app/templates/reset_password_form.html:83
 msgid "Lozinke se ne poklapaju."
 msgstr "Passwords do not match."
 
-#: app/routes.py:844
+#: app/routes.py:854
 msgid "Lozinka je uspešno promenjena."
 msgstr "The password has been successfully changed."
 
-#: app/routes.py:955
+#: app/routes.py:965
 msgid "Nemate pristup ovoj akciji."
 msgstr "You do not have access to this action."
 
-#: app/routes.py:982
+#: app/routes.py:997
 msgid "Nemate dozvolu da ažurirate ovog vozača."
 msgstr "You do not have permission to update this driver."
 
-#: app/routes.py:1004
+#: app/routes.py:1019
 msgid "Neispravan format datuma isteka tahograf kartice."
 msgstr "Invalid tachograph card expiration date format."
 
-#: app/routes.py:1012
+#: app/routes.py:1027
 msgid "Neispravan format datuma isteka CPC kartice."
 msgstr "Invalid CPC card expiration date format."
 
-#: app/routes.py:1027
+#: app/routes.py:1042
 msgid "Ovaj broj tahograf kartice je već dodeljen drugom vozaču."
 msgstr "This tachograph card number is already assigned to another driver."
 
-#: app/routes.py:1042
+#: app/routes.py:1057
 msgid "Dodata je nova tahografska kartica."
 msgstr "A new tachograph card has been added."
 
-#: app/routes.py:1047
+#: app/routes.py:1062
 msgid "Datum važenja tahograf kartice je ažuriran."
 msgstr "The tachograph card expiration date has been updated."
 
-#: app/routes.py:1054
+#: app/routes.py:1069
 msgid "Podaci o vozaču su uspešno ažurirani."
 msgstr "Driver information has been successfully updated."
 
-#: app/routes.py:1094
+#: app/routes.py:1109
 msgid "Morate biti prijavljeni kao poslodavac da biste videli ovu stranicu."
 msgstr "You must be logged in as an employer to rate a driver."
 
-#: app/routes.py:1118 app/templates/base.html:51
+#: app/routes.py:1136 app/templates/base.html:51
 msgid "Dobrodošli"
 msgstr "Welcome"
 
@@ -1154,22 +1151,22 @@ msgstr "must contain at least one number"
 
 #: app/templates/register.html:101
 #, python-format
-msgid "mora sadržati bar jedan specijalni znak (!@#$^%&*)"
-msgstr "must contain at least one special character (!@#$^%&*)"
+msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
+msgstr "Must contain at least one special character (!@#$%^&*)"
 
-#: app/templates/register.html:105 app/templates/reset_password_form.html:57
+#: app/templates/register.html:106 app/templates/reset_password_form.html:57
 msgid "Jaka lozinka"
 msgstr "Strong Password"
 
-#: app/templates/register.html:109 app/templates/reset_password_form.html:61
+#: app/templates/register.html:110 app/templates/reset_password_form.html:61
 msgid "Lozinka nije dovoljno jaka:"
 msgstr "Password is not strong enough:"
 
-#: app/templates/register.html:124 app/templates/reset_password_form.html:77
+#: app/templates/register.html:125 app/templates/reset_password_form.html:77
 msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
 msgstr "Password is not strong enough. Please correct it before submitting."
 
-#: app/templates/register.html:130
+#: app/templates/register.html:131
 msgid "Morate se složiti sa uslovima korišćenja i politikom privatnosti."
 msgstr "You must agree to the Terms of Use and Privacy Policy."
 
@@ -1441,7 +1438,6 @@ msgstr "Update Driver"
 #: app/templates/update_driver.html:7
 msgid "Ažuriraj podatke o vozaču"
 msgstr "Update Driver details"
-
 
 #: app/templates/update_driver.html:15
 msgid "Zatvori"
@@ -1830,4 +1826,10 @@ msgstr "Tachograph card number must be exactly 16 characters."
 
 #~ msgid "Not a valid float value."
 #~ msgstr ""
+
+#~ msgid "Uspešno ste se odjavili."
+#~ msgstr "You have successfully logged out."
+
+#~ msgid "mora sadržati bar jedan specijalni znak (!@#$^%&*)"
+#~ msgstr "must contain at least one special character (!@#$^%&*)"
 

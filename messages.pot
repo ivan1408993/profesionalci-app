@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-18 14:36+0200\n"
+"POT-Creation-Date: 2025-08-18 15:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1090,22 +1090,23 @@ msgid "mora sadržati bar jedan broj"
 msgstr ""
 
 #: app/templates/register.html:101
-msgid "mora sadržati bar jedan specijalni znak (!@#$^%&*)"
+#, python-format
+msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
 msgstr ""
 
-#: app/templates/register.html:105 app/templates/reset_password_form.html:57
+#: app/templates/register.html:106 app/templates/reset_password_form.html:57
 msgid "Jaka lozinka"
 msgstr ""
 
-#: app/templates/register.html:109 app/templates/reset_password_form.html:61
+#: app/templates/register.html:110 app/templates/reset_password_form.html:61
 msgid "Lozinka nije dovoljno jaka:"
 msgstr ""
 
-#: app/templates/register.html:124 app/templates/reset_password_form.html:77
+#: app/templates/register.html:125 app/templates/reset_password_form.html:77
 msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
 msgstr ""
 
-#: app/templates/register.html:130
+#: app/templates/register.html:131
 msgid "Morate se složiti sa uslovima korišćenja i politikom privatnosti."
 msgstr ""
 

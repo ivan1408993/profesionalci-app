@@ -1,13 +1,14 @@
 # German translations for Profesionalci.
 # Copyright (C) 2025 Profesionalci Team
-# This file is distributed under the same license as the Profesionalci project.
+# This file is distributed under the same license as the Profesionalci
+# project.
 # Autor: Ivan Lazić <lazici19@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-17 20:33+0200\n"
+"POT-Creation-Date: 2025-08-18 15:17+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,8 +19,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/routes.py:63 app/routes.py:248 app/routes.py:674 app/routes.py:784
-#: app/routes.py:973
+#: app/routes.py:63 app/routes.py:248 app/routes.py:684 app/routes.py:794
+#: app/routes.py:988
 msgid "Morate biti prijavljeni kao poslodavac."
 msgstr "Sie müssen als Arbeitgeber angemeldet sein."
 
@@ -93,7 +94,7 @@ msgstr ""
 "Der Fahrer ist bereits bei einem anderen Arbeitgeber aktiv und kann nicht"
 " übernommen werden."
 
-#: app/routes.py:349 app/routes.py:872 app/routes.py:883 app/routes.py:932
+#: app/routes.py:349 app/routes.py:882 app/routes.py:893 app/routes.py:942
 msgid "Nemate pristup ovoj stranici."
 msgstr "Sie haben keinen Zugriff auf diese Seite."
 
@@ -105,8 +106,8 @@ msgstr "Die Telefonnummer darf nur Ziffern enthalten."
 msgid "Podaci su uspešno ažurirani."
 msgstr "Die Daten wurden erfolgreich aktualisiert."
 
-#: app/routes.py:382 app/routes.py:523 app/routes.py:533 app/routes.py:610
-#: app/routes.py:645 app/routes.py:702
+#: app/routes.py:382 app/routes.py:533 app/routes.py:543 app/routes.py:620
+#: app/routes.py:655 app/routes.py:712
 msgid "Molimo prijavite se."
 msgstr "Bitte melden Sie sich an."
 
@@ -148,103 +149,99 @@ msgstr ""
 msgid "Uspešna registracija. Sada se možete prijaviti."
 msgstr "Registrierung erfolgreich. Sie können sich jetzt anmelden."
 
-#: app/routes.py:486
-msgid "Uspešno ste se odjavili."
-msgstr "Sie haben sich erfolgreich abgemeldet."
-
-#: app/routes.py:500
+#: app/routes.py:510
 msgid "Vaša firma nije aktivna. Prijava nije moguća."
 msgstr "Ihr Unternehmen ist nicht aktiv. Eine Anmeldung ist nicht möglich."
 
-#: app/routes.py:512
+#: app/routes.py:522
 msgid "Pogrešan email ili lozinka."
 msgstr "Falsche E-Mail oder falsches Passwort."
 
-#: app/routes.py:538 app/routes.py:615
+#: app/routes.py:548 app/routes.py:625
 msgid "Greška pri autentikaciji."
 msgstr "Authentifizierungsfehler."
 
-#: app/routes.py:624
+#: app/routes.py:634
 msgid "Vozač sa datim brojem tahograf kartice ne postoji."
 msgstr "Ein Fahrer mit dieser Fahrerkartennummer existiert nicht."
 
-#: app/routes.py:635
+#: app/routes.py:645
 msgid "Vozač već radi u vašoj firmi."
 msgstr "Der Fahrer arbeitet bereits in Ihrem Unternehmen."
 
-#: app/routes.py:682
+#: app/routes.py:692
 msgid "Morate prvo oceniti vozača pre nego što ga označite kao neaktivnog."
 msgstr ""
 "Sie müssen den Fahrer zuerst bewerten, bevor Sie ihn als inaktiv "
 "markieren."
 
-#: app/routes.py:746
+#: app/routes.py:756
 msgid "Morate biti prijavljeni kao poslodavac da biste ocenili vozača."
 msgstr "Sie müssen als Arbeitgeber angemeldet sein, um den Fahrer zu bewerten."
 
-#: app/routes.py:763
+#: app/routes.py:773
 msgid "Ocena je uspešno ažurirana."
 msgstr "Die Bewertung wurde erfolgreich aktualisiert."
 
-#: app/routes.py:773
+#: app/routes.py:783
 msgid "Ocena je uspešno dodata."
 msgstr "Die Bewertung wurde erfolgreich hinzugefügt."
 
-#: app/routes.py:818
+#: app/routes.py:828
 msgid "Ako email postoji u sistemu, link za reset je poslat."
 msgstr ""
 "Falls die E-Mail im System existiert, wurde ein Zurücksetzungslink "
 "gesendet."
 
-#: app/routes.py:828
+#: app/routes.py:838
 msgid "Link nije validan ili je istekao."
 msgstr "Der Link ist ungültig oder abgelaufen."
 
-#: app/routes.py:837 app/templates/reset_password_form.html:83
+#: app/routes.py:847 app/templates/reset_password_form.html:83
 msgid "Lozinke se ne poklapaju."
 msgstr "Passwörter stimmen nicht überein."
 
-#: app/routes.py:844
+#: app/routes.py:854
 msgid "Lozinka je uspešno promenjena."
 msgstr "Das Passwort wurde erfolgreich geändert."
 
-#: app/routes.py:955
+#: app/routes.py:965
 msgid "Nemate pristup ovoj akciji."
 msgstr "Sie haben keinen Zugriff auf diese Aktion."
 
-#: app/routes.py:982
+#: app/routes.py:997
 msgid "Nemate dozvolu da ažurirate ovog vozača."
 msgstr "Sie haben keine Berechtigung, diesen Fahrer zu aktualisieren."
 
-#: app/routes.py:1004
+#: app/routes.py:1019
 msgid "Neispravan format datuma isteka tahograf kartice."
 msgstr "Ungültiges Ablaufdatumsformat der Fahrerkart."
 
-#: app/routes.py:1012
+#: app/routes.py:1027
 msgid "Neispravan format datuma isteka CPC kartice."
 msgstr "Ungültiges Ablaufdatumsformat der CPC-Karte."
 
-#: app/routes.py:1027
+#: app/routes.py:1042
 msgid "Ovaj broj tahograf kartice je već dodeljen drugom vozaču."
 msgstr "Diese Fahrerkartennummer wurde bereits einem anderen Fahrer zugewiesen."
 
-#: app/routes.py:1042
+#: app/routes.py:1057
 msgid "Dodata je nova tahografska kartica."
 msgstr "Eine neue Fahrerkart wurde hinzugefügt."
 
-#: app/routes.py:1047
+#: app/routes.py:1062
 msgid "Datum važenja tahograf kartice je ažuriran."
 msgstr "Das Ablaufdatum der Fahrerkart wurde aktualisiert."
 
-#: app/routes.py:1054
+#: app/routes.py:1069
 msgid "Podaci o vozaču su uspešno ažurirani."
 msgstr "Die Fahrerdaten wurden erfolgreich aktualisiert."
 
-#: app/routes.py:1094
+#: app/routes.py:1109
 msgid "Morate biti prijavljeni kao poslodavac da biste videli ovu stranicu."
 msgstr "Sie müssen als Arbeitgeber angemeldet sein, um den Fahrer zu bewerten."
 
-#: app/routes.py:1118 app/templates/base.html:51
+#: app/routes.py:1136 app/templates/base.html:51
 msgid "Dobrodošli"
 msgstr "Willkommen"
 
@@ -1179,19 +1176,19 @@ msgstr "muss mindestens eine Zahl enthalten"
 msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
 msgstr "Muss mindestens ein Sonderzeichen enthalten (!@#$%^&*)"
 
-#: app/templates/register.html:105 app/templates/reset_password_form.html:57
+#: app/templates/register.html:106 app/templates/reset_password_form.html:57
 msgid "Jaka lozinka"
 msgstr "Starkes Passwort"
 
-#: app/templates/register.html:109 app/templates/reset_password_form.html:61
+#: app/templates/register.html:110 app/templates/reset_password_form.html:61
 msgid "Lozinka nije dovoljno jaka:"
 msgstr "Passwort ist nicht stark genug:"
 
-#: app/templates/register.html:124 app/templates/reset_password_form.html:77
+#: app/templates/register.html:125 app/templates/reset_password_form.html:77
 msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
 msgstr "Passwort ist nicht stark genug. Bitte korrigieren Sie vor dem Absenden."
 
-#: app/templates/register.html:130
+#: app/templates/register.html:131
 msgid "Morate se složiti sa uslovima korišćenja i politikom privatnosti."
 msgstr ""
 "Sie müssen den Nutzungsbedingungen und der Datenschutzrichtlinie "
@@ -1487,7 +1484,9 @@ msgstr "Neue Kartennummer eingeben (falls es eine Änderung gibt)"
 
 #: app/templates/update_driver.html:43
 msgid "Broj tahograf kartice mora imati tačno 16 karaktera (slova ili cifre)."
-msgstr "Die Fahrerkartennummer muss genau 16 Zeichen (Buchstaben oder Ziffern) enthalten."
+msgstr ""
+"Die Fahrerkartennummer muss genau 16 Zeichen (Buchstaben oder Ziffern) "
+"enthalten."
 
 #: app/templates/update_driver.html:46
 msgid "Trenutni broj"
@@ -1520,9 +1519,6 @@ msgstr "Keine Kartendaten vorhanden."
 #: app/templates/update_driver.html:138
 msgid "Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara."
 msgstr "Die Fahrerkartennummer muss genau 16 Zeichen enthalten."
-
-#~ msgid "mora sadržati bar jedan specijalni znak (!@#$^%&*)"
-#~ msgstr "muss mindestens ein Sonderzeichen enthalten (!@#$^%&*)"
 
 #~ msgid "Srpski"
 #~ msgstr "Serbisch"
@@ -1867,4 +1863,7 @@ msgstr "Die Fahrerkartennummer muss genau 16 Zeichen enthalten."
 
 #~ msgid "Not a valid float value."
 #~ msgstr ""
+
+#~ msgid "Uspešno ste se odjavili."
+#~ msgstr "Sie haben sich erfolgreich abgemeldet."
 
