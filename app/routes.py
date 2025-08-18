@@ -1,5 +1,5 @@
 from .utils import add_new_driver_card
-from flask import Blueprint, render_template, request, session, redirect, url_for, flash
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import Employer
 from app import db
@@ -480,11 +480,21 @@ def register():
 
 
 
+from flask import make_response
+
 @main.route('/logout')
 def logout():
+    # Uzmemo jezik iz cookie-ja (ako postoji), fallback na 'sr'
+    lang = request.cookies.get('lang', 'sr')
+
+    # Očistimo sesiju
     session.clear()
-    flash(_("Uspešno ste se odjavili."))
-    return redirect(url_for('main.index'))
+
+    # Kreiramo response i setujemo jezik ponovo u cookie
+    response = make_response(redirect(url_for('main.index')))
+    response.set_cookie('lang', lang, max_age=60*60*24*30)  # čuvamo 30 dana
+    return response
+
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
@@ -965,6 +975,11 @@ def toggle_employer_status(employer_id):
 
 from datetime import datetime
 
+@main.before_request
+def before_request():
+    g.current_lang = session.get('lang') or request.cookies.get('lang') or 'sr'
+
+
 @main.route('/drivers/<int:driver_id>/update', methods=['GET', 'POST']) 
 def update_driver(driver_id):
     # Provera da li je poslodavac prijavljen
@@ -1108,10 +1123,15 @@ def contact():
 
 @main.route('/set_language/<lang>')
 def set_language(lang):
-    if lang in ['sr', 'en', 'de']:
-        session['lang'] = lang
-        print("LANG SET TO:", session['lang'])
-    return redirect(request.referrer or url_for('main.index'))
+    if lang not in ['sr', 'en', 'de']:
+        lang = 'sr'
+
+    session['lang'] = lang  # i dalje ga čuvamo u sesiji
+    resp = redirect(request.referrer or url_for('main.index'))
+    # čuvamo i u cookie da preživi logout
+    resp.set_cookie('lang', lang, max_age=30*24*60*60)  # 30 dana
+    return resp
+
 
 @main.route("/test_translation")
 def test_translation():
