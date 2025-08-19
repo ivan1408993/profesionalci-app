@@ -65,23 +65,23 @@
     </div>
 
     {% if driver.cards|length > 1 %}
-      <hr class="divider my-4">
-      <h6 class="mb-3 text-custom">🗂 {{ _('Istorija tahograf kartica') }}</h6>
-      <ul class="list-group">
-        {% for card in driver.cards if not card.is_active %}
-          <li class="list-group-item">
-            <span class="text-custom">{{ _('Broj kartice:') }}</span> {{ card.card_number }} —
-            {% if card.issue_date %}
-              <span class="text-custom">{{ _('Izdata:') }}</span> {{ card.issue_date.strftime('%d.%m.%Y') }},
-            {% endif %}
-            {% if card.expiry_date %}
-              <span class="text-custom">{{ _('Važi do:') }}</span> {{ card.expiry_date.strftime('%d.%m.%Y') }}
-            {% endif %}
-            <span class="text-muted">({{ _('neaktivna') }})</span>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+  <hr class="divider my-4">
+  <h6 class="mb-3 text-custom">🗂 {{ _('Istorija tahograf kartica') }}</h6>
+  <ul class="list-group list-group-flush">
+    {% for card in driver.cards if not card.is_active %}
+      <li class="list-group-item bg-dark text-light">
+        <span class="fw-bold">{{ _('Broj kartice:') }}</span> {{ card.card_number }} —
+        {% if card.issue_date %}
+          <span class="fw-bold">{{ _('Izdata:') }}</span> {{ card.issue_date.strftime('%d.%m.%Y') }},
+        {% endif %}
+        {% if card.expiry_date %}
+          <span class="fw-bold">{{ _('Važi do:') }}</span> {{ card.expiry_date.strftime('%d.%m.%Y') }}
+        {% endif %}
+        <span class="badge bg-secondary ms-2">{{ _('neaktivna') }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
     {% if already_employed_by_other %}
       <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-4">{{ _('Ažuriraj vozača') }}</a>
