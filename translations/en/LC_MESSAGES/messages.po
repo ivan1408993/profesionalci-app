@@ -1457,7 +1457,7 @@ msgstr "Current number"
 
 #: app/templates/update_driver.html:46
 msgid "ostavite prazno ako ne menjate broj"
-msgstr "New password (leave blank if not changing)"
+msgstr "leave blank if you are not changing the number"
 
 #: app/templates/update_driver.html:49
 msgid "Broj mora imati tačno 16 karaktera (slova ili cifre)."
