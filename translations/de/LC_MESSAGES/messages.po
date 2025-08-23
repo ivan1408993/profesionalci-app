@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-18 15:17+0200\n"
+"POT-Creation-Date: 2025-08-23 23:20+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -119,7 +119,7 @@ msgstr ""
 "Dieser Fahrer ist derzeit bei einem anderen Arbeitgeber beschäftigt und "
 "kann nicht übernommen werden."
 
-#: app/routes.py:419 app/templates/register.html:30
+#: app/routes.py:419 app/templates/register.html:29
 msgid "PIB mora sadržati tačno 9 cifara."
 msgstr "Die USt-IdNr. muss genau 9 Ziffern enthalten."
 
@@ -258,7 +258,7 @@ msgid "poslodavaca"
 msgstr "Arbeitgebern"
 
 #: app/templates/about.html:13 app/templates/about.html:29
-#: app/templates/register.html:61
+#: app/templates/register.html:63
 msgid "i"
 msgstr "und"
 
@@ -321,7 +321,7 @@ msgstr "Neuen Fahrer hinzufügen"
 
 #: app/templates/add_driver.html:14 app/templates/all_drivers.html:38
 #: app/templates/driver_exists.html:9 app/templates/drivers.html:67
-#: app/templates/search_driver.html:138 app/templates/update_driver.html:27
+#: app/templates/search_driver.html:149 app/templates/update_driver.html:27
 msgid "Ime i prezime"
 msgstr "Vor- und Nachname"
 
@@ -363,7 +363,7 @@ msgstr "Ablaufdatum der CPC-Karte"
 msgid "Datum važenja tahograf kartice"
 msgstr "Gültigkeitsdatum der Fahrerkart"
 
-#: app/templates/add_driver.html:56 app/templates/search_driver.html:142
+#: app/templates/add_driver.html:56 app/templates/search_driver.html:153
 #: app/templates/update_driver.html:67
 msgid "Broj CPC kartice"
 msgstr "CPC-Kartennummer"
@@ -399,7 +399,7 @@ msgid "Pretraži po imenu ili broju kartice"
 msgstr "Suche nach Name oder Kartennummer"
 
 #: app/templates/all_drivers.html:28 app/templates/drivers.html:44
-#: app/templates/search_driver.html:17
+#: app/templates/search_driver.html:25
 msgid "Pretraži"
 msgstr "Suchen"
 
@@ -423,11 +423,11 @@ msgstr "Status"
 msgid "Prosečna ocena"
 msgstr "Durchschnittliche Bewertung"
 
-#: app/templates/all_drivers.html:66 app/templates/search_driver.html:60
+#: app/templates/all_drivers.html:66 app/templates/search_driver.html:71
 msgid "Aktivan"
 msgstr "Aktiv"
 
-#: app/templates/all_drivers.html:68 app/templates/search_driver.html:62
+#: app/templates/all_drivers.html:68 app/templates/search_driver.html:73
 msgid "Neaktivan"
 msgstr "Inaktiv"
 
@@ -467,12 +467,12 @@ msgstr "✉️ Kontakt"
 
 #: app/templates/base.html:51 app/templates/driver_detail.html:61
 #: app/templates/driver_exists.html:17 app/templates/employer_detail.html:3
-#: app/templates/search_driver.html:105
+#: app/templates/search_driver.html:116
 msgid "Poslodavac"
 msgstr "Arbeitgeber"
 
 #: app/templates/base.html:54 app/templates/employer_profile.html:2
-#: app/templates/employer_profile.html:6
+#: app/templates/employer_profile.html:7
 msgid "Moj profil"
 msgstr "Mein Profil"
 
@@ -600,7 +600,7 @@ msgstr "Gültig bis"
 msgid "CPC kartica"
 msgstr "CPC-Karte"
 
-#: app/templates/driver_detail.html:78 app/templates/search_driver.html:92
+#: app/templates/driver_detail.html:78 app/templates/search_driver.html:103
 msgid "Preuzmi vozača"
 msgstr "Fahrer übernehmen"
 
@@ -618,7 +618,7 @@ msgstr "Fahrerbewertungen"
 
 #: app/templates/driver_detail.html:118 app/templates/driver_exists.html:18
 #: app/templates/drivers.html:72 app/templates/rate_driver.html:23
-#: app/templates/search_driver.html:106
+#: app/templates/search_driver.html:117
 msgid "Ocena"
 msgstr "Bewertung"
 
@@ -634,7 +634,7 @@ msgstr "Unbekannt"
 msgid "Vozač još nema nijednu ocenu."
 msgstr "Der Fahrer hat noch keine Bewertung."
 
-#: app/templates/driver_detail.html:142 app/templates/search_driver.html:69
+#: app/templates/driver_detail.html:142 app/templates/search_driver.html:80
 #: app/templates/update_driver.html:100
 msgid "Istorija tahograf kartica"
 msgstr "Historie der Fahrerkarten"
@@ -672,11 +672,11 @@ msgid "Istorija rada kod drugih poslodavaca i ocene"
 msgstr "Beschäftigungshistorie bei anderen Arbeitgebern und Bewertungen"
 
 #: app/templates/driver_exists.html:19 app/templates/rate_driver.html:18
-#: app/templates/search_driver.html:107
+#: app/templates/search_driver.html:118
 msgid "Komentar"
 msgstr "Kommentar"
 
-#: app/templates/driver_exists.html:20 app/templates/search_driver.html:108
+#: app/templates/driver_exists.html:20 app/templates/search_driver.html:119
 msgid "Datum"
 msgstr "Datum"
 
@@ -692,7 +692,7 @@ msgstr "Aktivieren und Fahrer zu meinem Unternehmen hinzufügen"
 msgid "Otkaži"
 msgstr "Abbrechen"
 
-#: app/templates/driver_exists.html:49 app/templates/search_driver.html:87
+#: app/templates/driver_exists.html:49 app/templates/search_driver.html:98
 msgid "Ažuriraj vozača"
 msgstr "Fahrer aktualisieren"
 
@@ -772,33 +772,63 @@ msgstr "USt-IdNr.:"
 msgid "Nazad na kontrolnu tablu"
 msgstr "Zurück zum Dashboard"
 
-#: app/templates/employer_profile.html:9 app/templates/register.html:20
+#: app/templates/employer_profile.html:15 app/templates/register.html:19
 msgid "Naziv firme"
 msgstr "Firmenname"
 
-#: app/templates/employer_profile.html:13
-msgid "PIB (nepromenljiv)"
-msgstr "USt-IdNr. (unveränderlich)"
-
-#: app/templates/employer_profile.html:17
+#: app/templates/employer_profile.html:33
 msgid "Imejl"
 msgstr "E-Mail"
 
-#: app/templates/employer_profile.html:21
-msgid "Broj telefona"
-msgstr "Telefonnummer"
-
-#: app/templates/employer_profile.html:22
-msgid "Unesite broj telefona (samo cifre)"
+#: app/templates/employer_profile.html:42
+#, fuzzy
+msgid "Broj telefona (samo cifre)"
 msgstr "Telefonnummer eingeben (nur Ziffern)"
 
-#: app/templates/employer_profile.html:25
+#: app/templates/employer_profile.html:49
 msgid "Nova lozinka (ostavite prazno ako ne menjate)"
 msgstr "Neues Passwort (leer lassen, wenn nicht geändert)"
 
-#: app/templates/employer_profile.html:28
+#: app/templates/employer_profile.html:51
+#: app/templates/reset_password_form.html:6
+msgid "Unesite novu lozinku"
+msgstr "Neues Passwort eingeben"
+
+#: app/templates/employer_profile.html:60
 msgid "Sačuvaj izmene"
 msgstr "Änderungen speichern"
+
+#: app/templates/employer_profile.html:84 app/templates/register.html:103
+msgid "mora imati najmanje 8 karaktera"
+msgstr "muss mindestens 8 Zeichen enthalten"
+
+#: app/templates/employer_profile.html:85 app/templates/register.html:104
+msgid "mora sadržati bar jedno veliko slovo"
+msgstr "muss mindestens einen Großbuchstaben enthalten"
+
+#: app/templates/employer_profile.html:86 app/templates/register.html:105
+msgid "mora sadržati bar jedan broj"
+msgstr "muss mindestens eine Zahl enthalten"
+
+#: app/templates/employer_profile.html:87 app/templates/register.html:106
+#, python-format
+msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
+msgstr "Muss mindestens ein Sonderzeichen enthalten (!@#$%%^&*)"
+
+#: app/templates/employer_profile.html:95 app/templates/register.html:110
+#: app/templates/reset_password_form.html:57
+msgid "Jaka lozinka"
+msgstr "Starkes Passwort"
+
+#: app/templates/employer_profile.html:98 app/templates/register.html:114
+#: app/templates/reset_password_form.html:61
+msgid "Lozinka nije dovoljno jaka:"
+msgstr "Passwort ist nicht stark genug:"
+
+#: app/templates/employer_profile.html:113 app/templates/register.html:135
+#: app/templates/reset_password_form.html:77
+msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
+msgstr "Passwort ist nicht stark genug. Bitte korrigieren Sie vor dem Absenden."
 
 #: app/templates/index.html:7
 msgid "Platforma za ocenjivanje i proveru profesionalnih vozača."
@@ -808,7 +838,7 @@ msgstr "Plattform zur Bewertung und Überprüfung von Berufskraftfahrern."
 msgid "Prijavi se"
 msgstr "Anmelden"
 
-#: app/templates/index.html:10 app/templates/register.html:67
+#: app/templates/index.html:10 app/templates/register.html:69
 msgid "Registruj se"
 msgstr "Registrieren"
 
@@ -816,7 +846,7 @@ msgstr "Registrieren"
 msgid "Email"
 msgstr "E-Mail"
 
-#: app/templates/login.html:22 app/templates/register.html:50
+#: app/templates/login.html:22 app/templates/register.html:49
 msgid "Lozinka"
 msgstr "Passwort"
 
@@ -1127,68 +1157,39 @@ msgstr "Bewertung absenden"
 msgid "Registracija poslodavca"
 msgstr "Registrierung des Arbeitgebers"
 
-#: app/templates/register.html:27
+#: app/templates/register.html:26
 msgid "PIB"
 msgstr "USt-IdNr."
 
-#: app/templates/register.html:35
+#: app/templates/register.html:34
 msgid "Telefon"
 msgstr "Telefon"
 
-#: app/templates/register.html:38
+#: app/templates/register.html:37
 msgid "Unesite samo cifre"
 msgstr "Nur Ziffern eingeben"
 
-#: app/templates/register.html:43
+#: app/templates/register.html:42
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: app/templates/register.html:59
+#: app/templates/register.html:61
 msgid "Slažem se sa"
 msgstr "Ich stimme zu"
 
-#: app/templates/register.html:60
+#: app/templates/register.html:62
 msgid "uslovima korišćenja"
 msgstr "den Nutzungsbedingungen"
 
-#: app/templates/register.html:62
+#: app/templates/register.html:64
 msgid "politikom privatnosti"
 msgstr "der Datenschutzrichtlinie"
 
-#: app/templates/register.html:71
+#: app/templates/register.html:73
 msgid "Povratak na prijavu"
 msgstr "Zurück zur Anmeldung"
 
-#: app/templates/register.html:92
-msgid "mora imati najmanje 8 karaktera"
-msgstr "muss mindestens 8 Zeichen enthalten"
-
-#: app/templates/register.html:95
-msgid "mora sadržati bar jedno veliko slovo"
-msgstr "muss mindestens einen Großbuchstaben enthalten"
-
-#: app/templates/register.html:98
-msgid "mora sadržati bar jedan broj"
-msgstr "muss mindestens eine Zahl enthalten"
-
-#: app/templates/register.html:101
-#, python-format
-msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
-msgstr "Muss mindestens ein Sonderzeichen enthalten (!@#$%%^&*)"
-
-#: app/templates/register.html:106 app/templates/reset_password_form.html:57
-msgid "Jaka lozinka"
-msgstr "Starkes Passwort"
-
-#: app/templates/register.html:110 app/templates/reset_password_form.html:61
-msgid "Lozinka nije dovoljno jaka:"
-msgstr "Passwort ist nicht stark genug:"
-
-#: app/templates/register.html:125 app/templates/reset_password_form.html:77
-msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
-msgstr "Passwort ist nicht stark genug. Bitte korrigieren Sie vor dem Absenden."
-
-#: app/templates/register.html:131
+#: app/templates/register.html:139
 msgid "Morate se složiti sa uslovima korišćenja i politikom privatnosti."
 msgstr ""
 "Sie müssen den Nutzungsbedingungen und der Datenschutzrichtlinie "
@@ -1197,10 +1198,6 @@ msgstr ""
 #: app/templates/reset_password_form.html:2
 msgid "Nova lozinka"
 msgstr "Neues Passwort"
-
-#: app/templates/reset_password_form.html:6
-msgid "Unesite novu lozinku"
-msgstr "Neues Passwort eingeben"
 
 #: app/templates/reset_password_form.html:18
 msgid "Nova lozinka:"
@@ -1253,83 +1250,87 @@ msgstr "geben Sie@email.com ein"
 msgid "Pošalji link"
 msgstr "Link senden"
 
-#: app/templates/search_driver.html:2 app/templates/search_driver.html:9
+#: app/templates/search_driver.html:2 app/templates/search_driver.html:8
 msgid "Pretraga vozača"
 msgstr "Fahrersuche"
 
-#: app/templates/search_driver.html:13
+#: app/templates/search_driver.html:15
 msgid "Unesite JMBG, broj tahograf kartice ili CPC kartice"
 msgstr "Geben Sie JMBG, Fahrerkartennummer oder CPC-Kartennummer ein"
 
-#: app/templates/search_driver.html:26
+#: app/templates/search_driver.html:19
+msgid "Unesite podatke"
+msgstr "Angaben eingeben"
+
+#: app/templates/search_driver.html:37
 msgid "Rezultati pretrage"
 msgstr "Suchergebnisse"
 
-#: app/templates/search_driver.html:31
+#: app/templates/search_driver.html:42
 msgid "Ime i prezime:"
 msgstr "Vor- und Nachname:"
 
-#: app/templates/search_driver.html:34
+#: app/templates/search_driver.html:45
 msgid "Pogledaj detalje o vozaču"
 msgstr "Fahrerdetails ansehen"
 
-#: app/templates/search_driver.html:38
+#: app/templates/search_driver.html:49
 msgid "Kliknite za detalje"
 msgstr "Klicken Sie für Details"
 
-#: app/templates/search_driver.html:43
+#: app/templates/search_driver.html:54
 msgid "Broj tahograf kartice:"
 msgstr "Fahrerkartennummer:"
 
-#: app/templates/search_driver.html:48
+#: app/templates/search_driver.html:59
 msgid "Broj CPC kartice:"
 msgstr "CPC-Kartennummer:"
 
-#: app/templates/search_driver.html:53
+#: app/templates/search_driver.html:64
 msgid "Firma:"
 msgstr "Firma:"
 
-#: app/templates/search_driver.html:54
+#: app/templates/search_driver.html:65
 msgid "Nije zaposlen"
 msgstr "Nicht beschäftigt"
 
-#: app/templates/search_driver.html:58
+#: app/templates/search_driver.html:69
 msgid "Status:"
 msgstr "Status:"
 
-#: app/templates/search_driver.html:73
+#: app/templates/search_driver.html:84
 msgid "Broj kartice:"
 msgstr "Kartennummer:"
 
-#: app/templates/search_driver.html:75
+#: app/templates/search_driver.html:86
 msgid "Izdata:"
 msgstr "Ausgestellt:"
 
-#: app/templates/search_driver.html:78
+#: app/templates/search_driver.html:89
 msgid "Važi do:"
 msgstr "Gültig bis:"
 
-#: app/templates/search_driver.html:80
+#: app/templates/search_driver.html:91
 msgid "neaktivna"
 msgstr "inaktiv"
 
-#: app/templates/search_driver.html:100
+#: app/templates/search_driver.html:111
 msgid "Ocene prethodnih poslodavaca"
 msgstr "Bewertungen früherer Arbeitgeber"
 
-#: app/templates/search_driver.html:125
+#: app/templates/search_driver.html:136
 msgid "Nema ocena."
 msgstr "Keine Bewertungen."
 
-#: app/templates/search_driver.html:130
+#: app/templates/search_driver.html:141
 msgid "Vozač nije pronađen."
 msgstr "Fahrer nicht gefunden."
 
-#: app/templates/search_driver.html:134
+#: app/templates/search_driver.html:145
 msgid "Dodatna provera"
 msgstr "Zusätzliche Prüfung"
 
-#: app/templates/search_driver.html:145
+#: app/templates/search_driver.html:156
 msgid "Proveri"
 msgstr "Überprüfen"
 
@@ -1866,4 +1867,10 @@ msgstr "Die Fahrerkartennummer muss genau 16 Zeichen enthalten."
 
 #~ msgid "Uspešno ste se odjavili."
 #~ msgstr "Sie haben sich erfolgreich abgemeldet."
+
+#~ msgid "PIB (nepromenljiv)"
+#~ msgstr "USt-IdNr. (unveränderlich)"
+
+#~ msgid "Broj telefona"
+#~ msgstr "Telefonnummer"
 

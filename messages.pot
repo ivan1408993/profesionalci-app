@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-18 15:17+0200\n"
+"POT-Creation-Date: 2025-08-23 23:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,7 +113,7 @@ msgid ""
 "preuzeti."
 msgstr ""
 
-#: app/routes.py:419 app/templates/register.html:30
+#: app/routes.py:419 app/templates/register.html:29
 msgid "PIB mora sadržati tačno 9 cifara."
 msgstr ""
 
@@ -242,7 +242,7 @@ msgid "poslodavaca"
 msgstr ""
 
 #: app/templates/about.html:13 app/templates/about.html:29
-#: app/templates/register.html:61
+#: app/templates/register.html:63
 msgid "i"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 
 #: app/templates/add_driver.html:14 app/templates/all_drivers.html:38
 #: app/templates/driver_exists.html:9 app/templates/drivers.html:67
-#: app/templates/search_driver.html:138 app/templates/update_driver.html:27
+#: app/templates/search_driver.html:149 app/templates/update_driver.html:27
 msgid "Ime i prezime"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgstr ""
 msgid "Datum važenja tahograf kartice"
 msgstr ""
 
-#: app/templates/add_driver.html:56 app/templates/search_driver.html:142
+#: app/templates/add_driver.html:56 app/templates/search_driver.html:153
 #: app/templates/update_driver.html:67
 msgid "Broj CPC kartice"
 msgstr ""
@@ -376,7 +376,7 @@ msgid "Pretraži po imenu ili broju kartice"
 msgstr ""
 
 #: app/templates/all_drivers.html:28 app/templates/drivers.html:44
-#: app/templates/search_driver.html:17
+#: app/templates/search_driver.html:25
 msgid "Pretraži"
 msgstr ""
 
@@ -400,11 +400,11 @@ msgstr ""
 msgid "Prosečna ocena"
 msgstr ""
 
-#: app/templates/all_drivers.html:66 app/templates/search_driver.html:60
+#: app/templates/all_drivers.html:66 app/templates/search_driver.html:71
 msgid "Aktivan"
 msgstr ""
 
-#: app/templates/all_drivers.html:68 app/templates/search_driver.html:62
+#: app/templates/all_drivers.html:68 app/templates/search_driver.html:73
 msgid "Neaktivan"
 msgstr ""
 
@@ -444,12 +444,12 @@ msgstr ""
 
 #: app/templates/base.html:51 app/templates/driver_detail.html:61
 #: app/templates/driver_exists.html:17 app/templates/employer_detail.html:3
-#: app/templates/search_driver.html:105
+#: app/templates/search_driver.html:116
 msgid "Poslodavac"
 msgstr ""
 
 #: app/templates/base.html:54 app/templates/employer_profile.html:2
-#: app/templates/employer_profile.html:6
+#: app/templates/employer_profile.html:7
 msgid "Moj profil"
 msgstr ""
 
@@ -575,7 +575,7 @@ msgstr ""
 msgid "CPC kartica"
 msgstr ""
 
-#: app/templates/driver_detail.html:78 app/templates/search_driver.html:92
+#: app/templates/driver_detail.html:78 app/templates/search_driver.html:103
 msgid "Preuzmi vozača"
 msgstr ""
 
@@ -593,7 +593,7 @@ msgstr ""
 
 #: app/templates/driver_detail.html:118 app/templates/driver_exists.html:18
 #: app/templates/drivers.html:72 app/templates/rate_driver.html:23
-#: app/templates/search_driver.html:106
+#: app/templates/search_driver.html:117
 msgid "Ocena"
 msgstr ""
 
@@ -609,7 +609,7 @@ msgstr ""
 msgid "Vozač još nema nijednu ocenu."
 msgstr ""
 
-#: app/templates/driver_detail.html:142 app/templates/search_driver.html:69
+#: app/templates/driver_detail.html:142 app/templates/search_driver.html:80
 #: app/templates/update_driver.html:100
 msgid "Istorija tahograf kartica"
 msgstr ""
@@ -647,11 +647,11 @@ msgid "Istorija rada kod drugih poslodavaca i ocene"
 msgstr ""
 
 #: app/templates/driver_exists.html:19 app/templates/rate_driver.html:18
-#: app/templates/search_driver.html:107
+#: app/templates/search_driver.html:118
 msgid "Komentar"
 msgstr ""
 
-#: app/templates/driver_exists.html:20 app/templates/search_driver.html:108
+#: app/templates/driver_exists.html:20 app/templates/search_driver.html:119
 msgid "Datum"
 msgstr ""
 
@@ -667,7 +667,7 @@ msgstr ""
 msgid "Otkaži"
 msgstr ""
 
-#: app/templates/driver_exists.html:49 app/templates/search_driver.html:87
+#: app/templates/driver_exists.html:49 app/templates/search_driver.html:98
 msgid "Ažuriraj vozača"
 msgstr ""
 
@@ -747,32 +747,61 @@ msgstr ""
 msgid "Nazad na kontrolnu tablu"
 msgstr ""
 
-#: app/templates/employer_profile.html:9 app/templates/register.html:20
+#: app/templates/employer_profile.html:15 app/templates/register.html:19
 msgid "Naziv firme"
 msgstr ""
 
-#: app/templates/employer_profile.html:13
-msgid "PIB (nepromenljiv)"
-msgstr ""
-
-#: app/templates/employer_profile.html:17
+#: app/templates/employer_profile.html:33
 msgid "Imejl"
 msgstr ""
 
-#: app/templates/employer_profile.html:21
-msgid "Broj telefona"
+#: app/templates/employer_profile.html:42
+msgid "Broj telefona (samo cifre)"
 msgstr ""
 
-#: app/templates/employer_profile.html:22
-msgid "Unesite broj telefona (samo cifre)"
-msgstr ""
-
-#: app/templates/employer_profile.html:25
+#: app/templates/employer_profile.html:49
 msgid "Nova lozinka (ostavite prazno ako ne menjate)"
 msgstr ""
 
-#: app/templates/employer_profile.html:28
+#: app/templates/employer_profile.html:51
+#: app/templates/reset_password_form.html:6
+msgid "Unesite novu lozinku"
+msgstr ""
+
+#: app/templates/employer_profile.html:60
 msgid "Sačuvaj izmene"
+msgstr ""
+
+#: app/templates/employer_profile.html:84 app/templates/register.html:103
+msgid "mora imati najmanje 8 karaktera"
+msgstr ""
+
+#: app/templates/employer_profile.html:85 app/templates/register.html:104
+msgid "mora sadržati bar jedno veliko slovo"
+msgstr ""
+
+#: app/templates/employer_profile.html:86 app/templates/register.html:105
+msgid "mora sadržati bar jedan broj"
+msgstr ""
+
+#: app/templates/employer_profile.html:87 app/templates/register.html:106
+#, python-format
+msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
+msgstr ""
+
+#: app/templates/employer_profile.html:95 app/templates/register.html:110
+#: app/templates/reset_password_form.html:57
+msgid "Jaka lozinka"
+msgstr ""
+
+#: app/templates/employer_profile.html:98 app/templates/register.html:114
+#: app/templates/reset_password_form.html:61
+msgid "Lozinka nije dovoljno jaka:"
+msgstr ""
+
+#: app/templates/employer_profile.html:113 app/templates/register.html:135
+#: app/templates/reset_password_form.html:77
+msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
 msgstr ""
 
 #: app/templates/index.html:7
@@ -783,7 +812,7 @@ msgstr ""
 msgid "Prijavi se"
 msgstr ""
 
-#: app/templates/index.html:10 app/templates/register.html:67
+#: app/templates/index.html:10 app/templates/register.html:69
 msgid "Registruj se"
 msgstr ""
 
@@ -791,7 +820,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: app/templates/login.html:22 app/templates/register.html:50
+#: app/templates/login.html:22 app/templates/register.html:49
 msgid "Lozinka"
 msgstr ""
 
@@ -1045,77 +1074,44 @@ msgstr ""
 msgid "Registracija poslodavca"
 msgstr ""
 
-#: app/templates/register.html:27
+#: app/templates/register.html:26
 msgid "PIB"
 msgstr ""
 
-#: app/templates/register.html:35
+#: app/templates/register.html:34
 msgid "Telefon"
 msgstr ""
 
-#: app/templates/register.html:38
+#: app/templates/register.html:37
 msgid "Unesite samo cifre"
 msgstr ""
 
-#: app/templates/register.html:43
+#: app/templates/register.html:42
 msgid "E-mail"
 msgstr ""
 
-#: app/templates/register.html:59
+#: app/templates/register.html:61
 msgid "Slažem se sa"
 msgstr ""
 
-#: app/templates/register.html:60
+#: app/templates/register.html:62
 msgid "uslovima korišćenja"
 msgstr ""
 
-#: app/templates/register.html:62
+#: app/templates/register.html:64
 msgid "politikom privatnosti"
 msgstr ""
 
-#: app/templates/register.html:71
+#: app/templates/register.html:73
 msgid "Povratak na prijavu"
 msgstr ""
 
-#: app/templates/register.html:92
-msgid "mora imati najmanje 8 karaktera"
-msgstr ""
-
-#: app/templates/register.html:95
-msgid "mora sadržati bar jedno veliko slovo"
-msgstr ""
-
-#: app/templates/register.html:98
-msgid "mora sadržati bar jedan broj"
-msgstr ""
-
-#: app/templates/register.html:101
-#, python-format
-msgid "mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
-msgstr ""
-
-#: app/templates/register.html:106 app/templates/reset_password_form.html:57
-msgid "Jaka lozinka"
-msgstr ""
-
-#: app/templates/register.html:110 app/templates/reset_password_form.html:61
-msgid "Lozinka nije dovoljno jaka:"
-msgstr ""
-
-#: app/templates/register.html:125 app/templates/reset_password_form.html:77
-msgid "Lozinka nije dovoljno jaka. Molimo ispravite pre slanja."
-msgstr ""
-
-#: app/templates/register.html:131
+#: app/templates/register.html:139
 msgid "Morate se složiti sa uslovima korišćenja i politikom privatnosti."
 msgstr ""
 
 #: app/templates/reset_password_form.html:2
 msgid "Nova lozinka"
-msgstr ""
-
-#: app/templates/reset_password_form.html:6
-msgid "Unesite novu lozinku"
 msgstr ""
 
 #: app/templates/reset_password_form.html:18
@@ -1167,83 +1163,87 @@ msgstr ""
 msgid "Pošalji link"
 msgstr ""
 
-#: app/templates/search_driver.html:2 app/templates/search_driver.html:9
+#: app/templates/search_driver.html:2 app/templates/search_driver.html:8
 msgid "Pretraga vozača"
 msgstr ""
 
-#: app/templates/search_driver.html:13
+#: app/templates/search_driver.html:15
 msgid "Unesite JMBG, broj tahograf kartice ili CPC kartice"
 msgstr ""
 
-#: app/templates/search_driver.html:26
+#: app/templates/search_driver.html:19
+msgid "Unesite podatke"
+msgstr ""
+
+#: app/templates/search_driver.html:37
 msgid "Rezultati pretrage"
 msgstr ""
 
-#: app/templates/search_driver.html:31
+#: app/templates/search_driver.html:42
 msgid "Ime i prezime:"
 msgstr ""
 
-#: app/templates/search_driver.html:34
+#: app/templates/search_driver.html:45
 msgid "Pogledaj detalje o vozaču"
 msgstr ""
 
-#: app/templates/search_driver.html:38
+#: app/templates/search_driver.html:49
 msgid "Kliknite za detalje"
 msgstr ""
 
-#: app/templates/search_driver.html:43
+#: app/templates/search_driver.html:54
 msgid "Broj tahograf kartice:"
 msgstr ""
 
-#: app/templates/search_driver.html:48
+#: app/templates/search_driver.html:59
 msgid "Broj CPC kartice:"
 msgstr ""
 
-#: app/templates/search_driver.html:53
+#: app/templates/search_driver.html:64
 msgid "Firma:"
 msgstr ""
 
-#: app/templates/search_driver.html:54
+#: app/templates/search_driver.html:65
 msgid "Nije zaposlen"
 msgstr ""
 
-#: app/templates/search_driver.html:58
+#: app/templates/search_driver.html:69
 msgid "Status:"
 msgstr ""
 
-#: app/templates/search_driver.html:73
+#: app/templates/search_driver.html:84
 msgid "Broj kartice:"
 msgstr ""
 
-#: app/templates/search_driver.html:75
+#: app/templates/search_driver.html:86
 msgid "Izdata:"
 msgstr ""
 
-#: app/templates/search_driver.html:78
+#: app/templates/search_driver.html:89
 msgid "Važi do:"
 msgstr ""
 
-#: app/templates/search_driver.html:80
+#: app/templates/search_driver.html:91
 msgid "neaktivna"
 msgstr ""
 
-#: app/templates/search_driver.html:100
+#: app/templates/search_driver.html:111
 msgid "Ocene prethodnih poslodavaca"
 msgstr ""
 
-#: app/templates/search_driver.html:125
+#: app/templates/search_driver.html:136
 msgid "Nema ocena."
 msgstr ""
 
-#: app/templates/search_driver.html:130
+#: app/templates/search_driver.html:141
 msgid "Vozač nije pronađen."
 msgstr ""
 
-#: app/templates/search_driver.html:134
+#: app/templates/search_driver.html:145
 msgid "Dodatna provera"
 msgstr ""
 
-#: app/templates/search_driver.html:145
+#: app/templates/search_driver.html:156
 msgid "Proveri"
 msgstr ""
 
