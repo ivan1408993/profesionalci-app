@@ -4,12 +4,13 @@
 {% block content %}
 <div class="container">
   <!-- Sekcija za pretragu -->
-  <div class="section-box mx-auto max-w-800">
-    <h2 class="text-center section-title">🔍 {{ _('Pretraga vozača') }}</h2>
+<div class="section-box mx-auto max-w-800">
+  <h2 class="text-center section-title">🔍 {{ _('Pretraga vozača') }}</h2>
 
-    <form method="POST" action="{{ url_for('main.search_driver') }}" class="row gx-2 gy-2 align-items-center justify-content-center">
-      <div class="col-12 col-md-8">
-        <label for="search_input" class="form-label">
+  <form method="POST" action="{{ url_for('main.search_driver') }}" class="row gx-2 gy-2 justify-content-center">
+    <div class="col-12 col-md-8">
+      <div class="mb-2">
+        <label for="search_input" class="form-label d-block">
           {{ _('Unesite JMBG, broj tahograf kartice ili CPC kartice') }}
         </label>
         <input type="text" id="search_input" name="search_input"
@@ -17,13 +18,13 @@
                placeholder="{{ _('Unesite podatke') }}"
                required>
       </div>
-      <div class="col-12 col-md-auto text-center">
-        <button class="btn btn-custom w-100 w-md-auto" type="submit">
-          <i class="fas fa-search me-1"></i> {{ _('Pretraži') }}
-        </button>
-      </div>
-    </form>
-  </div>
+    </div>
+    <div class="col-12 col-md-auto d-flex align-items-end">
+      <button class="btn btn-custom w-100 w-md-auto" type="submit">
+        <i class="fas fa-search me-1"></i> {{ _('Pretraži') }}
+      </button>
+    </div>
+  </form>
 </div>
 
 
