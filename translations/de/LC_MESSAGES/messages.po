@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-23 23:20+0200\n"
+"POT-Creation-Date: 2025-08-24 00:26+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -354,7 +354,7 @@ msgstr "16 Zeichen"
 msgid "Mora imati tačno 16 karaktera (slova ili cifre)."
 msgstr "Es müssen genau 16 Zeichen (Buchstaben oder Zahlen) sein."
 
-#: app/templates/add_driver.html:43 app/templates/add_driver.html:63
+#: app/templates/add_driver.html:43 app/templates/add_driver.html:75
 #: app/templates/update_driver.html:76
 msgid "Datum kada CPC kartica prestaje da važi"
 msgstr "Ablaufdatum der CPC-Karte"
@@ -368,19 +368,33 @@ msgstr "Gültigkeitsdatum der Fahrerkart"
 msgid "Broj CPC kartice"
 msgstr "CPC-Kartennummer"
 
-#: app/templates/add_driver.html:58
-msgid "Opcionalno"
-msgstr "Optional"
+#: app/templates/add_driver.html:65
+msgid ""
+"Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 "
+"cifara)."
+msgstr ""
+"Die CPC-Kartennummer muss mit ABS beginnen und insgesamt 9 Zeichen lang "
+"sein (ABS + 6 Ziffern)."
 
-#: app/templates/add_driver.html:64 app/templates/update_driver.html:77
+#: app/templates/add_driver.html:66
+msgid "ABS123456"
+msgstr "ABS123456"
+
+#: app/templates/add_driver.html:68
+msgid "Broj CPC kartice mora početi sa 'ABS' i imati tačno 6 cifara posle toga."
+msgstr ""
+"Die CPC-Kartennummer muss mit 'ABS' beginnen und genau 6 Ziffern danach "
+"enthalten."
+
+#: app/templates/add_driver.html:76 app/templates/update_driver.html:77
 msgid "Datum važenja CPC kartice"
 msgstr "Gültigkeitsdatum der CPC-Karte"
 
-#: app/templates/add_driver.html:76
+#: app/templates/add_driver.html:88
 msgid "Sačuvaj vozača"
 msgstr "Fahrer speichern"
 
-#: app/templates/add_driver.html:79 app/templates/driver_exists.html:54
+#: app/templates/add_driver.html:91 app/templates/driver_exists.html:54
 #: app/templates/update_driver.html:93
 msgid "Nazad"
 msgstr "Zurück"
@@ -781,7 +795,6 @@ msgid "Imejl"
 msgstr "E-Mail"
 
 #: app/templates/employer_profile.html:42
-#, fuzzy
 msgid "Broj telefona (samo cifre)"
 msgstr "Telefonnummer eingeben (nur Ziffern)"
 
@@ -1873,4 +1886,7 @@ msgstr "Die Fahrerkartennummer muss genau 16 Zeichen enthalten."
 
 #~ msgid "Broj telefona"
 #~ msgstr "Telefonnummer"
+
+#~ msgid "Opcionalno"
+#~ msgstr "Optional"
 

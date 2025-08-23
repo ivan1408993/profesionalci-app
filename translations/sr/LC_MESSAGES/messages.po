@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-23 23:20+0200\n"
+"POT-Creation-Date: 2025-08-24 00:26+0200\n"
 "PO-Revision-Date: 2025-08-15 16:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sr\n"
@@ -334,7 +334,7 @@ msgstr ""
 msgid "Mora imati tačno 16 karaktera (slova ili cifre)."
 msgstr ""
 
-#: app/templates/add_driver.html:43 app/templates/add_driver.html:63
+#: app/templates/add_driver.html:43 app/templates/add_driver.html:75
 #: app/templates/update_driver.html:76
 msgid "Datum kada CPC kartica prestaje da važi"
 msgstr ""
@@ -348,19 +348,29 @@ msgstr ""
 msgid "Broj CPC kartice"
 msgstr ""
 
-#: app/templates/add_driver.html:58
-msgid "Opcionalno"
+#: app/templates/add_driver.html:65
+msgid ""
+"Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 "
+"cifara)."
 msgstr ""
 
-#: app/templates/add_driver.html:64 app/templates/update_driver.html:77
+#: app/templates/add_driver.html:66
+msgid "ABS123456"
+msgstr ""
+
+#: app/templates/add_driver.html:68
+msgid "Broj CPC kartice mora početi sa 'ABS' i imati tačno 6 cifara posle toga."
+msgstr ""
+
+#: app/templates/add_driver.html:76 app/templates/update_driver.html:77
 msgid "Datum važenja CPC kartice"
 msgstr ""
 
-#: app/templates/add_driver.html:76
+#: app/templates/add_driver.html:88
 msgid "Sačuvaj vozača"
 msgstr ""
 
-#: app/templates/add_driver.html:79 app/templates/driver_exists.html:54
+#: app/templates/add_driver.html:91 app/templates/driver_exists.html:54
 #: app/templates/update_driver.html:93
 msgid "Nazad"
 msgstr ""
@@ -1767,5 +1777,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Unesite broj telefona (samo cifre)"
+#~ msgstr ""
+
+#~ msgid "Opcionalno"
 #~ msgstr ""
 
