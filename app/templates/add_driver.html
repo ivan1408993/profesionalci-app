@@ -50,13 +50,25 @@
        min="{{ current_date }}">
         </div>
 
-    <!-- CPC kartica -->
-    <div class="mb-3">
-        <label for="cpc_card_number" class="form-label fw-semibold text-light">
-            <i class="fas fa-id-card me-1 icon-highlight"></i> {{ _("Broj CPC kartice") }}
-        </label>
-        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0" id="cpc_card_number" name="cpc_card_number" placeholder="{{ _('Opcionalno') }}">
-    </div>
+   <!-- CPC kartica -->
+<div class="mb-3">
+  <label for="cpc_card_number" class="form-label fw-semibold text-light">
+    <i class="fas fa-id-card me-1 icon-highlight"></i> {{ _("Broj CPC kartice") }}
+  </label>
+  <input type="text"
+         class="form-control bg-secondary bg-opacity-25 text-light border-0"
+         id="cpc_card_number"
+         name="cpc_card_number"
+         pattern="^ABS[0-9]{6}$"
+         maxlength="9"
+         minlength="9"
+         title="{{ _('Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 cifara).') }}"
+         placeholder="{{ _('ABS123456') }}">
+  <div class="invalid-feedback">
+    {{ _("Broj CPC kartice mora početi sa 'ABS' i imati tačno 6 cifara posle toga.") }}
+  </div>
+</div>
+
 
     <!-- Datum važenja CPC kartice -->
     <div class="mb-4">
