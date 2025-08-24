@@ -62,14 +62,25 @@
     </div>
 
     <!-- Broj CPC kartice -->
-    <div class="mb-3">
-        <label for="cpc_card_number" class="form-label text-light fw-semibold">
-            <i class="fas fa-id-badge icon-highlight me-1"></i> {{ _('Broj CPC kartice') }}
-        </label>
-        <input type="text" class="form-control bg-secondary bg-opacity-25 text-light border-0"
-               name="cpc_card_number" id="cpc_card_number"
-               value="{{ driver.cpc_card_number or '' }}">
-    </div>
+<div class="mb-3">
+  <label for="cpc_card_number" class="form-label fw-semibold text-light">
+    <i class="fas fa-id-badge icon-highlight me-1"></i> {{ _("Broj CPC kartice") }}
+  </label>
+  <input type="text"
+         class="form-control bg-secondary bg-opacity-25 text-light border-0"
+         id="cpc_card_number"
+         name="cpc_card_number"
+         value="{{ driver.cpc_card_number or '' }}"
+         pattern="^ABS[0-9]{6}$"
+         maxlength="9"
+         minlength="9"
+         title="{{ _('Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 cifara).') }}"
+         placeholder="{{ _('ABS123456') }}">
+  <div class="invalid-feedback">
+    {{ _("Broj CPC kartice mora početi sa 'ABS' i imati tačno 6 cifara posle toga.") }}
+  </div>
+</div>
+
 
     <!-- Datum važenja CPC kartice -->
     <div class="mb-4">
@@ -86,13 +97,14 @@
 
     <!-- Dugmad -->
     <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-success w-100">
-            <i class="fas fa-save me-2"></i> {{ _('Sačuvaj promene') }}
-        </button>
-        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary w-100">
-            <i class="fas fa-arrow-left me-2"></i> {{ _('Nazad') }}
-        </a>
-    </div>
+    <button type="submit" class="btn btn-success flex-fill">
+        <i class="fas fa-save me-2"></i> {{ _('Sačuvaj promene') }}
+    </button>
+    <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="btn btn-secondary flex-fill">
+        <i class="fas fa-arrow-left me-2"></i> {{ _('Nazad') }}
+    </a>
+</div>
+
 </form>
 
 <!-- Istorija kartica -->
@@ -131,11 +143,19 @@
         form.addEventListener("submit", function (event) {
             const cardNumber = document.getElementById("card_number").value.trim();
             const cardPattern = /^[A-Za-z0-9]{16}$/;
-
             if (cardNumber && !cardPattern.test(cardNumber)) {
                 event.preventDefault();
                 event.stopPropagation();
                 alert("{{ _('Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara.') }}");
+                return;
+            }
+
+            const cpcNumber = document.getElementById("cpc_card_number").value.trim();
+            const cpcPattern = /^ABS[0-9]{6}$/;
+            if (cpcNumber && !cpcPattern.test(cpcNumber)) {
+                event.preventDefault();
+                event.stopPropagation();
+                alert("{{ _('Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 cifara).') }}");
                 return;
             }
 
@@ -150,44 +170,11 @@
 </script>
 
 <script>
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    document.addEventListener("DOMContentLoaded", function () {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
 </script>
-
-<!-- Dodatni stil za ikone -->
-<style>
-.icon-highlight {
-    color: #00bcd4;
-    transition: color 0.3s ease;
-}
-.icon-highlight:hover {
-    color: #17e7ff;
-}
-
-.form-text {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.9rem;
-}
-
-.btn-success:hover {
-    background-color: #198754;
-    opacity: 0.9;
-}
-
-.btn-secondary:hover {
-    background-color: #6c757d;
-    opacity: 0.9;
-}
-
-.badge.bg-success {
-    font-size: 0.8rem;
-}
-
-.list-group-item.active-card {
-    background-color: #d1e7dd;
-    border-left: 5px solid #198754;
-}
-</style>
 {% endblock %}

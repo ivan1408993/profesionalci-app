@@ -411,7 +411,7 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
   100% { transform: rotate(0deg); }
 }*/
 
-/*kretanje kamiona pored imena profesionalci u base.html*/
+/*kretanje kamiona pored imena profesionalci u base.html
 .truck-icon {
     animation: moveTruck 3s linear infinite;
     position: relative;
@@ -421,4 +421,37 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
     0%   { left: 0; }
     50%  { left: 5px; }
     100% { left: 0; }
+}
+
+/* Dodatni stil za ikone*/
+.icon-highlight {
+    color: #00bcd4;
+    transition: color 0.3s ease;
+}
+.icon-highlight:hover {
+    color: #17e7ff;
+}
+
+.form-text {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+}
+
+.btn-success:hover {
+    background-color: #198754;
+    opacity: 0.9;
+}
+
+.btn-secondary:hover {
+    background-color: #6c757d;
+    opacity: 0.9;
+}
+
+.badge.bg-success {
+    font-size: 0.8rem;
+}
+
+.list-group-item.active-card {
+    background-color: #d1e7dd;
+    border-left: 5px solid #198754;
 }
