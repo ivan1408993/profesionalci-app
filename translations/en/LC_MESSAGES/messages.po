@@ -1214,7 +1214,6 @@ msgid "Mora sadržati bar jedan broj"
 msgstr "Must contain at least one number"
 
 #: app/templates/reset_password_form.html:53
-#, fuzzy, python-format
 msgid "Mora sadržati bar jedan specijalni znak (!@#$%^&*)"
 msgstr "Must contain at least one special character (!@#$%%^&*)"
 

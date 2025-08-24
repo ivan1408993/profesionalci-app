@@ -1782,3 +1782,6 @@ msgstr ""
 #~ msgid "Opcionalno"
 #~ msgstr ""
 
+#~ msgid "Mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
+#~ msgstr ""
+
