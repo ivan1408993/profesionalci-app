@@ -25,7 +25,7 @@ class Driver(db.Model):
     jmbg_hashed = db.Column(db.String(64), unique=True, index=True, nullable=False)
     salt = db.Column(db.LargeBinary(16), nullable=False)  # Dodajemo salt kao binarni niz
 
-    cpc_card_number = db.Column(db.String(32), unique=True, nullable=True)
+    cpc_card_number = db.Column(db.String(9), unique=True, nullable=False)
     cpc_expiry_date = db.Column(db.Date, nullable=True)
 
     active = db.Column(db.Boolean, default=True)
