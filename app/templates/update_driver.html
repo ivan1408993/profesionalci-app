@@ -138,44 +138,94 @@
 
 <!-- Validacija forme -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("driverForm");
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("driverForm");
 
-        form.addEventListener("submit", function (event) {
-            const cardNumber = document.getElementById("card_number").value.trim();
-            const cardPattern = /^[A-Za-z0-9]{16}$/;
-            if (cardNumber && !cardPattern.test(cardNumber)) {
-                event.preventDefault();
-                event.stopPropagation();
-                alert("{{ _('Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara.') }}");
+    const fields = {
+        full_name: {
+            pattern: /^.{2,100}$/,
+            message: "{{ _('Ime i prezime mora imati između 2 i 100 karaktera.') }}"
+        },
+        card_number: {
+            pattern: /^[A-Za-z0-9]{16}$/,
+            message: "{{ _('Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara.') }}",
+            optional: true
+        },
+        cpc_card_number: {
+            pattern: /^ABS[0-9]{6}$/,
+            message: "{{ _('Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 cifara).') }}"
+        },
+        expiry_date: {
+            pattern: /^\d{4}-\d{2}-\d{2}$/,
+            message: "{{ _('Neispravan format datuma tahograf kartice.') }}",
+            optional: true
+        },
+        cpc_expiry_date: {
+            pattern: /^\d{4}-\d{2}-\d{2}$/,
+            message: "{{ _('Neispravan format datuma CPC kartice.') }}",
+            optional: true
+        }
+    };
+
+    // Funkcija za prikaz greške ispod inputa
+    function showError(input, message) {
+        const feedback = input.nextElementSibling;
+        if (feedback) {
+            feedback.textContent = message;
+            input.classList.add("is-invalid");
+        }
+    }
+
+    function clearError(input) {
+        const feedback = input.nextElementSibling;
+        if (feedback) {
+            feedback.textContent = "";
+            input.classList.remove("is-invalid");
+        }
+    }
+
+    // Validacija pri submit-u
+    form.addEventListener("submit", function (event) {
+        let valid = true;
+        for (const id in fields) {
+            const field = fields[id];
+            const input = document.getElementById(id);
+            const value = input.value.trim();
+            if (!value && field.optional) {
+                clearError(input);
+                continue;
+            }
+            if (!field.pattern.test(value)) {
+                showError(input, field.message);
+                valid = false;
+            } else {
+                clearError(input);
+            }
+        }
+        if (!valid) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+    });
+
+    // Instant inline validacija dok korisnik kuca
+    for (const id in fields) {
+        const field = fields[id];
+        const input = document.getElementById(id);
+        input.addEventListener("input", function () {
+            const value = input.value.trim();
+            if (!value && field.optional) {
+                clearError(input);
                 return;
             }
-
-            const cpcNumber = document.getElementById("cpc_card_number").value.trim();
-            const cpcPattern = /^ABS[0-9]{6}$/;
-            if (cpcNumber && !cpcPattern.test(cpcNumber)) {
-                event.preventDefault();
-                event.stopPropagation();
-                alert("{{ _('Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 cifara).') }}");
-                return;
+            if (!field.pattern.test(value)) {
+                showError(input, field.message);
+            } else {
+                clearError(input);
             }
-
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-
-            form.classList.add("was-validated");
         });
-    });
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
+    }
 });
 </script>
 {% endblock %}

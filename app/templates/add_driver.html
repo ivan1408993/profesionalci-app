@@ -98,15 +98,50 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("driverForm");
-        form.addEventListener("submit", function (event) {
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add("was-validated");
-        });
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("driverForm");
+    const inputs = form.querySelectorAll("input[required]");
+
+    // Funkcija za validaciju pojedinačnog polja
+    function validateField(field) {
+        const pattern = field.getAttribute("pattern");
+        let valid = true;
+        if (pattern) {
+            const regex = new RegExp(pattern);
+            valid = regex.test(field.value.trim());
+        } else {
+            valid = field.value.trim() !== "";
+        }
+        if (!valid) {
+            field.classList.add("is-invalid");
+            field.classList.remove("is-valid");
+        } else {
+            field.classList.remove("is-invalid");
+            field.classList.add("is-valid");
+        }
+        return valid;
+    }
+
+    // Validacija u realnom vremenu dok korisnik kuca
+    inputs.forEach(input => {
+        input.addEventListener("input", () => validateField(input));
+        input.addEventListener("blur", () => validateField(input));
     });
+
+    // Validacija pri submit-u
+    form.addEventListener("submit", function (event) {
+        let allValid = true;
+        inputs.forEach(input => {
+            if (!validateField(input)) allValid = false;
+        });
+
+        if (!allValid) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+    });
+});
 </script>
 {% endblock %}
