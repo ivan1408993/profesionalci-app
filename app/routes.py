@@ -964,7 +964,7 @@ def before_request():
     g.current_lang = session.get('lang') or request.cookies.get('lang') or 'sr'
 
 
-@main.route('/drivers/<int:driver_id>/update', methods=['GET', 'POST']) 
+@main.route('/drivers/<int:driver_id>/update', methods=['GET', 'POST'])
 def update_driver(driver_id):
     # Provera da li je poslodavac prijavljen
     employer_id = session.get('user_id')
@@ -992,32 +992,34 @@ def update_driver(driver_id):
         cpc_card_number = request.form.get('cpc_card_number', '').strip()
         cpc_expiry_date_str = request.form.get('cpc_expiry_date', '').strip()
 
-        expiry_date = None
-        cpc_expiry_date = None
+        # Validacija imena
+        if not (2 <= len(new_full_name) <= 100):
+            flash(_("Ime i prezime mora imati između 2 i 100 karaktera."), "warning")
+            return redirect(url_for('main.update_driver', driver_id=driver.id))
 
-        # Parsiranje datuma isteka tahograf kartice
-        if expiry_date_str:
-            try:
-                expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date()
-            except ValueError:
-                flash(_("Neispravan format datuma isteka tahograf kartice."), "warning")
-                return redirect(url_for('main.update_driver', driver_id=driver_id))
+        # Validacija CPC kartice
+        import re
+        if not re.fullmatch(r'^ABS[0-9]{6}$', cpc_card_number):
+            flash(_("Broj CPC kartice mora početi sa ABS i imati ukupno 9 karaktera (ABS + 6 cifara)."), "danger")
+            return redirect(url_for('main.update_driver', driver_id=driver.id))
 
-        # Parsiranje datuma isteka CPC kartice
-        if cpc_expiry_date_str:
-            try:
-                cpc_expiry_date = datetime.strptime(cpc_expiry_date_str, '%Y-%m-%d').date()
-            except ValueError:
-                flash(_("Neispravan format datuma isteka CPC kartice."), "warning")
-                return redirect(url_for('main.update_driver', driver_id=driver_id))
+        # Parsiranje datuma
+        try:
+            expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date() if expiry_date_str else None
+            cpc_expiry_date = datetime.strptime(cpc_expiry_date_str, '%Y-%m-%d').date() if cpc_expiry_date_str else None
+        except ValueError:
+            flash(_("Neispravan format datuma."), "warning")
+            return redirect(url_for('main.update_driver', driver_id=driver.id))
 
-        # Ažuriranje imena ako je promenjeno
-        if new_full_name and new_full_name != driver.full_name:
-            driver.full_name = new_full_name
+        # Ažuriranje imena
+        driver.full_name = new_full_name
 
-        # Ako je unet novi broj kartice i različit je od trenutnog
-        if new_card_number and (not current_card or current_card.card_number != new_card_number):
-            # Provera da li broj već postoji kod drugog vozača
+        # Tahograf kartica
+        if new_card_number:
+            if not re.fullmatch(r'^[A-Za-z0-9]{16}$', new_card_number):
+                flash(_("Broj tahograf kartice mora imati tačno 16 karaktera, slova ili cifara."), "danger")
+                return redirect(url_for('main.update_driver', driver_id=driver.id))
+
             existing_card = DriverCard.query.filter(
                 DriverCard.card_number == new_card_number,
                 DriverCard.driver_id != driver.id
@@ -1030,7 +1032,7 @@ def update_driver(driver_id):
             if current_card:
                 current_card.is_active = False
 
-            # Dodavanje nove tahograf kartice sa unetim datumom isteka
+            # Dodavanje nove kartice
             new_card = DriverCard(
                 card_number=new_card_number,
                 driver_id=driver.id,
@@ -1038,15 +1040,13 @@ def update_driver(driver_id):
                 expiry_date=expiry_date
             )
             db.session.add(new_card)
-            flash(_("Dodata je nova tahografska kartica."), "success")
-
-        # Ako broj kartice nije promenjen, ali treba ažurirati datum važenja
+            flash(_("Nova tahografska kartica je dodata."), "success")
         elif current_card and expiry_date:
             current_card.expiry_date = expiry_date
             flash(_("Datum važenja tahograf kartice je ažuriran."), "info")
 
-        # Ažuriranje CPC kartice i datuma važenja
-        driver.cpc_card_number = cpc_card_number or None
+        # CPC kartica
+        driver.cpc_card_number = cpc_card_number
         driver.cpc_expiry_date = cpc_expiry_date
 
         db.session.commit()
