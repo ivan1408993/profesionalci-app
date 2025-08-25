@@ -13,7 +13,9 @@ with app.app_context():
     else:
         print("❌ Nema nijednog poslodavca u bazi.")
 
-#from app import create_app, db
+
+#Brisanje statusa admina
+# from app import create_app, db
 #from app.models import Employer
 
 #app = create_app()

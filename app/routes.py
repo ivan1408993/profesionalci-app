@@ -1,33 +1,21 @@
-from .utils import add_new_driver_card
-from flask import Blueprint, render_template, request, session, redirect, url_for, flash, g
-from werkzeug.security import generate_password_hash, check_password_hash
-from app.models import Employer
-from app import db
-from app.helpers import konvertuj_tekst
-from sqlalchemy import or_
-import os
-import hashlib
-from app.utils import hash_jmbg
-from sqlalchemy import and_
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash, g, current_app
+from flask_babel import _
+from flask_mail import Message
 from flask_paginate import Pagination, get_page_args
 
-from flask_babel import _
-from flask import current_app
-from flask_mail import Message
-
+from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import or_, and_, func
 from sqlalchemy.orm import joinedload
-from .models import Driver, Rating, Employer
+
+from app import db
+from app.models import Employer, Driver, DriverCard, Rating
+from app.utils import hash_jmbg, generate_salt, hash_jmbg_with_salt, generate_reset_token, verify_reset_token, add_new_driver_card
+from app.helpers import konvertuj_tekst
+from app.decorators import login_required, superadmin_required
 
 from datetime import datetime
-
-from .utils import generate_reset_token
-from .utils import verify_reset_token
-
-from .decorators import login_required, superadmin_required
-from app.models import Driver, DriverCard
-from app.models import Driver
-from sqlalchemy import or_, func
-
+import os
+import hashlib
 
 main = Blueprint('main', __name__)
 
@@ -115,15 +103,6 @@ def index():
     return render_template('index.html', current_lang=session.get('lang', 'sr'))
 
 
-
-from datetime import datetime
-
-from flask import flash, redirect, render_template, request, session, url_for
-from datetime import datetime
-from app import db
-from app.models import Driver, DriverCard
-from app.utils import generate_salt, hash_jmbg_with_salt
-
 @main.route('/drivers/add', methods=['GET', 'POST'])
 def add_driver():
     employer_id = session.get('user_id')
@@ -135,27 +114,41 @@ def add_driver():
     if request.method == 'POST':
         full_name = request.form['full_name'].strip()
         jmbg = request.form['jmbg'].strip()
+        cpc_card_number = request.form.get('cpc_card_number', '').strip()
+        cpc_expiry_date_str = request.form.get('cpc_expiry_date', '').strip()
+        card_number = request.form.get('card_number', '').strip()
+        issue_date_str = request.form.get('issue_date', '').strip()
+        expiry_date_str = request.form.get('expiry_date', '').strip()
 
-        # Provera dužine JMBG
+        # --- Provere ---
         if len(jmbg) != 13 or not jmbg.isdigit():
             flash(_("JMBG mora sadržati tačno 13 cifara."))
             return redirect(url_for('main.add_driver'))
 
-        card_number = request.form.get('card_number', '').strip()
-        issue_date_str = request.form.get('issue_date', '').strip()
-        expiry_date_str = request.form.get('expiry_date', '').strip()
-        cpc_card_number = request.form.get('cpc_card_number', '').strip()
-        cpc_expiry_date_str = request.form.get('cpc_expiry_date', '').strip()
+        if not cpc_card_number or len(cpc_card_number) != 9:
+            flash(_("Broj CPC kartice je obavezan i mora imati tačno 9 karaktera."))
+            return redirect(url_for('main.add_driver'))
+
+        if not cpc_card_number.startswith("ABS") or not cpc_card_number[3:].isdigit():
+            flash(_("Broj CPC kartice mora početi sa 'ABS' i imati 6 cifara posle toga."))
+            return redirect(url_for('main.add_driver'))
 
         if card_number and len(card_number) != 16:
             flash(_("Broj tahograf kartice mora imati tačno 16 karaktera."))
             return redirect(url_for('main.add_driver'))
 
+        # Datumi
         issue_date = datetime.strptime(issue_date_str, '%Y-%m-%d').date() if issue_date_str else None
         expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d').date() if expiry_date_str else None
         cpc_expiry_date = datetime.strptime(cpc_expiry_date_str, '%Y-%m-%d').date() if cpc_expiry_date_str else None
 
-        # Traži postojećeg vozača tako što prolazi kroz sve i upoređuje hash
+        # Provera da li CPC kartica već postoji
+        existing_cpc = Driver.query.filter_by(cpc_card_number=cpc_card_number).first()
+        if existing_cpc:
+            flash(_("Ova CPC kartica već postoji u sistemu."))
+            return redirect(url_for('main.add_driver'))
+
+        # Provera postojećeg vozača po JMBG
         existing_driver = None
         all_drivers = Driver.query.all()
         for driver in all_drivers:
@@ -173,9 +166,10 @@ def add_driver():
                 return redirect(url_for('main.search_driver'))
 
             else:
+                # Update inactive vozača
                 existing_driver.full_name = full_name
                 existing_driver.employer_id = employer_id
-                existing_driver.cpc_card_number = cpc_card_number or None
+                existing_driver.cpc_card_number = cpc_card_number
                 existing_driver.cpc_expiry_date = cpc_expiry_date
                 existing_driver.active = True
                 db.session.commit()
@@ -187,34 +181,27 @@ def add_driver():
                         return redirect(url_for('main.add_driver'))
 
                     new_card = DriverCard(
-                    card_number=card_number,
-                    driver_id=existing_driver.id,
-                    is_active=True,
-                    issue_date=issue_date,
-                    expiry_date=expiry_date,
+                        card_number=card_number,
+                        driver_id=existing_driver.id,
+                        is_active=True,
+                        issue_date=issue_date,
+                        expiry_date=expiry_date,
                     )
-
                     db.session.add(new_card)
                     db.session.commit()
 
                 flash(_("Postojeći vozač je preuzet u vašu firmu."))
                 return redirect(url_for('main.drivers'))
 
-        # Dodavanje novog vozača sa novim salt-om
+        # Dodavanje novog vozača
         salt = generate_salt()
         jmbg_hashed = hash_jmbg_with_salt(jmbg, salt)
-
-        if card_number:
-            existing_card = DriverCard.query.filter_by(card_number=card_number).first()
-            if existing_card:
-                flash(_("Tahograf kartica sa ovim brojem već postoji u sistemu."))
-                return redirect(url_for('main.add_driver'))
 
         new_driver = Driver(
             full_name=full_name,
             jmbg_hashed=jmbg_hashed,
             salt=salt,
-            cpc_card_number=cpc_card_number or None,
+            cpc_card_number=cpc_card_number,
             cpc_expiry_date=cpc_expiry_date,
             employer_id=employer_id,
             active=True
@@ -237,9 +224,6 @@ def add_driver():
         return redirect(url_for('main.drivers'))
 
     return render_template('add_driver.html', current_lang=session.get('lang', 'sr'), current_date=current_date)
-
-
-
 
 @main.route('/drivers/search', methods=['GET', 'POST'])
 def search_driver():
