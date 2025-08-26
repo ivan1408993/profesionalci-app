@@ -90,11 +90,12 @@ footer {
 }
 
 /* Navigacija */
+/* Navigacija */
 nav.navbar {
     background: linear-gradient(90deg, #1a1f2b, #2b3548);
     background-color: #1a1f2b; /* fallback */
     opacity: 1 !important;
-    margin-bottom: 1rem; /* ili padding-bottom: 1rem; */
+    margin-bottom: 1rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -111,6 +112,51 @@ nav.navbar {
 .navbar a:hover {
     color: white !important;
 }
+
+/* Animirani brand */
+.navbar-brand {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.15rem;
+    white-space: nowrap;
+}
+
+/* Kamion okrenut ka levoj strani */
+.truck-icon.flipped {
+    transform: scaleX(-1);
+    margin-right: 8px;
+    color: #0dcaf0;
+}
+
+/* Tokom animacije */
+.navbar-brand.brand-animating {
+    position: fixed;
+    top: 0.5rem; /* visina animacije */
+    z-index: 1100;
+    transition: transform 1.8s ease-out, opacity 0.8s ease-out;
+}
+
+/* Tekst "prikolica" */
+.brand-text {
+    transition: transform 1.8s ease-out;
+}
+
+.navbar-brand.brand-animating .brand-text {
+    transition-delay: 0.12s;
+    transform: translateX(0);
+}
+
+/* Ako korisnik preferira bez animacija */
+@media (prefers-reduced-motion: reduce) {
+    .navbar-brand,
+    .brand-text {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 
 /* Tekst u uslovima korišćenja i politici privatnosti */
 .terms-text, .privacy-text {
@@ -471,14 +517,17 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
 }
 
 .navbar-brand.brand-animating {
-  transition: transform 1.8s ease-out, opacity .6s ease-out;
-  will-change: transform;
+  position: fixed;      /* animiramo preko navigacije */
+  top: 0.5rem;          /* prilagodi po visini */
+  z-index: 1100;        /* iznad navbar linkova */
+  transition: transform 1.8s ease-out, opacity 0.8s ease-out;
 }
 
 .brand-text {
   transition: transform 1.8s ease-out;
 }
 
-.navbar-brand.brand-animating .brand-text {
-  transition-delay: .12s;
+.truck-icon.flipped {
+  transform: scaleX(-1);
 }
+

@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3 position-relative">
   <!-- Animirani logo -->
  <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
-  <i class="fas fa-truck-moving fa-lg me-2 truck-icon"></i>
+  <i class="fas fa-truck-moving fa-lg me-2 truck-icon flipped"></i>
   <span class="brand-text">Profesionalci</span>
 </a>
 
@@ -87,33 +87,6 @@
   </div>
 </nav>
 
-<!-- CSS animacija -->
-<style>
-.moving-logo {
-  position: absolute;
-  right: 20px; /* start kod Home */
-  top: 10px;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.3rem;
-  white-space: nowrap;
-  animation: driveToLeft 3s ease-out forwards;
-}
-
-.truck-icon {
-  margin-right: 8px;
-  color: #0dcaf0;
-}
-
-@keyframes driveToLeft {
-  0%   { right: 20px; opacity: 0; }
-  20%  { opacity: 1; }
-  100% { left: 20px; right: auto; }
-}
-</style>
-
-
 <!-- Flash poruke -->
 <div class="container flash-messages" aria-live="polite">
     {% with messages = get_flashed_messages() %}
@@ -147,6 +120,7 @@
 
     {% block scripts %}{% endblock %}
 
+<!-- Animacija kamiona -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   try {
@@ -154,38 +128,35 @@ document.addEventListener('DOMContentLoaded', function () {
     const home  = document.getElementById('homeLink');
     if (!brand || !home) return;
 
-    // finalna pozicija logotipa
     const finalRect = brand.getBoundingClientRect();
-    // pozicija linka Početna
-    const homeRect = home.getBoundingClientRect();
+    const homeRect  = home.getBoundingClientRect();
 
-    // razlika – gde treba da ga “spustimo” na start
+    // Kamion startuje iznad linka Početna
     const deltaX = homeRect.left - finalRect.left;
 
-    // pripremi animaciju
-    brand.classList.add('brand-animating');
-    brand.style.opacity   = 0;
-    brand.style.transform = `translateX(${deltaX}px)`; // teleport na Početna
-
     const text = brand.querySelector('.brand-text');
-    if (text) {
-      text.style.transform = 'translateX(-20px)'; // zakačena prikolica
-    }
 
-    // trigger animacije
+    brand.classList.add('brand-animating');
+    brand.style.opacity = 0;
+    brand.style.transform = `translateX(${deltaX}px)`;
+    if (text) text.style.transform = 'translateX(-20px)';
+
+    // Trigger animacije
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        brand.style.opacity   = 1;
+        brand.style.opacity = 1;
         brand.style.transform = 'translateX(0)';
         if (text) text.style.transform = 'translateX(0)';
       });
     });
 
-    // kad završi – očisti inline stilove
     brand.addEventListener('transitionend', () => {
       brand.classList.remove('brand-animating');
+      brand.style.position = '';
+      brand.style.left = '';
+      brand.style.top = '';
+      brand.style.opacity = '';
       brand.style.transform = '';
-      brand.style.opacity   = '';
       if (text) text.style.transform = '';
     }, { once: true });
 
