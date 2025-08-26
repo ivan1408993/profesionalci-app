@@ -13,112 +13,77 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-
     {% block styles %}{% endblock %}
 </head>
-
 <body class="d-flex flex-column min-vh-100">
 
-<nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3 position-fixed top-0 w-100" style="z-index: 1030; background-color: #343a40;">
-    <!-- Početna link -->
-    <a class="nav-link" id="homeLink" href="{{ url_for('main.index') }}">
-        🏠 Početna
-    </a>
+<!-- 🌐 Navigacija -->
+<nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3">
+  <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+    <i class="fas fa-truck-moving fa-lg me-2 truck-icon"></i>
+    <span>Profesionalci</span>
+  </a>
 
-    <!-- Animirani kamion i tekst Profesionalci -->
-    <div class="logo-wrapper d-flex align-items-center">
-        <i class="fas fa-truck-moving fa-lg me-2 truck-icon flipped"></i>
-        <span class="brand-text">Profesionalci</span>
-    </div>
+  <!-- Toggler za mobilni meni -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+          aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!-- Toggler za mobilni meni -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-            aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- Sve što treba da se skuplja na mobilnom ide ovde -->
+  <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+          <!-- 🔗 Zajednički linkovi za sve -->
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.index') }}">{{ _("🏠 Početna") }}</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.about') }}">{{ _("ℹ️ O nama") }}</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.contact') }}">{{ _("✉️ Kontakt") }}</a>
+          </li>
 
-    <!-- Ostali linkovi -->
-    <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.about') }}">{{ _("ℹ️ O nama") }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.contact') }}">{{ _("✉️ Kontakt") }}</a>
-            </li>
-            {% if session.get('user_type') == 'employer' and session.get('user_id') %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="employerMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ _("Dobrodošli") }}, {{ session.get('company_name', _("Poslodavac")) }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
-                    <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}"><i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>{{ _("Moji vozači") }}</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>{{ _("Dodaj vozača") }}</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>{{ _("Pretraga svih vozača") }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>{{ _("Odjava") }}</a></li>
-                </ul>
-            </li>
-            {% elif session.get('user_id') %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.logout') }}">{{ _("🚪 Odjava") }}</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.login') }}">{{ _("Prijava") }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.register') }}">{{ _("Registracija") }}</a>
-            </li>
-            {% endif %}
+          {% if session.get('user_type') == 'employer' and session.get('user_id') %}
+          <!-- 👤 Poslodavac meni -->
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="employerMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ _("Dobrodošli") }}, {{ session.get('company_name', _("Poslodavac")) }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
+                  <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}"><i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>{{ _("Moji vozači") }}</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>{{ _("Dodaj vozača") }}</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>{{ _("Pretraga svih vozača") }}</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>{{ _("Odjava") }}</a></li>
+              </ul>
+          </li>
 
-            <!-- Jezički meni -->
-            <li class="nav-item d-flex align-items-center ms-lg-3">
-                <a href="/set_language/sr" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
-                <a href="/set_language/en" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %} ms-2">🇬🇧</a>
-                <a href="/set_language/de" class="lang-flag {% if g.current_lang == 'de' %}active{% endif %} ms-2">🇩🇪</a>
-            </li>
-        </ul>
-    </div>
+          {% elif session.get('user_id') %}
+          <!-- 👤 Vozač -->
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.logout') }}">{{ _("🚪 Odjava") }}</a>
+          </li>
+          {% else %}
+          <!-- 🔐 Neregistrovani -->
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.login') }}">{{ _("Prijava") }}</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.register') }}">{{ _("Registracija") }}</a>
+          </li>
+          {% endif %}
+
+          <!-- 🌐 Jezički meni (sada deo collapse-a, ide udesno na desktopu) -->
+          <li class="nav-item d-flex align-items-center ms-lg-3">
+              <a href="/set_language/sr" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
+              <a href="/set_language/en" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %} ms-2">🇬🇧</a>
+              <a href="/set_language/de" class="lang-flag {% if g.current_lang == 'de' %}active{% endif %} ms-2">🇩🇪</a>
+          </li>
+      </ul>
+  </div>
 </nav>
-
-<style>
-/* Fiksna navigacija */
-.navbar {
-    background-color: #343a40 !important;
-}
-
-/* Animacija kamiona */
-.logo-wrapper {
-    position: absolute;
-    left: 50px; /* početak iznad linka Početna */
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    animation: moveTruck 3s linear infinite;
-    pointer-events: none; /* da ne preklapa link */
-}
-
-.truck-icon.flipped {
-    transform: scaleX(-1);
-    margin-right: 8px;
-    color: #0dcaf0;
-}
-
-@keyframes moveTruck {
-    0% { transform: translateX(0) translateY(-50%); }
-    50% { transform: translateX(10px) translateY(-50%); }
-    100% { transform: translateX(0) translateY(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .logo-wrapper {
-        animation: none !important;
-    }
-}
-</style>
 
 <!-- Flash poruke -->
 <div class="container flash-messages" aria-live="polite">
@@ -148,10 +113,9 @@
     </small>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-{% block scripts %}{% endblock %}
-
+    {% block scripts %}{% endblock %}
 </body>
 </html>

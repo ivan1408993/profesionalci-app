@@ -412,6 +412,17 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
 }*/
 
 /*kretanje kamiona pored imena profesionalci u base.html*/
+.truck-icon {
+    animation: moveTruck 3s linear infinite;
+    position: relative;
+}
+
+@keyframes moveTruck {
+    0%   { left: 0; }
+    50%  { left: 5px; }
+    100% { left: 0; }
+}
+
 /* Dodatni stil za ikone*/
 .icon-highlight {
     color: #00bcd4;
