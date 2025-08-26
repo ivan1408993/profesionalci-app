@@ -20,9 +20,11 @@
 <!-- 🌐 Navigacija -->
 <nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3 position-relative">
   <!-- Animirani logo -->
-  <a class="navbar-brand d-flex align-items-center moving-logo" href="{{ url_for('main.index') }}">
-    <span class="brand-text">Profesionalci<i class="fas fa-truck-moving fa-lg me-2 truck-icon"></i></span>
-  </a>
+ <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+  <i class="fas fa-truck-moving fa-lg me-2 truck-icon"></i>
+  <span class="brand-text">Profesionalci</span>
+</a>
+
 
   <!-- Toggler za mobilni meni -->
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
@@ -35,7 +37,7 @@
       <ul class="navbar-nav ms-auto">
           <!-- 🔗 Zajednički linkovi za sve -->
           <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.index') }}">{{ _("🏠 Početna") }}</a>
+              <a class="nav-link" id="homeLink" href="{{ url_for('main.index') }}">{{ _("🏠 Početna") }}</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="{{ url_for('main.about') }}">{{ _("ℹ️ O nama") }}</a>
@@ -144,5 +146,66 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     {% block scripts %}{% endblock %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    // ako smo već animirali u ovoj sesiji — preskoči
+    if (sessionStorage.getItem('brandAnimDone') === '1') return;
+
+    const brand = document.querySelector('.navbar .navbar-brand');
+    const home  = document.getElementById('homeLink');
+    const nav   = document.querySelector('.navbar');
+    if (!brand || !nav) return;
+
+    // Small delay da se layout stabilizuje (fontovi, collapse, itd.)
+    setTimeout(() => {
+      const finalRect = brand.getBoundingClientRect();
+      const navRect   = nav.getBoundingClientRect();
+
+      // Početna pozicija: kod linka Početna (ako je vidljiv), inače desna ivica navigacije
+      let startX;
+      if (home && home.offsetParent !== null) {
+        const homeRect = home.getBoundingClientRect();
+        startX = homeRect.left; // može i homeRect.right - 8, po ukusu
+      } else {
+        startX = navRect.right - 24; // fallback: sa desne strane nav-a
+      }
+
+      const deltaX = startX - finalRect.left;
+
+      // Inicijalno pomeri brand na start, pa animiraj do 0
+      brand.classList.add('brand-animating');
+      brand.style.opacity   = 0;
+      brand.style.transform = `translateX(${deltaX}px)`;
+
+      // “prikolica” – tekst krene malo iza (će stići tokom tranzicije)
+      const text = brand.querySelector('.brand-text');
+      if (text) {
+        text.style.transform = 'translateX(-14px)';
+      }
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          brand.style.opacity   = 1;
+          brand.style.transform = 'translateX(0)';
+          if (text) text.style.transform = 'translateX(0)';
+        });
+      });
+
+      brand.addEventListener('transitionend', () => {
+        brand.classList.remove('brand-animating');
+        brand.style.transform = '';
+        brand.style.opacity   = '';
+        if (text) text.style.transform = '';
+        sessionStorage.setItem('brandAnimDone', '1');
+      }, { once: true });
+    }, 60);
+  } catch (e) {
+    // tišina u produkciji :)
+    console.warn('Brand animation skipped:', e);
+  }
+});
+</script>
 </body>
 </html>
