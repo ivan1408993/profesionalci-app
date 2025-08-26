@@ -89,30 +89,18 @@ footer {
     color: #555 !important;
 }
 
-/* Navigacija */
-nav.navbar {
-    background: linear-gradient(90deg, #1a1f2b, #2b3548);
-    background-color: #1a1f2b; /* fallback */
-    opacity: 1 !important;
-    margin-bottom: 1rem; /* ili padding-bottom: 1rem; */
-    position: fixed;
+.truck-animation-container {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5);
+    height: 100%;
+    pointer-events: none; /* da ne smeta klikovima na navbar */
+    display: flex;
+    align-items: center;
+    padding-left: calc(1rem + 40px); /* start iza linka Početna */
 }
 
-.navbar a {
-    color: #00bcd4 !important;
-    transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-    color: white !important;
-}
-
-/*kretanje kamiona pored imena profesionalci u base.html*/
 .truck-path {
     display: flex;
     align-items: center;
@@ -123,28 +111,27 @@ nav.navbar {
 .truck {
     display: inline-block;
     position: relative;
-    animation: truckMove 4s ease-in-out infinite alternate;
+    animation: truckMove 6s ease-in-out infinite alternate;
     transform-origin: center;
 }
 
-/* Tekst kao prikolica: prati kamion */
+/* Tekst kao prikolica */
 .truck-trailer {
     display: inline-block;
-    margin-left: 10px; /* razmak između kamiona i prikolice */
-    animation: trailerFollow 4s ease-in-out infinite alternate;
+    margin-left: 10px;
+    animation: trailerFollow 6s ease-in-out infinite alternate;
 }
 
-/* Kamion ide sa desne strane linka Početna do leve strane navigacije */
+/* Animacija preko cele širine navbar-a */
 @keyframes truckMove {
     0% { transform: translateX(0) scaleX(1); }
-    50% { transform: translateX(-300px) scaleX(-1); } /* horizontal flip kada ide levo */
+    50% { transform: translateX(calc(-100% + 120px)) scaleX(-1); }
     100% { transform: translateX(0) scaleX(1); }
 }
 
-/* Prikolica prati kamion, bez flip-a */
 @keyframes trailerFollow {
     0% { transform: translateX(0); }
-    50% { transform: translateX(-300px); }
+    50% { transform: translateX(calc(-100% + 120px)); }
     100% { transform: translateX(0); }
 }
 
