@@ -113,53 +113,39 @@ nav.navbar {
 }
 
 /*kretanje kamiona pored imena profesionalci u base.html*/
-.truck-icon {
-    animation: moveTruck 3s linear infinite;
-    position: relative;
-}
-
-@keyframes moveTruck {
-    0%   { left: 0; }
-    50%  { left: 5px; }
-    100% { left: 0; }
-}
-
-.truck-wrapper {
+.truck-path {
     display: inline-flex;
     align-items: center;
     position: relative;
 }
 
-.truck-text, .truck-icon {
+/* Kamion animacija */
+.truck {
     display: inline-block;
+    position: relative;
+    animation: truckMove 4s linear infinite alternate;
+    transform-origin: center;
 }
 
-/* Glatka animacija "truck parade" sa horizontal flip */
-.truck-wrapper.truck-animation {
-    animation: truckMove 4s ease-in-out infinite;
+/* Tekst kao prikolica: ide za kamionom */
+.truck-trailer {
+    display: inline-block;
+    margin-left: 10px; /* razmak između kamiona i prikolice */
+    animation: trailerFollow 4s linear infinite alternate;
 }
 
+/* Kamion ide sa desne strane na levu */
 @keyframes truckMove {
-    0% {
-        transform: translateX(0) scaleX(1); /* početna pozicija iza Početna */
-    }
-    50% {
-        transform: translateX(-250px) scaleX(-1); /* ide levo, horizontalno flip */
-    }
-    100% {
-        transform: translateX(0) scaleX(1); /* vraća se desno, originalna orijentacija */
-    }
+    0% { transform: translateX(0) scaleX(1); }
+    50% { transform: translateX(-300px) scaleX(-1); } /* horizontal flip */
+    100% { transform: translateX(0) scaleX(1); }
 }
 
-/* Opcionalno: male vibracije kamiona dok se kreće */
-.truck-icon {
-    animation: truckShake 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes truckShake {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-2px); }
-    100% { transform: translateY(0); }
+/* Prikolica prati kamion */
+@keyframes trailerFollow {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-300px); } /* isto kretanje kao kamion, bez flip */
+    100% { transform: translateX(0); }
 }
 
 
