@@ -150,39 +150,37 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   try {
-    
     const brand = document.querySelector('.navbar .navbar-brand');
     const home  = document.getElementById('homeLink');
     const nav   = document.querySelector('.navbar');
     if (!brand || !nav) return;
 
-    // Small delay da se layout stabilizuje (fontovi, collapse, itd.)
     setTimeout(() => {
       const finalRect = brand.getBoundingClientRect();
       const navRect   = nav.getBoundingClientRect();
 
-      // Početna pozicija: kod linka Početna (ako je vidljiv), inače desna ivica navigacije
+      // Start tačka: Početna link ili fallback desna ivica nav-a
       let startX;
       if (home && home.offsetParent !== null) {
         const homeRect = home.getBoundingClientRect();
-        startX = homeRect.left; // može i homeRect.right - 8, po ukusu
+        startX = homeRect.right + 10; // kreće od desne ivice "Početna"
       } else {
-        startX = navRect.right - 24; // fallback: sa desne strane nav-a
+        startX = navRect.right + 50;  // fallback: van ekrana desno
       }
 
       const deltaX = startX - finalRect.left;
 
-      // Inicijalno pomeri brand na start, pa animiraj do 0
+      // Postavi početnu poziciju
       brand.classList.add('brand-animating');
       brand.style.opacity   = 0;
       brand.style.transform = `translateX(${deltaX}px)`;
 
-      // “prikolica” – tekst krene malo iza (će stići tokom tranzicije)
       const text = brand.querySelector('.brand-text');
       if (text) {
-        text.style.transform = 'translateX(-14px)';
+        text.style.transform = 'translateX(-18px)'; // za prikolicu
       }
 
+      // Pokreni animaciju
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           brand.style.opacity   = 1;
@@ -197,9 +195,8 @@ document.addEventListener('DOMContentLoaded', function () {
         brand.style.opacity   = '';
         if (text) text.style.transform = '';
       }, { once: true });
-    }, 60);
+    }, 80);
   } catch (e) {
-    // tišina u produkciji :)
     console.warn('Brand animation skipped:', e);
   }
 });
