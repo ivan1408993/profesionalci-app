@@ -18,10 +18,11 @@
 <body class="d-flex flex-column min-vh-100">
 
 <!-- 🌐 Navigacija -->
-<nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3">
-  <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+<nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3 position-relative">
+  <!-- Animirani logo -->
+  <a class="navbar-brand d-flex align-items-center moving-logo" href="{{ url_for('main.index') }}">
     <i class="fas fa-truck-moving fa-lg me-2 truck-icon"></i>
-    <span>Profesionalci</span>
+    <span class="brand-text">Profesionalci</span>
   </a>
 
   <!-- Toggler za mobilni meni -->
@@ -84,6 +85,33 @@
       </ul>
   </div>
 </nav>
+
+<!-- CSS animacija -->
+<style>
+.moving-logo {
+  position: absolute;
+  right: 20px; /* start kod Home */
+  top: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  white-space: nowrap;
+  animation: driveToLeft 3s ease-out forwards;
+}
+
+.truck-icon {
+  margin-right: 8px;
+  color: #0dcaf0;
+}
+
+@keyframes driveToLeft {
+  0%   { right: 20px; opacity: 0; }
+  20%  { opacity: 1; }
+  100% { left: 20px; right: auto; }
+}
+</style>
+
 
 <!-- Flash poruke -->
 <div class="container flash-messages" aria-live="polite">
