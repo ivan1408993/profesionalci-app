@@ -501,33 +501,3 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
     background-color: #d1e7dd;
     border-left: 5px solid #198754;
 }
-
-/* Osnovno */
-.navbar-brand {
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  font-size: 1.15rem;
-  white-space: nowrap;
-}
-
-.truck-icon {
-  color: #0dcaf0;
-}
-
-.navbar-brand.brand-animating {
-  position: fixed;      /* animiramo preko navigacije */
-  top: 0.5rem;          /* prilagodi po visini */
-  z-index: 1100;        /* iznad navbar linkova */
-  transition: transform 1.8s ease-out, opacity 0.8s ease-out;
-}
-
-.brand-text {
-  transition: transform 1.8s ease-out;
-}
-
-.truck-icon.flipped {
-  transform: scaleX(-1);
-}
-
