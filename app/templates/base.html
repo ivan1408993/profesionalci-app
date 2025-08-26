@@ -151,29 +151,37 @@
 document.addEventListener('DOMContentLoaded', function () {
   try {
     const brand = document.querySelector('.navbar .navbar-brand');
-    if (!brand) return;
+    const home  = document.getElementById('homeLink');
+    if (!brand || !home) return;
 
-    // zapamti finalnu poziciju
-    const finalX = brand.getBoundingClientRect().left;
+    // finalna pozicija logotipa
+    const finalRect = brand.getBoundingClientRect();
+    // pozicija linka Početna
+    const homeRect = home.getBoundingClientRect();
 
-    // start: van ekrana desno
+    // razlika – gde treba da ga “spustimo” na start
+    const deltaX = homeRect.left - finalRect.left;
+
+    // pripremi animaciju
     brand.classList.add('brand-animating');
-    brand.style.opacity = 0;
-    brand.style.transform = `translateX(${window.innerWidth}px)`;
+    brand.style.opacity   = 0;
+    brand.style.transform = `translateX(${deltaX}px)`; // teleport na Početna
 
     const text = brand.querySelector('.brand-text');
     if (text) {
-      text.style.transform = 'translateX(-20px)';
+      text.style.transform = 'translateX(-20px)'; // zakačena prikolica
     }
 
+    // trigger animacije
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        brand.style.opacity = 1;
+        brand.style.opacity   = 1;
         brand.style.transform = 'translateX(0)';
         if (text) text.style.transform = 'translateX(0)';
       });
     });
 
+    // kad završi – očisti inline stilove
     brand.addEventListener('transitionend', () => {
       brand.classList.remove('brand-animating');
       brand.style.transform = '';

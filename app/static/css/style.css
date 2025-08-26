@@ -470,9 +470,8 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
   color: #0dcaf0;
 }
 
-/* Tokom animacije */
 .navbar-brand.brand-animating {
-  transition: transform 1.8s ease-out, opacity .4s ease-out;
+  transition: transform 1.8s ease-out, opacity .6s ease-out;
   will-change: transform;
 }
 
@@ -480,17 +479,6 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
   transition: transform 1.8s ease-out;
 }
 
-/* "Prikolica" efekat – tekst malko kasni za kamionom */
 .navbar-brand.brand-animating .brand-text {
   transition-delay: .12s;
-  transform: translateX(0);
-}
-
-/* Ako korisnik preferira bez animacija */
-@media (prefers-reduced-motion: reduce) {
-  .navbar-brand,
-  .brand-text {
-    transition: none !important;
-    animation: none !important;
-  }
 }
