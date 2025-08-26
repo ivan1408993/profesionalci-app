@@ -150,9 +150,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   try {
-    // ako smo već animirali u ovoj sesiji — preskoči
-    if (sessionStorage.getItem('brandAnimDone') === '1') return;
-
+    
     const brand = document.querySelector('.navbar .navbar-brand');
     const home  = document.getElementById('homeLink');
     const nav   = document.querySelector('.navbar');
@@ -198,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function () {
         brand.style.transform = '';
         brand.style.opacity   = '';
         if (text) text.style.transform = '';
-        sessionStorage.setItem('brandAnimDone', '1');
       }, { once: true });
     }, 60);
   } catch (e) {
