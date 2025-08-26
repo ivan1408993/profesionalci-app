@@ -151,51 +151,36 @@
 document.addEventListener('DOMContentLoaded', function () {
   try {
     const brand = document.querySelector('.navbar .navbar-brand');
-    const home  = document.getElementById('homeLink');
-    const nav   = document.querySelector('.navbar');
-    if (!brand || !nav) return;
+    if (!brand) return;
 
-    setTimeout(() => {
-      const finalRect = brand.getBoundingClientRect();
-      const navRect   = nav.getBoundingClientRect();
+    // zapamti finalnu poziciju
+    const finalX = brand.getBoundingClientRect().left;
 
-      // Start tačka: Početna link ili fallback desna ivica nav-a
-      let startX;
-      if (home && home.offsetParent !== null) {
-        const homeRect = home.getBoundingClientRect();
-        startX = homeRect.right + 10; // kreće od desne ivice "Početna"
-      } else {
-        startX = navRect.right + 50;  // fallback: van ekrana desno
-      }
+    // start: van ekrana desno
+    brand.classList.add('brand-animating');
+    brand.style.opacity = 0;
+    brand.style.transform = `translateX(${window.innerWidth}px)`;
 
-      const deltaX = startX - finalRect.left;
+    const text = brand.querySelector('.brand-text');
+    if (text) {
+      text.style.transform = 'translateX(-20px)';
+    }
 
-      // Postavi početnu poziciju
-      brand.classList.add('brand-animating');
-      brand.style.opacity   = 0;
-      brand.style.transform = `translateX(${deltaX}px)`;
-
-      const text = brand.querySelector('.brand-text');
-      if (text) {
-        text.style.transform = 'translateX(-18px)'; // za prikolicu
-      }
-
-      // Pokreni animaciju
+    requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          brand.style.opacity   = 1;
-          brand.style.transform = 'translateX(0)';
-          if (text) text.style.transform = 'translateX(0)';
-        });
+        brand.style.opacity = 1;
+        brand.style.transform = 'translateX(0)';
+        if (text) text.style.transform = 'translateX(0)';
       });
+    });
 
-      brand.addEventListener('transitionend', () => {
-        brand.classList.remove('brand-animating');
-        brand.style.transform = '';
-        brand.style.opacity   = '';
-        if (text) text.style.transform = '';
-      }, { once: true });
-    }, 80);
+    brand.addEventListener('transitionend', () => {
+      brand.classList.remove('brand-animating');
+      brand.style.transform = '';
+      brand.style.opacity   = '';
+      if (text) text.style.transform = '';
+    }, { once: true });
+
   } catch (e) {
     console.warn('Brand animation skipped:', e);
   }
