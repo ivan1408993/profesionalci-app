@@ -112,6 +112,64 @@ nav.navbar {
     color: white !important;
 }
 
+/*kretanje kamiona pored imena profesionalci u base.html*/
+.truck-icon {
+    animation: moveTruck 3s linear infinite;
+    position: relative;
+}
+
+@keyframes moveTruck {
+    0%   { left: 0; }
+    50%  { left: 5px; }
+    100% { left: 0; }
+}
+
+/* Truck kao prikolica animacija */
+.truck-wrapper {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.truck-text, .truck-icon {
+    display: inline-block;
+}
+
+/* Glatka animacija "truck parade" */
+.truck-wrapper.truck-animation {
+    animation: truckMove 4s ease-in-out infinite;
+}
+
+@keyframes truckMove {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-250px) rotate(0deg); /* ide ka levoj strani */
+    }
+    50% {
+        transform: translateX(-250px) rotate(180deg); /* okret na levoj strani */
+    }
+    75% {
+        transform: translateX(0) rotate(180deg); /* vraća se nazad */
+    }
+    100% {
+        transform: translateX(0) rotate(0deg); /* završava gde je počelo */
+    }
+}
+
+/* Opcionalno: male vibracije kamiona dok se kreće */
+.truck-icon {
+    animation: truckShake 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes truckShake {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+    100% { transform: translateY(0); }
+}
+
+
 /* Tekst u uslovima korišćenja i politici privatnosti */
 .terms-text, .privacy-text {
     max-width: 800px;
@@ -219,22 +277,6 @@ nav.navbar {
     z-index: 1100;
     margin-top: 56px; /* Ako je navbar visok oko 56px */
 }
-
-/*@media (max-width: 576px) {
-  footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1050;
-    background-color: rgba(0,0,0,0.5); /* malo tamnija pozadina da se istakne 
-  }
-  main {
-    padding-bottom: 60px; /* dovoljno prostora da sadržaj ne bude ispod footera
-  }
-}*/
-
-/* 🎯 Search Driver stranica */
 
 /* Sekcija */
 .section-box {
@@ -376,51 +418,6 @@ nav.navbar {
 
 .lang-flag.active {
   border-bottom: 2px solid gold;
-}
-
-
-
-/*__________________
-EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
-.lang-select {
-  border: 2px solid #ffc107; /* жута ивица
-  font-size: 1.1rem;
-  padding: 4px 8px;
-  background-color: #212529;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.lang-select:hover {
-  transform: scale(1.05);
-  border-color: #fff;
-}
-
-.lang-select option {
-  animation: wave 2s infinite ease-in-out;
-  display: inline-block;
-}
-
- ефекат вијорења заставе
-@keyframes wave {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(5deg); }
-  50% { transform: rotate(0deg); }
-  75% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
-}*/
-
-/*kretanje kamiona pored imena profesionalci u base.html*/
-.truck-icon {
-    animation: moveTruck 3s linear infinite;
-    position: relative;
-}
-
-@keyframes moveTruck {
-    0%   { left: 0; }
-    50%  { left: 5px; }
-    100% { left: 0; }
 }
 
 /* Dodatni stil za ikone*/
