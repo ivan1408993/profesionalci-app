@@ -412,45 +412,6 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
 }*/
 
 /*kretanje kamiona pored imena profesionalci u base.html*/
-/* Wrapper za kamion i tekst */
-.logo-wrapper {
-    position: absolute; /* kreće unutar navbar-a */
-    left: 0;           /* start pored linka Početna */
-    display: flex;
-    align-items: center;
-
-    animation: moveLogo 2s ease-in-out infinite alternate;
-}
-
-/* Kamion ostaje flipped */
-.truck-icon.flipped {
-    transform: scaleX(-1);
-    color: #0dcaf0;
-    margin-right: 6px;
-}
-
-/* Tekst */
-.brand-text {
-    color: #00bcd4;
-    font-weight: 700;
-    font-size: 1.15rem;
-}
-
-/* Animacija napred-nazad */
-@keyframes moveLogo {
-    0%   { transform: translateX(0); }
-    50%  { transform: translateX(8px); }
-    100% { transform: translateX(0); }
-}
-
-/* Ako korisnik preferira bez animacije */
-@media (prefers-reduced-motion: reduce) {
-    .logo-wrapper {
-        animation: none !important;
-    }
-}
-
-
 /* Dodatni stil za ikone*/
 .icon-highlight {
     color: #00bcd4;
