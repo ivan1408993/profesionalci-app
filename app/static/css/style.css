@@ -124,7 +124,6 @@ nav.navbar {
     100% { left: 0; }
 }
 
-/* Truck kao prikolica animacija */
 .truck-wrapper {
     display: inline-flex;
     align-items: center;
@@ -135,26 +134,20 @@ nav.navbar {
     display: inline-block;
 }
 
-/* Glatka animacija "truck parade" */
+/* Glatka animacija "truck parade" sa horizontal flip */
 .truck-wrapper.truck-animation {
     animation: truckMove 4s ease-in-out infinite;
 }
 
 @keyframes truckMove {
     0% {
-        transform: translateX(0) rotate(0deg);
-    }
-    25% {
-        transform: translateX(-250px) rotate(0deg); /* ide ka levoj strani */
+        transform: translateX(0) scaleX(1); /* početna pozicija iza Početna */
     }
     50% {
-        transform: translateX(-250px) rotate(180deg); /* okret na levoj strani */
-    }
-    75% {
-        transform: translateX(0) rotate(180deg); /* vraća se nazad */
+        transform: translateX(-250px) scaleX(-1); /* ide levo, horizontalno flip */
     }
     100% {
-        transform: translateX(0) rotate(0deg); /* završava gde je počelo */
+        transform: translateX(0) scaleX(1); /* vraća se desno, originalna orijentacija */
     }
 }
 
