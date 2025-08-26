@@ -114,37 +114,37 @@ nav.navbar {
 
 /*kretanje kamiona pored imena profesionalci u base.html*/
 .truck-path {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     position: relative;
 }
 
-/* Kamion animacija */
+/* Kamion: glatko kretanje i horizontal flip */
 .truck {
     display: inline-block;
     position: relative;
-    animation: truckMove 4s linear infinite alternate;
+    animation: truckMove 4s ease-in-out infinite alternate;
     transform-origin: center;
 }
 
-/* Tekst kao prikolica: ide za kamionom */
+/* Tekst kao prikolica: prati kamion */
 .truck-trailer {
     display: inline-block;
     margin-left: 10px; /* razmak između kamiona i prikolice */
-    animation: trailerFollow 4s linear infinite alternate;
+    animation: trailerFollow 4s ease-in-out infinite alternate;
 }
 
-/* Kamion ide sa desne strane na levu */
+/* Kamion ide sa desne strane linka Početna do leve strane navigacije */
 @keyframes truckMove {
     0% { transform: translateX(0) scaleX(1); }
-    50% { transform: translateX(-300px) scaleX(-1); } /* horizontal flip */
+    50% { transform: translateX(-300px) scaleX(-1); } /* horizontal flip kada ide levo */
     100% { transform: translateX(0) scaleX(1); }
 }
 
-/* Prikolica prati kamion */
+/* Prikolica prati kamion, bez flip-a */
 @keyframes trailerFollow {
     0% { transform: translateX(0); }
-    50% { transform: translateX(-300px); } /* isto kretanje kao kamion, bez flip */
+    50% { transform: translateX(-300px); }
     100% { transform: translateX(0); }
 }
 
