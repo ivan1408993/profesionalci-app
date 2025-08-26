@@ -17,14 +17,12 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-<!-- 🌐 Navigacija -->
 <nav class="navbar navbar-expand-lg navbar-dark px-3 mb-3 position-relative">
-  <!-- Animirani logo -->
- <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
-  <i class="fas fa-truck-moving fa-lg me-2 truck-icon flipped"></i>
-  <span class="brand-text">Profesionalci</span>
-</a>
-
+  <!-- Animirani logo wrapper -->
+  <div class="logo-wrapper d-flex align-items-center">
+      <i class="fas fa-truck-moving fa-lg me-2 truck-icon flipped"></i>
+      <span class="brand-text">Profesionalci</span>
+  </div>
 
   <!-- Toggler za mobilni meni -->
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
@@ -32,10 +30,9 @@
       <span class="navbar-toggler-icon"></span>
   </button>
 
-  <!-- Sve što treba da se skuplja na mobilnom ide ovde -->
+  <!-- Linkovi -->
   <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto">
-          <!-- 🔗 Zajednički linkovi za sve -->
           <li class="nav-item">
               <a class="nav-link" id="homeLink" href="{{ url_for('main.index') }}">{{ _("🏠 Početna") }}</a>
           </li>
@@ -120,50 +117,5 @@
 
     {% block scripts %}{% endblock %}
 
-<!-- Animacija kamiona -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  try {
-    const brand = document.querySelector('.navbar .navbar-brand');
-    const home  = document.getElementById('homeLink');
-    if (!brand || !home) return;
-
-    const finalRect = brand.getBoundingClientRect();
-    const homeRect  = home.getBoundingClientRect();
-
-    // Kamion startuje iznad linka Početna
-    const deltaX = homeRect.left - finalRect.left;
-
-    const text = brand.querySelector('.brand-text');
-
-    brand.classList.add('brand-animating');
-    brand.style.opacity = 0;
-    brand.style.transform = `translateX(${deltaX}px)`;
-    if (text) text.style.transform = 'translateX(-20px)';
-
-    // Trigger animacije
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        brand.style.opacity = 1;
-        brand.style.transform = 'translateX(0)';
-        if (text) text.style.transform = 'translateX(0)';
-      });
-    });
-
-    brand.addEventListener('transitionend', () => {
-      brand.classList.remove('brand-animating');
-      brand.style.position = '';
-      brand.style.left = '';
-      brand.style.top = '';
-      brand.style.opacity = '';
-      brand.style.transform = '';
-      if (text) text.style.transform = '';
-    }, { once: true });
-
-  } catch (e) {
-    console.warn('Brand animation skipped:', e);
-  }
-});
-</script>
 </body>
 </html>

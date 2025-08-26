@@ -90,12 +90,11 @@ footer {
 }
 
 /* Navigacija */
-/* Navigacija */
 nav.navbar {
     background: linear-gradient(90deg, #1a1f2b, #2b3548);
     background-color: #1a1f2b; /* fallback */
     opacity: 1 !important;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* ili padding-bottom: 1rem; */
     position: fixed;
     top: 0;
     left: 0;
@@ -112,51 +111,6 @@ nav.navbar {
 .navbar a:hover {
     color: white !important;
 }
-
-/* Animirani brand */
-.navbar-brand {
-    position: relative;
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    font-size: 1.15rem;
-    white-space: nowrap;
-}
-
-/* Kamion okrenut ka levoj strani */
-.truck-icon.flipped {
-    transform: scaleX(-1);
-    margin-right: 8px;
-    color: #0dcaf0;
-}
-
-/* Tokom animacije */
-.navbar-brand.brand-animating {
-    position: fixed;
-    top: 0.5rem; /* visina animacije */
-    z-index: 1100;
-    transition: transform 1.8s ease-out, opacity 0.8s ease-out;
-}
-
-/* Tekst "prikolica" */
-.brand-text {
-    transition: transform 1.8s ease-out;
-}
-
-.navbar-brand.brand-animating .brand-text {
-    transition-delay: 0.12s;
-    transform: translateX(0);
-}
-
-/* Ako korisnik preferira bez animacija */
-@media (prefers-reduced-motion: reduce) {
-    .navbar-brand,
-    .brand-text {
-        transition: none !important;
-        animation: none !important;
-    }
-}
-
 
 /* Tekst u uslovima korišćenja i politici privatnosti */
 .terms-text, .privacy-text {
@@ -457,17 +411,45 @@ EFEKAT ZA JEZICKI MENI 2 / kasnija verzija
   100% { transform: rotate(0deg); }
 }*/
 
-/*kretanje kamiona pored imena profesionalci u base.html
-.truck-icon {
-    animation: moveTruck 3s linear infinite;
-    position: relative;
+/*kretanje kamiona pored imena profesionalci u base.html*/
+/* Wrapper za kamion i tekst */
+.logo-wrapper {
+    position: absolute; /* kreće unutar navbar-a */
+    left: 0;           /* start pored linka Početna */
+    display: flex;
+    align-items: center;
+
+    animation: moveLogo 2s ease-in-out infinite alternate;
 }
 
-@keyframes moveTruck {
-    0%   { left: 0; }
-    50%  { left: 5px; }
-    100% { left: 0; }
+/* Kamion ostaje flipped */
+.truck-icon.flipped {
+    transform: scaleX(-1);
+    color: #0dcaf0;
+    margin-right: 6px;
 }
+
+/* Tekst */
+.brand-text {
+    color: #00bcd4;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+/* Animacija napred-nazad */
+@keyframes moveLogo {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+
+/* Ako korisnik preferira bez animacije */
+@media (prefers-reduced-motion: reduce) {
+    .logo-wrapper {
+        animation: none !important;
+    }
+}
+
 
 /* Dodatni stil za ikone*/
 .icon-highlight {
