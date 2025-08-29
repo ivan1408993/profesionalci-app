@@ -90,15 +90,18 @@
                 {% endif %}
             </div>
 
-            <!-- Ocene -->
-            <hr class="my-4">
-            <h4 class="mb-3"><i class="bi bi-star-fill text-warning"></i> {{ _("Ocene vozača") }}</h4>
-<!-- Pretraga po firmi/PIB -->
+             <!-- Ocene -->
+<hr class="my-4">
+<h4 id="ratings-section" class="mb-3">
+    <i class="bi bi-star-fill text-warning"></i> {{ _("Ocene vozača") }}
+</h4>
+
+      <!-- Pretraga po firmi/PIB -->
 <div class="card border-0 shadow-sm p-3 mb-4" style="background: #f8f9fa;">
     <label for="searchInput" class="form-label fw-semibold text-dark">
         <i class="bi bi-search me-1"></i> {{ _("Pretraga ocena po firmi ili PIB-u") }}
     </label>
-    <form method="get" action="{{ url_for('main.driver_detail', driver_id=driver.id) }}">
+    <form method="get" action="{{ url_for('main.driver_detail', driver_id=driver.id) }}#ratings-section">
         <div class="input-group">
             <input type="text" id="searchInput" name="q"
                    class="form-control form-control-lg"
@@ -112,6 +115,7 @@
         </div>
     </form>
 </div>
+
 
 {% if q and not ratings %}
     <div class="alert alert-warning">
