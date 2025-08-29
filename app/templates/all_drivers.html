@@ -36,7 +36,8 @@
             <thead class="table-light">
                 <tr>
                     <th>{{ _("Ime i prezime") }}</th>
-                    <th>{{ _("Broj kartice") }}</th>
+                    <th>{{ _("Broj tahograf kartice") }}</th>
+                    <th>{{ _("Tahograf kartica važi do") }}</th>
                     <th>{{ _("CPC broj") }}</th>
                     <th>{{ _("CPC važi do") }}</th>
                     <th>{{ _("Status") }}</th>
@@ -54,6 +55,11 @@
                     <td>
                         {% set active_card = driver.cards | selectattr('is_active') | first %}
                         {{ active_card.card_number if active_card else '—' }}
+                    </td>
+                    <td>
+                        {% if active_card and active_card.expiry_date %}
+                            {{ active_card.expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %} — {% endif %}
                     </td>
                     <td>{{ driver.cpc_card_number or '—' }}</td>
                     <td>
