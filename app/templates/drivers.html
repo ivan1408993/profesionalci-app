@@ -22,11 +22,11 @@
 <div class="card shadow-sm border-0 mb-3" style="background-color: #f8f9fa;">
     <div class="card-body d-flex align-items-center gap-2 py-2 px-3">
 
-        <!-- Dashboard Icon SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#0d6efd" class="bi bi-speedometer2" viewBox="0 0 16 16">
-          <path d="M8 4a.5.5 0 0 0-.5.5V8H5a.5.5 0 0 0 0 1h3.5a.5.5 0 0 0 .5-.5V4.5A.5.5 0 0 0 8 4z"/>
-          <path fill-rule="evenodd" d="M6.664 11.418a.5.5 0 0 1-.662.749C3.776 11.425 2 9.163 2 6.5 2 3.462 4.462 1 7.5 1S13 3.462 13 6.5c0 2.662-1.776 4.926-3.999 5.667a.5.5 0 0 1-.662-.749C10.09 11.57 11 9.524 11 6.5 11 3.462 8.538 1 5.5 1S0 3.462 0 6.5c0 3.024.91 5.07 2.664 6.918z"/>
-        </svg>
+        <!-- PNG tachometer -->
+        <img src="{{ url_for('static', filename='images/dashboard.png') }}" 
+             alt="Tachometer" 
+             width="40" 
+             height="40">
 
         <h6 class="mb-0 fw-bold text-dark">
             {{ _("Kontrolni panel – pregled zaposlenih vozača") }}
@@ -34,9 +34,13 @@
     </div>
 </div>
 
-
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>{{ _("Vaši vozači") }}</h2>
+        <h2> <!-- PNG tachometer -->
+        <img src="{{ url_for('static', filename='images/tachometer.png') }}" 
+             alt="Tachometer" 
+             width="40" 
+             height="40">
+{{ _("Vaši vozači") }}</h2>
         <div class="d-flex gap-2">
             <a href="{{ url_for('main.all_drivers') }}" class="btn btn-primary btn-sm mb-4 custom-btn">
                 <i class="fas fa-users"></i> {{ _("Svi vozači (uključujući i neaktivne)") }}
