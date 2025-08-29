@@ -407,3 +407,9 @@ nav.navbar {
     background-color: #d1e7dd;
     border-left: 5px solid #198754;
 }
+
+#searchInput::placeholder {
+    color: #6c757d;       /* tamnija siva */
+    font-weight: 500;     /* da izgleda čvršće */
+    opacity: 1 !important; /* da ne bude providno */
+}
