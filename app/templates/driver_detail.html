@@ -93,6 +93,22 @@
             <!-- Ocene -->
             <hr class="my-4">
             <h4 class="mb-3"><i class="bi bi-star-fill text-warning"></i> {{ _("Ocene vozača") }}</h4>
+            <!-- Pretraga po firmi/PIB -->
+<form method="get" action="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control"
+               placeholder="{{ _('Pretraži po imenu firme ili PIB-u') }}"
+               value="{{ q }}">
+        <button class="btn btn-outline-primary" type="submit">🔍{{ _('Pretraži') }}</button>
+    </div>
+</form>
+
+{% if q and not ratings %}
+    <div class="alert alert-warning">
+        {{ _("Nema rezultata za upit") }}: <strong>{{ q }}</strong>
+    </div>
+{% endif %}
+
 
             {% if ratings %}
                 {% set avg = (ratings | map(attribute='stars') | sum) / (ratings | length) %}

@@ -788,12 +788,26 @@ def driver_detail(driver_id):
         driver.active and driver.employer_id == session.get('user_id')
     )
 
+    # ✅ Pretraga po firmi ili PIB-u
+    q = request.args.get("q", "").strip()
+
+    ratings = driver.ratings
+    if q:
+        ratings = [
+            r for r in ratings if r.employer and (
+                (r.employer.company_name and q.lower() in r.employer.company_name.lower()) or
+                (r.employer.pib and q.lower() in r.employer.pib.lower())
+            )
+        ]
+
     return render_template(
         'driver_detail.html',
         driver=driver,
-        ratings=driver.ratings,
-        can_update_driver=currently_employed_by_this_employer
+        ratings=ratings,
+        can_update_driver=currently_employed_by_this_employer,
+        q=q
     )
+
 
 
 @main.route('/reset-password', methods=['GET', 'POST'])
