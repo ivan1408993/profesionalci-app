@@ -94,14 +94,15 @@
             <hr class="my-4">
             <h4 class="mb-3"><i class="bi bi-star-fill text-warning"></i> {{ _("Ocene vozača") }}</h4>
 <!-- Pretraga po firmi/PIB -->
-<div class="card border-primary shadow-sm p-3 mb-4">
-    <label for="searchInput" class="form-label fw-bold text-primary">
-        <i class="bi bi-search"></i> {{ _("Pretraga ocena po firmi ili PIB-u") }}
+<div class="card border-0 shadow-sm p-3 mb-4" style="background: #f8f9fa;">
+    <label for="searchInput" class="form-label fw-semibold text-dark">
+        <i class="bi bi-search me-1"></i> {{ _("Pretraga ocena po firmi ili PIB-u") }}
     </label>
     <form method="get" action="{{ url_for('main.driver_detail', driver_id=driver.id) }}">
         <div class="input-group">
             <input type="text" id="searchInput" name="q"
-                   class="form-control form-control-lg border-primary text-dark"
+                   class="form-control form-control-lg"
+                   style="border: 2px solid #0d6efd; color: #212529; font-weight: 500; background-color: #ffffff;"
                    placeholder="{{ _('Unesite ime firme ili PIB') }}"
                    value="{{ q }}">
             <button class="btn btn-primary btn-lg" type="submit">
@@ -110,7 +111,6 @@
         </div>
     </form>
 </div>
-
 
 {% if q and not ratings %}
     <div class="alert alert-warning">
