@@ -22,24 +22,11 @@
     <div class="card shadow-sm border-0 mb-4" style="background-color: #f8f9fa;">
     <div class="card-body d-flex align-items-center gap-3">
 
-        <!-- Inline SVG tachometer -->
-        <svg width="50" height="50" viewBox="0 0 64 64">
-            <!-- Primer: krug iz ikonice -->
-            <circle cx="32" cy="32" r="30" stroke="#0d6efd" stroke-width="4" fill="#ffffff"/>
-            
-            <!-- Pokretna kazaljka -->
-            <line x1="32" y1="32" x2="32" y2="10" stroke="#dc3545" stroke-width="3" stroke-linecap="round">
-                <animateTransform
-                    attributeName="transform"
-                    attributeType="XML"
-                    type="rotate"
-                    from="-30 32 32"
-                    to="30 32 32"
-                    dur="1s"
-                    repeatCount="indefinite"
-                />
-            </line>
-        </svg>
+        <!-- PNG tachometer -->
+        <img src="{{ url_for('static', filename='images/tachometer.png') }}" 
+             alt="Tachometer" 
+             width="50" 
+             height="50">
 
         <h5 class="mb-0 fw-bold text-dark">
             {{ _("Kontrolni panel – pregled zaposlenih vozača") }}
