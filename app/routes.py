@@ -499,6 +499,7 @@ def login():
                     "login.html",
                     current_lang=session.get('lang', 'sr'),
                     block=True,
+                    email=email,
                     remaining_attempts=0,
                     remaining_seconds=remaining
                 )
@@ -513,8 +514,16 @@ def login():
         if employer and check_password_hash(employer.password_hash, password):
             if not employer.active:
                 flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
-                return redirect(url_for('main.login'))
+                return render_template(
+                    "login.html",
+                    current_lang=session.get('lang', 'sr'),
+                    block=False,
+                    email=email,
+                    remaining_attempts=5,
+                    remaining_seconds=0
+                )
 
+            # uspešan login -> resetujemo pokušaje
             if attempt:
                 db.session.delete(attempt)
                 db.session.commit()
@@ -525,7 +534,7 @@ def login():
 
             return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
 
-        # Neuspešan login
+        # ❌ Neuspešan login
         if attempt:
             attempt.attempts += 1
             attempt.last_failed_at = datetime.utcnow()
@@ -536,23 +545,33 @@ def login():
         db.session.commit()
 
         remaining_attempts = max(0, 5 - attempt.attempts)
-        if remaining_attempts > 0:
-            flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
-        else:
+
+        if remaining_attempts <= 0:
             return render_template(
                 "login.html",
                 current_lang=session.get('lang', 'sr'),
                 block=True,
+                email=email,
                 remaining_attempts=0,
                 remaining_seconds=300
             )
 
-        return redirect(url_for('main.login'))
+        flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
+        return render_template(
+            "login.html",
+            current_lang=session.get('lang', 'sr'),
+            block=False,
+            email=email,
+            remaining_attempts=remaining_attempts,
+            remaining_seconds=0
+        )
 
+    # GET zahtev
     return render_template(
-        'login.html',
+        "login.html",
         current_lang=session.get('lang', 'sr'),
         block=False,
+        email="",
         remaining_attempts=5,
         remaining_seconds=0
     )
