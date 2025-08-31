@@ -64,3 +64,13 @@ class Rating(db.Model):
 
     driver = db.relationship('Driver', back_populates='ratings')
     employer = db.relationship('Employer', back_populates='ratings')
+
+
+class LoginAttempt(db.Model):
+    __tablename__ = 'login_attempt'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), nullable=False, index=True)
+    ip_address = db.Column(db.String(45), index=True)
+    attempts = db.Column(db.Integer, default=0, nullable=False)
+    last_failed_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+

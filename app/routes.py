@@ -485,28 +485,55 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        ip = request.remote_addr or "unknown"
+
+        # 🔹 nađi login pokušaj za korisnika (email + IP)
+        attempt = LoginAttempt.query.filter_by(email=email, ip_address=ip).first()
+
+        if attempt and attempt.attempts >= 5:
+            # proveri da li je prošlo 5 minuta od poslednjeg neuspelog pokušaja
+            if datetime.utcnow() - attempt.last_failed_at < timedelta(minutes=5):
+                flash(_("5 puta ste uneli neispravnu lozinku. Sačekajte 5 minuta pa pokušajte ponovo ili kliknite na 'Zaboravili ste lozinku'."))
+                return redirect(url_for('main.login'))
+            else:
+                # reset ako je prošlo 5 minuta
+                attempt.attempts = 0
+                db.session.commit()
 
         employer = Employer.query.filter_by(email=email).first()
         if employer and check_password_hash(employer.password_hash, password):
 
-            # ✅ Provera da li je firma aktivna
+            # ✅ firma mora biti aktivna
             if not employer.active:
                 flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
                 return redirect(url_for('main.login'))
+
+            # uspešan login → resetujemo pokušaje
+            if attempt:
+                db.session.delete(attempt)
+                db.session.commit()
 
             session['user_id'] = employer.id
             session['user_type'] = 'superadmin' if employer.is_superadmin else 'employer'
             session['company_name'] = employer.company_name
 
-            if employer.is_superadmin:
-                return redirect(url_for('main.admin_dashboard'))
-            else:
-                return redirect(url_for('main.drivers'))
+            return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
+
+        # ❌ pogrešan login → uvećaj broj pokušaja
+        if attempt:
+            attempt.attempts += 1
+            attempt.last_failed_at = datetime.utcnow()
+        else:
+            attempt = LoginAttempt(email=email, ip_address=ip, attempts=1)
+            db.session.add(attempt)
+
+        db.session.commit()
 
         flash(_("Pogrešan email ili lozinka."))
         return redirect(url_for('main.login'))
 
     return render_template('login.html', current_lang=session.get('lang', 'sr'))
+
 
 @main.route('/dashboard')
 def dashboard():
