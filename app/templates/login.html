@@ -15,74 +15,62 @@
     {% endwith %}
 
     {% if block %}
-<div id="login-block" data-remaining='{{ remaining_seconds|tojson }}' data-total='{{ 300 }}' class="text-center mb-3">
-    <div class="alert alert-danger">
-        {{ _('Vaš nalog je privremeno blokiran zbog više neuspešnih pokušaja.') }}
-    </div>
+        <div id="login-block" 
+             data-remaining='{{ remaining_seconds|tojson }}' 
+             data-total='{{ 300 }}'
+             class="text-center mb-3">
 
-    <div>
-        <span id="timer-text">{{ _('Preostalo vreme:') }} 
-            {{ (remaining_seconds // 60)|int }}:{{ '%02d' % (remaining_seconds % 60) }}
-        </span>
-    </div>
+            <div class="alert alert-danger">
+                {{ _('Vaš nalog je privremeno blokiran zbog više neuspešnih pokušaja.') }}
+            </div>
 
-    <div class="progress mt-2" style="height: 16px; max-width: 300px; margin: 8px auto;">
-        <div id="progress-bar" 
-             class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
-             role="progressbar" 
-             style="width: 100%;">
+            <div>
+                <span id="timer-text">{{ _('Preostalo vreme:') }} 
+                    {{ (remaining_seconds // 60)|int }}:{{ '%02d' % (remaining_seconds % 60) }}
+                </span>
+            </div>
+
+            <div class="progress mt-2" style="height: 20px; max-width: 300px; margin: 8px auto;">
+                <div id="progress-bar" 
+                     class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
+                     role="progressbar" 
+                     style="width: 100%;">
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<script>
-(function () {
-    // Sigurno dohvatimo podatke iz data-* atributa (bez direktnog umetanja Jinja u JS izraz)
-    const loginBlock = document.getElementById('login-block');
-    if (!loginBlock) return;
+        <script>
+        (function () {
+            const loginBlock = document.getElementById('login-block');
+            if (!loginBlock) return;
 
-    const remainingRaw = loginBlock.dataset.remaining;
-    const totalRaw = loginBlock.dataset.total;
+            let remaining = Number(loginBlock.dataset.remaining) || 0;
+            const total = Number(loginBlock.dataset.total) || 300;
 
-    // Parsiramo i stavimo fallback vrednosti
-    let remaining = Number(remainingRaw);
-    if (Number.isNaN(remaining) || remaining < 0) remaining = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const timerText = document.getElementById('timer-text');
 
-    const total = Number(totalRaw) || 300; // podrazumevano 5 minuta = 300s
+            function formatTime(sec) {
+                const m = Math.floor(sec / 60);
+                const s = sec % 60;
+                return `${m}:${String(s).padStart(2, '0')}`;
+            }
 
-    const progressBar = document.getElementById('progress-bar');
-    const timerText = document.getElementById('timer-text');
+            timerText.textContent = "{{ _('Preostalo vreme:') }} " + formatTime(remaining);
+            progressBar.style.width = (remaining / total * 100) + "%";
 
-    function formatTime(sec) {
-        const m = Math.floor(sec / 60);
-        const s = sec % 60;
-        return `${m}:${String(s).padStart(2, '0')}`;
-    }
-
-    // Init prikaz
-    timerText.textContent = "{{ _('Preostalo vreme:') }} " + formatTime(remaining);
-    if (total > 0) {
-        const pct = (remaining / total) * 100;
-        progressBar.style.width = pct + "%";
-    }
-
-    // Odbrojavanje
-    const interval = setInterval(() => {
-        remaining--;
-        if (remaining <= 0) {
-            clearInterval(interval);
-            // automatski refresh kada istekne blokada -> backend će resetovati attempt
-            window.location.reload();
-            return;
-        }
-        timerText.textContent = "{{ _('Preostalo vreme:') }} " + formatTime(remaining);
-        const pct = (remaining / total) * 100;
-        progressBar.style.width = pct + "%";
-    }, 1000);
-})();
-</script>
-{% endif %}
-
+            const interval = setInterval(() => {
+                remaining--;
+                if (remaining <= 0) {
+                    clearInterval(interval);
+                    window.location.reload(); // automatski refresh kad istekne blokada
+                    return;
+                }
+                timerText.textContent = "{{ _('Preostalo vreme:') }} " + formatTime(remaining);
+                progressBar.style.width = (remaining / total * 100) + "%";
+            }, 1000);
+        })();
+        </script>
 
     {% else %}
         <form method="POST" action="{{ url_for('main.login') }}">
