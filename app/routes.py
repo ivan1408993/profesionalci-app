@@ -484,27 +484,32 @@ def logout():
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
-    block_minutes = 5
-    max_attempts = 5
-    ip = request.remote_addr or "unknown"
-
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        ip = request.remote_addr or "unknown"
 
         attempt = LoginAttempt.query.filter_by(email=email, ip_address=ip).first()
 
-        # Provera blokade
-        if attempt and attempt.attempts >= max_attempts:
-            if attempt.last_failed_at and datetime.utcnow() - attempt.last_failed_at < timedelta(minutes=block_minutes):
-                # preostalo vreme u sekundama
-                remaining_seconds = int((timedelta(minutes=block_minutes) - (datetime.utcnow() - attempt.last_failed_at)).total_seconds())
-                return render_template('login.html', block=True, remaining_seconds=remaining_seconds, current_lang=session.get('lang', 'sr'))
+        # Ako je blokiran
+        if attempt and attempt.attempts >= 5:
+            if attempt.last_failed_at and datetime.utcnow() - attempt.last_failed_at < timedelta(minutes=5):
+                remaining = 300 - int((datetime.utcnow() - attempt.last_failed_at).total_seconds())
+                return render_template(
+                    "login.html",
+                    current_lang=session.get('lang', 'sr'),
+                    block=True,
+                    remaining_attempts=0,
+                    remaining_seconds=remaining
+                )
             else:
-                attempt.attempts = 0
+                # Reset jer je prošlo 5 min
+                db.session.delete(attempt)
                 db.session.commit()
+                attempt = None
 
         employer = Employer.query.filter_by(email=email).first()
+
         if employer and check_password_hash(employer.password_hash, password):
             if not employer.active:
                 flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
@@ -520,21 +525,37 @@ def login():
 
             return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
 
-        # Pogrešan login
+        # Neuspešan login
         if attempt:
             attempt.attempts += 1
             attempt.last_failed_at = datetime.utcnow()
         else:
             attempt = LoginAttempt(email=email, ip_address=ip, attempts=1, last_failed_at=datetime.utcnow())
             db.session.add(attempt)
+
         db.session.commit()
 
-        remaining_attempts = max(0, max_attempts - attempt.attempts)
-        flash(_("Pogrešan email ili lozinka. Preostali pokušaji: %(count)s", count=remaining_attempts))
+        remaining_attempts = max(0, 5 - attempt.attempts)
+        if remaining_attempts > 0:
+            flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
+        else:
+            return render_template(
+                "login.html",
+                current_lang=session.get('lang', 'sr'),
+                block=True,
+                remaining_attempts=0,
+                remaining_seconds=300
+            )
+
         return redirect(url_for('main.login'))
 
-    return render_template('login.html', block=False, remaining_seconds=0, current_lang=session.get('lang', 'sr'))
-
+    return render_template(
+        'login.html',
+        current_lang=session.get('lang', 'sr'),
+        block=False,
+        remaining_attempts=5,
+        remaining_seconds=0
+    )
 
 @main.route('/dashboard')
 def dashboard():

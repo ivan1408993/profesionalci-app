@@ -15,76 +15,103 @@
     {% endwith %}
 
     {% if block %}
-    <!-- Blokirana prijava -->
-    <div class="alert alert-danger text-center" role="alert">
-        {{ _("Prekoračili ste maksimalan broj pokušaja. Sačekajte:") }}
-        <span id="timer">{{ remaining_seconds // 60 }}:{{ '%02d' % (remaining_seconds % 60) }}</span>
-        {{ _("minuta") }}.
+<div id="login-block" data-remaining='{{ remaining_seconds|tojson }}' data-total='{{ 300 }}' class="text-center mb-3">
+    <div class="alert alert-danger">
+        {{ _('Vaš nalog je privremeno blokiran zbog više neuspešnih pokušaja.') }}
     </div>
 
-    <!-- Progress bar -->
-    <div class="progress mb-3" style="height: 20px;">
-        <div id="progressBar" 
-             class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
+    <div>
+        <span id="timer-text">{{ _('Preostalo vreme:') }} 
+            {{ (remaining_seconds // 60)|int }}:{{ '%02d' % (remaining_seconds % 60) }}
+        </span>
+    </div>
+
+    <div class="progress mt-2" style="height: 16px; max-width: 300px; margin: 8px auto;">
+        <div id="progress-bar" 
+             class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
              role="progressbar" 
-             style="width: 100%">
+             style="width: 100%;">
         </div>
     </div>
-    {% endif %}
-
-    {% if not block %}
-    <form method="POST" action="{{ url_for('main.login') }}">
-        <div class="mb-3">
-            <input type="email" class="form-control" name="email" placeholder="{{ _('Email') }}" required>
-        </div>
-        <div class="mb-3">
-            <input type="password" class="form-control" name="password" placeholder="{{ _('Lozinka') }}" required>
-        </div>
-        <div class="d-grid">
-            <button type="submit" class="btn btn-custom">{{ _('Prijavi se') }}</button>
-        </div>
-        <p class="mt-3 text-center">
-            <a href="{{ url_for('main.reset_password_request') }}" 
-               class="btn btn-outline-warning">
-               {{ _('Zaboravili ste lozinku?') }}
-            </a>
-        </p>
-    </form>
-    {% endif %}
-
-    <p class="mt-3 text-center">
-        {{ _('Nemate nalog?') }}
-        <a href="{{ url_for('main.register') }}" class="btn btn-warning ms-2">
-            {{ _('Registrujte se') }}
-        </a>
-    </p>
 </div>
 
-{% if block %}
 <script>
-let remaining = {{ remaining_seconds }};
-const timerEl = document.getElementById('timer');
-const progressBar = document.getElementById('progressBar');
-const total = remaining;
+(function () {
+    // Sigurno dohvatimo podatke iz data-* atributa (bez direktnog umetanja Jinja u JS izraz)
+    const loginBlock = document.getElementById('login-block');
+    if (!loginBlock) return;
 
-function updateTimer() {
-    if (remaining <= 0) {
-        location.reload(); // osveži stranicu kada blokada istekne
-    } else {
-        let minutes = Math.floor(remaining / 60);
-        let seconds = remaining % 60;
-        timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    const remainingRaw = loginBlock.dataset.remaining;
+    const totalRaw = loginBlock.dataset.total;
 
-        // update progress bar
-        let percent = (remaining / total) * 100;
-        progressBar.style.width = percent + "%";
+    // Parsiramo i stavimo fallback vrednosti
+    let remaining = Number(remainingRaw);
+    if (Number.isNaN(remaining) || remaining < 0) remaining = 0;
 
-        remaining--;
+    const total = Number(totalRaw) || 300; // podrazumevano 5 minuta = 300s
+
+    const progressBar = document.getElementById('progress-bar');
+    const timerText = document.getElementById('timer-text');
+
+    function formatTime(sec) {
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        return `${m}:${String(s).padStart(2, '0')}`;
     }
-}
 
-setInterval(updateTimer, 1000);
+    // Init prikaz
+    timerText.textContent = "{{ _('Preostalo vreme:') }} " + formatTime(remaining);
+    if (total > 0) {
+        const pct = (remaining / total) * 100;
+        progressBar.style.width = pct + "%";
+    }
+
+    // Odbrojavanje
+    const interval = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+            clearInterval(interval);
+            // automatski refresh kada istekne blokada -> backend će resetovati attempt
+            window.location.reload();
+            return;
+        }
+        timerText.textContent = "{{ _('Preostalo vreme:') }} " + formatTime(remaining);
+        const pct = (remaining / total) * 100;
+        progressBar.style.width = pct + "%";
+    }, 1000);
+})();
 </script>
 {% endif %}
 
+
+    {% else %}
+        <form method="POST" action="{{ url_for('main.login') }}">
+            <div class="mb-3">
+                <input type="email" class="form-control" name="email" placeholder="{{ _('Email') }}" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" placeholder="{{ _('Lozinka') }}" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-custom">{{ _('Prijavi se') }}</button>
+            </div>
+            <p class="mt-3 text-center">
+                <a href="{{ url_for('main.reset_password_request') }}" class="btn btn-outline-warning">
+                    {{ _('Zaboravili ste lozinku?') }}
+                </a>
+            </p>
+        </form>
+
+        <p class="mt-3 text-center">
+            {{ _('Nemate nalog?') }}
+            <a href="{{ url_for('main.register') }}" class="btn btn-warning ms-2">
+                {{ _('Registrujte se') }}
+            </a>
+        </p>
+
+        <p class="text-center text-muted">
+            {{ _('Preostalo pokušaja:') }} <strong>{{ remaining_attempts }}</strong> / 5
+        </p>
+    {% endif %}
+</div>
 {% endblock %}
