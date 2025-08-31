@@ -13,9 +13,11 @@ from app.utils import hash_jmbg, generate_salt, hash_jmbg_with_salt, generate_re
 from app.helpers import konvertuj_tekst
 from app.decorators import login_required, superadmin_required
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import hashlib
+from .models import LoginAttempt
+
 
 main = Blueprint('main', __name__)
 
@@ -482,33 +484,32 @@ def logout():
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
+    block_minutes = 5
+    max_attempts = 5
+    ip = request.remote_addr or "unknown"
+
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        ip = request.remote_addr or "unknown"
 
-        # 🔹 nađi login pokušaj za korisnika (email + IP)
         attempt = LoginAttempt.query.filter_by(email=email, ip_address=ip).first()
 
-        if attempt and attempt.attempts >= 5:
-            # proveri da li je prošlo 5 minuta od poslednjeg neuspelog pokušaja
-            if datetime.utcnow() - attempt.last_failed_at < timedelta(minutes=5):
-                flash(_("5 puta ste uneli neispravnu lozinku. Sačekajte 5 minuta pa pokušajte ponovo ili kliknite na 'Zaboravili ste lozinku'."))
-                return redirect(url_for('main.login'))
+        # Provera blokade
+        if attempt and attempt.attempts >= max_attempts:
+            if attempt.last_failed_at and datetime.utcnow() - attempt.last_failed_at < timedelta(minutes=block_minutes):
+                # preostalo vreme u sekundama
+                remaining_seconds = int((timedelta(minutes=block_minutes) - (datetime.utcnow() - attempt.last_failed_at)).total_seconds())
+                return render_template('login.html', block=True, remaining_seconds=remaining_seconds, current_lang=session.get('lang', 'sr'))
             else:
-                # reset ako je prošlo 5 minuta
                 attempt.attempts = 0
                 db.session.commit()
 
         employer = Employer.query.filter_by(email=email).first()
         if employer and check_password_hash(employer.password_hash, password):
-
-            # ✅ firma mora biti aktivna
             if not employer.active:
                 flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
                 return redirect(url_for('main.login'))
 
-            # uspešan login → resetujemo pokušaje
             if attempt:
                 db.session.delete(attempt)
                 db.session.commit()
@@ -519,20 +520,20 @@ def login():
 
             return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
 
-        # ❌ pogrešan login → uvećaj broj pokušaja
+        # Pogrešan login
         if attempt:
             attempt.attempts += 1
             attempt.last_failed_at = datetime.utcnow()
         else:
-            attempt = LoginAttempt(email=email, ip_address=ip, attempts=1)
+            attempt = LoginAttempt(email=email, ip_address=ip, attempts=1, last_failed_at=datetime.utcnow())
             db.session.add(attempt)
-
         db.session.commit()
 
-        flash(_("Pogrešan email ili lozinka."))
+        remaining_attempts = max(0, max_attempts - attempt.attempts)
+        flash(_("Pogrešan email ili lozinka. Preostali pokušaji: %(count)s", count=remaining_attempts))
         return redirect(url_for('main.login'))
 
-    return render_template('login.html', current_lang=session.get('lang', 'sr'))
+    return render_template('login.html', block=False, remaining_seconds=0, current_lang=session.get('lang', 'sr'))
 
 
 @main.route('/dashboard')
