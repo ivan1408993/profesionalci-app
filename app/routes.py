@@ -492,14 +492,13 @@ def login():
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
 
-        # ⚠️ tražimo po EMAILU samo (IP ne koristimo u filteru!)
+        # ⚠️ tražimo po EMAILU samo
         attempt = LoginAttempt.query.filter_by(email=email).first()
 
         # Ako postoji blokada
         if attempt and attempt.attempts >= 5:
             if attempt.last_failed_at and (datetime.utcnow() - attempt.last_failed_at) < timedelta(minutes=5):
                 remaining = 300 - int((datetime.utcnow() - attempt.last_failed_at).total_seconds())
-                # nema redirect-a – odmah render, da ostane email i da radi tajmer
                 return render_template(
                     "login.html",
                     current_lang=session.get('lang', 'sr'),
@@ -511,7 +510,7 @@ def login():
             else:
                 # istekla blokada → reset
                 attempt.attempts = 0
-                attempt.last_failed_at = None
+                attempt.last_failed_at = datetime.utcnow()  # ⚡ važno da ne bude None
                 db.session.commit()
 
         employer = Employer.query.filter_by(email=email).first()
@@ -519,7 +518,6 @@ def login():
         if employer and check_password_hash(employer.password_hash, password):
             if not employer.active:
                 flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
-                # prikaži formu sa sačuvanim email-om i brojem pokušaja (ako postoji attempt)
                 remaining_attempts = 5 - (attempt.attempts if attempt else 0)
                 return render_template(
                     "login.html",
@@ -554,7 +552,6 @@ def login():
         remaining_attempts = max(0, 5 - attempt.attempts)
         if remaining_attempts > 0:
             flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
-            # važan deo: NEMA redirect-a – odmah render da zadrži email i pravilno prikaže stanje
             return render_template(
                 "login.html",
                 current_lang=session.get('lang', 'sr'),
@@ -564,7 +561,6 @@ def login():
                 email=email
             )
         else:
-            # upravo došla 5. greška → prikaži blok sa tajmerom 5 min
             return render_template(
                 "login.html",
                 current_lang=session.get('lang', 'sr'),
@@ -583,6 +579,7 @@ def login():
         remaining_seconds=0,
         email=""
     )
+
 
 @main.route('/dashboard')
 def dashboard():
