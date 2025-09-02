@@ -2,71 +2,70 @@
 {% block title %}{{ _('Pretraga vozača') }}{% endblock %}
 
 {% block content %}
-<div class="container">
-<!-- Sekcija za pretragu -->
-<div class="section-box mx-auto max-w-800">
-  <h2 class="text-center section-title">🔍 {{ _('Pretraga vozača') }}</h2>
+<div class="container py-4">
 
-  <form method="POST" action="{{ url_for('main.search_driver') }}">
-    <div class="row gx-2 gy-2 justify-content-center align-items-end">
-      <!-- Input sa labelom -->
-      <div class="col-12 col-md-8">
-        <label for="search_input" class="form-label">
-          {{ _('Unesite JMBG, broj tahograf kartice ili CPC kartice') }}
-        </label>
-        <input type="text" id="search_input" name="search_input"
-               class="form-control"
-               placeholder="{{ _('Unesite podatke') }}"
-               required>
+  <!-- Sekcija za pretragu -->
+  <div class="section-box mx-auto max-w-800 mb-5 p-4 shadow-sm rounded-3 bg-dark text-light">
+    <h2 class="text-center section-title shadow-text">🔍 {{ _('Pretraga vozača') }}</h2>
+
+    <form method="POST" action="{{ url_for('main.search_driver') }}">
+      <div class="row gx-2 gy-3 justify-content-center align-items-end">
+        <!-- Input sa labelom -->
+        <div class="col-12 col-md-8">
+          <label for="search_input" class="form-label fw-semibold">
+            {{ _('Unesite JMBG, broj tahograf kartice ili CPC kartice') }}
+          </label>
+          <input type="text" id="search_input" name="search_input"
+                 class="form-control form-control-lg search-input-lg"
+                 placeholder="{{ _('Unesite podatke') }}"
+                 required>
+        </div>
+        <!-- Dugme -->
+        <div class="col-12 col-md-auto">
+          <button class="btn btn-warning btn-lg w-100 w-md-auto" type="submit">
+            <i class="fas fa-search me-1"></i> {{ _('Pretraži') }}
+          </button>
+        </div>
       </div>
-      <!-- Dugme -->
-      <div class="col-12 col-md-auto">
-        <button class="btn btn-custom w-100 w-md-auto" type="submit">
-          <i class="fas fa-search me-1"></i> {{ _('Pretraži') }}
-        </button>
-      </div>
-    </div>
-  </form>
-</div>
-
-
+    </form>
+  </div>
 
   {% if driver %}
   <!-- Rezultati pretrage -->
-  <div class="section-box mx-auto max-w-900">
-    <h4 class="text-center mb-4 section-title">📋 {{ _('Rezultati pretrage') }}</h4>
+  <div class="section-box mx-auto max-w-900 mb-5 p-4 shadow-sm rounded-3 bg-dark text-light">
+    <h4 class="text-center mb-4 section-title shadow-text">📋 {{ _('Rezultati pretrage') }}</h4>
     <hr class="divider">
 
     <div class="row gy-3">
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Ime i prezime:') }}</span><br>
+        <span class="text-custom fw-bold">{{ _('Ime i prezime:') }}</span><br>
         <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" 
-           class="text-custom driver-link" 
+           class="text-warning driver-link fw-semibold"
            title="{{ _('Pogledaj detalje o vozaču') }} {{ driver.full_name }}">
           {{ driver.full_name }}
           <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
         </a>
-        <div class="small text-white">{{ _('Kliknite za detalje') }}</div>
+        <div class="small text-muted">{{ _('Kliknite za detalje') }}</div>
       </div>
 
       {% set active_card = driver.cards | selectattr('is_active') | first %}
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Broj tahograf kartice:') }}</span><br>
+        <span class="text-custom fw-bold">{{ _('Broj tahograf kartice:') }}</span><br>
         {{ active_card.card_number if active_card else '—' }}
       </div>
 
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Broj CPC kartice:') }}</span><br>
+        <span class="text-custom fw-bold">{{ _('Broj CPC kartice:') }}</span><br>
         {{ driver.cpc_card_number or '—' }}
       </div>
 
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Firma:') }}</span><br>
+        <span class="text-custom fw-bold">{{ _('Firma:') }}</span><br>
         {{ driver.employer.company_name if driver.employer else _('Nije zaposlen') }}
       </div>
 
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Status:') }}</span><br>
+        <span class="text-custom fw-bold">{{ _('Status:') }}</span><br>
         {% if driver.active %}
           <span class="badge bg-success">{{ _('Aktivan') }}</span>
         {% else %}
@@ -76,23 +75,23 @@
     </div>
 
     {% if driver.cards|length > 1 %}
-  <hr class="divider my-4">
-  <h6 class="mb-3 text-custom">🗂 {{ _('Istorija tahograf kartica') }}</h6>
-  <ul class="list-group list-group-flush">
-    {% for card in driver.cards if not card.is_active %}
-      <li class="list-group-item bg-dark text-light">
-        <span class="fw-bold">{{ _('Broj kartice:') }}</span> {{ card.card_number }} —
-        {% if card.issue_date %}
-          <span class="fw-bold">{{ _('Izdata:') }}</span> {{ card.issue_date.strftime('%d.%m.%Y') }},
-        {% endif %}
-        {% if card.expiry_date %}
-          <span class="fw-bold">{{ _('Važi do:') }}</span> {{ card.expiry_date.strftime('%d.%m.%Y') }}
-        {% endif %}
-        <span class="badge bg-secondary ms-2">{{ _('neaktivna') }}</span>
-      </li>
-    {% endfor %}
-  </ul>
-{% endif %}
+      <hr class="divider my-4">
+      <h6 class="mb-3 text-custom">🗂 {{ _('Istorija tahograf kartica') }}</h6>
+      <ul class="list-group list-group-flush">
+        {% for card in driver.cards if not card.is_active %}
+          <li class="list-group-item bg-dark text-light">
+            <span class="fw-bold">{{ _('Broj kartice:') }}</span> {{ card.card_number }} —
+            {% if card.issue_date %}
+              <span class="fw-bold">{{ _('Izdata:') }}</span> {{ card.issue_date.strftime('%d.%m.%Y') }},
+            {% endif %}
+            {% if card.expiry_date %}
+              <span class="fw-bold">{{ _('Važi do:') }}</span> {{ card.expiry_date.strftime('%d.%m.%Y') }}
+            {% endif %}
+            <span class="badge bg-secondary ms-2">{{ _('neaktivna') }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     {% if already_employed_by_other %}
       <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-4">{{ _('Ažuriraj vozača') }}</a>
@@ -107,11 +106,11 @@
 
   {% if ratings_info %}
     <!-- Ocene -->
-    <div class="section-box mx-auto max-w-900">
-      <h5 class="text-center mb-3 section-title">⭐ {{ _('Ocene prethodnih poslodavaca') }}</h5>
+    <div class="section-box mx-auto max-w-900 mb-5 p-4 shadow-sm rounded-3 bg-dark text-light">
+      <h5 class="text-center mb-3 section-title shadow-text">⭐ {{ _('Ocene prethodnih poslodavaca') }}</h5>
       <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle text-center">
-          <thead>
+        <table class="table table-bordered table-hover align-middle text-center text-light">
+          <thead class="table-light text-dark">
             <tr>
               <th>{{ _('Poslodavac') }}</th>
               <th>{{ _('Ocena') }}</th>
@@ -134,29 +133,6 @@
     </div>
   {% else %}
     <p class="text-muted mt-3 text-center">{{ _('Nema ocena.') }}</p>
-  {% endif %}
-
-  {% elif request.method == 'POST' %}
-    <!-- Vozač nije pronađen -->
-    <div class="alert alert-warning text-center mt-4">⚠️ {{ _('Vozač nije pronađen.') }}</div>
-
-    {% if show_additional_fields %}
-    <div class="section-box mx-auto max-w-600">
-      <h5 class="text-center mb-3 section-title">🔁 {{ _('Dodatna provera') }}</h5>
-      <form method="POST" action="{{ url_for('main.search_driver') }}">
-        <input type="hidden" name="check_additional" value="1">
-        <div class="mb-3">
-          <label for="full_name" class="form-label">{{ _('Ime i prezime') }}</label>
-          <input type="text" id="full_name" name="full_name" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label for="cpc_card_number" class="form-label">{{ _('Broj CPC kartice') }}</label>
-          <input type="text" id="cpc_card_number" name="cpc_card_number" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-custom">{{ _('Proveri') }}</button>
-      </form>
-    </div>
-    {% endif %}
   {% endif %}
 </div>
 {% endblock %}
