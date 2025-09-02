@@ -135,6 +135,9 @@
     <p class="text-muted mt-3 text-center">{{ _('Nema ocena.') }}</p>
   {% endif %}
 
-{% endif %}
+  {% elif request.method == 'POST' %}
+    <!-- Vozač nije pronađen -->
+    <div class="alert alert-warning text-center mt-4">⚠️ {{ _('Vozač nije pronađen.') }}</div>
+  {% endif %}
 </div>
 {% endblock %}
