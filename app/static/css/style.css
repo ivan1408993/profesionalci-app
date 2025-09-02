@@ -325,6 +325,28 @@ nav.navbar {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
+.btn-rounded-lg {
+    border-radius: 12px;
+    font-size: 1.1rem;
+}
+
+.card-light {
+    background-color: #f8f9fa;
+}
+
+.text-shadow {
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.icon-shadow {
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.8));
+}
+
+.min-width-180 {
+    min-width: 180px;
+}
+
+
 
 .divider {
     border-top: 3px solid #ffffff; /* bela linija*/
