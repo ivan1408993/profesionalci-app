@@ -347,6 +347,89 @@ nav.navbar {
 }
 
 
+/* ---------- Generalni stil kartica ---------- */
+.card {
+    border-radius: 12px;          /* Zaobljeni uglovi */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Blaga senka */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animacija hover efekta */
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Kartice za tahograf, CPC i poslodavca */
+.card.card-body {
+    background-color: #f8f9fa;    /* Svetla pozadina */
+    color: #212529;               /* Tamni tekst za kontrast */
+}
+
+/* ---------- Polje za pretragu (.search-input-lg) ---------- */
+.search-input-lg {
+    background-color: #e9ecef;    /* Svetlija pozadina inputa */
+    border: 2px solid #0d6efd;   /* Plavi okvir */
+    color: #212529;               /* Tamni tekst */
+    font-weight: 600;             /* Srednje podebljan tekst */
+    border-radius: 8px 0 0 8px;  /* Zaobljeni levi ugao (ako je dugme desno) */
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input-lg:focus {
+    border-color: #0a58ca;        /* Tamnija plava prilikom fokusa */
+    box-shadow: 0 0 6px rgba(13, 110, 253, 0.4);
+    outline: none;
+}
+
+/* Dugme pored inputa u pretrazi */
+.input-group .btn {
+    border-radius: 0 8px 8px 0;  /* Zaobljeni desni ugao */
+    padding: 0.75rem 1.25rem;
+}
+
+/* ---------- Tooltip stil (ako koristiš Bootstrap tooltip) ---------- */
+.tooltip-inner {
+    background-color: #212529;  /* Tamna pozadina tooltip-a */
+    color: #f8f9fa;             /* Svetli tekst */
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+/* ---------- Lista ocena ---------- */
+.list-group-item {
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #e2e6ea;
+}
+
+/* ---------- Progress bar za prosečnu ocenu ---------- */
+.progress {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- Responsive spacing ---------- */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem !important;
+    }
+
+    .input-group .btn, .search-input-lg {
+        font-size: 1rem;
+    }
+}
+
 
 .divider {
     border-top: 3px solid #ffffff; /* bela linija*/

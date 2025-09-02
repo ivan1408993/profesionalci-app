@@ -33,31 +33,30 @@
                 </div>
             </div>
 
-           <!-- Tahograf kartica -->
+            <!-- Tahograf i CPC kartice -->
             {% set active_card = driver.cards | selectattr('is_active') | first %}
             <div class="row g-3 mb-4">
+                <!-- Tahograf -->
                 <div class="col-md-6">
-                    <div class="bg-light border rounded shadow-sm p-3 h-100">
+                    <div class="card card-body h-100">
                         <p class="text-muted mb-1"><i class="bi bi-credit-card-2-front"></i> {{ _("Tahograf kartica") }}</p>
                         <h5 class="mb-1">{{ active_card.card_number if active_card else '—' }}</h5>
                         <small class="text-muted">{{ _("Važi do") }}: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
                     </div>
                 </div>
 
-                <!-- CPC kartica -->
+                <!-- CPC -->
                 <div class="col-md-6">
-                    <div class="bg-light border rounded shadow-sm p-3 h-100">
+                    <div class="card card-body h-100">
                         <p class="text-muted mb-1"><i class="bi bi-credit-card-2-back"></i> {{ _("CPC kartica") }}</p>
                         <h5 class="mb-1">{{ driver.cpc_card_number or '—' }}</h5>
-                        <small class="text-muted">{{ _("Važi do") }}: 
-                            {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}
-                        </small>
+                        <small class="text-muted">{{ _("Važi do") }}: {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}</small>
                     </div>
                 </div>
 
                 <!-- Poslodavac -->
                 <div class="col-md-6">
-                    <div class="bg-light border rounded shadow-sm p-3 h-100">
+                    <div class="card card-body h-100">
                         <p class="text-muted mb-1"><i class="bi bi-building"></i> {{ _("Poslodavac") }}</p>
                         <h5 class="mb-1">
                             {% if driver.employer %}
@@ -82,7 +81,9 @@
                     <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning me-2">
                         <i class="bi bi-pencil-square"></i> {{ _("Ažuriraj") }}
                     </a>
-                    <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" class="d-inline">
+                    <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" 
+                          class="d-inline"
+                          onsubmit="return confirm('{{ _('Da li ste sigurni da želite deaktivirati vozača?') }}');">
                         <button type="submit" class="btn btn-danger">
                             <i class="bi bi-x-circle"></i> {{ _("Deaktiviraj") }}
                         </button>
@@ -90,40 +91,31 @@
                 {% endif %}
             </div>
 
-             <!-- Ocene -->
-<hr class="my-4">
-<h4 id="ratings-section" class="mb-3">
-    <i class="bi bi-star-fill text-warning"></i> {{ _("Ocene vozača") }}
-</h4>
+            <!-- Ocene -->
+            <hr class="my-4">
+            <h4 id="ratings-section" class="mb-3">
+                <i class="bi bi-star-fill text-warning"></i> {{ _("Ocene vozača") }}
+            </h4>
 
-      <!-- Pretraga po firmi/PIB -->
-<div class="card border-0 shadow-sm p-3 mb-4" style="background: #f8f9fa;">
-    <label for="searchInput" class="form-label fw-semibold text-dark">
-        <i class="bi bi-search me-1"></i> {{ _("Pretraga ocena po firmi ili PIB-u") }}
-    </label>
-    <form method="get" action="{{ url_for('main.driver_detail', driver_id=driver.id) }}#ratings-section">
-        <div class="input-group">
-            <input type="text" id="searchInput" name="q"
-                   class="form-control form-control-lg"
-                   style="background-color: #e9ecef; border: 2px solid #0d6efd; 
-                          color: #212529; font-weight: 600;"
-                   placeholder="{{ _('Unesite ime firme ili PIB') }}"
-                   value="{{ q }}">
-            <button class="btn btn-primary btn-lg" type="submit">
-                <i class="bi bi-search"></i> {{ _('Pretraži') }}
-            </button>
-        </div>
-    </form>
-</div>
+            <!-- Pretraga ocena -->
+            <div class="card shadow-sm p-3 mb-4">
+                <form method="get" action="{{ url_for('main.driver_detail', driver_id=driver.id) }}#ratings-section">
+                    <label for="searchInput" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-search me-1"></i> {{ _("Pretraga ocena po firmi ili PIB-u") }}
+                    </label>
+                    <div class="input-group">
+                        <input type="text" id="searchInput" name="q" class="form-control form-control-lg search-input-lg"
+                               placeholder="{{ _('Unesite ime firme ili PIB') }}" value="{{ q }}">
+                        <button class="btn btn-primary btn-lg" type="submit">
+                            <i class="bi bi-search"></i> {{ _('Pretraži') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-
-{% if q and not ratings %}
-    <div class="alert alert-warning">
-        {{ _("Nema rezultata za upit") }}: <strong>{{ q }}</strong>
-    </div>
-{% endif %}
-
-
+            {% if q and not ratings %}
+                <div class="alert alert-warning">{{ _("Nema rezultata za upit") }}: <strong>{{ q }}</strong></div>
+            {% endif %}
 
             {% if ratings %}
                 {% set avg = (ratings | map(attribute='stars') | sum) / (ratings | length) %}
@@ -135,8 +127,7 @@
                             {% if avg >= 4 %} bg-success
                             {% elif avg >= 2.5 %} bg-warning text-dark
                             {% else %} bg-danger
-                            {% endif %}"
-                            style="width: {{ width }}%;" role="progressbar">
+                            {% endif %}" style="width: {{ width }}%;" role="progressbar">
                             {{ avg|round(1) }}⭐
                         </div>
                     </div>
@@ -175,7 +166,7 @@
             {% if driver.cards %}
                 {% set sorted_cards = driver.cards | sort(attribute='issue_date', reverse=True) %}
                 <div class="table-responsive">
-                    <table class="table table-bordered align-middle">
+                    <table class="table table-bordered table-hover table-sm align-middle">
                         <thead class="table-light">
                             <tr>
                                 <th>{{ _("Broj tahograf kartice") }}</th>
@@ -189,11 +180,9 @@
                                     <td><strong>{{ card.card_number }}</strong></td>
                                     <td>{{ card.expiry_date.strftime('%d.%m.%Y') if card.expiry_date else '—' }}</td>
                                     <td>
-                                        {% if card.is_active %}
-                                            <span class="badge bg-success">{{ _("Aktivna") }}</span>
-                                        {% else %}
-                                            <span class="badge bg-secondary">{{ _("Neaktivna") }}</span>
-                                        {% endif %}
+                                        <span class="badge {% if card.is_active %}bg-success{% else %}bg-secondary{% endif %}">
+                                            {% if card.is_active %}{{ _("Aktivna") }}{% else %}{{ _("Neaktivna") }}{% endif %}
+                                        </span>
                                     </td>
                                 </tr>
                             {% endfor %}

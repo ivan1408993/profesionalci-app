@@ -104,9 +104,10 @@
             </a>
         </p>
 
-        <p class="text-center text-muted">
-            {{ _('Preostalo pokušaja:') }} <strong>{{ remaining_attempts }}</strong> / 5
-        </p>
+        <p class="text-center text-light">
+    {{ _('Preostalo pokušaja:') }} 
+    <strong class="text-warning">{{ remaining_attempts }}</strong> / 5
+</p>
     {% endif %}
 </div>
 {% endblock %}
