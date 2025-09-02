@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="hero d-flex align-items-center justify-content-center text-center text-light">
+<section class="hero d-flex align-items-center justify-content-center text-center text-light" aria-labelledby="hero-title">
     <div>
-        <h1 class="display-4 fw-bold" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);"><span class="text-warning">{{ _('Profesionalci') }}</span></h1>
-        <p class="lead" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">{{ _('Platforma za ocenjivanje i proveru profesionalnih vozača.') }}</p>
+        <h1 id="hero-title" class="display-4 fw-bold text-warning text-shadow">
+            {{ _('Profesionalci') }}
+        </h1>
+        <p class="lead text-shadow">
+            {{ _('Platforma za ocenjivanje i proveru profesionalnih vozača.') }}
+        </p>
         <div class="mt-4">
-            <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg me-3">{{ _('Prijavi se') }}</a>
-            <a href="{{ url_for('main.register') }}" class="btn btn-warning btn-lg">{{ _('Registruj se') }}</a>
+            <a href="{{ url_for('main.login') }}" 
+               class="btn btn-outline-light btn-lg me-3"
+               aria-label="{{ _('Prijavi se na platformu') }}">
+               {{ _('Prijavi se') }}
+            </a>
+            <a href="{{ url_for('main.register') }}" 
+               class="btn btn-warning btn-lg"
+               aria-label="{{ _('Registruj novi nalog na platformi') }}">
+               {{ _('Registruj se') }}
+            </a>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <title>{% block title %}{{ _("Aplikacija") }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ _('Profesionalci - ocenjivanje vozača i poslodavaca u transportnoj industriji') }}">
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
     <!-- Smooth scroll za celu aplikaciju -->
     <style>
         html {
             scroll-behavior: smooth;
         }
     </style>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -28,11 +32,9 @@
  <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
    <div class="truck-wrapper truck-animation">
     <span class="truck-text">Profesionalci</span>
-    
     <i class="fas fa-truck-moving fa-lg ms-2 truck-icon"></i>
-</div>
-</a>
-
+   </div>
+ </a>
 
   <!-- Toggler za mobilni meni -->
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
@@ -45,13 +47,25 @@
       <ul class="navbar-nav ms-auto">
           <!-- 🔗 Zajednički linkovi za sve -->
           <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.index') }}">{{ _("🏠 Početna") }}</a>
+              <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}"
+                 href="{{ url_for('main.index') }}"
+                 {% if request.endpoint == 'main.index' %}aria-current="page"{% endif %}>
+                 {{ _("🏠 Početna") }}
+              </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.about') }}">{{ _("ℹ️ O nama") }}</a>
+              <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}"
+                 href="{{ url_for('main.about') }}"
+                 {% if request.endpoint == 'main.about' %}aria-current="page"{% endif %}>
+                 {{ _("ℹ️ O nama") }}
+              </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.contact') }}">{{ _("✉️ Kontakt") }}</a>
+              <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}"
+                 href="{{ url_for('main.contact') }}"
+                 {% if request.endpoint == 'main.contact' %}aria-current="page"{% endif %}>
+                 {{ _("✉️ Kontakt") }}
+              </a>
           </li>
 
           {% if session.get('user_type') == 'employer' and session.get('user_id') %}
@@ -78,18 +92,26 @@
           {% else %}
           <!-- 🔐 Neregistrovani -->
           <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.login') }}">{{ _("Prijava") }}</a>
+              <a class="nav-link {% if request.endpoint == 'main.login' %}active{% endif %}"
+                 href="{{ url_for('main.login') }}"
+                 {% if request.endpoint == 'main.login' %}aria-current="page"{% endif %}>
+                 {{ _("Prijava") }}
+              </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.register') }}">{{ _("Registracija") }}</a>
+              <a class="nav-link {% if request.endpoint == 'main.register' %}active{% endif %}"
+                 href="{{ url_for('main.register') }}"
+                 {% if request.endpoint == 'main.register' %}aria-current="page"{% endif %}>
+                 {{ _("Registracija") }}
+              </a>
           </li>
           {% endif %}
 
-          <!-- 🌐 Jezički meni (sada deo collapse-a, ide udesno na desktopu) -->
+          <!-- 🌐 Jezički meni -->
           <li class="nav-item d-flex align-items-center ms-lg-3">
-              <a href="/set_language/sr" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
-              <a href="/set_language/en" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %} ms-2">🇬🇧</a>
-              <a href="/set_language/de" class="lang-flag {% if g.current_lang == 'de' %}active{% endif %} ms-2">🇩🇪</a>
+              <a href="/set_language/sr" aria-label="Srpski" class="lang-flag {% if g.current_lang == 'sr' %}active{% endif %}">🇷🇸</a>
+              <a href="/set_language/en" aria-label="English" class="lang-flag {% if g.current_lang == 'en' %}active{% endif %} ms-2">🇬🇧</a>
+              <a href="/set_language/de" aria-label="Deutsch" class="lang-flag {% if g.current_lang == 'de' %}active{% endif %} ms-2">🇩🇪</a>
           </li>
       </ul>
   </div>
@@ -116,10 +138,10 @@
     </div>
 </main>
 
-<footer class="text-center py-3 mt-auto" style="color: #ccc;">
+<footer class="text-center py-3 mt-auto footer-text">
     <small>© 2025 Profesionalci | 
-    <a href="{{ url_for('main.terms') }}" style="color: #00bcd4; text-decoration: none;">{{ _("Uslovi korišćenja") }}</a> | 
-    <a href="{{ url_for('main.privacy_policy') }}" style="color: #00bcd4; text-decoration: none;">{{ _("Politika privatnosti") }}</a>
+    <a href="{{ url_for('main.terms') }}" class="footer-link">{{ _("Uslovi korišćenja") }}</a> | 
+    <a href="{{ url_for('main.privacy_policy') }}" class="footer-link">{{ _("Politika privatnosti") }}</a>
     </small>
 </footer>
 

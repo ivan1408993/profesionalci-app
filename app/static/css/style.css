@@ -40,6 +40,18 @@ footer {
     border-top: 2px solid #00bcd4;
 }
 
+.footer-text {
+    color: #ccc;
+}
+.footer-link {
+    color: #00bcd4;
+    text-decoration: none;
+}
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+
 /* ✅ Општи стилови */
 .card {
     border-radius: 1rem;
@@ -308,6 +320,11 @@ nav.navbar {
 .text-custom:hover {
     color: #82aefc; /* svetlija plava na hover */
 }
+
+.text-shadow {
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
 
 .divider {
     border-top: 3px solid #ffffff; /* bela linija*/
