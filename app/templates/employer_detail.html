@@ -22,20 +22,24 @@
             </h3>
         </div>
         <div class="card-body p-4 bg-light">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item py-3 border-0">
-                    <strong><i class="fas fa-briefcase me-2 text-primary"></i>{{ _('Naziv firme:') }}</strong> 
-                    {{ employer.company_name }}
-                </li>
-                <li class="list-group-item py-3 border-0">
-                    <strong><i class="fas fa-id-card me-2 text-success"></i>{{ _('PIB:') }}</strong> 
-                    {{ employer.pib }}
-                </li>
-                <li class="list-group-item py-3 border-0">
-                    <strong><i class="fas fa-phone me-2 text-warning"></i>{{ _('Telefon:') }}</strong> 
-                    {{ employer.phone_number }}
-                </li>
-            </ul>
+            <div class="row g-3">
+                <div class="col-md-6 d-flex align-items-center">
+                    <i class="fas fa-briefcase me-2 text-primary fs-5"></i>
+                    <strong>{{ _('Naziv firme:') }}</strong>&nbsp;{{ employer.company_name }}
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <i class="fas fa-id-card me-2 text-success fs-5"></i>
+                    <strong>{{ _('PIB:') }}</strong>&nbsp;{{ employer.pib }}
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <i class="fas fa-phone me-2 text-warning fs-5"></i>
+                    <strong>{{ _('Telefon:') }}</strong>&nbsp;{{ employer.phone_number }}
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <i class="fas fa-envelope me-2 text-info fs-5"></i>
+                    <strong>{{ _('Email:') }}</strong>&nbsp;{{ employer.email }}
+                </div>
+            </div>
         </div>
         <div class="card-footer text-end bg-white rounded-bottom-4">
             <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-primary btn-lg px-4">

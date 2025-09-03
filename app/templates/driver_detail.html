@@ -83,7 +83,309 @@
                     </a>
                     <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" 
                           class="d-inline"
-                          onsubmit="return confirm('{{ _('Da li ste sigurni da želite deaktivirati vozača?') }}');">
+                       {% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Dugme za povratak -->
+    <div class="mb-3 text-start">
+        <a href="{{ url_for('main.drivers') }}" class="btn btn-primary btn-back shadow-sm">
+            <i class="fas fa-arrow-left me-2"></i>
+            {{ _("Nazad na listu vozača") }}
+        </a>
+    </div>
+
+    <!-- Naslov -->
+    <h2 class="fw-bold mb-4 d-flex align-items-center">
+        <i class="fas fa-users me-2 text-primary"></i>
+        {{ _("Svi vozači koji su radili u vašoj firmi") }}
+    </h2>
+
+    <!-- Pretraga -->
+    <form method="get" class="row g-2 align-items-center mb-4">
+        <div class="col-md-10">
+            <div class="input-group shadow-sm">
+                <span class="input-group-text bg-light">
+                    <i class="fas fa-search text-muted"></i>
+                </span>
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="form-control" 
+                    placeholder="{{ _('Pretraži po imenu ili broju kartice') }}" 
+                    value="{{ search or '' }}"
+                >
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100 shadow-sm">
+                <i class="fas fa-search me-1"></i> {{ _("Pretraži") }}
+            </button>
+        </div>
+    </form>
+
+    {% if drivers %}
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover align-middle table-bordered">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th><i class="fas fa-id-card me-1"></i> {{ _("Ime i prezime") }}</th>
+                    <th><i class="fas fa-credit-card me-1"></i> {{ _("Broj tahograf kartice") }}</th>
+                    <th><i class="fas fa-calendar-alt me-1"></i> {{ _("Tahograf kartica važi do") }}</th>
+                    <th><i class="fas fa-id-badge me-1"></i> {{ _("CPC broj") }}</th>
+                    <th><i class="fas fa-calendar-check me-1"></i> {{ _("CPC važi do") }}</th>
+                    <th><i class="fas fa-user-check me-1"></i> {{ _("Status") }}</th>
+                    <th><i class="fas fa-star me-1"></i> {{ _("Prosečna ocena") }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for driver in drivers %}
+                <tr class="text-center {% if not driver.active %}table-secondary{% endif %}">
+                    <td>
+                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="text-decoration-none fw-bold">
+                            <i class="fas fa-user me-1"></i> {{ driver.full_name }}
+                        </a>
+                    </td>
+                    <td>
+                        {% set active_card = driver.cards | selectattr('is_active') | first %}
+                        {{ active_card.card_number if active_card else '—' }}
+                    </td>
+                    <td>
+                        {% if active_card and active_card.expiry_date %}
+                            {{ active_card.expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %} — {% endif %}
+                    </td>
+                    <td>{{ driver.cpc_card_number or '—' }}</td>
+                    <td>
+                        {% if driver.cpc_expiry_date %}
+                            {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %} — {% endif %}
+                    </td>
+                    <td>
+                        {% if driver.active %}
+                            <span class="badge bg-success">
+                                <i class="fas fa-check-circle me-1"></i> {{ _("Aktivan") }}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-danger">
+                                <i class="fas fa-times-circle me-1"></i> {{ _("Neaktivan") }}
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if driver_ratings[driver.id] %}
+                            <span class="{% if driver_ratings[driver.id] >= 4 %}text-success{% elif driver_ratings[driver.id] >= 2.5 %}text-warning{% else %}text-danger{% endif %}">
+                                <i class="fas fa-star"></i> {{ driver_ratings[driver.id] }} / 5
+                            </span>
+                        {% else %}
+                            <span class="text-muted"><i class="fas fa-star-half-alt"></i> —</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginacija -->
+    <nav aria-label="{{ _('Paginacija vozača') }}" class="mt-3">
+        <ul class="pagination justify-content-center">
+            {% if pagination.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.all_drivers', page=pagination.prev_num, search=search) }}">
+                        <i class="fas fa-chevron-left"></i> {{ _("Prethodna") }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">{{ _("Prethodna") }}</span></li>
+            {% endif %}
+
+            {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                {% if page_num %}
+                    {% if page_num == pagination.page %}
+                        <li class="page-item active"><span class="page-link">{{ page_num }}</span></li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('main.all_drivers', page=page_num, search=search) }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.all_drivers', page=pagination.next_num, search=search) }}">
+                        {{ _("Sledeća") }} <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">{{ _("Sledeća") }}</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% else %}
+        <div class="alert alert-info mt-4 text-center">
+            <i class="fas fa-info-circle me-1"></i> {{ _("Nema rezultata za zadatu pretragu.") }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Dugme za povratak -->
+    <div class="mb-3 text-start">
+        <a href="{{ url_for('main.drivers') }}" class="btn btn-primary btn-back shadow-sm">
+            <i class="fas fa-arrow-left me-2"></i>
+            {{ _("Nazad na listu vozača") }}
+        </a>
+    </div>
+
+    <!-- Naslov -->
+    <h2 class="fw-bold mb-4 d-flex align-items-center">
+        <i class="fas fa-users me-2 text-primary"></i>
+        {{ _("Svi vozači koji su radili u vašoj firmi") }}
+    </h2>
+
+    <!-- Pretraga -->
+    <form method="get" class="row g-2 align-items-center mb-4">
+        <div class="col-md-10">
+            <div class="input-group shadow-sm">
+                <span class="input-group-text bg-light">
+                    <i class="fas fa-search text-muted"></i>
+                </span>
+                <input 
+                    type="text" 
+                    name="search" 
+                    class="form-control" 
+                    placeholder="{{ _('Pretraži po imenu ili broju kartice') }}" 
+                    value="{{ search or '' }}"
+                >
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100 shadow-sm">
+                <i class="fas fa-search me-1"></i> {{ _("Pretraži") }}
+            </button>
+        </div>
+    </form>
+
+    {% if drivers %}
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover align-middle table-bordered">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th><i class="fas fa-id-card me-1"></i> {{ _("Ime i prezime") }}</th>
+                    <th><i class="fas fa-credit-card me-1"></i> {{ _("Broj tahograf kartice") }}</th>
+                    <th><i class="fas fa-calendar-alt me-1"></i> {{ _("Tahograf kartica važi do") }}</th>
+                    <th><i class="fas fa-id-badge me-1"></i> {{ _("CPC broj") }}</th>
+                    <th><i class="fas fa-calendar-check me-1"></i> {{ _("CPC važi do") }}</th>
+                    <th><i class="fas fa-user-check me-1"></i> {{ _("Status") }}</th>
+                    <th><i class="fas fa-star me-1"></i> {{ _("Prosečna ocena") }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for driver in drivers %}
+                <tr class="text-center {% if not driver.active %}table-secondary{% endif %}">
+                    <td>
+                        <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" class="text-decoration-none fw-bold">
+                            <i class="fas fa-user me-1"></i> {{ driver.full_name }}
+                        </a>
+                    </td>
+                    <td>
+                        {% set active_card = driver.cards | selectattr('is_active') | first %}
+                        {{ active_card.card_number if active_card else '—' }}
+                    </td>
+                    <td>
+                        {% if active_card and active_card.expiry_date %}
+                            {{ active_card.expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %} — {% endif %}
+                    </td>
+                    <td>{{ driver.cpc_card_number or '—' }}</td>
+                    <td>
+                        {% if driver.cpc_expiry_date %}
+                            {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') }}
+                        {% else %} — {% endif %}
+                    </td>
+                    <td>
+                        {% if driver.active %}
+                            <span class="badge bg-success">
+                                <i class="fas fa-check-circle me-1"></i> {{ _("Aktivan") }}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-danger">
+                                <i class="fas fa-times-circle me-1"></i> {{ _("Neaktivan") }}
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if driver_ratings[driver.id] %}
+                            <span class="{% if driver_ratings[driver.id] >= 4 %}text-success{% elif driver_ratings[driver.id] >= 2.5 %}text-warning{% else %}text-danger{% endif %}">
+                                <i class="fas fa-star"></i> {{ driver_ratings[driver.id] }} / 5
+                            </span>
+                        {% else %}
+                            <span class="text-muted"><i class="fas fa-star-half-alt"></i> —</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginacija -->
+    <nav aria-label="{{ _('Paginacija vozača') }}" class="mt-3">
+        <ul class="pagination justify-content-center">
+            {% if pagination.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.all_drivers', page=pagination.prev_num, search=search) }}">
+                        <i class="fas fa-chevron-left"></i> {{ _("Prethodna") }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">{{ _("Prethodna") }}</span></li>
+            {% endif %}
+
+            {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                {% if page_num %}
+                    {% if page_num == pagination.page %}
+                        <li class="page-item active"><span class="page-link">{{ page_num }}</span></li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('main.all_drivers', page=page_num, search=search) }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.all_drivers', page=pagination.next_num, search=search) }}">
+                        {{ _("Sledeća") }} <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">{{ _("Sledeća") }}</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% else %}
+        <div class="alert alert-info mt-4 text-center">
+            <i class="fas fa-info-circle me-1"></i> {{ _("Nema rezultata za zadatu pretragu.") }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+   onsubmit="return confirm('{{ _('Da li ste sigurni da želite deaktivirati vozača?') }}');">
                         <button type="submit" class="btn btn-danger">
                             <i class="bi bi-x-circle"></i> {{ _("Deaktiviraj") }}
                         </button>
