@@ -8,39 +8,59 @@
 
         <form method="POST" action="{{ url_for('main.employer_profile') }}">
             <!-- Naziv firme -->
-            <div class="mb-3 input-group">
-                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
-                    <i class="fas fa-building"></i>
-                </span>
-                <input type="text" class="form-control" name="company_name" value="{{ employer.company_name }}" placeholder="{{ _('Naziv firme') }}" required
-                       style="background-color: #34495e; color: #ecf0f1; border: none;">
+            <div class="mb-3">
+                <label class="form-label" style="color: #ecf0f1;">
+                    <i class="fas fa-building me-1 text-primary"></i> {{ _('Naziv firme') }}
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
+                        <i class="fas fa-building"></i>
+                    </span>
+                    <input type="text" class="form-control" name="company_name" value="{{ employer.company_name }}" placeholder="{{ _('Naziv firme') }}" required
+                           style="background-color: #34495e; color: #ecf0f1; border: none;">
+                </div>
             </div>
 
             <!-- PIB -->
-            <div class="mb-3 input-group">
-                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
-                    <i class="fas fa-id-card"></i>
-                </span>
-                <input type="text" class="form-control" value="{{ employer.pib }}" readonly tabindex="-1"
-                       style="background-color: #34495e; color: #bdc3c7; border: none;">
+            <div class="mb-3">
+                <label class="form-label" style="color: #ecf0f1;">
+                    <i class="fas fa-id-card me-1 text-success"></i> {{ _('PIB') }}
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
+                        <i class="fas fa-id-card"></i>
+                    </span>
+                    <input type="text" class="form-control" value="{{ employer.pib }}" readonly tabindex="-1"
+                           style="background-color: #34495e; color: #bdc3c7; border: none;">
+                </div>
             </div>
 
             <!-- Email -->
-            <div class="mb-3 input-group">
-                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
-                    <i class="fas fa-envelope"></i>
-                </span>
-                <input type="email" class="form-control" name="email" value="{{ employer.email }}" placeholder="{{ _('Imejl') }}" required
-                       style="background-color: #34495e; color: #ecf0f1; border: none;">
+            <div class="mb-3">
+                <label class="form-label" style="color: #ecf0f1;">
+                    <i class="fas fa-envelope me-1 text-warning"></i> {{ _('Imejl adresa') }}
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <input type="email" class="form-control" name="email" value="{{ employer.email }}" placeholder="{{ _('Imejl') }}" required
+                           style="background-color: #34495e; color: #ecf0f1; border: none;">
+                </div>
             </div>
 
             <!-- Telefon -->
-            <div class="mb-3 input-group">
-                <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
-                    <i class="fas fa-phone"></i>
-                </span>
-                <input type="tel" pattern="[0-9]+" class="form-control" name="phone_number" value="{{ employer.phone_number or '' }}" placeholder="{{ _('Broj telefona (samo cifre)') }}"
-                       style="background-color: #34495e; color: #ecf0f1; border: none;">
+            <div class="mb-3">
+                <label class="form-label" style="color: #ecf0f1;">
+                    <i class="fas fa-phone me-1 text-info"></i> {{ _('Broj telefona') }}
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text" style="background-color: #34495e; color: #1abc9c;">
+                        <i class="fas fa-phone"></i>
+                    </span>
+                    <input type="tel" pattern="[0-9]+" class="form-control" name="phone_number" value="{{ employer.phone_number or '' }}" placeholder="{{ _('Broj telefona (samo cifre)') }}"
+                           style="background-color: #34495e; color: #ecf0f1; border: none;">
+                </div>
             </div>
 
             <!-- Lozinka -->
