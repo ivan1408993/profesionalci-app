@@ -28,7 +28,7 @@
                     type="text" 
                     name="search" 
                     class="form-control" 
-                    placeholder="{{ _('Pretraži po imenu ili broju kartice') }}" 
+                    placeholder="{{ _('Pretraži po imenu, tahografu ili broju CPC') }}" 
                     value="{{ search or '' }}"
                 >
             </div>
@@ -46,8 +46,8 @@
             <thead class="table-dark text-center">
                 <tr>
                     <th><i class="fas fa-id-card me-1"></i> {{ _("Ime i prezime") }}</th>
-                    <th><i class="fas fa-credit-card me-1"></i> {{ _("Broj tahograf kartice") }}</th>
-                    <th><i class="fas fa-calendar-alt me-1"></i> {{ _("Tahograf kartica važi do") }}</th>
+                    <th><i class="fas fa-credit-card me-1"></i> {{ _("Tahograf kartica") }}</th>
+                    <th><i class="fas fa-calendar-alt me-1"></i> {{ _("Tahograf važi do") }}</th>
                     <th><i class="fas fa-id-badge me-1"></i> {{ _("CPC broj") }}</th>
                     <th><i class="fas fa-calendar-check me-1"></i> {{ _("CPC važi do") }}</th>
                     <th><i class="fas fa-user-check me-1"></i> {{ _("Status") }}</th>
