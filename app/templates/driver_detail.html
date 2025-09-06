@@ -81,13 +81,11 @@
                     <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning me-2">
                         <i class="bi bi-pencil-square"></i> {{ _("Ažuriraj") }}
                     </a>
-                    <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}" 
-                          class="d-inline"
-                          onsubmit="return confirm('{{ _(Da li ste sigurni da želite deaktivirati vozača?) }}');">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-x-circle"></i> {{ _("Deaktiviraj") }}
-                        </button>
-                    </form>
+                    <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}">
+    <button type="submit" class="btn btn-warning">
+        {{ _("Deaktiviraj vozača") }}
+    </button>
+</form>
                 {% endif %}
             </div>
 
