@@ -70,23 +70,26 @@
             </div>
 
             <!-- Akcije -->
-            <div class="mb-4">
-                {% if not driver.active %}
-                    <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST" class="d-inline">
-                        <button type="submit" class="btn btn-success me-2">
-                            <i class="bi bi-plus-circle"></i> {{ _("Preuzmi vozača") }}
-                        </button>
-                    </form>
-                {% elif driver.employer_id == session.get('user_id') %}
-                    <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning me-2">
-                        <i class="bi bi-pencil-square"></i> {{ _("Ažuriraj") }}
-                    </a>
-<form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}">
-                 <button type="submit" class="btn btn-danger">
-        {{ _("Deaktiviraj vozača") }}
-    </button>
-                {% endif %}
-            </div>
+<div class="mb-4 d-flex align-items-center gap-2">
+    {% if not driver.active %}
+        <form action="{{ url_for('main.adopt_driver', driver_id=driver.id) }}" method="POST">
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> {{ _("Preuzmi vozača") }}
+            </button>
+        </form>
+    {% elif driver.employer_id == session.get('user_id') %}
+        <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning">
+            <i class="bi bi-pencil-square"></i> {{ _("Ažuriraj") }}
+        </a>
+        <form method="POST" action="{{ url_for('main.deactivate_driver', driver_id=driver.id) }}">
+            <button type="submit" class="btn btn-danger">
+                {{ _("Deaktiviraj vozača") }}
+            </button>
+        </form>
+    {% endif %}
+</div>
+
+
 
             <!-- Ocene -->
             <hr class="my-4">
