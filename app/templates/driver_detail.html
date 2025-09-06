@@ -33,48 +33,62 @@
                 </div>
             </div>
 
-            <!-- Tahograf i CPC kartice -->
-            {% set active_card = driver.cards | selectattr('is_active') | first %}
-            <div class="row g-3 mb-4">
-                <!-- Tahograf -->
-                <div class="col-md-6">
-                    <div class="card card-body h-100">
-                        <p class="text-muted mb-1"><i class="bi bi-credit-card-2-front"></i> {{ _("Tahograf kartica") }}</p>
-                        <h5 class="mb-1">{{ active_card.card_number if active_card else '—' }}</h5>
-                        <small class="text-muted">{{ _("Važi do") }}: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}</small>
-                    </div>
-                </div>
+<!-- Kartice vozača 2x2 -->
+{% set active_card = driver.cards | selectattr('is_active') | first %}
+<div class="row g-3 mb-4">
+    <!-- Tahograf -->
+    <div class="col-md-6">
+        <div class="card card-body h-100 shadow-sm border-0">
+            <p class="fw-semibold text-primary mb-1">
+                <i class="bi bi-credit-card-2-front me-1 fs-5 text-primary"></i> {{ _("Tahograf kartica") }}
+            </p>
+            <h5 class="mb-1">{{ active_card.card_number if active_card else '—' }}</h5>
+            <small class="text-muted">
+                {{ _("Važi do") }}: {{ active_card.expiry_date.strftime('%d.%m.%Y') if active_card and active_card.expiry_date else '—' }}
+            </small>
+        </div>
+    </div>
 
-                <!-- CPC -->
-                <div class="col-md-6">
-                    <div class="card card-body h-100">
-                        <p class="text-muted mb-1"><i class="bi bi-credit-card-2-back"></i> {{ _("CPC kartica") }}</p>
-                        <h5 class="mb-1">{{ driver.cpc_card_number or '—' }}</h5>
-                        <small class="text-muted">{{ _("Važi do") }}: {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}</small>
-                    </div>
-                </div>
+    <!-- CPC -->
+    <div class="col-md-6">
+        <div class="card card-body h-100 shadow-sm border-0">
+            <p class="fw-semibold text-success mb-1">
+                <i class="bi bi-credit-card-2-back me-1 fs-5 text-success"></i> {{ _("CPC kartica") }}
+            </p>
+            <h5 class="mb-1">{{ driver.cpc_card_number or '—' }}</h5>
+            <small class="text-muted">
+                {{ _("Važi do") }}: {{ driver.cpc_expiry_date.strftime('%d.%m.%Y') if driver.cpc_expiry_date else '—' }}
+            </small>
+        </div>
+    </div>
 
-                <!-- Poslodavac -->
-                <div class="col-md-6">
-                    <div class="card card-body h-100">
-                        <p class="text-muted mb-1"><i class="bi bi-building"></i> {{ _("Poslodavac") }}</p>
-                        <h5 class="mb-1">
-                            {% if driver.employer %}
-                                {{ driver.employer.company_name }}
-                            {% else %}
-                                <span class="text-muted">—</span>
-                            {% endif %}
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <!-- Ukupno ocena -->
-<div class="col-md-6">
-    <div class="card card-body h-100">
-        <p class="text-muted mb-1"><i class="bi bi-star"></i> {{ _("Ukupno ocena") }}</p>
-        <h5 class="mb-1">{{ ratings|length }}</h5>
+    <!-- Poslodavac -->
+    <div class="col-md-6">
+        <div class="card card-body h-100 shadow-sm border-0">
+            <p class="fw-semibold text-info mb-1">
+                <i class="bi bi-building me-1 fs-5 text-info"></i> {{ _("Poslodavac") }}
+            </p>
+            <h5 class="mb-1">
+                {% if driver.employer %}
+                    {{ driver.employer.company_name }}
+                {% else %}
+                    <span class="text-muted">—</span>
+                {% endif %}
+            </h5>
+        </div>
+    </div>
+
+    <!-- Ukupno ocena -->
+    <div class="col-md-6">
+        <div class="card card-body h-100 shadow-sm border-0">
+            <p class="fw-semibold text-warning mb-1">
+                <i class="bi bi-star-fill me-1 fs-5 text-warning"></i> {{ _("Ukupno ocena") }}
+            </p>
+            <h5 class="mb-1">{{ ratings|length if ratings else '—' }}</h5>
+        </div>
     </div>
 </div>
+
 
             <!-- Akcije -->
 <div class="mb-4 d-flex align-items-center gap-2">
