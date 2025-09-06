@@ -4,39 +4,42 @@
 {% block content %}
 <div class="container">
   <!-- Sekcija za pretragu -->
-<div class="section-box mx-auto max-w-800">
-  <h2 class="text-center section-title text-shadow">
-    🔍 {{ _('Pretraga vozača') }}
-  </h2>
+  <div class="section-box mx-auto max-w-800">
+    <h2 class="text-center section-title text-shadow">
+      🔍 {{ _('Pretraga vozača') }}
+    </h2>
 
-  <form method="POST" action="{{ url_for('main.search_driver') }}" class="row gx-2 gy-2 justify-content-center">
-    <div class="col-12 col-md-10">
-      <label for="search_input" class="form-label fw-bold text-shadow">
-        {{ _('Unesite JMBG, broj tahograf kartice ili CPC kartice') }}
-      </label>
-      <div class="input-group shadow">
-        <input type="text" id="search_input" name="search_input"
-               class="form-control"
-               placeholder="{{ _('Unesite podatke') }}"
-               required>
-        <button class="btn btn-custom fw-bold" type="submit">
-          <i class="fas fa-search me-1"></i> {{ _('Pretraži') }}
-        </button>
+    <form method="POST" action="{{ url_for('main.search_driver') }}" class="row gx-2 gy-2 justify-content-center">
+      <div class="col-12 col-md-10">
+        <label for="search_input" class="form-label fw-bold text-shadow">
+          {{ _('Unesite JMBG, broj tahograf kartice ili CPC kartice') }}
+        </label>
+        <div class="input-group shadow">
+          <input type="text" id="search_input" name="search_input"
+                 class="form-control"
+                 placeholder="{{ _('Unesite podatke') }}"
+                 required>
+          <button class="btn btn-custom fw-bold" type="submit">
+            <i class="fas fa-search me-1"></i> {{ _('Pretraži') }}
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+
   {% if driver %}
   <!-- Rezultati pretrage -->
   <div class="section-box mx-auto max-w-900">
-    <h4 class="text-center mb-4 section-title">📋 {{ _('Rezultati pretrage') }}</h4>
+    <h4 class="text-center mb-4 section-title text-shadow">
+      📋 {{ _('Rezultati pretrage') }}
+    </h4>
     <hr class="divider">
 
     <div class="row gy-3">
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Ime i prezime:') }}</span><br>
+        <span class="text-custom fw-bold text-shadow">{{ _('Ime i prezime:') }}</span><br>
         <a href="{{ url_for('main.driver_detail', driver_id=driver.id) }}" 
-           class="text-custom driver-link" 
+           class="text-custom driver-link fw-bold" 
            title="{{ _('Pogledaj detalje o vozaču') }} {{ driver.full_name }}">
           {{ driver.full_name }}
           <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
@@ -46,22 +49,22 @@
 
       {% set active_card = driver.cards | selectattr('is_active') | first %}
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Broj tahograf kartice:') }}</span><br>
+        <span class="text-custom fw-bold text-shadow">{{ _('Broj tahograf kartice:') }}</span><br>
         {{ active_card.card_number if active_card else '—' }}
       </div>
 
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Broj CPC kartice:') }}</span><br>
+        <span class="text-custom fw-bold text-shadow">{{ _('Broj CPC kartice:') }}</span><br>
         {{ driver.cpc_card_number or '—' }}
       </div>
 
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Firma:') }}</span><br>
+        <span class="text-custom fw-bold text-shadow">{{ _('Firma:') }}</span><br>
         {{ driver.employer.company_name if driver.employer else _('Nije zaposlen') }}
       </div>
 
       <div class="col-md-6">
-        <span class="text-custom">{{ _('Status:') }}</span><br>
+        <span class="text-custom fw-bold text-shadow">{{ _('Status:') }}</span><br>
         {% if driver.active %}
           <span class="badge bg-success">{{ _('Aktivan') }}</span>
         {% else %}
@@ -71,23 +74,23 @@
     </div>
 
     {% if driver.cards|length > 1 %}
-  <hr class="divider my-4">
-  <h6 class="mb-3 text-custom">🗂 {{ _('Istorija tahograf kartica') }}</h6>
-  <ul class="list-group list-group-flush">
-    {% for card in driver.cards if not card.is_active %}
-      <li class="list-group-item bg-dark text-light">
-        <span class="fw-bold">{{ _('Broj kartice:') }}</span> {{ card.card_number }} —
-        {% if card.issue_date %}
-          <span class="fw-bold">{{ _('Izdata:') }}</span> {{ card.issue_date.strftime('%d.%m.%Y') }},
-        {% endif %}
-        {% if card.expiry_date %}
-          <span class="fw-bold">{{ _('Važi do:') }}</span> {{ card.expiry_date.strftime('%d.%m.%Y') }}
-        {% endif %}
-        <span class="badge bg-secondary ms-2">{{ _('neaktivna') }}</span>
-      </li>
-    {% endfor %}
-  </ul>
-{% endif %}
+      <hr class="divider my-4">
+      <h6 class="mb-3 text-custom text-shadow">🗂 {{ _('Istorija tahograf kartica') }}</h6>
+      <ul class="list-group list-group-flush">
+        {% for card in driver.cards if not card.is_active %}
+          <li class="list-group-item bg-dark text-light">
+            <span class="fw-bold">{{ _('Broj kartice:') }}</span> {{ card.card_number }} —
+            {% if card.issue_date %}
+              <span class="fw-bold">{{ _('Izdata:') }}</span> {{ card.issue_date.strftime('%d.%m.%Y') }},
+            {% endif %}
+            {% if card.expiry_date %}
+              <span class="fw-bold">{{ _('Važi do:') }}</span> {{ card.expiry_date.strftime('%d.%m.%Y') }}
+            {% endif %}
+            <span class="badge bg-secondary ms-2">{{ _('neaktivna') }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     {% if already_employed_by_other %}
       <a href="{{ url_for('main.update_driver', driver_id=driver.id) }}" class="btn btn-warning mt-4">{{ _('Ažuriraj vozača') }}</a>
@@ -103,10 +106,12 @@
   {% if ratings_info %}
     <!-- Ocene -->
     <div class="section-box mx-auto max-w-900">
-      <h5 class="text-center mb-3 section-title">⭐ {{ _('Ocene prethodnih poslodavaca') }}</h5>
-      <div class="table-responsive">
+      <h5 class="text-center mb-3 section-title text-shadow">
+        ⭐ {{ _('Ocene prethodnih poslodavaca') }}
+      </h5>
+      <div class="table-responsive shadow">
         <table class="table table-bordered table-hover align-middle text-center">
-          <thead>
+          <thead class="table-dark">
             <tr>
               <th>{{ _('Poslodavac') }}</th>
               <th>{{ _('Ocena') }}</th>
