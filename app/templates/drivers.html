@@ -68,30 +68,26 @@
         </h2>
     </div>
 
-    <!-- Pretraga -->
+   <!-- Pretraga -->
 <form method="GET" action="{{ url_for('main.drivers') }}" 
-      class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 w-100">
+      class="search-form mb-4">
 
-    <!-- Input i dugme -->
-    <div class="flex-grow-1 w-100 search-container">
-        <h5>{{ _("Unesite ime, broj tahografa ili CPC") }}</h5>
+    <h5>{{ _("Unesite ime, broj tahografa ili CPC") }}</h5>
 
-        <div class="input-group w-100 shadow-sm rounded">
+    <div class="search-controls">
+        <!-- Input sa dugmetom Pretraži -->
+        <div class="input-group shadow-sm rounded">
             <span class="input-group-text bg-light">
                 <i class="fas fa-search text-secondary"></i>
             </span>
-
             <input type="text" name="search" class="form-control" 
                    placeholder="{{ _('Unesite podatke') }}" value="{{ search or '' }}">
-
             <button type="submit" class="btn btn-primary transition-btn">
                 <i class="fas fa-arrow-right"></i> {{ _("Pretraži") }}
             </button>
         </div>
-    </div>
 
-    <!-- Sortiranje -->
-    <div>
+        <!-- Select za sortiranje -->
         <select name="sort" class="form-select sort-select" id="sortSelect">
             <option value="ime" {% if sort == 'ime' %}selected{% endif %}>
                 {{ _("Sortiraj po imenu") }}

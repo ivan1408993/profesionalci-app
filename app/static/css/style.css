@@ -83,7 +83,34 @@ footer {
     }
 }
 
-/* Dugme sa efektom transformacije i senke */
+/* Forma pretrage */
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* Kontrolni elementi: input + dugme i select */
+.search-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 1000px;
+}
+
+@media (min-width: 768px) {
+    .search-controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+/* Dugme sa animacijom */
 .transition-btn {
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -93,14 +120,17 @@ footer {
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* Ograničenje širine input sekcije */
-.search-container {
-    max-width: 1000px;
-}
-
-/* Opcionalno: min-width za select */
+/* Select da bude iste visine kao input */
 .sort-select {
     min-width: 180px;
+    height: 38px; /* visina input polja */
+}
+
+/* Input grupa da raste po širini */
+.input-group {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
 }
 
 
