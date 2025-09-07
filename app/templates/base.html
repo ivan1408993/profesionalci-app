@@ -69,32 +69,20 @@
           </li>
 
           {% if session.get('user_type') == 'employer' and session.get('user_id') %}
-          <!-- 👤 Poslodavac neon glass meni -->
-<li class="nav-item">
-    <a class="nav-link dropdown-toggle" href="#" id="employerMenu" role="button">
-        {{ _("Dobrodošli") }}, {{ session.get('company_name', _("Poslodavac")) }}
-    </a>
-    <!-- Neon Glass Menu -->
-    <aside id="employerNeonMenu" class="menu">
-        <span class="shine shine-top"></span>
-        <span class="shine shine-bottom"></span>
-        <span class="glow glow-top"></span>
-        <span class="glow glow-bottom"></span>
-        <span class="glow glow-bright glow-top"></span>
-        <span class="glow glow-bright glow-bottom"></span>
-        <div class="inner">
-            <ul>
-                <li><a href="{{ url_for('main.employer_profile') }}"><i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}</a></li>
-                <li><a href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>{{ _("Moji vozači") }}</a></li>
-                <li><a href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>{{ _("Dodaj vozača") }}</a></li>
-                <li><a href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>{{ _("Pretraga svih vozača") }}</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="text-danger" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>{{ _("Odjava") }}</a></li>
-            </ul>
-        </div>
-    </aside>
-</li>
-
+          <!-- 👤 Poslodavac meni -->
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="employerMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ _("Dobrodošli") }}, {{ session.get('company_name', _("Poslodavac")) }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
+                  <li><a class="dropdown-item" href="{{ url_for('main.employer_profile') }}"><i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>{{ _("Moji vozači") }}</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>{{ _("Dodaj vozača") }}</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>{{ _("Pretraga svih vozača") }}</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-danger" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>{{ _("Odjava") }}</a></li>
+              </ul>
+          </li>
 
           {% elif session.get('user_id') %}
           <!-- 👤 Vozač -->
@@ -161,8 +149,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     {% block scripts %}{% endblock %}
-
-    <script src="{{ url_for('static', filename='js/neonMenu.js') }}"></script>
-
 </body>
 </html>
