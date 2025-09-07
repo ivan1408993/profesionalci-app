@@ -23,11 +23,6 @@
             <span class="badge bg-success p-2 flex-shrink-0 me-2">
                 <i class="bi bi-check-circle-fill me-1"></i> {{ _("Zaposlen") }}
             </span>
-            {% if driver.employer %}
-                <span class="text-muted text-truncate" title="{{ driver.employer.company_name }}">
-                    {{ driver.employer.company_name }}
-                </span>
-            {% endif %}
         </div>
     {% else %}
         <span class="badge bg-danger p-2 flex-shrink-0">
@@ -70,7 +65,7 @@
     <div class="col-md-6">
         <div class="card card-body h-100 shadow-sm border-0 bg-secondary bg-opacity-10">
             <p class="fw-semibold text-info mb-1">
-                <i class="bi bi-building me-1 fs-5 text-info"></i> {{ _("Poslodavac") }}
+                <i class="bi bi-building me-1 fs-5 text-info"></i> {{ _(" Trenutni poslodavac") }}
             </p>
             <h5 class="mb-1">
                 {% if driver.employer %}
