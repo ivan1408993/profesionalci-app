@@ -70,11 +70,11 @@
 
     <!-- Pretraga -->
     <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 w-100">
-        <div class="flex-grow-1 w-100" style="max-width: 1000px;">
-            <div class="input-group w-100 shadow-sm rounded">
-                 <label for="searchInput" class="form-label d-block mb-1">
+            <label for="searchInput" class="form-label d-block mb-1">
             {{ _("Unesite ime, broj tahografa ili CPC") }}
         </label>
+        <div class="flex-grow-1 w-100" style="max-width: 1000px;">
+            <div class="input-group w-100 shadow-sm rounded">
                 <span class="input-group-text bg-light">
                     <i class="fas fa-search text-secondary"></i>
                 </span>
