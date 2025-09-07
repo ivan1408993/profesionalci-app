@@ -23,6 +23,27 @@ body {
     min-height: 100vh; /* drži footer na dnu */
 }
 
+/* Kontejner pozadine */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, #6a11cb, #2575fc, #ff6a00, #ff0099);
+    background-size: 800% 800%;
+    animation: gradientShift 20s ease infinite;
+    z-index: -1; /* Da ostane iza sadržaja */
+}
+
+/* Animacija gradijenta */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
 /* Glavni sadržaj raste i gura footer dole */
 main {
     flex: 1; /* umesto 1 0 auto — jednostavnije */
