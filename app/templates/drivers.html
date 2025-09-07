@@ -70,38 +70,37 @@
 
     <!-- Pretraga -->
 <form method="GET" action="{{ url_for('main.drivers') }}" 
-      class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 w-100">
+      class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-end gap-3 w-100">
 
     <div class="flex-grow-1 w-100" style="max-width: 1000px;">
-        
-        <!-- Label изнад input поља -->
-        <label for="searchInput" class="form-label">
+        <!-- Label изнад целог реда -->
+        <label for="searchInput" class="form-label d-block mb-1">
             {{ _("Unesite ime, broj tahografa ili CPC") }}
         </label>
 
-        <div class="input-group w-100 shadow-sm rounded">
-            <span class="input-group-text bg-light">
-                <i class="fas fa-search text-secondary"></i>
-            </span>
+        <div class="d-flex w-100 gap-2">
+            <div class="input-group flex-grow-1 shadow-sm rounded">
+                <span class="input-group-text bg-light">
+                    <i class="fas fa-search text-secondary"></i>
+                </span>
 
-            <input type="text" id="searchInput" name="search" class="form-control" 
-                   placeholder="{{ _('Unesite podatke') }}" value="{{ search or '' }}">
+                <input type="text" id="searchInput" name="search" class="form-control" 
+                       placeholder="{{ _('Unesite podatke') }}" value="{{ search or '' }}">
+            </div>
 
             <button type="submit" class="btn btn-primary transition-btn">
                 <i class="fas fa-arrow-right"></i> {{ _("Pretraži") }}
             </button>
-        </div>
-    </div>
 
-    <div>
-        <select name="sort" class="form-select" style="min-width: 180px;" id="sortSelect">
-            <option value="ime" {% if sort == 'ime' %}selected{% endif %}>
-                {{ _("Sortiraj po imenu") }}
-            </option>
-            <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>
-                {{ _("Sortiraj po oceni") }}
-            </option>
-        </select>
+            <select name="sort" class="form-select sort-select" id="sortSelect">
+                <option value="ime" {% if sort == 'ime' %}selected{% endif %}>
+                    {{ _("Sortiraj po imenu") }}
+                </option>
+                <option value="ocena" {% if sort == 'ocena' %}selected{% endif %}>
+                    {{ _("Sortiraj po oceni") }}
+                </option>
+            </select>
+        </div>
     </div>
 </form>
 
