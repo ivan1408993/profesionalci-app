@@ -11,7 +11,9 @@ html, body {
 
 body {
     transition: background-color 0.3s ease, color 0.3s ease;
-    background: #2c5364;
+    background: linear-gradient(-45deg, #2c5364, #203a43, #0f2027, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
     color: #fdfcf9;
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -23,25 +25,19 @@ body {
     min-height: 100vh; /* drži footer na dnu */
 }
 
-/* Kontejner pozadine */
-.animated-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(-45deg, #2c5364, #203a43, #0f2027, #2c5364);
-    background-size: 400% 400%;
-    animation: gradientShift 25s ease infinite;
-    z-index: -1; /* Da ostane iza sadržaja */
-}
-
 /* Animacija gradijenta */
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
+
 
 
 
