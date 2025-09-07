@@ -83,6 +83,26 @@ footer {
     }
 }
 
+/* Dugme sa efektom transformacije i senke */
+.transition-btn {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.transition-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Ograničenje širine input sekcije */
+.search-container {
+    max-width: 1000px;
+}
+
+/* Opcionalno: min-width za select */
+.sort-select {
+    min-width: 180px;
+}
+
 
 .footer-text {
     color: #ccc;
