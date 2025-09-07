@@ -39,7 +39,7 @@
                    style="transition: 0.3s;"
                    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.2)';"
                    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='';">
-                    <i class="fas fa-users"></i> {{ _("Svi vozači (uključujući i neaktivne)") }}
+                    <i class="fas fa-users"></i> {{ _("Aktivni i neaktivni vozači") }}
                 </a>
                 <a href="{{ url_for('main.add_driver') }}" class="btn btn-success btn-sm custom-btn"
                    style="transition: 0.3s;"
@@ -72,7 +72,10 @@
     <form method="GET" action="{{ url_for('main.drivers') }}" class="mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 w-100">
         <div class="flex-grow-1 w-100" style="max-width: 1000px;">
             <div class="input-group w-100 shadow-sm rounded">
-                <span class="input-group-text bg-light">{{ _Unesite ime, broj tahografa ili CPC}}<i class="fas fa-search text-secondary"></i></span>
+                <span class="input-group-text bg-light">
+                    <h3>{{ _Unesite ime, broj tahografa ili CPC}}</h3>
+                    <i class="fas fa-search text-secondary"></i>
+                </span>
                 <input type="text" name="search" class="form-control" placeholder="{{ _('Unesite podatke') }}" value="{{ search or '' }}">
                 <button type="submit" class="btn btn-primary"
                         style="transition: 0.3s;"
