@@ -75,16 +75,13 @@
                   {{ _("Dobrodošli") }}, {{ session.get('company_name', _("Poslodavac")) }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
-                  <li>
-    <a class="dropdown-item" href="{{ url_for('main.employer_profile') }}">
-        <i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}
+     <li>
+    <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ url_for('main.employer_profile') }}">
+        <span><i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}</span>
+        <small class="text-muted">{{ _("ID firme:") }} {{ session.get('user_id') }}</small>
     </a>
 </li>
-<li>
-    <a class="dropdown-item disabled text-muted">
-        {{ _("ID firme:") }} {{ session.get('user_id') }}
-    </a>
-</li>
+
                   <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>{{ _("Moji vozači") }}</a></li>
                   <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>{{ _("Dodaj vozača") }}</a></li>
                   <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>{{ _("Pretraga svih vozača") }}</a></li>
