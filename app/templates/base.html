@@ -82,10 +82,9 @@
 </li>
 <li>
     <a class="dropdown-item disabled text-muted">
-        {{ _("ID firme:") }} {{ current_user.id }}
+        {{ _("ID firme:") }} {{ session.get('user_id') }}
     </a>
 </li>
-
                   <li><a class="dropdown-item" href="{{ url_for('main.drivers') }}"><i class="fas fa-user me-1"></i><i class="fas fa-truck ms-1 me-2"></i>{{ _("Moji vozači") }}</a></li>
                   <li><a class="dropdown-item" href="{{ url_for('main.add_driver') }}"><i class="fas fa-user-plus me-2"></i>{{ _("Dodaj vozača") }}</a></li>
                   <li><a class="dropdown-item" href="{{ url_for('main.search_driver') }}"><i class="fas fa-search me-2"></i>{{ _("Pretraga svih vozača") }}</a></li>
