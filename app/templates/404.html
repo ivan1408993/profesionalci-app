@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}404 - Страница није пронађена{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="display-1 text-danger">404</h1>
+    <h2 class="mb-4">Страница није пронађена</h2>
+    <p class="text-muted mb-4">
+        Линк који тражиш не постоји или је премештен.
+    </p>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+        <i class="fas fa-home me-2"></i> Назад на почетну
+    </a>
+</div>
+{% endblock %}

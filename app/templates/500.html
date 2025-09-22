@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}500 - Грешка на серверу{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="display-1 text-warning">500</h1>
+    <h2 class="mb-4">Унутрашња грешка сервера</h2>
+    <p class="text-muted mb-4">
+        Извини, нешто је пошло наопако. Наш тим је обавештен.
+    </p>
+    <a href="{{ url_for('main.index') }}" class="btn btn-secondary">
+        <i class="fas fa-redo me-2"></i> Покушај поново
+    </a>
+</div>
+{% endblock %}
