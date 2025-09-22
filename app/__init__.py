@@ -8,7 +8,6 @@ import os
 from dotenv import load_dotenv
 from flask_session import Session
 from datetime import timedelta
-from . import errors
 
 load_dotenv()
 
@@ -28,9 +27,6 @@ def get_locale():
 def create_app():
     app = Flask(__name__)
 
-
-    app.register_error_handler(404, errors.page_not_found)
-    app.register_error_handler(500, errors.internal_error)
     # Baza
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
