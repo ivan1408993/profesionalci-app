@@ -76,9 +76,11 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="employerMenu">
      <li>
-    <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ url_for('main.employer_profile') }}">
-        <span><i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}</span>
-        <small class="text-muted">{{ _("ID firme:") }} {{ session.get('user_id') }}</small>
+    <a class="dropdown-item d-flex align-items-center" href="{{ url_for('main.employer_profile') }}">
+        <i class="fas fa-user-circle me-2"></i>{{ _("Moj profil") }}
+        <span class="badge bg-primary ms-2">
+            ID: {{ session.get('user_id') }}
+        </span>
     </a>
 </li>
 
