@@ -64,7 +64,7 @@
               <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}"
                  href="{{ url_for('main.contact') }}"
                  {% if request.endpoint == 'main.contact' %}aria-current="page"{% endif %}>
-                 {{ _("✉️ Kontakt") }}
+                <i class="fas fa-envelope text-primary me-2"></i>{{ _("Kontakt") }}
               </a>
           </li>
 
