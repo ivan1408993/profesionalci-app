@@ -95,21 +95,14 @@ def add_driver_card(driver_id):
 # INDEX
 @main.route('/')
 def index():
-    # Прочитај cookie
-    user_id = request.cookies.get('user_id')
-    user_type = request.cookies.get('user_type')
-
-    if user_id and user_type:
+    if 'user_id' in session:
+        print(dict(session))
+        user_type = session.get('user_type')
         if user_type == 'employer':
             return redirect(url_for('main.drivers'))
         elif user_type == 'superadmin':
             return redirect(url_for('main.admin_dashboard'))
-
-    # Ако нема cookie или није валидан, прикажи index
-    return render_template(
-        'index.html',
-        current_lang=session.get('lang', 'sr')
-    )
+    return render_template('index.html', current_lang=session.get('lang', 'sr'))
 
 
 @main.route('/drivers/add', methods=['GET', 'POST'])
@@ -473,27 +466,19 @@ def register():
 
 
 
-from flask import make_response, redirect, url_for, request, session
+from flask import make_response
 
 @main.route('/logout')
 def logout():
     # Uzmemo jezik iz cookie-ja (ako postoji), fallback na 'sr'
     lang = request.cookies.get('lang', 'sr')
 
-    # Očistimo session (ako još uvek koristimo)
+    # Očistimo sesiju
     session.clear()
 
-    # Kreiramo response i setujemo redirect na index
+    # Kreiramo response i setujemo jezik ponovo u cookie
     response = make_response(redirect(url_for('main.index')))
-
-    # Brišemo login cookie-je
-    response.set_cookie('user_id', '', expires=0, domain='.driverrate.com')
-    response.set_cookie('user_type', '', expires=0, domain='.driverrate.com')
-    response.set_cookie('company_name', '', expires=0, domain='.driverrate.com')
-
-    # Ponovo setujemo jezik cookie
-    response.set_cookie('lang', lang, max_age=60*60*24*30, domain='.driverrate.com')
-
+    response.set_cookie('lang', lang, max_age=60*60*24*30)  # čuvamo 30 dana
     return response
 
 
@@ -507,9 +492,10 @@ def login():
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
 
+        # ⚠️ tražimo po EMAILU samo
         attempt = LoginAttempt.query.filter_by(email=email).first()
 
-        # Blokada
+        # Ako postoji blokada
         if attempt and attempt.attempts >= 5:
             if attempt.last_failed_at and (datetime.utcnow() - attempt.last_failed_at) < timedelta(minutes=5):
                 remaining = 300 - int((datetime.utcnow() - attempt.last_failed_at).total_seconds())
@@ -522,8 +508,9 @@ def login():
                     email=email
                 )
             else:
+                # istekla blokada → reset
                 attempt.attempts = 0
-                attempt.last_failed_at = datetime.utcnow()
+                attempt.last_failed_at = datetime.utcnow()  # ⚡ važno da ne bude None
                 db.session.commit()
 
         employer = Employer.query.filter_by(email=email).first()
@@ -546,46 +533,12 @@ def login():
                 db.session.delete(attempt)
                 db.session.commit()
 
-            # --- napravimo response sa cookie ---
-            resp = make_response(
-                redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
-            )
+            session['user_id'] = employer.id
+            session['user_type'] = 'superadmin' if employer.is_superadmin else 'employer'
+            session['company_name'] = employer.company_name
+            return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
 
-            # Autentikacioni cookie
-            resp.set_cookie(
-                'user_id',
-                str(employer.id),
-                domain='.driverrate.com',  # važi za www i non-www
-                secure=True,               # samo HTTPS
-                httponly=True,             # JS ne može da čita
-                samesite='Lax',
-                max_age=30*24*3600         # 30 dana
-            )
-
-            # User role cookie (ako front-end treba da zna)
-            resp.set_cookie(
-                'user_type',
-                'superadmin' if employer.is_superadmin else 'employer',
-                domain='.driverrate.com',
-                secure=True,
-                httponly=False,   # JS može da čita
-                samesite='Lax',
-                max_age=30*24*3600
-            )
-
-            resp.set_cookie(
-                'company_name',
-                employer.company_name,
-                domain='.driverrate.com',
-                secure=True,
-                httponly=False,
-                samesite='Lax',
-                max_age=30*24*3600
-            )
-
-            return resp
-
-        # Neuspešan login → uvećaj broj pokušaja
+        # ❌ Neuspešan login → uvećaj broj pokušaja
         now = datetime.utcnow()
         if attempt:
             attempt.attempts += 1
@@ -593,19 +546,29 @@ def login():
         else:
             attempt = LoginAttempt(email=email, ip_address=ip, attempts=1, last_failed_at=now)
             db.session.add(attempt)
+
         db.session.commit()
 
         remaining_attempts = max(0, 5 - attempt.attempts)
         if remaining_attempts > 0:
             flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
-        return render_template(
-            "login.html",
-            current_lang=session.get('lang', 'sr'),
-            block=remaining_attempts == 0,
-            remaining_attempts=remaining_attempts,
-            remaining_seconds=300 if remaining_attempts == 0 else 0,
-            email=email
-        )
+            return render_template(
+                "login.html",
+                current_lang=session.get('lang', 'sr'),
+                block=False,
+                remaining_attempts=remaining_attempts,
+                remaining_seconds=0,
+                email=email
+            )
+        else:
+            return render_template(
+                "login.html",
+                current_lang=session.get('lang', 'sr'),
+                block=True,
+                remaining_attempts=0,
+                remaining_seconds=300,
+                email=email
+            )
 
     # GET – početno stanje
     return render_template(
