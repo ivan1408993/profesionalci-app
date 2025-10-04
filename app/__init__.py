@@ -1,4 +1,4 @@
-from flask import Flask, session, request, g
+from flask import Flask, session, request, g, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_babel import Babel
@@ -55,15 +55,13 @@ def create_app():
     app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
-    
     # === COOKIE podešavanja za sve poddomene ===
     app.config.update(
-    SESSION_COOKIE_DOMAIN=".driverrate.com",  # važi i za www i non-www
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_SAMESITE="Lax",
-    SESSION_COOKIE_HTTPONLY=True
+        SESSION_COOKIE_DOMAIN=".driverrate.com",  # važi i za www i non-www
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_SAMESITE="Lax",
+        SESSION_COOKIE_HTTPONLY=True
     )
-
 
     # === Inicijalizacija ekstenzija ===
     Session(app)
@@ -72,9 +70,16 @@ def create_app():
     babel.init_app(app, locale_selector=get_locale)
     mail.init_app(app)
 
-    # === Jezik u g.current_lang ===
+    # === Pre svakog zahteva ===
     @app.before_request
-    def set_current_lang():
+    def before_every_request():
+        # 1️⃣ Forsiraj www.driverrate.com ako nije
+        host = request.host.lower()
+        if host == "driverrate.com":
+            new_url = request.url.replace("://driverrate.com", "://www.driverrate.com")
+            return redirect(new_url, code=301)
+
+        # 2️⃣ Postavi trenutni jezik (g.current_lang)
         g.current_lang = get_locale()
 
     # === Registracija ruta ===
