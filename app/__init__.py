@@ -32,7 +32,7 @@ def create_app():
     # === BAZA ===
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'tajna123'
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'tajna123')
     app.config['JMBG_SALT'] = 'moj_sakriveni_salt_2025'
 
     # === BABEL (prevodi) ===
@@ -55,10 +55,15 @@ def create_app():
     app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
-    # ⚙️ Cookie konfiguracija — стабилна за Render + Cloudflare
+    # ⚙️ Cookie konfiguracija — stabilna za Render + Cloudflare
+    if "driverrate.com" in request.host:
+        cookie_domain = ".driverrate.com"
+    else:
+        cookie_domain = None  # Render ili lokalno
+
     app.config.update(
-        SESSION_COOKIE_DOMAIN=".driverrate.com",  # važi za www i non-www
-        SESSION_COOKIE_SECURE=True,               # HTTPS obavezno
+        SESSION_COOKIE_DOMAIN=cookie_domain,
+        SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_SAMESITE="Lax",
         SESSION_COOKIE_HTTPONLY=True
     )
@@ -74,7 +79,7 @@ def create_app():
     @app.before_request
     def before_every_request():
         # 1️⃣ Ako nije HTTPS, redirektuj na HTTPS
-        if not request.is_secure and not app.debug:
+        if not request.is_secure and not app.debug and request.headers.get('X-Forwarded-Proto', 'http') != 'https':
             url = request.url.replace("http://", "https://", 1)
             return redirect(url, code=301)
 

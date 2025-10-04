@@ -96,9 +96,9 @@ def add_driver_card(driver_id):
 # INDEX
 @main.route('/')
 def index():
-    # Pročitaj cookie-je
-    user_id = request.cookies.get('user_id')
-    user_type = request.cookies.get('user_type')
+    # Proveravamo login preko sesije
+    user_id = session.get('user_id')
+    user_type = session.get('user_type')
 
     if user_id and user_type:
         if user_type == 'employer':
@@ -106,11 +106,12 @@ def index():
         elif user_type == 'superadmin':
             return redirect(url_for('main.admin_dashboard'))
 
-    # Ako nema cookie ili nije validan, prikaži index
+    # Ako nema sesije ili nije validna, prikaži index
     return render_template(
         'index.html',
-        current_lang=request.cookies.get('lang', 'sr')
+        current_lang=g.get('current_lang', 'sr')
     )
+
 
 
 @main.route('/drivers/add', methods=['GET', 'POST'])
@@ -501,9 +502,16 @@ def logout():
 
 
 
+from flask import render_template, request, redirect, url_for, flash, session, g
+from datetime import datetime, timedelta
+from werkzeug.security import check_password_hash
+from .models import Employer, LoginAttempt
+from . import db
+from flask_babel import _
+
 @main.route('/login', methods=['GET', 'POST'])
 def login():
-    # helper: stvarni IP (iza proxy-ja)
+    # === Pravi IP adresa iza proxy-ja ===
     xff = (request.headers.get('X-Forwarded-For') or "").split(",")[0].strip()
     ip = xff or request.remote_addr or "unknown"
 
@@ -511,16 +519,16 @@ def login():
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
 
-        # Tražimo po EMAILU
+        # Proveravamo prethodne pokušaje
         attempt = LoginAttempt.query.filter_by(email=email).first()
 
-        # Ako postoji blokada (više od 5 pokušaja u 5 minuta)
+        # Blokada nakon 5 neuspešnih pokušaja u 5 minuta
         if attempt and attempt.attempts >= 5:
             if attempt.last_failed_at and (datetime.utcnow() - attempt.last_failed_at) < timedelta(minutes=5):
                 remaining = 300 - int((datetime.utcnow() - attempt.last_failed_at).total_seconds())
                 return render_template(
                     "login.html",
-                    current_lang=request.cookies.get('lang', 'sr'),
+                    current_lang=g.get('current_lang', 'sr'),
                     block=True,
                     remaining_attempts=0,
                     remaining_seconds=remaining,
@@ -529,9 +537,10 @@ def login():
             else:
                 # Resetujemo pokušaje nakon isteka 5 minuta
                 attempt.attempts = 0
-                attempt.last_failed_at = datetime.utcnow()
+                attempt.last_failed_at = None
                 db.session.commit()
 
+        # Tražimo korisnika u bazi
         employer = Employer.query.filter_by(email=email).first()
 
         if employer and check_password_hash(employer.password_hash, password):
@@ -540,23 +549,23 @@ def login():
                 remaining_attempts = 5 - (attempt.attempts if attempt else 0)
                 return render_template(
                     "login.html",
-                    current_lang=request.cookies.get('lang', 'sr'),
+                    current_lang=g.get('current_lang', 'sr'),
                     block=False,
                     remaining_attempts=remaining_attempts,
                     remaining_seconds=0,
                     email=email
                 )
 
-            # uspešan login → očisti attempt zapis
+            # === Uspešan login ===
             if attempt:
                 db.session.delete(attempt)
                 db.session.commit()
 
-            # === SETOVANJE SESIJE ===
+            session.clear()  # obavezno očisti prethodnu sesiju
             session['user_id'] = employer.id
             session['user_type'] = 'superadmin' if employer.is_superadmin else 'employer'
             session['company_name'] = employer.company_name
-            session.permanent = True  # trajna sesija 30 dana (definisano u init.py)
+            session.permanent = True  # trajna sesija 30 dana
 
             # Redirekcija na dashboard
             return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
@@ -569,34 +578,24 @@ def login():
         else:
             attempt = LoginAttempt(email=email, ip_address=ip, attempts=1, last_failed_at=now)
             db.session.add(attempt)
-
         db.session.commit()
 
         remaining_attempts = max(0, 5 - attempt.attempts)
         if remaining_attempts > 0:
             flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
-            return render_template(
-                "login.html",
-                current_lang=request.cookies.get('lang', 'sr'),
-                block=False,
-                remaining_attempts=remaining_attempts,
-                remaining_seconds=0,
-                email=email
-            )
-        else:
-            return render_template(
-                "login.html",
-                current_lang=request.cookies.get('lang', 'sr'),
-                block=True,
-                remaining_attempts=0,
-                remaining_seconds=300,
-                email=email
-            )
+        return render_template(
+            "login.html",
+            current_lang=g.get('current_lang', 'sr'),
+            block=remaining_attempts == 0,
+            remaining_attempts=remaining_attempts,
+            remaining_seconds=300 if remaining_attempts == 0 else 0,
+            email=email
+        )
 
     # === GET zahtev – početni prikaz forme ===
     return render_template(
         "login.html",
-        current_lang=request.cookies.get('lang', 'sr'),
+        current_lang=g.get('current_lang', 'sr'),
         block=False,
         remaining_attempts=5,
         remaining_seconds=0,
