@@ -1,13 +1,14 @@
-from flask import Flask, session, request, g  # dodaj g ovde
+from flask import Flask, session, request, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_babel import Babel
 from flask_mail import Mail
-from .helpers import konvertuj_tekst
-import os
-from dotenv import load_dotenv
 from flask_session import Session
 from datetime import timedelta
+from dotenv import load_dotenv
+import os
+
+from .helpers import konvertuj_tekst
 
 load_dotenv()
 
@@ -15,6 +16,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 babel = Babel()
 mail = Mail()
+
 
 def get_locale():
     # 1. cookie lang
@@ -27,19 +29,18 @@ def get_locale():
 def create_app():
     app = Flask(__name__)
 
-    # Baza
+    # === BAZA ===
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'tajna123'
     app.config['JMBG_SALT'] = 'moj_sakriveni_salt_2025'
 
-    # Babel podešavanja
+    # === BABEL (prevodi) ===
     app.config['BABEL_DEFAULT_LOCALE'] = 'sr'
     app_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(app_root, 'translations')
 
-
-    # Email podešavanja
+    # === EMAIL ===
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
@@ -47,30 +48,34 @@ def create_app():
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
     app.config['MAIL_DEFAULT_SENDER'] = ('Profesionalci', os.environ.get('MAIL_USERNAME'))
 
-      # Konfiguriši session da se čuva u fajlovima (može i Redis, baza...)
+    # === SESSION podešavanja ===
     app.config['SESSION_TYPE'] = 'filesystem'
     app.config['SESSION_PERMANENT'] = True
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
     app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
+    # === COOKIE podešavanja za domen ===
+    app.config.update(
+        SESSION_COOKIE_DOMAIN=".driverrate.com",  # važi i za www i bez www
+        SESSION_COOKIE_SECURE=True,               # samo HTTPS
+        SESSION_COOKIE_SAMESITE="Lax",            # dozvoljava preusmerenja
+        SESSION_COOKIE_HTTPONLY=True              # zaštita od JS pristupa
+    )
 
-    # Inicijalizuj Flask-Session
+    # === Inicijalizacija ekstenzija ===
     Session(app)
-
-
-    # Inicijalizacija ekstenzija
     db.init_app(app)
     migrate.init_app(app, db)
     babel.init_app(app, locale_selector=get_locale)
     mail.init_app(app)
 
-    # Ovo dodajemo da g.current_lang radi svuda
+    # === Jezik u g.current_lang ===
     @app.before_request
     def set_current_lang():
         g.current_lang = get_locale()
 
-    # Registracija ruta
+    # === Registracija ruta ===
     from .routes import main
     app.register_blueprint(main)
 
