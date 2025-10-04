@@ -55,12 +55,12 @@ def create_app():
     app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
-    # === COOKIE podešavanja za domen ===
+    # === COOKIE podešavanja (fallback varijanta za Render) ===
     app.config.update(
-        SESSION_COOKIE_DOMAIN=".driverrate.com",  # važi i za www i bez www
-        SESSION_COOKIE_SECURE=True,               # samo HTTPS
-        SESSION_COOKIE_SAMESITE="Lax",            # dozvoljava preusmerenja
-        SESSION_COOKIE_HTTPONLY=True              # zaštita od JS pristupa
+    SESSION_COOKIE_DOMAIN=None,  # Flask automatski koristi domen sa kog dolazi zahtev
+    SESSION_COOKIE_SECURE=True,  # HTTPS obavezno
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_HTTPONLY=True
     )
 
     # === Inicijalizacija ekstenzija ===
