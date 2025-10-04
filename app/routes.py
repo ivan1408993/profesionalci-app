@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for, flash, g, current_app
 from flask_babel import _
 from flask_mail import Message
-from flask_paginate import Pagination, get_page_args
+from flask_paginate import Pagination, get_page_arg
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import or_, and_, func
@@ -511,7 +511,6 @@ from flask_babel import _
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
-    # === Pravi IP adresa iza proxy-ja ===
     xff = (request.headers.get('X-Forwarded-For') or "").split(",")[0].strip()
     ip = xff or request.remote_addr or "unknown"
 
@@ -519,58 +518,47 @@ def login():
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
 
-        # Proveravamo prethodne pokušaje
         attempt = LoginAttempt.query.filter_by(email=email).first()
 
-        # Blokada nakon 5 neuspešnih pokušaja u 5 minuta
         if attempt and attempt.attempts >= 5:
             if attempt.last_failed_at and (datetime.utcnow() - attempt.last_failed_at) < timedelta(minutes=5):
                 remaining = 300 - int((datetime.utcnow() - attempt.last_failed_at).total_seconds())
-                return render_template(
-                    "login.html",
-                    current_lang=g.get('current_lang', 'sr'),
-                    block=True,
-                    remaining_attempts=0,
-                    remaining_seconds=remaining,
-                    email=email
-                )
+                return render_template("login.html",
+                                       current_lang=g.get('current_lang', 'sr'),
+                                       block=True,
+                                       remaining_attempts=0,
+                                       remaining_seconds=remaining,
+                                       email=email)
             else:
-                # Resetujemo pokušaje nakon isteka 5 minuta
                 attempt.attempts = 0
                 attempt.last_failed_at = None
                 db.session.commit()
 
-        # Tražimo korisnika u bazi
         employer = Employer.query.filter_by(email=email).first()
 
         if employer and check_password_hash(employer.password_hash, password):
             if not employer.active:
                 flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
                 remaining_attempts = 5 - (attempt.attempts if attempt else 0)
-                return render_template(
-                    "login.html",
-                    current_lang=g.get('current_lang', 'sr'),
-                    block=False,
-                    remaining_attempts=remaining_attempts,
-                    remaining_seconds=0,
-                    email=email
-                )
+                return render_template("login.html",
+                                       current_lang=g.get('current_lang', 'sr'),
+                                       block=False,
+                                       remaining_attempts=remaining_attempts,
+                                       remaining_seconds=0,
+                                       email=email)
 
-            # === Uspešan login ===
             if attempt:
                 db.session.delete(attempt)
                 db.session.commit()
 
-            session.clear()  # obavezno očisti prethodnu sesiju
+            session.clear()
             session['user_id'] = employer.id
             session['user_type'] = 'superadmin' if employer.is_superadmin else 'employer'
             session['company_name'] = employer.company_name
-            session.permanent = True  # trajna sesija 30 dana
+            session.permanent = True
 
-            # Redirekcija na dashboard
             return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
 
-        # === Neuspešan login ===
         now = datetime.utcnow()
         if attempt:
             attempt.attempts += 1
@@ -583,24 +571,20 @@ def login():
         remaining_attempts = max(0, 5 - attempt.attempts)
         if remaining_attempts > 0:
             flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
-        return render_template(
-            "login.html",
-            current_lang=g.get('current_lang', 'sr'),
-            block=remaining_attempts == 0,
-            remaining_attempts=remaining_attempts,
-            remaining_seconds=300 if remaining_attempts == 0 else 0,
-            email=email
-        )
 
-    # === GET zahtev – početni prikaz forme ===
-    return render_template(
-        "login.html",
-        current_lang=g.get('current_lang', 'sr'),
-        block=False,
-        remaining_attempts=5,
-        remaining_seconds=0,
-        email=""
-    )
+        return render_template("login.html",
+                               current_lang=g.get('current_lang', 'sr'),
+                               block=remaining_attempts == 0,
+                               remaining_attempts=remaining_attempts,
+                               remaining_seconds=300 if remaining_attempts == 0 else 0,
+                               email=email)
+
+    return render_template("login.html",
+                           current_lang=g.get('current_lang', 'sr'),
+                           block=False,
+                           remaining_attempts=5,
+                           remaining_seconds=0,
+                           email="")
 
 
 @main.route('/dashboard')

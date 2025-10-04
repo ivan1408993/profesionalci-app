@@ -1,4 +1,4 @@
-from flask import Flask, session, request, g, redirect
+from flask import Flask, session, g, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_babel import Babel
@@ -55,14 +55,9 @@ def create_app():
     app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
-    # ⚙️ Cookie konfiguracija — stabilna za Render + Cloudflare
-    if "driverrate.com" in request.host:
-        cookie_domain = ".driverrate.com"
-    else:
-        cookie_domain = None  # Render ili lokalno
-
+    # ⚙️ Cookie konfiguracija – statički, bez request u create_app
     app.config.update(
-        SESSION_COOKIE_DOMAIN=cookie_domain,
+        SESSION_COOKIE_DOMAIN=None,  # radi lokalno, na Render-u i domenima
         SESSION_COOKIE_SECURE=True,
         SESSION_COOKIE_SAMESITE="Lax",
         SESSION_COOKIE_HTTPONLY=True
@@ -78,7 +73,7 @@ def create_app():
     # === Pre svakog zahteva ===
     @app.before_request
     def before_every_request():
-        # 1️⃣ Ako nije HTTPS, redirektuj na HTTPS
+        # 1️⃣ Ako nije HTTPS, redirektuj na HTTPS (iza proxy-ja)
         if not request.is_secure and not app.debug and request.headers.get('X-Forwarded-Proto', 'http') != 'https':
             url = request.url.replace("http://", "https://", 1)
             return redirect(url, code=301)
