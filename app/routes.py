@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for, flash, g, current_app
 from flask_babel import _
 from flask_mail import Message
-from flask_paginate import Pagination, get_page_arg
+from flask_paginate import Pagination, get_page_args
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import or_, and_, func
