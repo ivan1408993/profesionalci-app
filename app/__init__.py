@@ -19,10 +19,10 @@ mail = Mail()
 
 
 def get_locale():
-    # 1. cookie lang
+    # 1️⃣ cookie lang
     if request.cookies.get('lang'):
         return request.cookies.get('lang')
-    # 2. browser accept-languages
+    # 2️⃣ browser accept-languages
     return request.accept_languages.best_match(['sr', 'en', 'de']) or 'sr'
 
 
@@ -55,10 +55,10 @@ def create_app():
     app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
-    # === COOKIE podešavanja za sve poddomene ===
+    # ⚙️ Cookie konfiguracija — стабилна за Render + Cloudflare
     app.config.update(
-        SESSION_COOKIE_DOMAIN=".driverrate.com",  # važi i za www i non-www
-        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_DOMAIN=".driverrate.com",  # važi za www i non-www
+        SESSION_COOKIE_SECURE=True,               # HTTPS obavezno
         SESSION_COOKIE_SAMESITE="Lax",
         SESSION_COOKIE_HTTPONLY=True
     )
@@ -73,13 +73,18 @@ def create_app():
     # === Pre svakog zahteva ===
     @app.before_request
     def before_every_request():
-        # 1️⃣ Forsiraj www.driverrate.com ako nije
+        # 1️⃣ Ako nije HTTPS, redirektuj na HTTPS
+        if not request.is_secure and not app.debug:
+            url = request.url.replace("http://", "https://", 1)
+            return redirect(url, code=301)
+
+        # 2️⃣ Ako nema www, redirektuj na www.driverrate.com
         host = request.host.lower()
         if host == "driverrate.com":
             new_url = request.url.replace("://driverrate.com", "://www.driverrate.com")
             return redirect(new_url, code=301)
 
-        # 2️⃣ Postavi trenutni jezik (g.current_lang)
+        # 3️⃣ Postavi trenutni jezik
         g.current_lang = get_locale()
 
     # === Registracija ruta ===

@@ -481,16 +481,24 @@ def logout():
     # Očistimo sesiju
     session.clear()
 
-    # Kreiramo response i brišemo login cookie-je
+    # Napravimo redirect response
     response = make_response(redirect(url_for('main.index')))
-    response.set_cookie('lang', lang, max_age=60*60*24*30)  # čuvamo 30 dana
+    response.set_cookie('lang', lang, max_age=60*60*24*30)
+
+    # Dinamički određujemo domen (ako smo na pravom sajtu)
+    domain = request.host
+    if domain.endswith('driverrate.com'):
+        cookie_domain = '.driverrate.com'
+    else:
+        cookie_domain = None  # za localhost/test okruženje
 
     # Brišemo login cookie-je
-    response.set_cookie('user_id', '', expires=0, domain='.driverrate.com')
-    response.set_cookie('user_type', '', expires=0, domain='.driverrate.com')
-    response.set_cookie('company_name', '', expires=0, domain='.driverrate.com')
+    response.set_cookie('user_id', '', expires=0, domain=cookie_domain)
+    response.set_cookie('user_type', '', expires=0, domain=cookie_domain)
+    response.set_cookie('company_name', '', expires=0, domain=cookie_domain)
 
     return response
+
 
 
 @main.route('/login', methods=['GET', 'POST'])
@@ -503,10 +511,10 @@ def login():
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
 
-        # Tražimo po EMAILU samo
+        # Tražimo po EMAILU
         attempt = LoginAttempt.query.filter_by(email=email).first()
 
-        # Ako postoji blokada
+        # Ako postoji blokada (više od 5 pokušaja u 5 minuta)
         if attempt and attempt.attempts >= 5:
             if attempt.last_failed_at and (datetime.utcnow() - attempt.last_failed_at) < timedelta(minutes=5):
                 remaining = 300 - int((datetime.utcnow() - attempt.last_failed_at).total_seconds())
@@ -519,6 +527,7 @@ def login():
                     email=email
                 )
             else:
+                # Resetujemo pokušaje nakon isteka 5 minuta
                 attempt.attempts = 0
                 attempt.last_failed_at = datetime.utcnow()
                 db.session.commit()
@@ -543,47 +552,16 @@ def login():
                 db.session.delete(attempt)
                 db.session.commit()
 
-            # --- napravimo response sa cookie ---
-            resp = make_response(
-                redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
-            )
+            # === SETOVANJE SESIJE ===
+            session['user_id'] = employer.id
+            session['user_type'] = 'superadmin' if employer.is_superadmin else 'employer'
+            session['company_name'] = employer.company_name
+            session.permanent = True  # trajna sesija 30 dana (definisano u init.py)
 
-            # Autentikacioni cookie
-            resp.set_cookie(
-                'user_id',
-                str(employer.id),
-                domain='.driverrate.com',  # važi za www i non-www
-                secure=True,               # HTTPS obavezno
-                httponly=True,             # JS ne može da čita
-                samesite='Lax',
-                max_age=30*24*3600         # 30 dana
-            )
+            # Redirekcija na dashboard
+            return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
 
-            # User role cookie (ako front-end treba da zna)
-            resp.set_cookie(
-                'user_type',
-                'superadmin' if employer.is_superadmin else 'employer',
-                domain='.driverrate.com',
-                secure=True,
-                httponly=False,   # JS može da čita
-                samesite='Lax',
-                max_age=30*24*3600
-            )
-
-            # Company name cookie
-            resp.set_cookie(
-                'company_name',
-                employer.company_name,
-                domain='.driverrate.com',
-                secure=True,
-                httponly=False,
-                samesite='Lax',
-                max_age=30*24*3600
-            )
-
-            return resp
-
-        # Neuspešan login → uvećaj broj pokušaja
+        # === Neuspešan login ===
         now = datetime.utcnow()
         if attempt:
             attempt.attempts += 1
@@ -615,7 +593,7 @@ def login():
                 email=email
             )
 
-    # GET – početno stanje
+    # === GET zahtev – početni prikaz forme ===
     return render_template(
         "login.html",
         current_lang=request.cookies.get('lang', 'sr'),
