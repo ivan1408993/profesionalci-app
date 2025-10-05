@@ -1,4 +1,4 @@
-from flask import Flask, session, request, g  # dodaj g ovde
+from flask import Flask, session, request, g, redirect  # dodali redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_babel import Babel
@@ -27,19 +27,18 @@ def get_locale():
 def create_app():
     app = Flask(__name__)
 
-    # Baza
+    # === BAZA ===
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'tajna123'
     app.config['JMBG_SALT'] = 'moj_sakriveni_salt_2025'
 
-    # Babel podešavanja
+    # === JEZIK (Babel) ===
     app.config['BABEL_DEFAULT_LOCALE'] = 'sr'
     app_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(app_root, 'translations')
 
-
-    # Email podešavanja
+    # === EMAIL ===
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
@@ -47,30 +46,38 @@ def create_app():
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
     app.config['MAIL_DEFAULT_SENDER'] = ('Profesionalci', os.environ.get('MAIL_USERNAME'))
 
-      # Konfiguriši session da se čuva u fajlovima (može i Redis, baza...)
+    # === SESIJE ===
     app.config['SESSION_TYPE'] = 'filesystem'
     app.config['SESSION_PERMANENT'] = True
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
-    app.config['SESSION_FILE_DIR'] = os.path.join(app.instance_path, 'flask_session')
+
+    # 🟢 Dodato: sesije rade i na custom domenu
+    app.config['SESSION_COOKIE_DOMAIN'] = '.driverrate.com'
+    app.config['SESSION_FILE_DIR'] = '/tmp/flask_session'
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
-
-    # Inicijalizuj Flask-Session
+    # Inicijalizacija Flask-Session
     Session(app)
 
-
-    # Inicijalizacija ekstenzija
+    # === EKSTENZIJE ===
     db.init_app(app)
     migrate.init_app(app, db)
     babel.init_app(app, locale_selector=get_locale)
     mail.init_app(app)
 
-    # Ovo dodajemo da g.current_lang radi svuda
+    # === LOKALIZACIJA ===
     @app.before_request
     def set_current_lang():
         g.current_lang = get_locale()
 
-    # Registracija ruta
+    # 🟢 Dodato: redirect sa Render domena na pravi domen
+    @app.before_request
+    def redirect_to_custom_domain():
+        if request.host.startswith("profesionalci.onrender.com"):
+            target_url = request.url.replace("profesionalci.onrender.com", "www.driverrate.com")
+            return redirect(target_url, code=301)
+
+    # === RUTE ===
     from .routes import main
     app.register_blueprint(main)
 
