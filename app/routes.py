@@ -473,18 +473,25 @@ def logout():
     # Uzmemo jezik iz cookie-ja (ako postoji), fallback na 'sr'
     lang = request.cookies.get('lang', 'sr')
 
-    # Očistimo sesiju
+    # Očistimo server-side sesiju
     session.clear()
 
-    # Kreiramo response i setujemo jezik ponovo u cookie
+    # Napravimo response za redirect na index
     response = make_response(redirect(url_for('main.index')))
-    response.set_cookie('lang', lang, max_age=60*60*24*30)  # čuvamo 30 dana
-    return response
 
+    # Ponovo setujemo lang cookie za sve poddomene
+    response.set_cookie('lang', lang, max_age=60*60*24*30, domain='.driverrate.com', path='/')
+
+    # Brišemo session cookie za sve domene
+    cookie_name = current_app.session_cookie_name  # obično 'session'
+    response.set_cookie(cookie_name, '', expires=0, path='/', domain='.driverrate.com')
+    response.set_cookie(cookie_name, '', expires=0, path='/', domain='driverrate.com')
+    response.set_cookie(cookie_name, '', expires=0, path='/')  # host-only cookie
+
+    return response
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
-    # helper: stvarni IP (iza proxy-ja)
     xff = (request.headers.get('X-Forwarded-For') or "").split(",")[0].strip()
     ip = xff or request.remote_addr or "unknown"
 
@@ -492,25 +499,17 @@ def login():
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
 
-        # ⚠️ tražimo po EMAILU samo
         attempt = LoginAttempt.query.filter_by(email=email).first()
 
-        # Ako postoji blokada
+        # blokada
         if attempt and attempt.attempts >= 5:
             if attempt.last_failed_at and (datetime.utcnow() - attempt.last_failed_at) < timedelta(minutes=5):
                 remaining = 300 - int((datetime.utcnow() - attempt.last_failed_at).total_seconds())
-                return render_template(
-                    "login.html",
-                    current_lang=session.get('lang', 'sr'),
-                    block=True,
-                    remaining_attempts=0,
-                    remaining_seconds=remaining,
-                    email=email
-                )
+                return render_template("login.html", current_lang=session.get('lang', 'sr'), block=True,
+                                       remaining_attempts=0, remaining_seconds=remaining, email=email)
             else:
-                # istekla blokada → reset
                 attempt.attempts = 0
-                attempt.last_failed_at = datetime.utcnow()  # ⚡ važno da ne bude None
+                attempt.last_failed_at = datetime.utcnow()
                 db.session.commit()
 
         employer = Employer.query.filter_by(email=email).first()
@@ -519,26 +518,25 @@ def login():
             if not employer.active:
                 flash(_("Vaša firma nije aktivna. Prijava nije moguća."))
                 remaining_attempts = 5 - (attempt.attempts if attempt else 0)
-                return render_template(
-                    "login.html",
-                    current_lang=session.get('lang', 'sr'),
-                    block=False,
-                    remaining_attempts=remaining_attempts,
-                    remaining_seconds=0,
-                    email=email
-                )
+                return render_template("login.html", current_lang=session.get('lang', 'sr'), block=False,
+                                       remaining_attempts=remaining_attempts, remaining_seconds=0, email=email)
 
-            # uspešan login → očisti attempt zapis
             if attempt:
                 db.session.delete(attempt)
                 db.session.commit()
 
+            # ✅ Postavljanje sesije
             session['user_id'] = employer.id
             session['user_type'] = 'superadmin' if employer.is_superadmin else 'employer'
             session['company_name'] = employer.company_name
-            return redirect(url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers'))
 
-        # ❌ Neuspešan login → uvećaj broj pokušaja
+            # Redirect na www
+            target = url_for('main.admin_dashboard' if employer.is_superadmin else 'main.drivers')
+            if not request.host.startswith('www.'):
+                return redirect(f"https://www.driverrate.com{target}")
+            return redirect(target)
+
+        # neuspešan login
         now = datetime.utcnow()
         if attempt:
             attempt.attempts += 1
@@ -546,39 +544,19 @@ def login():
         else:
             attempt = LoginAttempt(email=email, ip_address=ip, attempts=1, last_failed_at=now)
             db.session.add(attempt)
-
         db.session.commit()
 
         remaining_attempts = max(0, 5 - attempt.attempts)
-        if remaining_attempts > 0:
-            flash(_("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts))
-            return render_template(
-                "login.html",
-                current_lang=session.get('lang', 'sr'),
-                block=False,
-                remaining_attempts=remaining_attempts,
-                remaining_seconds=0,
-                email=email
-            )
-        else:
-            return render_template(
-                "login.html",
-                current_lang=session.get('lang', 'sr'),
-                block=True,
-                remaining_attempts=0,
-                remaining_seconds=300,
-                email=email
-            )
+        flash_msg = _("Pogrešan email ili lozinka. Preostalo pokušaja: ") + str(remaining_attempts) if remaining_attempts > 0 else _("Blokirani ste 5 minuta.")
+        flash(flash_msg)
+        return render_template("login.html", current_lang=session.get('lang', 'sr'),
+                               block=(remaining_attempts == 0),
+                               remaining_attempts=remaining_attempts,
+                               remaining_seconds=(300 if remaining_attempts == 0 else 0),
+                               email=email)
 
-    # GET – početno stanje
-    return render_template(
-        "login.html",
-        current_lang=session.get('lang', 'sr'),
-        block=False,
-        remaining_attempts=5,
-        remaining_seconds=0,
-        email=""
-    )
+    return render_template("login.html", current_lang=session.get('lang', 'sr'),
+                           block=False, remaining_attempts=5, remaining_seconds=0, email="")
 
 
 @main.route('/dashboard')
