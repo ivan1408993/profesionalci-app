@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 from flask_babel import _
 from flask_mail import Message
 from flask_paginate import Pagination, get_page_args
+from flask import make_response
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import or_, and_, func
@@ -93,16 +94,23 @@ def add_driver_card(driver_id):
 
 
 # INDEX
+# INDEX
 @main.route('/')
 def index():
-    if 'user_id' in session:
-        print(dict(session))
-        user_type = session.get('user_type')
-        if user_type == 'employer':
-            return redirect(url_for('main.drivers'))
-        elif user_type == 'superadmin':
-            return redirect(url_for('main.admin_dashboard'))
+    user_id = session.get('user_id')
+    user_type = session.get('user_type')
+
+    # Ako je korisnik prijavljen, odmah redirektuj na dashboard na www
+    if user_id and user_type:
+        target = url_for('main.drivers') if user_type == 'employer' else url_for('main.admin_dashboard')
+        # Force www prefix
+        if not request.host.startswith('www.'):
+            return redirect(f"https://www.driverrate.com{target}")
+        return redirect(target)
+
+    # Nije prijavljen → prikaži index
     return render_template('index.html', current_lang=session.get('lang', 'sr'))
+
 
 
 @main.route('/drivers/add', methods=['GET', 'POST'])
@@ -465,20 +473,27 @@ def register():
 
 
 
-
-from flask import make_response
+from flask import current_app
 
 @main.route('/logout')
 def logout():
-    # Uzmemo jezik iz cookie-ja (ako postoji), fallback na 'sr'
     lang = request.cookies.get('lang', 'sr')
 
-    # Očistimo sesiju
+    # Očisti server-side sesiju
     session.clear()
 
-    # Kreiramo response i setujemo jezik ponovo u cookie
+    # Napravi response i eksplicitno obriši cookie pod oba domena (host-only i leading-dot)
+    cookie_name = current_app.session_cookie_name  # obično 'session'
     response = make_response(redirect(url_for('main.index')))
-    response.set_cookie('lang', lang, max_age=60*60*24*30)  # čuvamo 30 dana
+    # ponovo setuj lang cookie za .driverrate.com
+    response.set_cookie('lang', lang, max_age=60*60*24*30, domain='.driverrate.com', path='/')
+
+    # Obriši sesiju cookie za obe varijante domena (s i bez tačke)
+    response.set_cookie(cookie_name, '', expires=0, path='/', domain='.driverrate.com')
+    response.set_cookie(cookie_name, '', expires=0, path='/', domain='driverrate.com')
+    # dodatno obriši bez domene (host-only)
+    response.set_cookie(cookie_name, '', expires=0, path='/')
+
     return response
 
 

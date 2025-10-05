@@ -47,15 +47,20 @@ def create_app():
     app.config['MAIL_DEFAULT_SENDER'] = ('Profesionalci', os.environ.get('MAIL_USERNAME'))
 
     # === SESIJE ===
+   # SESIJE (mora pre Session(app))
     app.config['SESSION_TYPE'] = 'filesystem'
     app.config['SESSION_PERMANENT'] = True
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
-
-    # 🟢 Dodato: sesije rade i na custom domenu
-    app.config['SESSION_COOKIE_DOMAIN'] = '.driverrate.com'
     app.config['SESSION_FILE_DIR'] = '/tmp/flask_session'
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
+    # važna podešavanja cookie-ja — primenjuju se na sve poddomene
+    app.config['SESSION_COOKIE_NAME'] = os.environ.get('SESSION_COOKIE_NAME', 'session')
+    app.config['SESSION_COOKIE_DOMAIN'] = '.driverrate.com'   # VAŽNO: odnosi se na www + bez-www
+    app.config['SESSION_COOKIE_PATH'] = '/'
+    app.config['SESSION_COOKIE_SECURE'] = True
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
     # Inicijalizacija Flask-Session
     Session(app)
 
