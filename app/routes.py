@@ -94,19 +94,21 @@ def add_driver_card(driver_id):
 
 
 # INDEX
-# INDEX
 @main.route('/')
 def index():
     user_id = session.get('user_id')
     user_type = session.get('user_type')
 
-    # Ako je korisnik prijavljen, odmah redirektuj na dashboard na www
+    # Ako je korisnik prijavljen, redirektuj na dashboard na www.driverrate.com
     if user_id and user_type:
         target = url_for('main.drivers') if user_type == 'employer' else url_for('main.admin_dashboard')
-        # Force www prefix
+
+        # Ako već nismo na www, force www
         if not request.host.startswith('www.'):
-            return redirect(f"https://www.driverrate.com{target}")
-        return redirect(target)
+            return redirect(f"https://www.driverrate.com{target}", code=302)
+
+        # Ako smo na www, redirektuj na odgovarajući dashboard
+        return redirect(target, code=302)
 
     # Nije prijavljen → prikaži index
     return render_template('index.html', current_lang=session.get('lang', 'sr'))
@@ -482,17 +484,16 @@ def logout():
     # Očisti server-side sesiju
     session.clear()
 
-    # Napravi response i eksplicitno obriši cookie pod oba domena (host-only i leading-dot)
     cookie_name = current_app.session_cookie_name  # obično 'session'
+    
     response = make_response(redirect(url_for('main.index')))
-    # ponovo setuj lang cookie za .driverrate.com
+
+    # Ponovo setuj lang cookie za sve poddomene
     response.set_cookie('lang', lang, max_age=60*60*24*30, domain='.driverrate.com', path='/')
 
-    # Obriši sesiju cookie za obe varijante domena (s i bez tačke)
-    response.set_cookie(cookie_name, '', expires=0, path='/', domain='.driverrate.com')
-    response.set_cookie(cookie_name, '', expires=0, path='/', domain='driverrate.com')
-    # dodatno obriši bez domene (host-only)
-    response.set_cookie(cookie_name, '', expires=0, path='/')
+    # Obriši sesiju cookie za sve relevantne domene
+    for domain in [".driverrate.com", "driverrate.com", None]:  # None = host-only
+        response.set_cookie(cookie_name, '', expires=0, path='/', domain=domain)
 
     return response
 

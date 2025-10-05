@@ -1,4 +1,4 @@
-from flask import Flask, session, request, g, redirect  # dodali redirect
+from flask import Flask, session, request, g, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_babel import Babel
@@ -15,6 +15,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 babel = Babel()
 mail = Mail()
+
 
 def get_locale():
     # 1. cookie lang
@@ -47,21 +48,19 @@ def create_app():
     app.config['MAIL_DEFAULT_SENDER'] = ('Profesionalci', os.environ.get('MAIL_USERNAME'))
 
     # === SESIJE ===
-   # SESIJE (mora pre Session(app))
     app.config['SESSION_TYPE'] = 'filesystem'
     app.config['SESSION_PERMANENT'] = True
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
     app.config['SESSION_FILE_DIR'] = '/tmp/flask_session'
     os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
 
-    # važna podešavanja cookie-ja — primenjuju se na sve poddomene
+    # važno: session cookie za www + bez-www
     app.config['SESSION_COOKIE_NAME'] = os.environ.get('SESSION_COOKIE_NAME', 'session')
-    app.config['SESSION_COOKIE_DOMAIN'] = '.driverrate.com'   # VAŽNO: odnosi se na www + bez-www
+    app.config['SESSION_COOKIE_DOMAIN'] = '.driverrate.com'  # deljenje sesije između domena
     app.config['SESSION_COOKIE_PATH'] = '/'
     app.config['SESSION_COOKIE_SECURE'] = True
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-    # Inicijalizacija Flask-Session
     Session(app)
 
     # === EKSTENZIJE ===
@@ -75,12 +74,21 @@ def create_app():
     def set_current_lang():
         g.current_lang = get_locale()
 
-    # 🟢 Dodato: redirect sa Render domena na pravi domen
+    # === HTTPS + domen redirect ===
     @app.before_request
-    def redirect_to_custom_domain():
+    def enforce_https_and_domain():
+        # 1. Redirect sa render domena na www.driverrate.com
         if request.host.startswith("profesionalci.onrender.com"):
             target_url = request.url.replace("profesionalci.onrender.com", "www.driverrate.com")
             return redirect(target_url, code=301)
+
+        # 2. Force HTTPS i www
+        if not request.is_secure:
+            url = request.url.replace("http://", "https://", 1)
+            return redirect(url, code=301)
+        if request.host == "driverrate.com":
+            url = request.url.replace("://driverrate.com", "://www.driverrate.com", 1)
+            return redirect(url, code=301)
 
     # === RUTE ===
     from .routes import main
