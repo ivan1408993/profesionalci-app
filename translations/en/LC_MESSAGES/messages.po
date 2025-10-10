@@ -49,25 +49,20 @@ msgid "JMBG mora sadržati tačno 13 cifara."
 msgstr "JMBG must contain exactly 13 digits."
 
 #: app/routes.py:131
-#, fuzzy
 msgid "Broj CPC kartice je obavezan i mora imati tačno 9 karaktera."
-msgstr "Tachograph card number must be exactly 16 characters."
+msgstr "The CPC card number is required and must contain exactly 9 characters."
 
 #: app/routes.py:135
-#, fuzzy
 msgid "Broj CPC kartice mora početi sa 'ABS' i imati 6 cifara posle toga."
-msgstr ""
-"The CPC card number must start with 'ABS' and contain exactly 6 digits "
-"after that."
+msgstr "The CPC card number must start with 'ABS' and be followed by 6 digits."
 
 #: app/routes.py:139 app/templates/add_driver.html:37
 msgid "Broj tahograf kartice mora imati tačno 16 karaktera."
 msgstr "Tachograph card number must be exactly 16 characters."
 
 #: app/routes.py:150
-#, fuzzy
 msgid "Ova CPC kartica već postoji u sistemu."
-msgstr "This card already exists in the system."
+msgstr "This CPC card already exists in the system."
 
 #: app/routes.py:163
 msgid "Vozač već radi kod vas."
@@ -171,7 +166,6 @@ msgid "Vaša firma nije aktivna. Prijava nije moguća."
 msgstr "Your company is not active. Login is not possible."
 
 #: app/routes.py:554
-#, fuzzy
 msgid "Pogrešan email ili lozinka. Preostalo pokušaja: "
 msgstr "Incorrect email or password."
 
@@ -241,7 +235,6 @@ msgstr ""
 "(ABS + 6 digits)."
 
 #: app/routes.py:1098
-#, fuzzy
 msgid "Neispravan format datuma."
 msgstr "Invalid expiration date format."
 
@@ -254,7 +247,6 @@ msgid "Ovaj broj tahograf kartice je već dodeljen drugom vozaču."
 msgstr "This tachograph card number is already assigned to another driver."
 
 #: app/routes.py:1130
-#, fuzzy
 msgid "Nova tahografska kartica je dodata."
 msgstr "A new tachograph card has been added."
 
@@ -426,9 +418,8 @@ msgid "Svi vozači koji su radili u vašoj firmi"
 msgstr "All drivers who have worked in your company"
 
 #: app/templates/all_drivers.html:31
-#, fuzzy
 msgid "Pretraži po imenu, tahografu ili broju CPC"
-msgstr "Search by name or card number"
+msgstr "Search by name tachograph or CPC number"
 
 #: app/templates/all_drivers.html:38 app/templates/driver_detail.html:126
 #: app/templates/drivers.html:86 app/templates/search_driver.html:23
@@ -441,7 +432,6 @@ msgid "Tahograf kartica"
 msgstr "Tachograph Card"
 
 #: app/templates/all_drivers.html:50 app/templates/drivers.html:112
-#, fuzzy
 msgid "Tahograf važi do"
 msgstr "Tachograph Card Valid Until"
 
@@ -488,9 +478,8 @@ msgid "Nema rezultata za zadatu pretragu."
 msgstr "No results found for the search."
 
 #: app/templates/base.html:7
-#, fuzzy
 msgid "Profesionalci – DriverRate"
-msgstr "Professionals"
+msgstr "Professionals - DriverRate"
 
 #: app/templates/base.html:9
 msgid "Profesionalci - ocenjivanje vozača i poslodavaca u transportnoj industriji"
@@ -505,9 +494,8 @@ msgid "ℹ️ O nama"
 msgstr "ℹ️ About Us"
 
 #: app/templates/base.html:74
-#, fuzzy
 msgid "Kontakt"
-msgstr "✉️ Contact"
+msgstr "Contact"
 
 #: app/templates/base.html:82 app/templates/driver_detail.html:68
 #: app/templates/driver_exists.html:17 app/templates/employer_detail.html:3
@@ -639,9 +627,8 @@ msgid "CPC kartica"
 msgstr "CPC Card"
 
 #: app/templates/driver_detail.html:84
-#, fuzzy
 msgid "Ukupno ocena"
-msgstr "Rate Again"
+msgstr "Total rates"
 
 #: app/templates/driver_detail.html:96 app/templates/search_driver.html:101
 msgid "Preuzmi vozača"
@@ -652,9 +639,8 @@ msgid "Ažuriraj"
 msgstr "Update"
 
 #: app/templates/driver_detail.html:105
-#, fuzzy
 msgid "Deaktiviraj vozača"
-msgstr "Deactivate"
+msgstr "Deactivate driver"
 
 #: app/templates/driver_detail.html:113
 msgid "Ocene vozača"
@@ -665,12 +651,10 @@ msgid "Pretraga ocena po firmi ili PIB-u"
 msgstr ""
 
 #: app/templates/driver_detail.html:124
-#, fuzzy
 msgid "Unesite ime firme ili PIB"
-msgstr "Enter full name"
+msgstr "Enter the company name or VAT"
 
 #: app/templates/driver_detail.html:133
-#, fuzzy
 msgid "Nema rezultata za upit"
 msgstr "No results found for the search."
 
@@ -831,9 +815,8 @@ msgid "Nazad na kontrolnu tablu"
 msgstr "Back to Dashboard"
 
 #: app/templates/employer_profile.html:13
-#, fuzzy
 msgid "ID firme"
-msgstr "Company Name"
+msgstr "Company ID"
 
 #: app/templates/employer_profile.html:27 app/templates/register.html:19
 msgid "Naziv firme"
@@ -844,17 +827,14 @@ msgid "PIB"
 msgstr "VAT Number"
 
 #: app/templates/employer_profile.html:55
-#, fuzzy
 msgid "Imejl adresa"
 msgstr "Email Address:"
 
 #: app/templates/employer_profile.html:69
-#, fuzzy
 msgid "Broj telefona"
-msgstr "Phone"
+msgstr "Phone number"
 
 #: app/templates/employer_profile.html:78
-#, fuzzy
 msgid "Broj telefona (samo cifre)"
 msgstr "Enter phone number (digits only)"
 
@@ -908,9 +888,8 @@ msgid "Platforma za ocenjivanje i proveru profesionalnih vozača."
 msgstr "Platform for evaluating and verifying professional drivers."
 
 #: app/templates/index.html:15
-#, fuzzy
 msgid "Prijavi se na platformu"
-msgstr "Login"
+msgstr "Log in to the platform"
 
 #: app/templates/index.html:16 app/templates/login.html:91
 msgid "Prijavi se"
@@ -1299,7 +1278,6 @@ msgid "Mora sadržati bar jedan broj"
 msgstr "Must contain at least one number"
 
 #: app/templates/reset_password_form.html:53
-#, fuzzy, python-format
 msgid "Mora sadržati bar jedan specijalni znak (!@#$%%^&*)"
 msgstr "Must contain at least one special character (!@#$%%^&*)"
 
@@ -1569,14 +1547,12 @@ msgid "Nema podataka o prethodnim karticama."
 msgstr "No card data available."
 
 #: app/templates/update_driver.html:160
-#, fuzzy
 msgid "Neispravan format datuma tahograf kartice."
 msgstr "Invalid tachograph card expiration date format."
 
 #: app/templates/update_driver.html:165
-#, fuzzy
 msgid "Neispravan format datuma CPC kartice."
-msgstr "Invalid CPC card expiration date format."
+msgstr "Invalid CPC card date format."
 
 #~ msgid "Srpski"
 #~ msgstr "Serbian"
