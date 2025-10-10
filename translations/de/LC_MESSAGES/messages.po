@@ -502,7 +502,7 @@ msgstr "ℹ️ Über uns"
 
 #: app/templates/base.html:74
 msgid "Kontakt"
-msgstr "✉️ Kontakt"
+msgstr "Kontakt"
 
 #: app/templates/base.html:82 app/templates/driver_detail.html:68
 #: app/templates/driver_exists.html:17 app/templates/employer_detail.html:3
@@ -657,7 +657,7 @@ msgstr "Fahrerbewertungen"
 
 #: app/templates/driver_detail.html:120
 msgid "Pretraga ocena po firmi ili PIB-u"
-msgstr ""
+msgstr "Bewertungen nach Firma oder USt-IdNr. suchen"
 
 #: app/templates/driver_detail.html:124
 msgid "Unesite ime firme ili PIB"
