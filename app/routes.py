@@ -286,12 +286,22 @@ def search_driver():
             driver.employer_id and not driver.active and driver.employer_id != employer_id
         )
 
-    return render_template('search_driver.html',
-                           driver=driver,
-                           ratings_info=ratings_info,
-                           already_employed_by_other=already_employed_by_other,
-                           show_additional_fields=show_additional_fields,
-                           current_lang=session.get('lang', 'sr'))
+    # 🔹 Dodaj statistiku vozača (za barometar)
+    total_employed = Driver.query.filter_by(active=True).count()
+    total_unemployed = Driver.query.filter_by(active=False).count()
+    total_drivers = total_employed + total_unemployed
+
+    return render_template(
+        'search_driver.html',
+        driver=driver,
+        ratings_info=ratings_info,
+        already_employed_by_other=already_employed_by_other,
+        show_additional_fields=show_additional_fields,
+        total_employed=total_employed,
+        total_unemployed=total_unemployed,
+        total_drivers=total_drivers,
+        current_lang=session.get('lang', 'sr')
+    )
 
 
 
