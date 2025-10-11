@@ -180,7 +180,7 @@ nav.navbar {
         transform: translateX(0); /* start pozicija */
     }
     100% {
-        transform: translateX(80px); /* koliko daleko se pomera udesno */
+        transform: translateX(65px); /* koliko daleko se pomera udesno */
     }
 }
 
