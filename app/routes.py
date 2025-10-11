@@ -615,9 +615,8 @@ def drivers():
 
     # Osnovni query - samo vozači za datog poslodavca
     drivers_query = Driver.query.options(
-    db.joinedload(Driver.cards)
+        db.joinedload(Driver.cards)
     ).filter_by(employer_id=employer.id)
-
 
     # Ako checkbox "samo aktivni" -> filtriraj
     if active_only:
@@ -659,6 +658,9 @@ def drivers():
         avg_rating = db.session.query(func.avg(Rating.stars)).filter(Rating.driver_id == d.id).scalar()
         driver_ratings[d.id] = round(avg_rating, 2) if avg_rating else None
 
+    # 🔹 DODATO: Ukupan broj vozača u sistemu
+    total_drivers = Driver.query.count()
+
     return render_template(
         'drivers.html',
         drivers=drivers_list,
@@ -667,6 +669,7 @@ def drivers():
         pagination=pagination,
         active_only=active_only,
         sort=sort,
+        total_drivers=total_drivers,  # <— prosleđujemo u template
         current_lang=session.get('lang', 'sr')
     )
 
