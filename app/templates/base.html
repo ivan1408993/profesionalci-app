@@ -2,17 +2,31 @@
 <html lang="{{ g.current_lang }}">
 
 <head>
+     <!-- Favicon -->
     <link rel="icon" href="/static/images/favicon.png" type="image/png">
+
+    <!-- Charset i viewport -->
     <meta charset="UTF-8">
-    <title>{% block title %}{{ _("Profesionalci – DriverRate") }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Naslov i opis sajta -->
+    <title>{% block title %}{{ _("Profesionalci – DriverRate") }}{% endblock %}</title>
     <meta name="description" content="{{ _('Profesionalci - ocenjivanje vozača i poslodavaca u transportnoj industriji') }}">
 
+    <!-- Open Graph (Facebook, Viber, LinkedIn...) -->
     <meta property="og:title" content="Profesionalci - DriverRate">
     <meta property="og:description" content="Profesionalci - Platforma za ocenjivanje i proveru profesionalnih vozača.">
-    <meta property="og:image" content="https://driverrate.com/static/images/logo.png">
+    <meta property="og:image" content="https://driverrate.com/static/images/logo-og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://driverrate.com/">
     <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Profesionalci - DriverRate">
+    <meta name="twitter:description" content="Profesionalci - Platforma za ocenjivanje i proveru profesionalnih vozača.">
+    <meta name="twitter:image" content="https://driverrate.com/static/images/logo-og.png">
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
