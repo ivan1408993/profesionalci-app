@@ -10,6 +10,10 @@
                 <strong>{{ _("Napredna pretraga:") }}</strong> {{ _("Pronađite bilo kog vozača u sistemu, bez obzira na firmu.") }}
             </div>
         </div>
+        <div>
+            <strong>{{ _("Ukupan broj vozača u sistemu:") }}</strong> 
+            <span class="fs-5 fw-bold text-dark">{{ total_drivers }}</span>
+        </div>
         <a href="{{ url_for('main.search_driver') }}" 
            class="btn btn-warning btn-lg shadow-sm d-flex align-items-center gap-2 px-4 py-2"
            style="font-size: 1.1rem; border-radius: 12px; transition: 0.3s;"
@@ -18,16 +22,7 @@
            <i class="fas fa-search"></i> {{ _("Pretraži sve vozače u sistemu") }}
         </a>
     </div>
-    <!-- BROJ VOZAČA U SISTEMU -->
-<div class="alert alert-success d-flex align-items-center justify-content-between shadow-sm rounded-3 border border-success mb-4">
-    <div class="d-flex align-items-center">
-        <i class="fas fa-users me-2 text-success fs-4"></i>
-        <div>
-            <strong>{{ _("Ukupan broj vozača u sistemu:") }}</strong> 
-            <span class="fs-5 fw-bold text-dark">{{ total_drivers }}</span>
-        </div>
-    </div>
-</div>
+
 
 
     <hr class="my-3">
